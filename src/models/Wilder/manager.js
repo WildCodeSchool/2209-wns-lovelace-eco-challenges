@@ -8,7 +8,8 @@ async function initializeWilders() {
 }
 
 async function getWilders() {
-  return;
+  const wilderRepository = (await getDatabase()).getRepository(Wilder);
+  return wilderRepository.find();
 }
 
 async function createWilder() {
@@ -17,5 +18,6 @@ async function createWilder() {
 
 module.exports = {
   initializeWilders,
+  getWilders,
   createWilder,
 };
