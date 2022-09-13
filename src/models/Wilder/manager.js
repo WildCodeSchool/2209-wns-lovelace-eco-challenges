@@ -3,7 +3,7 @@ const { getWilderRepository } = require("../../database/utils");
 async function initializeWilders() {
   const wilderRepository = await getWilderRepository();
   await wilderRepository.clear();
-  await wilderRepository.save({ name: "Jean Wilder" });
+  await wilderRepository.save({ firstName: "Jean", lastName: "Wilder" });
 }
 
 async function getWilders() {
@@ -11,8 +11,11 @@ async function getWilders() {
   return wilderRepository.find();
 }
 
-async function createWilder() {
-  return;
+async function createWilder(firstName, lastName) {
+  const wilderRepository = await getWilderRepository();
+  const newWilder = wilderRepository.create({ firstName, lastName });
+  await wilderRepository.save(newWilder);
+  return newWilder;
 }
 
 module.exports = {
