@@ -1,6 +1,7 @@
 const express = require("express");
 const wildersControllers = require("./controllers/wilders");
 const { getDatabase } = require("./database/utils");
+const { initializeSchools } = require("./models/School/manager");
 const { initializeWilders } = require("./models/Wilder/manager");
 
 const app = express();
@@ -19,6 +20,7 @@ app.delete(`${WILDERS_PATH}/:id`, wildersControllers.del);
 const PORT = 4000;
 
 async function start() {
+  await initializeSchools();
   await initializeWilders();
   await getDatabase();
   app.listen(PORT, () => {

@@ -1,9 +1,20 @@
 const { getWilderRepository } = require("../../database/utils");
+const { getSchoolByName } = require("../School/manager");
 
 async function initializeWilders() {
   const wilderRepository = await getWilderRepository();
   await wilderRepository.clear();
-  await wilderRepository.save({ firstName: "Jean", lastName: "Wilder" });
+  const lyonSchool = await getSchoolByName("Lyon");
+  await wilderRepository.save({
+    firstName: "Jean",
+    lastName: "Wilder",
+    school: lyonSchool,
+  });
+  await wilderRepository.save({
+    firstName: "Jeanne",
+    lastName: "Wilder",
+    school: lyonSchool,
+  });
 }
 
 async function getWilders() {
