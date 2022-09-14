@@ -1,7 +1,7 @@
 import blankProfilePicture from "../media/blank-profile-picture.png";
 import Skill from "./Skill";
 
-const Wilder = ({ firstName, lastName }) => {
+const Wilder = ({ firstName, lastName, skills }) => {
   return (
     <article className="card">
       <img src={blankProfilePicture} alt="Jane Doe Profile" />
@@ -16,12 +16,11 @@ const Wilder = ({ firstName, lastName }) => {
       </p>
       <h4>Wild Skills</h4>
       <ul className="skills">
-        <li>
-          <Skill name="JavaScript" numberOfVotes={3} />
-        </li>
-        <li>
-          <Skill name="PHP" numberOfVotes={4} />
-        </li>
+        {skills.map((skill) => (
+          <li key={skill.id}>
+            <Skill skillName={skill.skillName} numberOfVotes={1} />
+          </li>
+        ))}
       </ul>
     </article>
   );
