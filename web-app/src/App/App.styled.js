@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { MAIN_THEME_COLOR } from "../style-constants";
-import { baseContainerStyles, baseTitleStyles } from "../base-styles";
+import { MAIN_THEME_COLOR } from "../styles/style-constants";
+import { baseContainerStyles, baseTitleStyles } from "../styles/base-styles";
 
 export const Container = styled.div`
   ${baseContainerStyles}
@@ -22,15 +22,4 @@ export const Footer = styled.footer`
 export const PageTitle = styled.h1`
   ${baseTitleStyles}
   font-size: 40px;
-`;
-
-export const SectionTitle = styled.h2`
-  ${baseTitleStyles}
-  font-size: 28px;
-`;
-
-export const CardRow = styled.section`
-  display: grid;
-  grid-template-columns: repeat(3, 32%);
-  justify-content: space-between;
 `;

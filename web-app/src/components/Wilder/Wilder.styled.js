@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
-import { MAIN_THEME_COLOR } from "../../style-constants";
-import { baseTitleStyles, Paragraph } from "../../base-styles";
+import { MAIN_THEME_COLOR } from "../../styles/style-constants";
+import { baseTitleStyles, Paragraph } from "../../styles/base-styles";
 
 export const Card = styled.article`
   padding: 20px;
