@@ -1,5 +1,5 @@
 import { SectionTitle, CardRow } from "./Home.styled";
-import Wilder from "../components/Wilder/Wilder";
+import Wilder from "../../components/Wilder/Wilder";
 
 const WILDERS = [
   {
