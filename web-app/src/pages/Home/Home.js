@@ -21,6 +21,8 @@ const Home = () => {
       <SectionTitle>Wilders</SectionTitle>
       {isLoading ? (
         <Loader />
+      ) : wilders.length === 0 ? (
+        "Aucun wilder à afficher."
       ) : (
         <CardRow>
           {wilders?.map((wilder) => (
