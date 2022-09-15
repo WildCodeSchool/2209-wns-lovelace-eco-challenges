@@ -1,7 +1,11 @@
-import { SectionTitle, CardRow } from "./Home.styled";
-import Wilder from "../../components/Wilder/Wilder";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+import { CardRow } from "./Home.styled";
+import Wilder from "../../components/Wilder/Wilder";
 import Loader from "../../components/Loader";
+import { SectionTitle } from "../../styles/base-styles";
+import { CREATE_WILDER_PATH } from "../paths";
 
 const Home = () => {
   const [wilders, setWilders] = useState(null);
@@ -19,6 +23,7 @@ const Home = () => {
   return (
     <>
       <SectionTitle>Wilders</SectionTitle>
+      <Link to={CREATE_WILDER_PATH}>Ajouter un nouveau Wilder</Link>
       {isLoading ? (
         <Loader />
       ) : wilders.length === 0 ? (

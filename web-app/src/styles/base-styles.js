@@ -15,3 +15,8 @@ export const baseContainerStyles = css`
 export const Paragraph = styled.p`
   margin: 0 0 1.15em;
 `;
+
+export const SectionTitle = styled.h2`
+  ${baseTitleStyles}
+  font-size: 28px;
+`;
