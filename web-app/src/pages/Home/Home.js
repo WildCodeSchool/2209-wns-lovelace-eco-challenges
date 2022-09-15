@@ -39,6 +39,18 @@ const WILDERS = [
       },
     ],
   },
+  {
+    id: "dddd",
+    firstName: "Arnaud",
+    lastName: "Renaud",
+    isTrainer: true,
+    skills: [
+      {
+        id: "skill-2",
+        skillName: "JavaScript",
+      },
+    ],
+  },
 ];
 
 const Home = () => {
