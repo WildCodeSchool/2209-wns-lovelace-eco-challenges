@@ -7,7 +7,8 @@ export const SectionTitle = styled.h2`
 `;
 
 export const CardRow = styled.section`
-  display: grid;
-  grid-template-columns: repeat(3, 32%);
-  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 `;

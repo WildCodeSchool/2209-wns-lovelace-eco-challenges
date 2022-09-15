@@ -4,6 +4,7 @@ import { MAIN_THEME_COLOR } from "../../styles/style-constants";
 import { baseTitleStyles, Paragraph } from "../../styles/base-styles";
 
 export const Card = styled.article`
+  width: 200px;
   padding: 20px;
   border: 1px solid #c9c9c9;
   border-radius: 7px;
