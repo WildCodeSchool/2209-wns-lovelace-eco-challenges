@@ -11,4 +11,9 @@ const initializeSkills = async () => {
   });
 };
 
-module.exports = { initializeSkills };
+async function getSkillByName(name) {
+  const skillRepository = await getSkillRepository();
+  return skillRepository.findOneBy({ skillName: name });
+}
+
+module.exports = { initializeSkills, getSkillByName };
