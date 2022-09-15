@@ -8,8 +8,6 @@ import {
 } from "./App.styled";
 
 function App() {
-  // fetch list of wilders from API
-
   return (
     <>
       <Header>
