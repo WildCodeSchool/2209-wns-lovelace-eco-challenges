@@ -1,6 +1,7 @@
 import { SectionTitle, CardRow } from "./Home.styled";
 import Wilder from "../../components/Wilder/Wilder";
 import { useEffect, useState } from "react";
+import Loader from "../../components/Loader";
 
 const Home = () => {
   const [wilders, setWilders] = useState(null);
@@ -19,7 +20,7 @@ const Home = () => {
     <>
       <SectionTitle>Wilders</SectionTitle>
       {isLoading ? (
-        "Loading…"
+        <Loader />
       ) : (
         <CardRow>
           {wilders?.map((wilder) => (
