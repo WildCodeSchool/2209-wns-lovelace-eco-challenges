@@ -1,8 +1,10 @@
+import { SkillVotes } from "./Skill.styled";
+
 const Skill = ({ skillName, numberOfVotes }) => {
   return (
     <>
       {skillName}
-      <span className="votes">{numberOfVotes}</span>
+      <SkillVotes>{numberOfVotes}</SkillVotes>
     </>
   );
 };

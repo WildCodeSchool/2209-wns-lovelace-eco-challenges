@@ -1,5 +1,13 @@
-import Wilder from "./components/Wilder";
-import "./App.css";
+import Wilder from "../components/Wilder/Wilder";
+import {
+  CardRow,
+  Container,
+  Footer,
+  Header,
+  MainContainer,
+  PageTitle,
+  SectionTitle,
+} from "./App.styled";
 
 const WILDERS = [
   {
@@ -46,14 +54,14 @@ function App() {
 
   return (
     <div>
-      <header>
-        <div className="container">
-          <h1>Wilders Book</h1>
-        </div>
-      </header>
-      <main className="container">
-        <h2>Wilders</h2>
-        <section className="card-row">
+      <Header>
+        <Container>
+          <PageTitle>Wilders Book</PageTitle>
+        </Container>
+      </Header>
+      <MainContainer>
+        <SectionTitle>Wilders</SectionTitle>
+        <CardRow>
           {WILDERS.map((wilder) => (
             <Wilder
               key={wilder.id}
@@ -62,13 +70,13 @@ function App() {
               skills={wilder.skills}
             />
           ))}
-        </section>
-      </main>
-      <footer>
-        <div className="container">
+        </CardRow>
+      </MainContainer>
+      <Footer>
+        <Container>
           <p>&copy; 2022 Wild Code School</p>
-        </div>
-      </footer>
+        </Container>
+      </Footer>
     </div>
   );
 }
