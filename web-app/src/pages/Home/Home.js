@@ -11,35 +11,52 @@ import { fetchWilders } from "./rest";
 const Home = () => {
   const [wilders, setWilders] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     (async () => {
-      const fetchedWilders = await fetchWilders();
-      setWilders(fetchedWilders);
-      setIsLoading(false);
+      try {
+        const fetchedWilders = await fetchWilders();
+        setWilders(fetchedWilders);
+      } catch (error) {
+        setErrorMessage(error.message);
+      } finally {
+        setIsLoading(false);
+      }
     })();
   }, []);
+
+  const renderMainContent = () => {
+    if (isLoading) {
+      return <Loader />;
+    }
+    if (errorMessage) {
+      return errorMessage;
+    }
+    if (!wilders?.length) {
+      return "Aucun wilder à afficher.";
+    }
+    return (
+      <CardRow>
+        {wilders?.map((wilder) => (
+          <Wilder
+            key={wilder.id}
+            firstName={wilder.firstName}
+            lastName={wilder.lastName}
+            skills={wilder.skills}
+          />
+        ))}
+      </CardRow>
+    );
+  };
 
   return (
     <>
       <SectionTitle>Wilders</SectionTitle>
       <Link to={CREATE_WILDER_PATH}>Ajouter un nouveau Wilder</Link>
-      {isLoading ? (
-        <Loader />
-      ) : wilders.length === 0 ? (
-        "Aucun wilder à afficher."
-      ) : (
-        <CardRow>
-          {wilders?.map((wilder) => (
-            <Wilder
-              key={wilder.id}
-              firstName={wilder.firstName}
-              lastName={wilder.lastName}
-              skills={wilder.skills}
-            />
-          ))}
-        </CardRow>
-      )}
+      <br />
+      <br />
+      {renderMainContent()}
     </>
   );
 };
