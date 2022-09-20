@@ -1,9 +1,9 @@
-const typeorm = require("typeorm");
-const Wilder = require("../models/Wilder");
-const School = require("../models/School");
-const Skill = require("../models/Skill");
+import { DataSource } from "typeorm";
+import Wilder from "../models/Wilder";
+import School from "../models/School";
+import Skill from "../models/Skill";
 
-const dataSource = new typeorm.DataSource({
+const dataSource = new DataSource({
   type: "sqlite",
   database: "wildersdb.sqlite",
   synchronize: true,
@@ -32,7 +32,7 @@ async function getSchoolRepository() {
 const getSkillRepository = async () =>
   (await getDatabase()).getRepository(Skill);
 
-module.exports = {
+export {
   getDatabase,
   getWilderRepository,
   getSchoolRepository,

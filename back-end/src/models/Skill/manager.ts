@@ -1,4 +1,5 @@
-const { getSkillRepository } = require("../../database/utils");
+import Skill from ".";
+import { getSkillRepository } from "../../database/utils";
 
 const initializeSkills = async () => {
   const skillRepository = await getSkillRepository();
@@ -11,9 +12,9 @@ const initializeSkills = async () => {
   });
 };
 
-async function getSkillByName(name) {
+async function getSkillByName(name: string): Promise<Skill | null> {
   const skillRepository = await getSkillRepository();
   return skillRepository.findOneBy({ skillName: name });
 }
 
-module.exports = { initializeSkills, getSkillByName };
+export { initializeSkills, getSkillByName };

@@ -1,9 +1,10 @@
-const express = require("express");
-const wildersControllers = require("./controllers/wilders");
-const { getDatabase } = require("./database/utils");
-const { initializeSchools } = require("./models/School/manager");
-const { initializeSkills } = require("./models/Skill/manager");
-const { initializeWilders } = require("./models/Wilder/manager");
+import express from "express";
+
+import * as wildersControllers from "./controllers/wilders";
+import { getDatabase } from "./database/utils";
+import { initializeSchools } from "./models/School/manager";
+import { initializeSkills } from "./models/Skill/manager";
+import { initializeWilders } from "./models/Wilder/manager";
 
 const app = express();
 app.use(express.json());
