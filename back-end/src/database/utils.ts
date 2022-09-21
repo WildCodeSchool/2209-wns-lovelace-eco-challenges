@@ -7,7 +7,7 @@ const dataSource = new DataSource({
   type: "sqlite",
   database: "wildersdb.sqlite",
   synchronize: true,
-  entities: [Wilder, School, Skill],
+  entities: [__dirname + "/../models/**/index.js"],
   logging: ["query", "error"],
 });
 
