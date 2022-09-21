@@ -1,6 +1,20 @@
+import { getErrorMessage } from "../utils";
+
 export const WILDERS_PATH = "/wilders";
 
-export async function query(url, method, body) {
+export enum HTTPVerb {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  PATCH = "PATCH",
+  DELETE = "DELETE",
+}
+
+export async function query(
+  url: string,
+  method: HTTPVerb,
+  body?: Record<string, unknown>
+): Promise<any> {
   let httpStatusError = false;
   try {
     const response = await fetch(url, {
@@ -16,7 +30,7 @@ export async function query(url, method, body) {
     return message;
   } catch (error) {
     if (httpStatusError) {
-      throw Error(error.message);
+      throw Error(getErrorMessage(error));
     }
     throw Error(
       "Impossible de joindre le serveur. Vérifiez votre connexion à Internet."

@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -7,9 +8,11 @@ import Loader from "../../components/Loader";
 import { SectionTitle } from "../../styles/base-styles";
 import { CREATE_WILDER_PATH } from "../paths";
 import { fetchWilders } from "./rest";
+import { WilderType } from "../../types";
+import { getErrorMessage } from "../../utils";
 
 const Home = () => {
-  const [wilders, setWilders] = useState(null);
+  const [wilders, setWilders] = useState<null | WilderType[]>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -19,7 +22,7 @@ const Home = () => {
         const fetchedWilders = await fetchWilders();
         setWilders(fetchedWilders);
       } catch (error) {
-        setErrorMessage(error.message);
+        setErrorMessage(getErrorMessage(error));
       } finally {
         setIsLoading(false);
       }
@@ -38,7 +41,7 @@ const Home = () => {
     }
     return (
       <CardRow>
-        {wilders?.map((wilder) => (
+        {wilders.map((wilder) => (
           <Wilder
             key={wilder.id}
             firstName={wilder.firstName}

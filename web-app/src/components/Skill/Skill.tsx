@@ -1,6 +1,12 @@
+import React from "react";
 import { SkillVotes } from "./Skill.styled";
 
-const Skill = ({ skillName, numberOfVotes }) => {
+type PropType = {
+  skillName: string;
+  numberOfVotes: number;
+};
+
+const Skill = ({ skillName, numberOfVotes }: PropType) => {
   return (
     <>
       {skillName}
