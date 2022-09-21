@@ -1,9 +1,9 @@
 import express from "express";
 
 import * as wildersControllers from "./controllers/wilders";
-import SchoolRepository from "./models/School/repository";
-import SkillRepository from "./models/Skill/repository";
-import WilderRepository from "./models/Wilder/repository";
+import SchoolRepository from "./models/School/School.repository";
+import SkillRepository from "./models/Skill/Skill.repository";
+import WilderRepository from "./models/Wilder/Wilder.repository";
 
 const app = express();
 app.use(express.json());

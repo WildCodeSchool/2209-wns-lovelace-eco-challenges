@@ -1,13 +1,13 @@
 import { DataSource } from "typeorm";
-import Wilder from "../models/Wilder";
-import School from "../models/School";
-import Skill from "../models/Skill";
+import Wilder from "../models/Wilder/Wilder.entity";
+import School from "../models/School/School.entity";
+import Skill from "../models/Skill/Skill.entity";
 
 const dataSource = new DataSource({
   type: "sqlite",
   database: "wildersdb.sqlite",
   synchronize: true,
-  entities: [__dirname + "/../models/**/index.js"],
+  entities: [__dirname + "/../models/**/*.entity.js"],
   logging: ["query", "error"],
 });
 

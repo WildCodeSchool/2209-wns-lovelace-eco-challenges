@@ -6,8 +6,8 @@ import {
   ManyToMany,
   JoinTable,
 } from "typeorm";
-import School from "../School";
-import Skill from "../Skill";
+import School from "../School/School.entity";
+import Skill from "../Skill/Skill.entity";
 
 @Entity()
 export default class Wilder {

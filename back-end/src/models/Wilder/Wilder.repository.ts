@@ -1,10 +1,10 @@
 import { Repository } from "typeorm";
-import Wilder from ".";
+import Wilder from "./Wilder.entity";
 import { getWilderRepository } from "../../database/utils";
-import School from "../School";
-import SchoolRepository from "../School/repository";
-import Skill from "../Skill";
-import SkillRepository from "../Skill/repository";
+import School from "../School/School.entity";
+import SchoolRepository from "../School/School.repository";
+import Skill from "../Skill/Skill.entity";
+import SkillRepository from "../Skill/Skill.repository";
 
 export default class WilderRepository extends Wilder {
   private static repository: Repository<Wilder>;

@@ -5,7 +5,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import Wilder from "../Wilder";
+import Wilder from "../Wilder/Wilder.entity";
 
 @Entity()
 export default class School {

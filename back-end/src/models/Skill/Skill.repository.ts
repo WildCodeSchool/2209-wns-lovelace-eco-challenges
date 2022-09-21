@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import Skill from ".";
+import Skill from "./Skill.entity";
 import { getSkillRepository } from "../../database/utils";
 
 export default class SkillRepository extends Skill {

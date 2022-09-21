@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { getErrorMessage } from "../utils";
-import WilderRepository from "../models/Wilder/repository";
+import WilderRepository from "../models/Wilder/Wilder.repository";
 
 const get = async (req: Request, res: Response): Promise<void> => {
   const wilders = await WilderRepository.getWilders();
