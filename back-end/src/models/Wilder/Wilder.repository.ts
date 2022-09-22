@@ -6,7 +6,7 @@ import SchoolRepository from "../School/School.repository";
 import Skill from "../Skill/Skill.entity";
 import SkillRepository from "../Skill/Skill.repository";
 
-export default class WilderRepository extends Wilder {
+export default class WilderRepository {
   private static repository: Repository<Wilder>;
   static async initializeRepository() {
     this.repository = await getRepository(Wilder);

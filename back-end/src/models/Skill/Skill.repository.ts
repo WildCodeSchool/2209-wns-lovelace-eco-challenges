@@ -2,7 +2,7 @@ import { Repository } from "typeorm";
 import { getRepository } from "../../database/utils";
 import Skill from "./Skill.entity";
 
-export default class SkillRepository extends Skill {
+export default class SkillRepository {
   private static repository: Repository<Skill>;
   static async initializeRepository() {
     this.repository = await getRepository(Skill);

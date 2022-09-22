@@ -3,7 +3,7 @@ import School from "./School.entity";
 import WilderRepository from "../Wilder/Wilder.repository";
 import { getRepository } from "../../database/utils";
 
-export default class SchoolRepository extends School {
+export default class SchoolRepository {
   private static repository: Repository<School>;
   static async initializeRepository() {
     this.repository = await getRepository(School);
