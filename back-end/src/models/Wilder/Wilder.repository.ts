@@ -5,17 +5,9 @@ import School from "../School/School.entity";
 import SchoolRepository from "../School/School.repository";
 import Skill from "../Skill/Skill.entity";
 import SkillRepository from "../Skill/Skill.repository";
+import WilderDb from "./Wilder.db";
 
-export default class WilderRepository {
-  private static repository: Repository<Wilder>;
-  static async initializeRepository() {
-    this.repository = await getRepository(Wilder);
-  }
-
-  static async clearRepository(): Promise<void> {
-    this.repository.clear();
-  }
-
+export default class WilderRepository extends WilderDb {
   static async initializeWilders(): Promise<void> {
     await this.clearRepository();
     const lyonSchool = (await SchoolRepository.getSchoolByName(
@@ -71,7 +63,7 @@ export default class WilderRepository {
   }
 
   static async deleteWilder(id: string): Promise<Wilder> {
-    const existingWilder = await this.repository.findOneBy({ id });
+    const existingWilder = await this.findWilderById(id);
     if (!existingWilder) {
       throw Error("No existing Wilder matching ID.");
     }
@@ -82,7 +74,7 @@ export default class WilderRepository {
     wilderId: string,
     skillId: string
   ): Promise<Wilder> {
-    const wilder = await this.repository.findOneBy({ id: wilderId });
+    const wilder = await this.findWilderById(wilderId);
     if (!wilder) {
       throw Error("No existing Wilder matching ID.");
     }
