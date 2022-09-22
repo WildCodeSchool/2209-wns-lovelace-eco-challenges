@@ -46,4 +46,8 @@ export default class Wilder {
   getFullName() {
     return `${this.firstName} ${this.lastName}`;
   }
+
+  getDisplayName() {
+    return `[${this.school.schoolName}] ${this.getFullName}`;
+  }
 }
