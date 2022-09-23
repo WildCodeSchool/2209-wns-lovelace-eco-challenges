@@ -8,7 +8,13 @@ const Dialog = ({
   onConfirm: () => void;
 }) => {
   return (
-    <Overlay>
+    <Overlay
+      onClick={(event) => {
+        if (event.target === event.currentTarget) {
+          onCancel();
+        }
+      }}
+    >
       <Box>
         Confirmer l'action ?
         <ButtonGroup>
