@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 import blankProfilePicture from "../../media/blank-profile-picture.png";
 import { WilderType } from "../../types";
 import { getErrorMessage } from "../../utils";
 import CloseButton from "../CloseButton/CloseButton";
+import Dialog from "../Dialog/Dialog";
 import Skill from "../Skill/Skill";
 import { deleteWilder } from "./rest";
 import {
@@ -19,7 +20,13 @@ import {
 type PropType = Omit<WilderType, "school"> & { onDelete: () => void };
 
 const Wilder = ({ id, firstName, lastName, skills, onDelete }: PropType) => {
-  const onCloseButtonClick = async () => {
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+
+  const onCloseButtonClick = () => {
+    setShowDeleteConfirmation(true);
+  };
+
+  const onDeleteConfirmation = async () => {
     try {
       await deleteWilder(id);
       toast.success(`Wilder ${firstName} ${lastName} supprimé avec succès.`);
@@ -50,6 +57,17 @@ const Wilder = ({ id, firstName, lastName, skills, onDelete }: PropType) => {
         ))}
       </CardSkillList>
       <CloseButton onClick={onCloseButtonClick} />
+      {showDeleteConfirmation && (
+        <Dialog
+          onCancel={() => {
+            setShowDeleteConfirmation(false);
+          }}
+          onConfirm={() => {
+            setShowDeleteConfirmation(false);
+            onDeleteConfirmation();
+          }}
+        />
+      )}
       <ToastContainer />
     </Card>
   );
