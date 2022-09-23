@@ -16,17 +16,19 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const _fetchWilders = async () => {
+    try {
+      const fetchedWilders = await fetchWilders();
+      setWilders(fetchedWilders);
+    } catch (error) {
+      setErrorMessage(getErrorMessage(error));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    (async () => {
-      try {
-        const fetchedWilders = await fetchWilders();
-        setWilders(fetchedWilders);
-      } catch (error) {
-        setErrorMessage(getErrorMessage(error));
-      } finally {
-        setIsLoading(false);
-      }
-    })();
+    _fetchWilders();
   }, []);
 
   const renderMainContent = () => {
@@ -44,9 +46,11 @@ const Home = () => {
         {wilders.map((wilder) => (
           <Wilder
             key={wilder.id}
+            id={wilder.id}
             firstName={wilder.firstName}
             lastName={wilder.lastName}
             skills={wilder.skills}
+            onDelete={_fetchWilders}
           />
         ))}
       </CardRow>

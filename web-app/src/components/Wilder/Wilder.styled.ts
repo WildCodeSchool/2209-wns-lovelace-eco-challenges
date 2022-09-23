@@ -1,12 +1,13 @@
 import styled, { css } from "styled-components";
 
-import { MAIN_THEME_COLOR } from "../../styles/style-constants";
+import { BORDER_COLOR, MAIN_THEME_COLOR } from "../../styles/style-constants";
 import { baseTitleStyles, Paragraph } from "../../styles/base-styles";
 
 export const Card = styled.article`
+  position: relative;
   width: 200px;
   padding: 20px;
-  border: 1px solid #c9c9c9;
+  border: 1px solid ${BORDER_COLOR};
   border-radius: 7px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
 `;

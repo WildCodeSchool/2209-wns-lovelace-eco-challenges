@@ -1,7 +1,9 @@
 import React from "react";
 import blankProfilePicture from "../../media/blank-profile-picture.png";
 import { WilderType } from "../../types";
+import CloseButton from "../CloseButton/CloseButton";
 import Skill from "../Skill/Skill";
+import { deleteWilder } from "./rest";
 import {
   Card,
   CardImage,
@@ -11,9 +13,14 @@ import {
   CardTitle,
 } from "./Wilder.styled";
 
-type PropType = Omit<WilderType, "id" | "school">;
+type PropType = Omit<WilderType, "school"> & { onDelete: () => void };
 
-const Wilder = ({ firstName, lastName, skills }: PropType) => {
+const Wilder = ({ id, firstName, lastName, skills, onDelete }: PropType) => {
+  const onCloseButtonClick = async () => {
+    await deleteWilder(id);
+    onDelete();
+  };
+
   return (
     <Card>
       <CardImage src={blankProfilePicture} alt="Jane Doe Profile" />
@@ -34,6 +41,7 @@ const Wilder = ({ firstName, lastName, skills }: PropType) => {
           </li>
         ))}
       </CardSkillList>
+      <CloseButton onClick={onCloseButtonClick} />
     </Card>
   );
 };
