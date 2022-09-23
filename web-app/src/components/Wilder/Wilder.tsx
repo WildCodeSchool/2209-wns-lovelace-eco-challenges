@@ -1,6 +1,9 @@
 import React from "react";
+import { ToastContainer, toast } from "react-toastify";
+
 import blankProfilePicture from "../../media/blank-profile-picture.png";
 import { WilderType } from "../../types";
+import { getErrorMessage } from "../../utils";
 import CloseButton from "../CloseButton/CloseButton";
 import Skill from "../Skill/Skill";
 import { deleteWilder } from "./rest";
@@ -17,8 +20,13 @@ type PropType = Omit<WilderType, "school"> & { onDelete: () => void };
 
 const Wilder = ({ id, firstName, lastName, skills, onDelete }: PropType) => {
   const onCloseButtonClick = async () => {
-    await deleteWilder(id);
-    onDelete();
+    try {
+      await deleteWilder(id);
+      toast.success(`Wilder ${firstName} ${lastName} supprimé avec succès.`);
+      onDelete();
+    } catch (error) {
+      toast.error(getErrorMessage(error));
+    }
   };
 
   return (
@@ -42,6 +50,7 @@ const Wilder = ({ id, firstName, lastName, skills, onDelete }: PropType) => {
         ))}
       </CardSkillList>
       <CloseButton onClick={onCloseButtonClick} />
+      <ToastContainer />
     </Card>
   );
 };
