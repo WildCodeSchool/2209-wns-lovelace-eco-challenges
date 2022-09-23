@@ -1,5 +1,9 @@
 import { useEffect } from "react";
-import { disablePageScroll, enablePageScroll } from "../../browser-utils";
+import {
+  actOnEscapeKeydown,
+  disablePageScroll,
+  enablePageScroll,
+} from "../../browser-utils";
 import { Box, ButtonGroup, Overlay } from "./Dialog.styled";
 
 const Dialog = ({
@@ -10,10 +14,14 @@ const Dialog = ({
   onConfirm: () => void;
 }) => {
   useEffect(() => {
+    actOnEscapeKeydown(onCancel, true);
     disablePageScroll();
 
-    return enablePageScroll;
-  }, []);
+    return () => {
+      actOnEscapeKeydown(onCancel, false);
+      enablePageScroll();
+    };
+  }, [onCancel]);
 
   return (
     <Overlay
