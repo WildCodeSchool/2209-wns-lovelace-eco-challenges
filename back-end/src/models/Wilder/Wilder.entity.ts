@@ -50,11 +50,13 @@ export default class Wilder {
   @JoinTable()
   skills: Skill[];
 
+  @Field(() => String)
   getFullName() {
     return `${this.firstName} ${this.lastName}`;
   }
 
+  @Field(() => String)
   getDisplayName() {
-    return `[${this.school.schoolName}] ${this.getFullName}`;
+    return `[${this.school?.schoolName ?? ""}] ${this.getFullName()}`;
   }
 }
