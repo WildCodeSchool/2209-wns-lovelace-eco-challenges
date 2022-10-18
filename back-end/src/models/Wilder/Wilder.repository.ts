@@ -67,7 +67,10 @@ export default class WilderRepository extends WilderDb {
     if (!existingWilder) {
       throw Error("No existing Wilder matching ID.");
     }
-    return this.repository.remove(existingWilder);
+    await this.repository.remove(existingWilder);
+    // resetting ID because existingWilder loses ID after calling remove
+    existingWilder.id = id;
+    return existingWilder;
   }
 
   static async addSkillToWilder(

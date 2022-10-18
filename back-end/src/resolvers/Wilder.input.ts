@@ -1,5 +1,5 @@
-import { MinLength } from "class-validator";
-import { ArgsType, Field } from "type-graphql";
+import { IsUUID, MinLength } from "class-validator";
+import { ArgsType, Field, ID } from "type-graphql";
 
 @ArgsType()
 class CreateWilderArgs {
@@ -14,4 +14,11 @@ class CreateWilderArgs {
   lastName: string;
 }
 
-export { CreateWilderArgs };
+@ArgsType()
+class UpdateWilderArgs extends CreateWilderArgs {
+  @Field(() => ID)
+  @IsUUID()
+  id: string;
+}
+
+export { CreateWilderArgs, UpdateWilderArgs };
