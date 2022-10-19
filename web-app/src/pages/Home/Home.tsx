@@ -24,8 +24,10 @@ const GET_WILDERS = gql`
 `;
 
 const Home = () => {
-  const { data, loading, error, refetch } =
-    useQuery<GetWildersQuery>(GET_WILDERS);
+  const { data, loading, error, refetch } = useQuery<GetWildersQuery>(
+    GET_WILDERS,
+    { fetchPolicy: "cache-and-network" }
+  );
 
   const renderMainContent = () => {
     if (loading) {
