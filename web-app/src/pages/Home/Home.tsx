@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { CardRow } from "./Home.styled";
@@ -7,10 +6,8 @@ import Wilder from "../../components/Wilder/Wilder";
 import Loader from "../../components/Loader";
 import { SectionTitle } from "../../styles/base-styles";
 import { CREATE_WILDER_PATH } from "../paths";
-import { fetchWilders } from "./rest";
-import { WilderType } from "../../types";
-import { getErrorMessage } from "../../utils";
 import { useQuery, gql } from "@apollo/client";
+import { GetWildersQuery } from "../../gql/graphql";
 
 const GET_WILDERS = gql`
   query GetWilders {
@@ -27,7 +24,8 @@ const GET_WILDERS = gql`
 `;
 
 const Home = () => {
-  const { data, loading, error, refetch } = useQuery(GET_WILDERS);
+  const { data, loading, error, refetch } =
+    useQuery<GetWildersQuery>(GET_WILDERS);
 
   const renderMainContent = () => {
     if (loading) {
@@ -36,12 +34,12 @@ const Home = () => {
     if (error) {
       return error.message;
     }
-    if (!data.wilders?.length) {
+    if (!data?.wilders?.length) {
       return "Aucun wilder à afficher.";
     }
     return (
       <CardRow>
-        {data.wilders.map((wilder: WilderType) => (
+        {data.wilders.map((wilder) => (
           <Wilder
             key={wilder.id}
             id={wilder.id}
