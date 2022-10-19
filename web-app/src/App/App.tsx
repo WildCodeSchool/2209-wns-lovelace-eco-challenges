@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import CreateWilder from "../pages/CreateWilder/CreateWilder";
 import Home from "../pages/Home/Home";
@@ -34,6 +35,7 @@ function App() {
           <p>&copy; 2022 Wild Code School</p>
         </Container>
       </Footer>
+      <ToastContainer />
     </>
   );
 }

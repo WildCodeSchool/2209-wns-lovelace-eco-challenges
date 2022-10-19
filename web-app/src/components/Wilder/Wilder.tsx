@@ -1,13 +1,17 @@
+import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+import {
+  DeleteWilderMutation,
+  DeleteWilderMutationVariables,
+  GetWildersQuery,
+} from "../../gql/graphql";
 
 import blankProfilePicture from "../../media/blank-profile-picture.png";
-import { WilderType } from "../../types";
 import { getErrorMessage } from "../../utils";
 import CloseButton from "../CloseButton/CloseButton";
 import Dialog from "../Dialog/Dialog";
 import Skill from "../Skill/Skill";
-import { deleteWilder } from "./rest";
 import {
   Card,
   CardImage,
@@ -17,10 +21,25 @@ import {
   CardTitle,
 } from "./Wilder.styled";
 
-type PropType = Omit<WilderType, "school"> & { onDelete: () => void };
+const DELETE_WILDERS = gql`
+  mutation DeleteWilder($id: String!) {
+    deleteWilder(id: $id) {
+      id
+      firstName
+    }
+  }
+`;
+
+type PropType = GetWildersQuery["wilders"][number] & {
+  onDelete: () => void;
+};
 
 const Wilder = ({ id, firstName, lastName, skills, onDelete }: PropType) => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [deleteWilder] = useMutation<
+    DeleteWilderMutation,
+    DeleteWilderMutationVariables
+  >(DELETE_WILDERS);
 
   const onCloseButtonClick = () => {
     setShowDeleteConfirmation(true);
@@ -28,7 +47,7 @@ const Wilder = ({ id, firstName, lastName, skills, onDelete }: PropType) => {
 
   const onDeleteConfirmation = async () => {
     try {
-      await deleteWilder(id);
+      await deleteWilder({ variables: { id } });
       toast.success(`Wilder ${firstName} ${lastName} supprimé avec succès.`);
       onDelete();
     } catch (error) {
@@ -68,7 +87,6 @@ const Wilder = ({ id, firstName, lastName, skills, onDelete }: PropType) => {
           }}
         />
       )}
-      <ToastContainer />
     </Card>
   );
 };
