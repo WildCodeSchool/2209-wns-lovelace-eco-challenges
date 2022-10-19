@@ -1,19 +1,38 @@
+import { gql, useMutation } from "@apollo/client";
 import React from "react";
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "../../components/Loader";
+import {
+  CreateWilderMutation,
+  CreateWilderMutationVariables,
+} from "../../gql/graphql";
 
 import { SectionTitle } from "../../styles/base-styles";
 import { getErrorMessage } from "../../utils";
-import { createWilder } from "./rest";
+
+const CREATE_WILDER = gql`
+  mutation CreateWilder($firstName: String!, $lastName: String!) {
+    createWilder(firstName: $firstName, lastName: $lastName) {
+      id
+      firstName
+    }
+  }
+`;
 
 const CreateWilder = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
+  const [createWilder, { loading }] = useMutation<
+    CreateWilderMutation,
+    CreateWilderMutationVariables
+  >(CREATE_WILDER);
+
   const submit = async () => {
     try {
-      await createWilder(firstName, lastName);
+      await createWilder({ variables: { firstName, lastName } });
       toast.success(`Wilder ${firstName} ${lastName} créé avec succès.`);
       setFirstName("");
       setLastName("");
@@ -61,9 +80,8 @@ const CreateWilder = () => {
           />
         </label>
         <br />
-        <button>Valider</button>
+        <button disabled={loading}>{loading ? <Loader /> : "Valider"}</button>
       </form>
-      <ToastContainer />
     </>
   );
 };
