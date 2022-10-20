@@ -1,8 +1,8 @@
 import { DataSource, EntityTarget } from "typeorm";
 
 const dataSource = new DataSource({
-  type: "sqlite",
-  database: "wildersdb.sqlite",
+  type: "postgres",
+  url: process.env.DATABASE_URL,
   synchronize: true,
   entities: [__dirname + "/../models/**/*.entity.js"],
   logging: ["query", "error"],
