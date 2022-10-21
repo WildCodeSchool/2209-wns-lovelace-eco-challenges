@@ -7,5 +7,5 @@
 Docker and Docker Compose are required on host system.
 
 ```
-docker-compose -f docker-compose.dev.yml up --build
+./build-start.dev.sh
 ```
