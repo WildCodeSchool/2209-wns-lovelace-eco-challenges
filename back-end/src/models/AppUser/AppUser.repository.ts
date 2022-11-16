@@ -35,10 +35,10 @@ export default class AppUserRepository extends AppUserDb {
     return { user, session };
   }
 
-  static async findBySessionId(sessionId: string): Promise<AppUser> {
+  static async findBySessionId(sessionId: string): Promise<AppUser | null> {
     const session = await SessionRepository.findById(sessionId);
     if (!session) {
-      throw Error(ERROR_NO_USER_SIGNED_IN);
+      return null;
     }
     return session.user;
   }

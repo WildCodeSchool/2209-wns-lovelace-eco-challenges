@@ -1,10 +1,9 @@
-import { ExpressContext } from "apollo-server-express";
-import { Args, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import { Args, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import AppUser from "../../models/AppUser/AppUser.entity";
 import AppUserRepository from "../../models/AppUser/AppUser.repository";
 import { SignInArgs, SignUpArgs } from "./AppUser.input";
-import { getSessionIdInCookie, setSessionIdInCookie } from "../../http-utils";
-import { ERROR_NO_USER_SIGNED_IN } from "../../models/AppUser/error-messages";
+import { setSessionIdInCookie } from "../../http-utils";
+import { GlobalContext } from "../..";
 
 @Resolver(AppUser)
 export default class AppUserResolver {
@@ -23,7 +22,7 @@ export default class AppUserResolver {
   @Mutation(() => AppUser)
   async signIn(
     @Args() { emailAddress, password }: SignInArgs,
-    @Ctx() context: ExpressContext
+    @Ctx() context: GlobalContext
   ): Promise<AppUser> {
     const { user, session } = await AppUserRepository.signIn(
       emailAddress,
@@ -33,12 +32,9 @@ export default class AppUserResolver {
     return user;
   }
 
+  @Authorized()
   @Query(() => AppUser)
-  async myProfile(@Ctx() context: ExpressContext): Promise<AppUser> {
-    const sessionId = getSessionIdInCookie(context);
-    if (!sessionId) {
-      throw Error(ERROR_NO_USER_SIGNED_IN);
-    }
-    return AppUserRepository.findBySessionId(sessionId);
+  async myProfile(@Ctx() context: GlobalContext): Promise<AppUser> {
+    return context.user as AppUser;
   }
 }
