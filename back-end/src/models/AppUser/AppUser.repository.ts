@@ -3,6 +3,7 @@ import AppUser from "./AppUser.entity";
 
 import { hashSync, compareSync } from "bcryptjs";
 import SessionRepository from "./Session.repository";
+import Session from "./Session.entity";
 
 export default class AppUserRepository extends AppUserDb {
   static createUser(
@@ -23,13 +24,13 @@ export default class AppUserRepository extends AppUserDb {
   static async signIn(
     emailAddress: string,
     password: string
-  ): Promise<AppUser> {
+  ): Promise<{ user: AppUser; session: Session }> {
     const user = await this.findByEmailAddress(emailAddress);
 
     if (!user || !compareSync(password, user.hashedPassword)) {
       throw new Error("Identifiants incorrects.");
     }
-    await SessionRepository.createSession(user);
-    return user;
+    const session = await SessionRepository.createSession(user);
+    return { user, session };
   }
 }
