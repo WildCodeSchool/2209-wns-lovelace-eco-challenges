@@ -4,6 +4,7 @@ import AppUser from "./AppUser.entity";
 import { hashSync, compareSync } from "bcryptjs";
 import SessionRepository from "./Session.repository";
 import Session from "./Session.entity";
+import { ERROR_NO_USER_SIGNED_IN } from "./error-messages";
 
 export default class AppUserRepository extends AppUserDb {
   static createUser(
@@ -32,5 +33,13 @@ export default class AppUserRepository extends AppUserDb {
     }
     const session = await SessionRepository.createSession(user);
     return { user, session };
+  }
+
+  static async findBySessionId(sessionId: string): Promise<AppUser> {
+    const session = await SessionRepository.findById(sessionId);
+    if (!session) {
+      throw Error(ERROR_NO_USER_SIGNED_IN);
+    }
+    return session.user;
   }
 }

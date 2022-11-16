@@ -7,4 +7,8 @@ export default class SessionRepository extends SessionDb {
     const session = new Session(user);
     return this.saveSession(session);
   }
+
+  static findById(id: string): Promise<Session | null> {
+    return this.repository.findOneBy({ id });
+  }
 }

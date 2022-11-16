@@ -17,8 +17,8 @@ const startServer = async () => {
     schema: await buildSchema({
       resolvers: [WilderResolver, AppUserResolver],
     }),
-    context: ({ res }) => {
-      return { res };
+    context: ({ req, res }) => {
+      return { req, res };
     },
     csrfPrevention: true,
     cache: "bounded",

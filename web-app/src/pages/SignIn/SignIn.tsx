@@ -19,7 +19,7 @@ const SIGN_IN = gql`
   }
 `;
 
-const SignIn = () => {
+const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
 
@@ -35,6 +35,7 @@ const SignIn = () => {
         variables: { emailAddress, password },
       });
       toast.success(`Vous vous êtes connecté avec succès.`);
+      onSuccess();
       navigate(HOME_PATH);
     } catch (error) {
       toast.error(getErrorMessage(error));
