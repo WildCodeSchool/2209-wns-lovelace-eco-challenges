@@ -1,6 +1,6 @@
 import { Args, Mutation, Resolver } from "type-graphql";
-import AppUser from "../models/AppUser/AppUser.entity";
-import AppUserRepository from "../models/AppUser/AppUser.repository";
+import AppUser from "../../models/AppUser/AppUser.entity";
+import AppUserRepository from "../../models/AppUser/AppUser.repository";
 import { SignInArgs, SignUpArgs } from "./AppUser.input";
 
 @Resolver(AppUser)
