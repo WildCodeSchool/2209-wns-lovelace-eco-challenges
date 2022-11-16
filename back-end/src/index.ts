@@ -8,11 +8,13 @@ import WilderRepository from "./models/Wilder/Wilder.repository";
 
 import WilderResolver from "./resolvers/Wilder.resolver";
 import { buildSchema } from "type-graphql";
+import AppUserResolver from "./resolvers/AppUser.resolver";
+import AppUserRepository from "./models/AppUser/AppUser.repository";
 
 const startServer = async () => {
   const server = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [WilderResolver],
+      resolvers: [WilderResolver, AppUserResolver],
     }),
     csrfPrevention: true,
     cache: "bounded",
@@ -31,6 +33,7 @@ const startServer = async () => {
   await SkillRepository.initializeRepository();
   await SchoolRepository.initializeRepository();
   await WilderRepository.initializeRepository();
+  await AppUserRepository.initializeRepository();
 
   await SkillRepository.initializeSkills();
   await SchoolRepository.initializeSchools();
