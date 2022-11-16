@@ -71,7 +71,7 @@ const CreateWilder = () => {
           <input
             type="text"
             required
-            id="firstName"
+            id="lastName"
             name="lastName"
             value={lastName}
             onChange={(event) => {
