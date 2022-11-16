@@ -10,6 +10,7 @@ import WilderRepository from "./models/Wilder/Wilder.repository";
 import WilderResolver from "./resolvers/Wilder/Wilder.resolver";
 import AppUserResolver from "./resolvers/AppUser/AppUser.resolver";
 import AppUserRepository from "./models/AppUser/AppUser.repository";
+import SessionRepository from "./models/AppUser/Session.repository";
 
 const startServer = async () => {
   const server = new ApolloServer({
@@ -34,6 +35,7 @@ const startServer = async () => {
   await SchoolRepository.initializeRepository();
   await WilderRepository.initializeRepository();
   await AppUserRepository.initializeRepository();
+  await SessionRepository.initializeRepository();
 
   await SkillRepository.initializeSkills();
   await SchoolRepository.initializeSchools();

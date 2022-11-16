@@ -2,6 +2,7 @@ import AppUserDb from "./AppUser.db";
 import AppUser from "./AppUser.entity";
 
 import { hashSync, compareSync } from "bcryptjs";
+import SessionRepository from "./Session.repository";
 
 export default class AppUserRepository extends AppUserDb {
   static createUser(
@@ -28,6 +29,7 @@ export default class AppUserRepository extends AppUserDb {
     if (!user || !compareSync(password, user.hashedPassword)) {
       throw new Error("Identifiants incorrects.");
     }
+    await SessionRepository.createSession(user);
     return user;
   }
 }
