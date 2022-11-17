@@ -9,7 +9,7 @@ export const setSessionIdInCookie = (
 ) => {
   ctx.res.cookie("sessionId", sessionId, {
     httpOnly: true,
-    // secure: true,
+    secure: true,
     sameSite: true,
     maxAge: 1000 * 60 * 60 * 24 * MAX_AGE_DAYS,
   });
