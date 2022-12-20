@@ -11,6 +11,10 @@ import Wilder from "../Wilder/Wilder.entity";
 @Entity()
 @ObjectType()
 export default class Skill {
+  constructor(skillName: string) {
+    this.skillName = skillName;
+  }
+
   @PrimaryGeneratedColumn("uuid")
   @Field(() => ID)
   id: string;
