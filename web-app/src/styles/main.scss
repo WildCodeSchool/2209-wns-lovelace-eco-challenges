@@ -1,0 +1,10 @@
+@use "../Shared/styles/header.scss";
+@use "../styles/normalize.scss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --primary-color: #3B8574;
+}

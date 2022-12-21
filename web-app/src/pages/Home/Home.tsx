@@ -2,17 +2,17 @@ import { gql, useQuery } from "@apollo/client";
 import { Routes, Route, Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import { MyProfileQuery } from "../gql/graphql";
+import { MyProfileQuery } from "../../gql/graphql";
 
-import CreateWilder from "../pages/CreateWilder/CreateWilder";
+import CreateWilder from "../../pages/CreateWilder/CreateWilder";
 import {
   CREATE_WILDER_PATH,
   HOME_PATH,
   SIGN_IN_PATH,
   SIGN_UP_PATH,
-} from "../pages/paths";
-import SignIn from "../pages/SignIn/SignIn";
-import SignUp from "../pages/SignUp/SignUp";
+} from "../../pages/paths";
+import SignIn from "../../pages/SignIn/SignIn";
+import SignUp from "../../pages/SignUp/SignUp";
 
 
 const MY_PROFILE = gql`
@@ -23,12 +23,11 @@ const MY_PROFILE = gql`
   }
 `;
 
-function App() {
+const Home = () => {
   const { data, refetch } = useQuery<MyProfileQuery>(MY_PROFILE);
 
   return (
     <>
-      <h1 className="header"> Test </h1>
       {/* <Header>
         <Container>
           <PageTitle>
@@ -63,4 +62,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
