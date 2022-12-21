@@ -9,23 +9,26 @@ import { GlobalContext } from "../..";
 export default class AppUserResolver {
   @Mutation(() => AppUser)
   signUp(
-    @Args() { firstName, lastName, emailAddress, password }: SignUpArgs
+    @Args() { firstName, lastName, nickname, email, city, country, password }: SignUpArgs
   ): Promise<AppUser> {
     return AppUserRepository.createUser(
       firstName,
       lastName,
-      emailAddress,
+      nickname,
+      email,
+      city,
+      country,
       password
     );
   }
 
   @Mutation(() => AppUser)
   async signIn(
-    @Args() { emailAddress, password }: SignInArgs,
+    @Args() { email, password }: SignInArgs,
     @Ctx() context: GlobalContext
   ): Promise<AppUser> {
     const { user, session } = await AppUserRepository.signIn(
-      emailAddress,
+      email,
       password
     );
     setSessionIdInCookie(context, session.id);
