@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { Routes, Route, Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+
 import { MyProfileQuery } from "../gql/graphql";
 
 import CreateWilder from "../pages/CreateWilder/CreateWilder";
