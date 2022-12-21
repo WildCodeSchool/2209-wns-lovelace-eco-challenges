@@ -5,7 +5,9 @@ module.exports = {
     "./index.html"
   ],
   theme: {
-    extend: {},
+    colors: {
+      'green': '#3B8574',
+    },
   },
   plugins: [],
 }
