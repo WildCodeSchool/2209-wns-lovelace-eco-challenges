@@ -1,4 +1,5 @@
 import { IsEmail } from "class-validator";
+import { count } from "console";
 import { Field, ID, ObjectType } from "type-graphql";
 import { Entity, PrimaryGeneratedColumn, Column, Index } from "typeorm";
 
@@ -8,13 +9,19 @@ export default class AppUser {
   constructor(
     firstName: string,
     lastName: string,
-    emailAddress: string,
+    nickname: string,
+    email: string,
+    city:string,
+    country:string,
     hashedPassword: string
   ) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.emailAddress = emailAddress;
+    this.nickname = nickname;
+    this.email = email;
     this.hashedPassword = hashedPassword;
+    this.city = city;
+    this.country = country;
   }
 
   @PrimaryGeneratedColumn("uuid")
@@ -25,7 +32,7 @@ export default class AppUser {
   @Field()
   @Index({ unique: true })
   @IsEmail()
-  emailAddress: string;
+  email: string;
 
   @Column()
   @Field()
@@ -37,4 +44,24 @@ export default class AppUser {
 
   @Column()
   hashedPassword: string;
+
+  @Field()
+  @Column()
+  nickname:string;
+
+  @Field()
+  @Column("int", {default:0})
+  score:number;
+
+  @Field()
+  @Column("boolean", {default:false})
+  disabled:boolean;
+
+  @Field()
+  @Column()
+  city:string;
+
+  @Field()
+  @Column()
+  country:string;
 }

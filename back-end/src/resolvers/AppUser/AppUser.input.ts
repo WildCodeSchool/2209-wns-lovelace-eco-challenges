@@ -18,8 +18,20 @@ export class SignUpArgs {
   lastName: string;
 
   @Field()
+  @MinLength(1, { message: "Le pseudo doit faire au moins un caractère de long." })
+  nickname: string;
+
+  @Field()
   @IsEmail()
-  emailAddress: string;
+  email: string;
+
+  @Field()
+  @MinLength(1, { message: "La ville doit faire au moins un caractère de long." })
+  city: string;
+
+  @Field()
+  @MinLength(1, { message: "le pay s doit faire au moins un caractère de long." })
+  country:string;
 
   @Field()
   @Matches(passwordRegExp, {
@@ -33,7 +45,7 @@ export class SignUpArgs {
 export class SignInArgs {
   @Field()
   @IsEmail()
-  emailAddress: string;
+  email: string;
 
   @Field()
   password: string;
