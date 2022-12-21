@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 
 import Loader from "../../components/Loader";
 import { SignUpMutation, SignUpMutationVariables } from "../../gql/graphql";
-import { SectionTitle } from "../../styles/base-styles";
 import { getErrorMessage } from "../../utils";
 import { SIGN_IN_PATH } from "../paths";
 
@@ -56,7 +55,7 @@ const SignUp = () => {
 
   return (
     <>
-      <SectionTitle>Inscription</SectionTitle>
+      {/* <SectionTitle>Inscription</SectionTitle> */}
       <form
         onSubmit={async (event) => {
           event.preventDefault();
