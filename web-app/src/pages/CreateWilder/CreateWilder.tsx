@@ -9,7 +9,6 @@ import {
   CreateWilderMutationVariables,
 } from "../../gql/graphql";
 
-import { SectionTitle } from "../../styles/base-styles";
 import { getErrorMessage } from "../../utils";
 
 const CREATE_WILDER = gql`
@@ -43,7 +42,7 @@ const CreateWilder = () => {
 
   return (
     <>
-      <SectionTitle>Ajouter un nouveau Wilder</SectionTitle>
+      {/* <SectionTitle>Ajouter un nouveau Wilder</SectionTitle> */}
       <form
         onSubmit={async (event) => {
           event.preventDefault();

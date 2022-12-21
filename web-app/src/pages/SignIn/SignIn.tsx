@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../../components/Loader";
 import { SignInMutation, SignInMutationVariables } from "../../gql/graphql";
-import { SectionTitle } from "../../styles/base-styles";
 import { getErrorMessage } from "../../utils";
 import { HOME_PATH } from "../paths";
 
@@ -44,7 +43,7 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
 
   return (
     <>
-      <SectionTitle>Connexion</SectionTitle>
+      {/* <SectionTitle>Connexion</SectionTitle> */}
       <form
         onSubmit={async (event) => {
           event.preventDefault();
