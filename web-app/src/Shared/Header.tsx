@@ -2,8 +2,7 @@ const Header = () => {
 
 
     return (
-        <header className="header bg-green">
-
+        <header className="header">
         </header>
     )
 }

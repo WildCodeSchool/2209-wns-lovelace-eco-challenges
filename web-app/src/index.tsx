@@ -5,7 +5,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import Header from './Shared/Header';
 
 import "./styles/main.scss";
-import App from "./pages/Home/Home";
+import Home from "./pages/Home/Home";
 import reportWebVitals from "./reportWebVitals";
 
 const client = new ApolloClient({
@@ -21,7 +21,7 @@ root.render(
     <ApolloProvider client={client}>
       <BrowserRouter>
         <Header />
-        <App />
+        <Home />
       </BrowserRouter>
     </ApolloProvider>
   </React.StrictMode>
