@@ -2,10 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import Header from './Shared/Header';
 
 import "./styles/main.scss";
-import Home from "./pages/Home/Home";
+import App from "./App/App";
 import reportWebVitals from "./reportWebVitals";
 
 const client = new ApolloClient({
@@ -20,8 +19,7 @@ root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <BrowserRouter>
-        <Header />
-        <Home />
+        <App />
       </BrowserRouter>
     </ApolloProvider>
   </React.StrictMode>

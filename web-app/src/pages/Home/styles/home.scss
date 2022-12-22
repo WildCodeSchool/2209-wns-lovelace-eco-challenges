@@ -1,0 +1,19 @@
+.home {
+    @apply p-3;
+
+    .title {
+        @apply text-xl text-center font-bold;
+    }
+
+    .subtitle {
+        @apply m-3 text-base text-center;
+    }
+
+    .buttons {
+        @apply m-3 flex justify-around;
+    }
+
+    .images {
+        @apply rounded m-3 flex justify-between;
+    }
+}
