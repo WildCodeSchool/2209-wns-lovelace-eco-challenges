@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import School from "./School.entity";
+import School from "./Team.entity";
 import WilderRepository from "../Wilder/Wilder.repository";
 import { getRepository } from "../../database/utils";
 

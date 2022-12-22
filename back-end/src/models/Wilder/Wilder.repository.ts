@@ -1,8 +1,8 @@
 import { Repository } from "typeorm";
 import Wilder from "./Wilder.entity";
 import { getRepository } from "../../database/utils";
-import School from "../School/School.entity";
-import SchoolRepository from "../School/School.repository";
+import School from "../Team/Team.entity";
+import SchoolRepository from "../Team/School.repository";
 import Skill from "../Skill/Skill.entity";
 import SkillRepository from "../Skill/Skill.repository";
 import WilderDb from "./Wilder.db";

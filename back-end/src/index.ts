@@ -4,7 +4,7 @@ import { ExpressContext } from "apollo-server-express";
 import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
 import { buildSchema } from "type-graphql";
 
-import SchoolRepository from "./models/School/School.repository";
+import SchoolRepository from "./models/Team/School.repository";
 import SkillRepository from "./models/Skill/Skill.repository";
 import WilderRepository from "./models/Wilder/Wilder.repository";
 

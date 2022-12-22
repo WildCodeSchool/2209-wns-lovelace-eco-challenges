@@ -1,7 +1,9 @@
 import { IsEmail } from "class-validator";
-import { count } from "console";
+// import { count } from "console";
 import { Field, ID, ObjectType } from "type-graphql";
-import { Entity, PrimaryGeneratedColumn, Column, Index } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, Index, ManyToMany, OneToMany } from "typeorm";
+import Team from "../Team/Team.entity";
+import UserTeam from "../UserTeam/UserTeam.entity";
 
 @Entity()
 @ObjectType()
@@ -13,7 +15,8 @@ export default class AppUser {
     email: string,
     city:string,
     country:string,
-    hashedPassword: string
+    hashedPassword: string,
+    userTeams?: UserTeam[]
   ) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -22,6 +25,9 @@ export default class AppUser {
     this.hashedPassword = hashedPassword;
     this.city = city;
     this.country = country;
+    if (userTeams) {
+      this.userTeams = userTeams;
+    }
   }
 
   @PrimaryGeneratedColumn("uuid")
@@ -64,4 +70,9 @@ export default class AppUser {
   @Field()
   @Column()
   country:string;
+
+  @OneToMany(() => UserTeam, (userTeam) => userTeam.user)
+  @Field(() => [UserTeam])
+  userTeams: UserTeam[]; 
+
 }

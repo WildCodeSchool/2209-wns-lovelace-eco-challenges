@@ -7,7 +7,7 @@ import {
   ManyToMany,
   JoinTable,
 } from "typeorm";
-import School from "../School/School.entity";
+import School from "../Team/Team.entity";
 import Skill from "../Skill/Skill.entity";
 
 @Entity()
@@ -21,9 +21,9 @@ export default class Wilder {
   ) {
     this.firstName = firstName;
     this.lastName = lastName;
-    if (school) {
-      this.school = school;
-    }
+    // if (school) {
+    //   this.school = school;
+    // }
     if (skills) {
       this.skills = skills;
     }
@@ -41,9 +41,9 @@ export default class Wilder {
   @Field()
   lastName: string;
 
-  @ManyToOne(() => School, (school) => school.wilders, { eager: true })
-  @Field(() => School, { nullable: true })
-  school: School;
+  // @ManyToOne(() => School, (school) => school.wilders, { eager: true })
+  // @Field(() => School, { nullable: true })
+  // school: School;
 
   @ManyToMany(() => Skill, { eager: true })
   @Field(() => [Skill])
@@ -55,12 +55,12 @@ export default class Wilder {
     return `${this.firstName} ${this.lastName}`;
   }
 
-  @Field(() => String)
-  getDisplayName() {
-    const skillCount = this.skills?.length;
+  // @Field(() => String)
+  // getDisplayName() {
+  //   const skillCount = this.skills?.length;
 
-    return `[${this.school?.schoolName ?? ""}] ${this.getFullName()}${
-      skillCount ? ` (${skillCount})` : ""
-    }`;
-  }
+  //   return `[${this.school?.schoolName ?? ""}] ${this.getFullName()}${
+  //     skillCount ? ` (${skillCount})` : ""
+  //   }`;
+  // }
 }
