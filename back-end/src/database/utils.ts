@@ -2,9 +2,7 @@ import { DataSource, EntityTarget } from "typeorm";
 import { DATABASE_URL, NODE_ENV, TEST_DATABASE_URL } from "../config";
 import AppUserRepository from "../models/AppUser/AppUser.repository";
 import SessionRepository from "../models/AppUser/Session.repository";
-import SchoolRepository from "../models/School/School.repository";
-import SkillRepository from "../models/Skill/Skill.repository";
-import WilderRepository from "../models/Wilder/Wilder.repository";
+import TeamRepository from "../models/Team/Team.repository";
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -13,7 +11,7 @@ const dataSource = new DataSource({
   entities: [
     __dirname + `/../models/**/*.entity.${NODE_ENV === "test" ? "ts" : "js"}`,
   ],
-  logging: NODE_ENV === "development" ? ["query", "error"] : ["error"],
+  logging: ["query", "error"],
 });
 
 let initialized = false;
@@ -31,9 +29,7 @@ async function getRepository(entity: EntityTarget<any>) {
 }
 
 async function initializeDatabaseRepositories() {
-  await SkillRepository.initializeRepository();
-  await SchoolRepository.initializeRepository();
-  await WilderRepository.initializeRepository();
+  await TeamRepository.initializeRepository();
   await AppUserRepository.initializeRepository();
   await SessionRepository.initializeRepository();
 }

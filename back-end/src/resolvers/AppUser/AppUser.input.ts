@@ -30,7 +30,7 @@ export class SignUpArgs {
   city: string;
 
   @Field()
-  @MinLength(1, { message: "le pay s doit faire au moins un caractère de long." })
+  @MinLength(1, { message: "le pays doit faire au moins un caractère de long." })
   country:string;
 
   @Field()

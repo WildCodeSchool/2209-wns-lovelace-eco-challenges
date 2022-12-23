@@ -4,16 +4,14 @@ import { ExpressContext } from "apollo-server-express";
 import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
 import { buildSchema } from "type-graphql";
 
-import SchoolRepository from "./models/School/School.repository";
-import SkillRepository from "./models/Skill/Skill.repository";
-import WilderRepository from "./models/Wilder/Wilder.repository";
-
-import WilderResolver from "./resolvers/Wilder/Wilder.resolver";
 import AppUserResolver from "./resolvers/AppUser/AppUser.resolver";
+import TeamResolver from "./resolvers/Team/Team.resolver";
+
 import AppUserRepository from "./models/AppUser/AppUser.repository";
 import { getSessionIdInCookie } from "./http-utils";
 import AppUser from "./models/AppUser/AppUser.entity";
 import { initializeDatabaseRepositories } from "./database/utils";
+
 
 export type GlobalContext = ExpressContext & {
   user: AppUser | null;
@@ -22,12 +20,12 @@ export type GlobalContext = ExpressContext & {
 const startServer = async () => {
   const server = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [WilderResolver, AppUserResolver],
+      resolvers: [TeamResolver, AppUserResolver],
       authChecker: async ({ context }) => {
         return Boolean(context.user);
       },
     }),
-    context: async (context): Promise<GlobalContext> => {
+    context: async (context: any): Promise<GlobalContext> => {
       const sessionId = getSessionIdInCookie(context);
       const user = !sessionId
         ? null
@@ -50,10 +48,6 @@ const startServer = async () => {
   // The `listen` method launches a web server.
   const { url } = await server.listen();
   await initializeDatabaseRepositories();
-
-  await SkillRepository.initializeSkills();
-  await SchoolRepository.initializeSchools();
-  await WilderRepository.initializeWilders();
 
   console.log(`🚀  Server ready at ${url}`);
 };
