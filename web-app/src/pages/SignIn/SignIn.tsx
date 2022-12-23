@@ -3,15 +3,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../../components/Loader";
-import { SignInMutation, SignInMutationVariables } from "../../gql/graphql";
+/* import { SignInMutation, SignInMutationVariables } from "../../gql/graphql"; */
 import { getErrorMessage } from "../../utils";
 import { HOME_PATH } from "../paths";
 
 const SIGN_IN = gql`
-  mutation SignIn($emailAddress: String!, $password: String!) {
-    signIn(emailAddress: $emailAddress, password: $password) {
+  mutation SignIn($email: String!, $password: String!) {
+    signIn(email: $email, password: $password) {
       id
-      emailAddress
+      email
       firstName
       lastName
     }
@@ -19,20 +19,20 @@ const SIGN_IN = gql`
 `;
 
 const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
-  const [emailAddress, setEmailAddress] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [signIn, { loading }] = useMutation<
+/*   const [signIn, { loading }] = useMutation<
     SignInMutation,
     SignInMutationVariables
-  >(SIGN_IN);
+  >(SIGN_IN); */
   const navigate = useNavigate();
 
   const submit = async () => {
     try {
-      await signIn({
-        variables: { emailAddress, password },
-      });
+      /* await signIn({
+        variables: { email, password },
+      }); */
       toast.success(`Vous vous êtes connecté avec succès.`);
       onSuccess();
       navigate(HOME_PATH);
@@ -57,11 +57,11 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
             type="email"
             required
             autoComplete="email"
-            id="emailAddress"
-            name="emailAddress"
-            value={emailAddress}
+            id="email"
+            name="email"
+            value={email}
             onChange={(event) => {
-              setEmailAddress(event.target.value);
+              setEmail(event.target.value);
             }}
           />
         </label>
@@ -82,7 +82,8 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
           />
         </label>
         <br />
-        <button disabled={loading}>{loading ? <Loader /> : "Valider"}</button>
+        <button> Valider </button>
+        {/* <button disabled={loading}>{loading ? <Loader /> : "Valider"}</button> */}
       </form>
     </>
   );

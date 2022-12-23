@@ -4,10 +4,10 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../../components/Loader";
-import {
+/* import {
   CreateWilderMutation,
   CreateWilderMutationVariables,
-} from "../../gql/graphql";
+} from "../../gql/graphql"; */
 
 import { getErrorMessage } from "../../utils";
 
@@ -24,14 +24,14 @@ const CreateWilder = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const [createWilder, { loading }] = useMutation<
+  /* const [createWilder, { loading }] = useMutation<
     CreateWilderMutation,
     CreateWilderMutationVariables
-  >(CREATE_WILDER);
+  >(CREATE_WILDER); */
 
   const submit = async () => {
     try {
-      await createWilder({ variables: { firstName, lastName } });
+      /* await createWilder({ variables: { firstName, lastName } }); */
       toast.success(`Wilder ${firstName} ${lastName} créé avec succès.`);
       setFirstName("");
       setLastName("");
@@ -79,7 +79,7 @@ const CreateWilder = () => {
           />
         </label>
         <br />
-        <button disabled={loading}>{loading ? <Loader /> : "Valider"}</button>
+        {/* <button disabled={loading}>{loading ? <Loader /> : "Valider"}</button> */}
       </form>
     </>
   );

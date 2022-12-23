@@ -2,7 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import { Routes, Route, Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import { MyProfileQuery } from "../../gql/graphql";
+/* import { MyProfileQuery } from "../../gql/graphql"; */
 
 import CreateWilder from "../../pages/CreateWilder/CreateWilder";
 import {
@@ -33,8 +33,7 @@ const MY_PROFILE = gql`
 `;
 
 const Home = () => {
-  const { data, refetch } = useQuery<MyProfileQuery>(MY_PROFILE);
-
+  /* const { data, refetch } = useQuery<MyProfileQuery>(MY_PROFILE); */
   return (
     <div className="home">
       <h2 className="title">
@@ -149,8 +148,13 @@ export default Home;
         <Container>
           <PageTitle>
             <PageTitleLink to={HOME_PATH}>Wilders Book</PageTitleLink>
+<<<<<<< HEAD
           </PageTitle>
           {data?.myProfile ? (
+=======
+          </PageTitle> */}
+          {/* {data?.myProfile ? (
+>>>>>>> 5b400de (before rebase)
             <i>{data?.myProfile.emailAddress}</i>
           ) : (
             <nav>
@@ -158,16 +162,27 @@ export default Home;
               {" | "}
               <Link to={SIGN_IN_PATH}>Connexion</Link>
             </nav>
+<<<<<<< HEAD
           )}
         </Container>
+=======
+          )} */}
+          <SignUp/>
+        {/* 
+          <main>
+              <Routes>
+              <Route path={HOME_PATH} element={<Home />} />
+              <Route path={CREATE_WILDER_PATH} element={<CreateWilder />} />
+              <Route path={SIGN_UP_PATH} element={<SignUp />} />
+              <Route path={SIGN_IN_PATH} element={<SignIn onSuccess={refetch} />} />
+            </Routes>
+          </main>
+         */}
+        {/* </Container>
+>>>>>>> 5b400de (before rebase)
       </Header>
       <MainContainer>
-        <Routes>
-          <Route path={HOME_PATH} element={<Home />} />
-          <Route path={CREATE_WILDER_PATH} element={<CreateWilder />} />
-          <Route path={SIGN_UP_PATH} element={<SignUp />} />
-          <Route path={SIGN_IN_PATH} element={<SignIn onSuccess={refetch} />} />
-        </Routes>
+        
       </MainContainer>
       <Footer>
         <Container>
