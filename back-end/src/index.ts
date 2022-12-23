@@ -20,6 +20,7 @@ export type GlobalContext = ExpressContext & {
 };
 
 const startServer = async () => {
+  console.log("test")
   const server = new ApolloServer({
     schema: await buildSchema({
       resolvers: [WilderResolver, AppUserResolver],
@@ -44,7 +45,7 @@ const startServer = async () => {
      * will be the defaults in AS4. For production environments, use
      * ApolloServerPluginLandingPageProductionDefault instead.
      **/
-    plugins: [ApolloServerPluginLandingPageLocalDefault({ embed: true })],
+    plugins:[ApolloServerPluginLandingPageLocalDefault({embed:true})],
   });
 
   // The `listen` method launches a web server.

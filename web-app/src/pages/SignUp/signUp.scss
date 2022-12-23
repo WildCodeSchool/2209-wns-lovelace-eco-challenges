@@ -1,0 +1,31 @@
+.form {
+    @apply border-2 rounded-xl font-bold border-primary mx-4 p-8;
+
+    legend {
+        @apply border-2 px-8 py-2 rounded-lg m-auto border-primary -rotate-2 text-primary;
+    }
+
+    input {
+        @apply bg-gray-100 rounded-xl p-2 w-full;
+
+    }
+    label {
+        @apply my-1 block;
+    }
+
+    h2 {
+        @apply text-center font-bold;
+    }
+
+    .otherSolution {
+        @apply text-primary;
+    }
+
+    .error {
+        @apply text-red-500;
+    }
+
+    .iconContainer {
+        @apply flex justify-around my-4 ;
+    }
+}
