@@ -1,12 +1,12 @@
 const Button = (props: any) => {
-    const { name } = props;
+  const { name, type, icon = null } = props;
 
-    return (
-        <button className="button">
-            { name }
-        </button>
-    )
-
+  return (
+    <button className={type}>
+      {name}
+      {icon ?? <i>{icon}</i>}
+    </button>
+  );
 };
 
 export default Button;

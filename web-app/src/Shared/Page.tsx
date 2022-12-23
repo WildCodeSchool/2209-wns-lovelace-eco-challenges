@@ -1,4 +1,5 @@
 import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
 
 const Page = (props: any) => {
   const { children } = props;
@@ -9,6 +10,7 @@ const Page = (props: any) => {
       <main className="eco-playground">
         <div className="page">{children}</div>
       </main>
+      <Footer />
     </>
   );
 };

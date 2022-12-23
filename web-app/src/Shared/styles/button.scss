@@ -1,3 +1,7 @@
-.button {
-    @apply text-white bg-primary rounded-lg p-2 w-28;
+.button-primary {
+    @apply text-white bg-primary rounded-lg p-2 min-w-fit flex;
+}
+
+.button-secondary {
+    @apply text-primary bg-white rounded-lg p-2 min-w-fit flex;
 }
