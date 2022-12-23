@@ -4,8 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 import "./styles/main.scss";
-import App from "./App/App";
 import reportWebVitals from "./reportWebVitals";
+import App from "./App/App";
 
 const client = new ApolloClient({
   uri: "/",

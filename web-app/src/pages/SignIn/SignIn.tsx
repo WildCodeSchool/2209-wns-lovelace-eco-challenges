@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../../components/Loader";
-/* import { SignInMutation, SignInMutationVariables } from "../../gql/graphql"; */
+import { SignInMutation, SignInMutationVariables } from "../../gql/graphql";
+import Button from "../../Shared/Buttons/Button";
 import { getErrorMessage } from "../../utils";
 import { HOME_PATH } from "../paths";
 
@@ -22,17 +23,17 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-/*   const [signIn, { loading }] = useMutation<
+  const [signIn, { loading }] = useMutation<
     SignInMutation,
     SignInMutationVariables
-  >(SIGN_IN); */
+  >(SIGN_IN);
   const navigate = useNavigate();
 
   const submit = async () => {
     try {
-      /* await signIn({
+      await signIn({
         variables: { email, password },
-      }); */
+      });
       toast.success(`Vous vous êtes connecté avec succès.`);
       onSuccess();
       navigate(HOME_PATH);
@@ -43,7 +44,6 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
 
   return (
     <>
-      {/* <SectionTitle>Connexion</SectionTitle> */}
       <form
         onSubmit={async (event) => {
           event.preventDefault();
@@ -82,8 +82,7 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
           />
         </label>
         <br />
-        <button> Valider </button>
-        {/* <button disabled={loading}>{loading ? <Loader /> : "Valider"}</button> */}
+        <Button disabled={loading}>{loading ? <Loader /> : "Valider"}</Button>
       </form>
     </>
   );

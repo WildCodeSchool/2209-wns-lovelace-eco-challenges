@@ -31,6 +31,7 @@ const SIGN_UP = gql`
 const SignUp = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [nickname, setNickName] = useState("")
   const [city, setCity] = useState("")
   const [country, setCountry] = useState("")
   const [email, setEmail] = useState("");
@@ -46,9 +47,9 @@ const SignUp = () => {
 
   const submit = async () => {
     try {
-      /* await signUp({
-        variables: { firstName, lastName, emailAddress: email, password },
-      }); */
+      await signUp({
+        variables: { firstName, lastName, nickname, email, city, country, password } 
+      });
       toast.success(
         `Votre compte a été créé avec succès. Vous pouvez maintenant vous connecter.`
       );
@@ -96,6 +97,21 @@ const SignUp = () => {
               placeholder="Doe"
               onChange={(event) => {
                 setLastName(event.target.value);
+              }}
+            />
+          </label>
+          <label>
+            Pseudo
+            <br />
+            <input
+              type="text"
+              required
+              id="nickname"
+              name="nickname"
+              value={nickname}
+              placeholder="Doe"
+              onChange={(event) => {
+                setNickName(event.target.value);
               }}
             />
           </label>
@@ -208,14 +224,12 @@ const SignUp = () => {
             </button>
           </section>
 
-          <button className="w-content m-auto"> <ArrowLinkTo /> </button>
-          {/* <button className="w-content m-auto" disabled={loading || !confirmedPassword}> <ArrowLinkTo /> </button> */}
+          <button className="w-content m-auto" disabled={loading || !confirmedPassword}> <ArrowLinkTo /> </button>
         </fieldset>
         <br />        
       </form>
       <h2> Vous avez déjà un compte ? </h2>
       <button className="button-cta m-auto"> Se connecter </button>
-      {/* <button className="button-cta m-auto">{loading ? <Loader /> : "Se connecter"}</button> */}
     </>
   );
 };
