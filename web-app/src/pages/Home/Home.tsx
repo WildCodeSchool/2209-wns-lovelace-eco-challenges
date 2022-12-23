@@ -20,9 +20,9 @@ import Solidarity from "../../assets/Solidarity";
 import WithFriends from "../../assets/WithFriends";
 import Company from "../../assets/Company";
 import LaunchChallenge from "../../assets/LaunchChallenge";
-import ArrowLinkTo from "../../assets/ArrowLinkTo";
 import Partners from "../../assets/Partners";
 import Check from "../../assets/Check";
+import { ArrowLinkTo } from "../../assets/ArrowContinue";
 
 const MY_PROFILE = gql`
   query MyProfile {

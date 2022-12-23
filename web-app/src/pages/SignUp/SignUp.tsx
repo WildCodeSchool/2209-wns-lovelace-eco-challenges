@@ -6,11 +6,11 @@ import "./signUp.scss"
 import Loader from "../../components/Loader";
 import { getErrorMessage } from "../../utils";
 import { SIGN_IN_PATH } from "../paths";
-import Facebook from "../../asset/icons/Facebook";
-import Mail from "../../asset/icons/Mail";
-import Apple from "../../asset/icons/Apple";
-import { ArrowLinkTo } from "../../asset/icons/ArrowContinue";
 import { SignUpMutation, SignUpMutationVariables } from "../../gql/graphql";
+import Facebook from "../../assets/Facebook";
+import Mail from "../../assets/Mail";
+import Apple from "../../assets/Apple";
+import { ArrowLinkTo } from "../../assets/ArrowContinue";
 
 const SIGN_UP = gql`
   mutation SignUp($firstName: String!, $lastName: String!, $nickname: String!, $email: String!, $city: String!, $country: String!, $password: String!) {
@@ -224,7 +224,7 @@ const SignUp = () => {
             </button>
           </section>
 
-          <button className="w-content m-auto" disabled={loading || !confirmedPassword}> <ArrowLinkTo /> </button>
+          <button className="w-content m-auto" disabled={loading || !confirmedPassword}> {loading ? <Loader/> : <ArrowLinkTo /> } </button>
         </fieldset>
         <br />        
       </form>
