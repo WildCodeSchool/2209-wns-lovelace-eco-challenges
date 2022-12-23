@@ -1,0 +1,84 @@
+.home {
+  @apply p-3;
+
+  .title {
+    @apply text-xl text-center font-bold;
+  }
+
+  .subtitle {
+    @apply m-3 text-base text-center;
+  }
+
+  .buttons {
+    @apply m-3 flex justify-around;
+  }
+
+  .images {
+    @apply rounded m-3 flex justify-between;
+  }
+
+  .card {
+    @apply border-solid border-4 border-primary w-10/12 m-auto p-2 rounded-lg;
+
+    .text {
+      @apply flex items-center font-bold;
+
+      .svg {
+        @apply m-2;
+      }
+    }
+
+    .subcard {
+      @apply text-center;
+    }
+
+    .subtext {
+      @apply mb-3;
+    }
+  }
+
+  .green-card {
+    @apply bg-primary pt-20 pb-7;
+
+    .green-card-display {
+      @apply flex justify-around;
+    }
+
+    .white-card {
+      @apply bg-white p-5 rounded-lg;
+    }
+
+    .button {
+      @apply flex justify-center mt-7;
+    }
+  }
+
+  .challenges {
+    .title {
+      @apply font-bold text-center text-xl flex justify-center items-center;
+    }
+  }
+
+  .gray-card {
+    @apply bg-gray-100 rounded-lg p-5;
+
+    .subtitle {
+        @apply font-bold text-start text-lg;
+    }
+  }
+
+  .versions {
+    @apply flex items-center flex-col mb-5;
+    .versions-title {
+        @apply text-primary font-bold text-center border-4 border-primary rounded-lg w-fit m-5;
+    }
+
+    .versions-line {
+        @apply flex mb-2;
+    }
+
+    .versions-subtitle {
+        @apply text-center mb-5;
+    }
+  }
+}
