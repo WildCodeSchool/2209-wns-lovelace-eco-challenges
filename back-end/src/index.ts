@@ -11,6 +11,7 @@ import AppUserRepository from "./models/AppUser/AppUser.repository";
 import { getSessionIdInCookie } from "./http-utils";
 import AppUser from "./models/AppUser/AppUser.entity";
 import { initializeDatabaseRepositories } from "./database/utils";
+import TeamRepository from "./models/Team/Team.repository";
 
 
 export type GlobalContext = ExpressContext & {
@@ -48,6 +49,8 @@ const startServer = async () => {
   // The `listen` method launches a web server.
   const { url } = await server.listen();
   await initializeDatabaseRepositories();
+
+  await TeamRepository.initializeTeams();
 
   console.log(`🚀  Server ready at ${url}`);
 };

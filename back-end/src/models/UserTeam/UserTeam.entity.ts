@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import AppUser from "../AppUser/AppUser.entity";
 import Team from "../Team/Team.entity";
+import Invitation from "../Invitation/Invitation.entity";
 
 export enum UserRole {
   ADMIN = "admin", 
@@ -23,12 +24,14 @@ export default class UserTeam {
     role: UserRole, 
     score: number, 
     disabled : boolean,
+    invitation: Invitation,
   ) {
     this.team = team;
     this.user = user;
     this.role = role; 
     this.score = score; 
     this.disabled = disabled; 
+    this.invitation = invitation;
   }
 
   @PrimaryGeneratedColumn("uuid")
@@ -42,6 +45,10 @@ export default class UserTeam {
   @ManyToOne(() => AppUser, (user) => user.userTeams, { eager: true })
   @Field(() => [AppUser])
   user: AppUser; 
+
+  @ManyToOne(() => Invitation, (invitation) => invitation.userTeams, { eager: true })
+  @Field(() => [Invitation!]!)
+  invitation: Invitation;
 
   @Column("enum", { enum: UserRole })
   @Field()

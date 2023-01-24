@@ -48,7 +48,7 @@ export default class Team {
   @Field({ nullable: true })
   country: string; 
 
-  @Column()
+  @Column("varchar", { nullable: true })
   @Field({ nullable: true })
   img: string; 
 
