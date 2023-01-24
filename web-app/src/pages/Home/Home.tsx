@@ -49,16 +49,8 @@ const Home = () => {
         <Button type="button-primary" name="Se connecter" />
       </div>
       <div className="images">
-        <img
-          className="image"
-          src="https://via.placeholder.com/150"
-          alt="image1"
-        />
-        <img
-          className="image"
-          src="https://via.placeholder.com/150"
-          alt="image2"
-        />
+        <img className="image" src="https://picsum.photos/150" alt="image1" />
+        <img className="image" src="https://picsum.photos/150" alt="image2" />
       </div>
       <div className="card">
         <div className="text">
@@ -123,19 +115,53 @@ const Home = () => {
         </h2>
         <div className="gray-card">
           <h3 className="subtitle">Nos partenaires</h3>
-          <i><Partners width="100px" height="100px" /></i>
+          <i>
+            <Partners width="100px" height="100px" />
+          </i>
         </div>
       </div>
       <div className="versions">
         <p className="versions-title">Version 100% gratuite</p>
-        <p className="versions-line"><i className="mr-5"><Check width="30px" height="30px" /></i>Coucou les copains</p>
-        <p className="versions-line"><i className="mr-5"><Check width="30px" height="30px" /></i>Coucou les copains</p>
-        <p className="versions-line"><i className="mr-5"><Check width="30px" height="30px" /></i>Coucou les copains</p>
+        <p className="versions-line">
+          <i className="mr-5">
+            <Check width="30px" height="30px" />
+          </i>
+          Coucou les copains
+        </p>
+        <p className="versions-line">
+          <i className="mr-5">
+            <Check width="30px" height="30px" />
+          </i>
+          Coucou les copains
+        </p>
+        <p className="versions-line">
+          <i className="mr-5">
+            <Check width="30px" height="30px" />
+          </i>
+          Coucou les copains
+        </p>
         <p className="versions-title">Version Premium</p>
-        <p className="versions-subtitle">Créée et pensée pour répondre aux besoins spécifiques des entreprises</p>
-        <p className="versions-line"><i className="mr-5"><Check width="30px" height="30px" /></i>Coucou les copains</p>
-        <p className="versions-line"><i className="mr-5"><Check width="30px" height="30px" /></i>Coucou les copains</p>
-        <p className="versions-line"><i className="mr-5"><Check width="30px" height="30px" /></i>Coucou les copains</p>
+        <p className="versions-subtitle">
+          Créée et pensée pour répondre aux besoins spécifiques des entreprises
+        </p>
+        <p className="versions-line">
+          <i className="mr-5">
+            <Check width="30px" height="30px" />
+          </i>
+          Coucou les copains
+        </p>
+        <p className="versions-line">
+          <i className="mr-5">
+            <Check width="30px" height="30px" />
+          </i>
+          Coucou les copains
+        </p>
+        <p className="versions-line">
+          <i className="mr-5">
+            <Check width="30px" height="30px" />
+          </i>
+          Coucou les copains
+        </p>
       </div>
     </div>
   );
