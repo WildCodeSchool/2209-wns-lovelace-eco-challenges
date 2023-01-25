@@ -11,12 +11,9 @@ import {
   SIGN_IN_PATH,
   SIGN_UP_PATH,
 } from "../../pages/paths";
-<<<<<<< HEAD
-=======
 import SignIn from "../../pages/SignIn/SignIn";
 import SignUp from "../../pages/SignUp/SignUp";
 */
->>>>>>> 346fecca918bc49b5691a974f4d6d58ff766f3fb
 import Button from "../../Shared/Buttons/Button";
 import MakeDifference from "../../assets/MakeDifference";
 import GoodForPlanet from "../../assets/GoodForPlanet";

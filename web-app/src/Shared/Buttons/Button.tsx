@@ -5,13 +5,15 @@ type Props = {
   name: string,
   type: string,
   icon?: any,
+  onClick?:() => void
 };
 
 const Button = (props: Props) => {
   const {
     name,
     type,
-    icon = null
+    icon = null,
+    onClick
   } = props;
 
   const buttonClassName = useMemo((): string => clsx({
@@ -21,7 +23,7 @@ const Button = (props: Props) => {
   }), [type]);
 
   return (
-    <button className={buttonClassName}>
+    <button onClick={onClick} className={buttonClassName}>
       {name}
       {icon ?? <i>{icon}</i>}
     </button>
