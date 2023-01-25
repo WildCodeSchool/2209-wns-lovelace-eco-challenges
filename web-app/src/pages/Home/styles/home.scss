@@ -1,16 +1,25 @@
 .home {
-  @apply p-3;
+  @apply flex flex-col justify-center;
 
-  .title {
-    @apply text-xl text-center font-bold;
-  }
+  .header-image {
+    @apply bg-[url('../assets/images/imageHeader.jpg')] h-80 relative bg-cover bg-center;
 
-  .subtitle {
-    @apply m-3 text-base text-center;
-  }
-
-  .buttons {
-    @apply m-3 flex justify-around;
+    .header-text {
+      @apply text-white absolute left-1/2 top-1/2 w-9/12 bg-transparent rounded-xl;
+      transform: translate(-50%, -50%);
+    }
+  
+    .title {
+      @apply text-xl text-center font-bold;
+    }
+  
+    .subtitle {
+      @apply m-3 text-base text-center;
+    }
+  
+    .buttons {
+      @apply m-3 flex justify-around;
+    }
   }
 
   .images {
@@ -22,13 +31,13 @@
   }
 
   .card {
-    @apply border-solid border-4 border-primary w-10/12 m-auto p-2 rounded-lg relative;
+    @apply border-solid border-4 border-primary w-8/12 p-2 rounded-lg mx-auto my-7;
 
     .text {
-      @apply flex items-center font-bold;
+      @apply text-center font-bold;
 
       .svg {
-        @apply m-2;
+        @apply flex justify-center m-2;
       }
     }
 
@@ -42,7 +51,7 @@
   }
 
   .green-card {
-    @apply bg-primary pt-20 pb-7;
+    @apply bg-primary py-7;
 
     .green-card-display {
       @apply flex justify-around;

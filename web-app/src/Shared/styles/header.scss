@@ -12,7 +12,7 @@
     }
 
     .burger-container {
-        @apply w-10 flex flex-col justify-around;
+        @apply w-10 flex flex-col justify-around md:hidden;
 
         .burger-line {
             @apply border-2 border-white;

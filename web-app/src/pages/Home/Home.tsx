@@ -15,15 +15,16 @@ import SignIn from "../../pages/SignIn/SignIn";
 import SignUp from "../../pages/SignUp/SignUp";
 */
 import Button from "../../Shared/Buttons/Button";
-import MakeDifference from "../../assets/MakeDifference";
-import GoodForPlanet from "../../assets/GoodForPlanet";
-import Solidarity from "../../assets/Solidarity";
-import WithFriends from "../../assets/WithFriends";
-import Company from "../../assets/Company";
-import LaunchChallenge from "../../assets/LaunchChallenge";
-import ArrowLinkTo from "../../assets/ArrowLinkTo";
-import Partners from "../../assets/Partners";
-import Check from "../../assets/Check";
+import MakeDifference from "../../assets/logos/MakeDifference";
+import GoodForPlanet from "../../assets/logos/GoodForPlanet";
+import Solidarity from "../../assets/logos/Solidarity";
+import WithFriends from "../../assets/logos/WithFriends";
+import Company from "../../assets/logos/Company";
+import LaunchChallenge from "../../assets/logos/LaunchChallenge";
+import ArrowLinkTo from "../../assets/logos/ArrowLinkTo";
+import Partners from "../../assets/logos/Partners";
+import Check from "../../assets/logos/Check";
+import imageHeader from "../../assets/images/imageHeader.jpg";
 
 import { PRIMARY } from '../../Shared/Constants/Color';
 
@@ -40,21 +41,27 @@ const Home = () => {
 
   return (
     <div className="home">
-      <h2 className="title">
-        Défiez vos groupes d'amis dans des challenges écolo !
-      </h2>
-      <p className="subtitle">
-        Sensibilisez, mobilisez et jouez avec vos amis avec Eco Playground,
-        testez le tout de suite dans sa version gratuite
-      </p>
-      <div className="buttons">
-        <Button type="button-primary" name="S'inscrire" />
-        <Button type="button-primary" name="Se connecter" />
+      <div className="header-image" >
+        <div className="header-text">
+          <h2 className="title">
+            Défiez vos groupes d'amis dans des challenges écolo !
+          </h2>
+          <p className="subtitle">
+            Sensibilisez, mobilisez et jouez avec vos amis avec Eco Playground,
+            testez le tout de suite dans sa version gratuite
+          </p>
+          <div className="buttons">
+            <Button type="button-primary" name="S'inscrire" />
+            <Button type="button-primary" name="Se connecter" />
+          </div>
+        </div>
       </div>
-      <div className="images">
+      {/*
+            <div className="images">
         <img className="image" src="https://picsum.photos/150" alt="image1" />
         <img className="image" src="https://picsum.photos/150" alt="image2" />
       </div>
+      */}
       <div className="card">
         <div className="text">
           <i className="svg">

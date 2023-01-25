@@ -2,6 +2,7 @@ import { useState } from 'react';
 import burger from './burger.png';
 
 import Nav from '../../Shared/Nav/Nav';
+import NavList from '../../Shared/Nav/NavList';
 
 const Header = () => {
     const [open, setOpen] = useState(false);
@@ -15,6 +16,7 @@ const Header = () => {
                 <div className="burger-line"></div>
             </div>
             <Nav open={ open } />
+            <NavList />
         </header>
     )
 }
