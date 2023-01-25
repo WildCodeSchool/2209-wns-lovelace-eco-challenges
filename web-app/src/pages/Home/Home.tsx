@@ -1,9 +1,9 @@
 import { gql, useQuery } from "@apollo/client";
 import { Routes, Route, Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 
 import { MyProfileQuery } from "../../gql/graphql";
 
+/* import { ToastContainer } from "react-toastify";
 import CreateWilder from "../../pages/CreateWilder/CreateWilder";
 import {
   CREATE_WILDER_PATH,
@@ -13,6 +13,7 @@ import {
 } from "../../pages/paths";
 import SignIn from "../../pages/SignIn/SignIn";
 import SignUp from "../../pages/SignUp/SignUp";
+*/
 import Button from "../../Shared/Buttons/Button";
 import MakeDifference from "../../assets/MakeDifference";
 import GoodForPlanet from "../../assets/GoodForPlanet";
@@ -23,6 +24,8 @@ import LaunchChallenge from "../../assets/LaunchChallenge";
 import ArrowLinkTo from "../../assets/ArrowLinkTo";
 import Partners from "../../assets/Partners";
 import Check from "../../assets/Check";
+
+import { PRIMARY } from '../../Shared/Constants/Color';
 
 const MY_PROFILE = gql`
   query MyProfile {
@@ -100,7 +103,7 @@ const Home = () => {
         </div>
         <div className="button">
           <Button
-            icon={<LaunchChallenge width="20px" height="20px" />}
+            icon={<LaunchChallenge width="20px" height="20px" fill={PRIMARY} />}
             type="button-secondary"
             name="Lancer un challenge"
           />
@@ -110,7 +113,7 @@ const Home = () => {
         <h2 className="title">
           Voir les challenges en cours
           <i>
-            <ArrowLinkTo width="50px" height="50px" />
+            <ArrowLinkTo width="50px" height="50px" fill={PRIMARY} />
           </i>
         </h2>
         <div className="gray-card">
@@ -124,19 +127,19 @@ const Home = () => {
         <p className="versions-title">Version 100% gratuite</p>
         <p className="versions-line">
           <i className="mr-5">
-            <Check width="30px" height="30px" />
+            <Check width="30px" height="30px" fill={PRIMARY} />
           </i>
           Coucou les copains
         </p>
         <p className="versions-line">
           <i className="mr-5">
-            <Check width="30px" height="30px" />
+            <Check width="30px" height="30px" fill={PRIMARY} />
           </i>
           Coucou les copains
         </p>
         <p className="versions-line">
           <i className="mr-5">
-            <Check width="30px" height="30px" />
+            <Check width="30px" height="30px" fill={PRIMARY} />
           </i>
           Coucou les copains
         </p>
@@ -146,19 +149,19 @@ const Home = () => {
         </p>
         <p className="versions-line">
           <i className="mr-5">
-            <Check width="30px" height="30px" />
+            <Check width="30px" height="30px" fill={PRIMARY} />
           </i>
           Coucou les copains
         </p>
         <p className="versions-line">
           <i className="mr-5">
-            <Check width="30px" height="30px" />
+            <Check width="30px" height="30px" fill={PRIMARY} />
           </i>
           Coucou les copains
         </p>
         <p className="versions-line">
           <i className="mr-5">
-            <Check width="30px" height="30px" />
+            <Check width="30px" height="30px" fill={PRIMARY} />
           </i>
           Coucou les copains
         </p>

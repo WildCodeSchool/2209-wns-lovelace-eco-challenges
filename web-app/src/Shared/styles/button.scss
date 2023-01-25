@@ -1,7 +1,11 @@
 .button-primary {
-  @apply text-white bg-primary rounded-lg p-2 min-button flex;
+  @apply text-white bg-primary;
 }
 
 .button-secondary {
-  @apply text-primary bg-white rounded-lg p-2 min-w-[100px] flex;
+  @apply text-primary bg-white;
+}
+
+.button {
+  @apply rounded-lg p-2 min-w-[120px] min-h-[42px];
 }
