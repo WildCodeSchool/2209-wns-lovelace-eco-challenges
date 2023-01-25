@@ -94,6 +94,7 @@ const SignIn = (/* { onSuccess }: { onSuccess: () => {} } */) => {
           </label>
           <br />
 
+
           <section className="iconContainer">
             <button>
               <Facebook/>
@@ -107,9 +108,18 @@ const SignIn = (/* { onSuccess }: { onSuccess: () => {} } */) => {
               <Apple/>
             </button>
           </section>
-          <button className="w-content m-auto" disabled={loading}> {loading ? <Loader/> : <ArrowLinkTo /> } </button>
+          <label className="flex">
+            <input type="checkbox"/>
+            restez connecé
+          </label>
+          <button className="w-full" disabled={loading}> {loading ? <Loader/> : <ArrowLinkTo /> } </button>
 
         </fieldset>
+
+        <h2> Pas encore inscrit </h2>
+        <Button action={() => {
+          navigate("/sign-up")
+        }} type="button-primary" name="Créer un compte"/>
       </form>
     </>
   );
