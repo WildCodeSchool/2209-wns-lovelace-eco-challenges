@@ -14,11 +14,15 @@
   }
 
   .images {
-    @apply rounded m-3 flex justify-between;
+    @apply m-3 flex justify-between;
+
+    .image {
+      @apply rounded-xl;
+    }
   }
 
   .card {
-    @apply border-solid border-4 border-primary w-10/12 m-auto p-2 rounded-lg;
+    @apply border-solid border-4 border-primary w-10/12 m-auto p-2 rounded-lg relative;
 
     .text {
       @apply flex items-center font-bold;

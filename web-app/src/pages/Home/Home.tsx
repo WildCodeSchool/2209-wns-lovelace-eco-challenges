@@ -1,9 +1,9 @@
 import { gql, useQuery } from "@apollo/client";
 import { Routes, Route, Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 
 /* import { MyProfileQuery } from "../../gql/graphql"; */
 
+/* import { ToastContainer } from "react-toastify";
 import CreateWilder from "../../pages/CreateWilder/CreateWilder";
 import {
   CREATE_WILDER_PATH,
@@ -11,6 +11,12 @@ import {
   SIGN_IN_PATH,
   SIGN_UP_PATH,
 } from "../../pages/paths";
+<<<<<<< HEAD
+=======
+import SignIn from "../../pages/SignIn/SignIn";
+import SignUp from "../../pages/SignUp/SignUp";
+*/
+>>>>>>> 346fecca918bc49b5691a974f4d6d58ff766f3fb
 import Button from "../../Shared/Buttons/Button";
 import MakeDifference from "../../assets/MakeDifference";
 import GoodForPlanet from "../../assets/GoodForPlanet";
@@ -21,6 +27,8 @@ import LaunchChallenge from "../../assets/LaunchChallenge";
 import Partners from "../../assets/Partners";
 import Check from "../../assets/Check";
 import { ArrowLinkTo } from "../../assets/ArrowContinue";
+
+import { PRIMARY } from '../../Shared/Constants/Color';
 
 const MY_PROFILE = gql`
   query MyProfile {
@@ -46,16 +54,8 @@ const Home = () => {
         <Button type="button-primary" name="Se connecter" />
       </div>
       <div className="images">
-        <img
-          className="image"
-          src="https://via.placeholder.com/150"
-          alt="image1"
-        />
-        <img
-          className="image"
-          src="https://via.placeholder.com/150"
-          alt="image2"
-        />
+        <img className="image" src="https://picsum.photos/150" alt="image1" />
+        <img className="image" src="https://picsum.photos/150" alt="image2" />
       </div>
       <div className="card">
         <div className="text">
@@ -105,7 +105,7 @@ const Home = () => {
         </div>
         <div className="button">
           <Button
-            icon={<LaunchChallenge width="20px" height="20px" />}
+            icon={<LaunchChallenge width="20px" height="20px" fill={PRIMARY} />}
             type="button-secondary"
             name="Lancer un challenge"
           />
@@ -115,24 +115,58 @@ const Home = () => {
         <h2 className="title">
           Voir les challenges en cours
           <i>
-            <ArrowLinkTo width="50px" height="50px" />
+            <ArrowLinkTo width="50px" height="50px" fill={PRIMARY} />
           </i>
         </h2>
         <div className="gray-card">
           <h3 className="subtitle">Nos partenaires</h3>
-          <i><Partners width="100px" height="100px" /></i>
+          <i>
+            <Partners width="100px" height="100px" />
+          </i>
         </div>
       </div>
       <div className="versions">
         <p className="versions-title">Version 100% gratuite</p>
-        <p className="versions-line"><i className="mr-5"><Check width="30px" height="30px" /></i>Coucou les copains</p>
-        <p className="versions-line"><i className="mr-5"><Check width="30px" height="30px" /></i>Coucou les copains</p>
-        <p className="versions-line"><i className="mr-5"><Check width="30px" height="30px" /></i>Coucou les copains</p>
+        <p className="versions-line">
+          <i className="mr-5">
+            <Check width="30px" height="30px" fill={PRIMARY} />
+          </i>
+          Coucou les copains
+        </p>
+        <p className="versions-line">
+          <i className="mr-5">
+            <Check width="30px" height="30px" fill={PRIMARY} />
+          </i>
+          Coucou les copains
+        </p>
+        <p className="versions-line">
+          <i className="mr-5">
+            <Check width="30px" height="30px" fill={PRIMARY} />
+          </i>
+          Coucou les copains
+        </p>
         <p className="versions-title">Version Premium</p>
-        <p className="versions-subtitle">Créée et pensée pour répondre aux besoins spécifiques des entreprises</p>
-        <p className="versions-line"><i className="mr-5"><Check width="30px" height="30px" /></i>Coucou les copains</p>
-        <p className="versions-line"><i className="mr-5"><Check width="30px" height="30px" /></i>Coucou les copains</p>
-        <p className="versions-line"><i className="mr-5"><Check width="30px" height="30px" /></i>Coucou les copains</p>
+        <p className="versions-subtitle">
+          Créée et pensée pour répondre aux besoins spécifiques des entreprises
+        </p>
+        <p className="versions-line">
+          <i className="mr-5">
+            <Check width="30px" height="30px" fill={PRIMARY} />
+          </i>
+          Coucou les copains
+        </p>
+        <p className="versions-line">
+          <i className="mr-5">
+            <Check width="30px" height="30px" fill={PRIMARY} />
+          </i>
+          Coucou les copains
+        </p>
+        <p className="versions-line">
+          <i className="mr-5">
+            <Check width="30px" height="30px" fill={PRIMARY} />
+          </i>
+          Coucou les copains
+        </p>
       </div>
     </div>
   );
