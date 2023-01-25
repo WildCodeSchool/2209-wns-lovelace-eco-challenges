@@ -1,5 +1,6 @@
 .form {
-    @apply border-2 rounded-xl font-bold border-primary mx-4 my-8 p-8;
+    
+    @apply border-2 rounded-xl font-bold border-primary mx-4 my-8 p-8 text-center;
 
     legend {
         @apply border-2 px-8 py-2 rounded-lg m-auto border-primary -rotate-2 text-primary;
@@ -10,7 +11,8 @@
 
     }
     label {
-        @apply my-1 block;
+        @apply text-left my-1 block;
+        
     }
 
     h2 {
@@ -27,5 +29,12 @@
 
     .iconContainer {
         @apply flex justify-around my-4 ;
+    }
+}
+
+.navigation-section {
+    @apply text-center;
+    button {
+        @apply m-3;
     }
 }

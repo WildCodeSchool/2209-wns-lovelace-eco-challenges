@@ -108,18 +108,22 @@ const SignIn = (/* { onSuccess }: { onSuccess: () => {} } */) => {
               <Apple/>
             </button>
           </section>
+          
           <label className="flex">
             <input type="checkbox"/>
             restez connecé
           </label>
+
           <button className="w-full" disabled={loading}> {loading ? <Loader/> : <ArrowLinkTo /> } </button>
 
         </fieldset>
 
       </form>
       
-      <h2> Pas encore inscrit </h2>
-      <Button onClick={navigate("/sign-up")} type="button-primary" name="Créer un compte"/>
+      <div className="navigation-section">
+        <h2> Pas encore inscrit </h2>
+        <Button onClick={() => navigate("/sign-up")} type="button-primary" name="Créer un compte"/>
+      </div>
     </>
   );
 };

@@ -11,6 +11,7 @@ import Facebook from "../../assets/Facebook";
 import Mail from "../../assets/Mail";
 import Apple from "../../assets/Apple";
 import { ArrowLinkTo } from "../../assets/ArrowContinue";
+import Button from "../../Shared/Buttons/Button";
 
 const SIGN_UP = gql`
   mutation SignUp($firstName: String!, $lastName: String!, $nickname: String!, $email: String!, $city: String!, $country: String!, $password: String!) {
@@ -224,12 +225,14 @@ const SignUp = () => {
             </button>
           </section>
 
-          <button className="w-content m-auto" disabled={loading || !confirmedPassword}> {loading ? <Loader/> : <ArrowLinkTo /> } </button>
+          <button disabled={loading || !confirmedPassword}> {loading ? <Loader/> : <ArrowLinkTo /> } </button>
         </fieldset>
         <br />        
       </form>
-      <h2> Vous avez déjà un compte ? </h2>
-      <button className="button-cta m-auto"> Se connecter </button>
+      <div className="navigation-section">
+        <h2> Vous avez déjà un compte ? </h2>
+        <Button onClick={() => navigate("/sign-in")} type="button-primary" name="Se connecter "/>
+      </div>
     </>
   );
 };
