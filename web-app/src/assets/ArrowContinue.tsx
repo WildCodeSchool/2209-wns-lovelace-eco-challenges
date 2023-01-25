@@ -4,7 +4,7 @@ export const ArrowLinkTo = (props: any) => (
       height="70px"
       viewBox="0 0 128 128"
       xmlns="http://www.w3.org/2000/svg"
-      className="fill-primary"
+      className="fill-primary m-auto"
       {...props}
     >
       <path
