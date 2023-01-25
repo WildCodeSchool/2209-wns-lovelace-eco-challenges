@@ -11,8 +11,6 @@ import {
   SIGN_IN_PATH,
   SIGN_UP_PATH,
 } from "../../pages/paths";
-import SignIn from "../../pages/SignIn/SignIn";
-import SignUp from "../../pages/SignUp/SignUp";
 import Button from "../../Shared/Buttons/Button";
 import MakeDifference from "../../assets/MakeDifference";
 import GoodForPlanet from "../../assets/GoodForPlanet";
