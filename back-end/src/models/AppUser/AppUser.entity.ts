@@ -2,7 +2,6 @@ import { IsEmail } from "class-validator";
 // import { count } from "console";
 import { Field, ID, ObjectType } from "type-graphql";
 import { Entity, PrimaryGeneratedColumn, Column, Index, ManyToMany, OneToMany } from "typeorm";
-import Team from "../Team/Team.entity";
 import UserTeam from "../UserTeam/UserTeam.entity";
 
 @Entity()

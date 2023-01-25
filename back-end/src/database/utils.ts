@@ -3,6 +3,7 @@ import { DATABASE_URL, NODE_ENV, TEST_DATABASE_URL } from "../config";
 import AppUserRepository from "../models/AppUser/AppUser.repository";
 import SessionRepository from "../models/AppUser/Session.repository";
 import TeamRepository from "../models/Team/Team.repository";
+import UserTeamRepository from "../models/UserTeam/UserTeam.repository";
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -29,9 +30,10 @@ async function getRepository(entity: EntityTarget<any>) {
 }
 
 async function initializeDatabaseRepositories() {
-  await TeamRepository.initializeRepository();
   await AppUserRepository.initializeRepository();
   await SessionRepository.initializeRepository();
+  await TeamRepository.initializeRepository();
+  await UserTeamRepository.initializeRepository();
 }
 
 async function closeConnection() {

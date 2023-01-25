@@ -12,6 +12,7 @@ import { getSessionIdInCookie } from "./http-utils";
 import AppUser from "./models/AppUser/AppUser.entity";
 import { initializeDatabaseRepositories } from "./database/utils";
 import TeamRepository from "./models/Team/Team.repository";
+import UserTeamResolver from "./resolvers/UserTeam/UserTeam.resolver";
 
 
 export type GlobalContext = ExpressContext & {
@@ -21,7 +22,7 @@ export type GlobalContext = ExpressContext & {
 const startServer = async () => {
   const server = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [TeamResolver, AppUserResolver],
+      resolvers: [TeamResolver, AppUserResolver, UserTeamResolver],
       authChecker: async ({ context }) => {
         return Boolean(context.user);
       },

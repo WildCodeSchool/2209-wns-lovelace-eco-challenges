@@ -6,7 +6,6 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import AppUser from "../AppUser/AppUser.entity";
 import UserTeam from "../UserTeam/UserTeam.entity";
 
 
@@ -17,15 +16,17 @@ export default class Team {
     teamName: string,
     city: string,
     country: string, 
-    img: string, 
     isPublic : boolean,
+    img?: string, 
     userTeams?: UserTeam[]
   ) {
     this.teamName = teamName;
     this.city = city;
-    this.country = country; 
-    this.img = img; 
+    this.country = country;  
     this.isPublic = isPublic; 
+    if (img) {
+      this.img = img; 
+    };
     if (userTeams) {
       this.userTeams = userTeams;
     }
@@ -41,16 +42,16 @@ export default class Team {
   teamName: string;
 
   @Column("varchar", { length: 100 })
-  @Field({ nullable: true })
+  @Field()
   city: string; 
 
   @Column("varchar", { length: 100 })
-  @Field({ nullable: true })
+  @Field()
   country: string; 
 
   @Column("varchar", { nullable: true })
   @Field({ nullable: true })
-  img: string; 
+  img?: string; 
 
   @Column("boolean")
   @Field()
@@ -59,5 +60,4 @@ export default class Team {
   @OneToMany(() => UserTeam, (userTeam) => userTeam.team)
   @Field(() => [UserTeam])
   userTeams: UserTeam[]; 
-
 }

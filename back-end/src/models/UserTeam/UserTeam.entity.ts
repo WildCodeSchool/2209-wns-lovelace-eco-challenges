@@ -12,7 +12,7 @@ import Invitation from "../Invitation/Invitation.entity";
 
 export enum UserRole {
   ADMIN = "admin", 
-  PARTICIPANT = "participant",
+  PLAYER = "player",
 }
 
 @Entity()
@@ -21,14 +21,14 @@ export default class UserTeam {
   constructor(
     team: Team,
     user: AppUser,
-    role: UserRole, 
+    userRole: UserRole, 
     score: number, 
     disabled : boolean,
     invitation: Invitation,
   ) {
     this.team = team;
     this.user = user;
-    this.role = role; 
+    this.userRole = userRole; 
     this.score = score; 
     this.disabled = disabled; 
     this.invitation = invitation;
@@ -52,7 +52,7 @@ export default class UserTeam {
 
   @Column("enum", { enum: UserRole })
   @Field()
-  role: UserRole; 
+  userRole: UserRole; 
 
   @Column("int", { default:0 })
   @Field({ nullable: true })
