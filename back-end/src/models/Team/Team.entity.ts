@@ -3,9 +3,12 @@ import {
   Column,
   Entity,
   Index,
+  JoinTable,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import Challenge from "../Challenge/Challenge.entity";
 import UserTeam from "../UserTeam/UserTeam.entity";
 
 
@@ -18,7 +21,8 @@ export default class Team {
     country: string, 
     isPublic : boolean,
     img?: string, 
-    userTeams?: UserTeam[]
+    userTeams?: UserTeam[],
+    challenges?: Challenge[]
   ) {
     this.teamName = teamName;
     this.city = city;
@@ -29,6 +33,9 @@ export default class Team {
     };
     if (userTeams) {
       this.userTeams = userTeams;
+    };
+    if (challenges) {
+      this.challenges = challenges;
     }
   }
 
@@ -60,4 +67,9 @@ export default class Team {
   @OneToMany(() => UserTeam, (userTeam) => userTeam.team)
   @Field(() => [UserTeam])
   userTeams: UserTeam[]; 
+
+  @ManyToMany(() => Challenge, { eager: true })
+  @Field(() => [Challenge])
+  @JoinTable()
+  challenges: Challenge[];
 }
