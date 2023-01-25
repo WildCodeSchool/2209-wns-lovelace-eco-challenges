@@ -116,11 +116,10 @@ const SignIn = (/* { onSuccess }: { onSuccess: () => {} } */) => {
 
         </fieldset>
 
-        <h2> Pas encore inscrit </h2>
-        <Button action={() => {
-          navigate("/sign-up")
-        }} type="button-primary" name="Créer un compte"/>
       </form>
+      
+      <h2> Pas encore inscrit </h2>
+      <Button onClick={navigate("/sign-up")} type="button-primary" name="Créer un compte"/>
     </>
   );
 };
