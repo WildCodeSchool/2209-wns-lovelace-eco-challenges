@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import burger from './burger.png';
+import Ecology from "../../assets/logos/ecology.png";
 
 import Nav from '../../Shared/Nav/Nav';
 import NavList from '../../Shared/Nav/NavList';
@@ -9,7 +9,12 @@ const Header = () => {
 
     return (
         <header className="header">
-            <h1 className="title">Eco Playground</h1>
+            <div className="flex">
+                <div className="header-logo">
+                    <img src={Ecology} alt="logo eco playground" />
+                </div>
+                <h1 className="title">Eco Playground</h1>
+            </div>
             <div onClick={ () => setOpen(!open) } className="burger-container">
                 <div className="burger-line"></div>
                 <div className="burger-line"></div>

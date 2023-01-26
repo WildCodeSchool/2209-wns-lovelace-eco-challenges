@@ -1,97 +1,118 @@
 .home {
-  @apply flex flex-col justify-center;
 
-  .header-image {
-    @apply bg-[url('../assets/images/imageHeader.jpg')] h-80 relative bg-cover bg-center;
+  .home-page {
+    @apply flex flex-col items-center justify-center;
 
-    .header-text {
-      @apply text-white absolute left-1/2 top-1/2 w-9/12 bg-transparent rounded-xl;
-      transform: translate(-50%, -50%);
-    }
-  
-    .title {
-      @apply text-xl text-center font-bold;
-    }
-  
-    .subtitle {
-      @apply m-3 text-base text-center;
-    }
-  
-    .buttons {
-      @apply m-3 flex justify-around;
-    }
-  }
+    .card {
+      @apply flex flex-col items-center justify-center border-solid border-4 border-primary w-3/4 sm:w-2/3 lg:w-1/2 p-2 rounded-lg my-7;
 
-  .images {
-    @apply m-3 flex justify-between;
+      .card-image {
+        @apply w-20;
+      }
 
-    .image {
-      @apply rounded-xl;
-    }
-  }
+      .text {
+        @apply font-bold text-lg;
+      }
 
-  .card {
-    @apply border-solid border-4 border-primary w-8/12 p-2 rounded-lg mx-auto my-7;
+      .subcard {
+        @apply text-center;
+      }
 
-    .text {
-      @apply text-center font-bold;
-
-      .svg {
-        @apply flex justify-center m-2;
+      .subtext {
+        @apply my-3;
       }
     }
 
-    .subcard {
-      @apply text-center;
+    .green-card {
+      @apply bg-primary py-7 w-full flex flex-col items-center justify-center;
+
+      .green-card-display {
+        @apply flex flex-wrap w-11/12 sm:w-2/3 md:w-2/3 lg:w-1/2 flex justify-around;
+      }
+
+      .green-card-box {
+        @apply bg-white rounded-lg flex items-center justify-center flex-col p-5 m-5;
+
+      }
+
+      .button {
+        @apply flex justify-center mt-4;
+      }
     }
 
-    .subtext {
-      @apply mb-3;
+    .challenges {
+      .title {
+        @apply font-bold text-center text-xl flex justify-center items-center p-2;
+      }
+    }
+
+    .gray-card {
+      @apply bg-gray-100 rounded-lg w-11/12 sm:w-11/12 px-4 pt-4;
+
+      .subtitle {
+        @apply font-bold text-start text-lg;
+      }
+
+      .underline {
+        @apply bg-primary h-2 w-20;
+      }
+
+      .grey-card-icon {
+        @apply flex justify-end;
+      }
+
+      .gray-card-partners {
+        @apply flex flex-wrap items-center justify-around;
+
+        .gray-card-logos {
+          @apply w-1/4 lg:w-1/5 xl:w-1/6  m-4;
+        }
+      }
+    }
+
+    .versions {
+      @apply flex items-center justify-center flex-col my-5;
+
+      .versions-free {
+        @apply mb-4 flex flex-col justify-center items-center;
+      }
+
+      .versions-premium {
+        @apply flex flex-col justify-center items-center;
+      }
+
+      .versions-title {
+        @apply text-primary font-bold border-4 border-primary rounded-lg w-fit p-2 -rotate-3 mb-2;
+      }
+
+      .versions-line {
+        @apply flex mb-2;
+      }
+
+      .versions-subtitle {
+        @apply text-center mb-5;
+      }
     }
   }
 
-  .green-card {
-    @apply bg-primary py-7;
+  .header-image {
+    @apply bg-[url('../assets/images/test10.webp')] h-80 relative bg-cover bg-center;
 
-    .green-card-display {
-      @apply flex justify-around;
+    .header-text {
+      @apply text-white absolute left-1/2 top-1/2 w-11/12 bg-transparent rounded-xl;
+      transform: translate(-50%, -50%);
     }
 
-    .white-card {
-      @apply bg-white p-5 rounded-lg;
-    }
-
-    .button {
-      @apply flex justify-center mt-7;
-    }
-  }
-
-  .challenges {
     .title {
-      @apply font-bold text-center text-xl flex justify-center items-center;
+      @apply text-xl text-center font-bold text-2xl;
     }
-  }
-
-  .gray-card {
-    @apply bg-gray-100 rounded-lg p-5;
 
     .subtitle {
-        @apply font-bold text-start text-lg;
-    }
-  }
-
-  .versions {
-    @apply flex items-center flex-col mb-5;
-    .versions-title {
-        @apply text-primary font-bold text-center border-4 border-primary rounded-lg w-fit m-5;
+      @apply m-3 text-base text-center text-xl;
     }
 
-    .versions-line {
-        @apply flex mb-2;
-    }
-
-    .versions-subtitle {
-        @apply text-center mb-5;
+    .buttons {
+      @apply m-3 flex justify-around;
     }
   }
 }
