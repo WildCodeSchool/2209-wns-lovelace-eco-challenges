@@ -13,6 +13,8 @@ import AppUser from "./models/AppUser/AppUser.entity";
 import { initializeDatabaseRepositories } from "./database/utils";
 import TeamRepository from "./models/Team/Team.repository";
 import UserTeamResolver from "./resolvers/UserTeam/UserTeam.resolver";
+import ChallengeRepository from "./models/Challenge/Challenge.repository";
+import ChallengeResolver from "./resolvers/Challenge/Challenge.resolver";
 
 
 export type GlobalContext = ExpressContext & {
@@ -22,7 +24,7 @@ export type GlobalContext = ExpressContext & {
 const startServer = async () => {
   const server = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [TeamResolver, AppUserResolver, UserTeamResolver],
+      resolvers: [TeamResolver, AppUserResolver, UserTeamResolver, ChallengeResolver],
       authChecker: async ({ context }) => {
         return Boolean(context.user);
       },
@@ -52,6 +54,7 @@ const startServer = async () => {
   await initializeDatabaseRepositories();
 
   await TeamRepository.initializeTeams();
+  await ChallengeRepository.initializeChallenges();
 
   console.log(`🚀  Server ready at ${url}`);
 };

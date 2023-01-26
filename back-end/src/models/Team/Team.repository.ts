@@ -5,7 +5,6 @@ import { ILike, Like } from "typeorm";
 export default class TeamRepository extends TeamDb {
   static async initializeTeams(): Promise<void> {
     await TeamRepository.clearRepository();
-    // await this.repository.delete({});
     await this.repository.save({
       teamName: "Team Paris",
       city: "Paris", 
@@ -53,6 +52,10 @@ export default class TeamRepository extends TeamDb {
 
   static async getTeamByCountry(country: string): Promise<Team[] | null> {
     return this.repository.findBy({ country: ILike(`%${country}%`) });
+  }
+
+  static async getTeamByName(teamName: string): Promise<Team | null> {
+    return this.repository.findOneBy({ teamName: ILike(`%${teamName}%`) });
   }
 
   static async createTeam(

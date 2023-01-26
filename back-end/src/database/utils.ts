@@ -2,6 +2,7 @@ import { DataSource, EntityTarget } from "typeorm";
 import { DATABASE_URL, NODE_ENV, TEST_DATABASE_URL } from "../config";
 import AppUserRepository from "../models/AppUser/AppUser.repository";
 import SessionRepository from "../models/AppUser/Session.repository";
+import ChallengeRepository from "../models/Challenge/Challenge.repository";
 import TeamRepository from "../models/Team/Team.repository";
 import UserTeamRepository from "../models/UserTeam/UserTeam.repository";
 
@@ -34,6 +35,7 @@ async function initializeDatabaseRepositories() {
   await SessionRepository.initializeRepository();
   await TeamRepository.initializeRepository();
   await UserTeamRepository.initializeRepository();
+  await ChallengeRepository.initializeRepository();
 }
 
 async function closeConnection() {

@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from "type-graphql";
+import { Field, ID, ObjectType, registerEnumType } from "type-graphql";
 import {
   Column,
   Entity,
@@ -7,47 +7,61 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import Team from "../Team/Team.entity";
-import UserTeam from "../UserTeam/UserTeam.entity";
 
 export enum Level {
-  EASY = "easy",
-  MODERATE = "moderate",
-  CHALLENGING = "challenging",
-  SUPERGREEN = "supergreen"
+  EASY = "Facile",
+  MODERATE = "Intermédiaire",
+  CHALLENGING = "Challengeant",
+  SUPERGREEN = "Supergreen"
 }
 
-export enum Categories {
-  CARPOOLING = "carpooling",
-  WASTEREDUCTION = "waste reduction", 
-  LESSWATER = "less water",
-  LESSELECTRICITY = "less electricity", 
-  LESSMEAT = "less meat", 
-  PROTECTSNATURE = "protects nature",
-  SELFSUFFICIENCY = "self-sufficiency" 
+// export type CategoryType = "Covoiturage" | "Déchets" | "Eau" | "Electricité" | "Viande" | "Protection Nature" | "Autosuffisance" | "Réduction";
+
+export enum Category {
+  CARPOOLING = "Covoiturage",
+  WASTE = "Déchets", 
+  WATER = "Eau",
+  ELECTRICITY = "Electricité", 
+  MEAT = "Viande", 
+  PROTECTSNATURE = "Protection Nature",
+  SELFSUFFICIENCY = "Autosuffisance",
+  LESS = "Réduction"
 }
+
+registerEnumType(Category, {
+  name: "Category",
+});
+registerEnumType(Level, {
+  name: "Level",
+});
+
 
 @Entity()
 @ObjectType()
 export default class Challenge {
   constructor(
     challengeName: string,
-    startsAt: Date,
-    endAt: Date, 
     level : Level,
     description: string,
-    category: Categories,
+    category: [Category],
+    startsAt?: Date,
+    endAt?: Date, 
     img?: string, 
     teams?: Team[]
   ) {
     this.challengeName = challengeName;
-    this.startsAt = startsAt;
-    this.endAt = endAt;  
     this.level = level; 
     this.description = description;
     this.category = category;
+    if (startsAt) {
+      this.startsAt = startsAt;
+    }
+    if (endAt) {
+      this.endAt = endAt; 
+    }
     if (img) {
       this.img = img; 
-    };
+    }
     if (teams) {
       this.teams = teams;
     }
@@ -62,19 +76,19 @@ export default class Challenge {
   @Field()
   challengeName: string;
 
-  @Column("timestamptz")
-  @Field()
-  startsAt: Date; 
+  @Column("timestamptz", { nullable: true })
+  @Field({ nullable: true })
+  startsAt?: Date; 
 
-  @Column("timestamptz")
-  @Field()
-  endAt: Date; 
+  @Column("timestamptz", { nullable: true })
+  @Field({ nullable: true })
+  endAt?: Date; 
 
   @Column({
     type: 'enum',
     enum: Level,
   })
-  @Field()
+  @Field(type => Level)
   level:Level;  
 
   @Column("varchar", { length: 500 })
@@ -82,17 +96,19 @@ export default class Challenge {
   description: string; 
 
   @Column({
-    type: 'enum',
-    enum: Categories,
+    type: "enum",
+    enum: Category,
+    array: true
   })
-  @Field()
-  category: Categories;
+  @Field(type => [Category])
+  category: Category[];
 
   @Column("varchar", { nullable: true })
   @Field({ nullable: true })
   img?: string; 
 
   @ManyToMany(() => Team, (team) => team.challenges)
-  @Field(() => [Team])
+  @Field(() => [Team], { nullable: true })
   teams: Team[];
 }
+

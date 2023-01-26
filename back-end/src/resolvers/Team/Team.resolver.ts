@@ -20,6 +20,11 @@ export default class TeamResolver {
     return TeamRepository.getTeamByCountry(country); 
   }
 
+  @Query(() => Team)
+  teamByName(@Arg("teamName") teamName : string): Promise<Team | null> {
+    return TeamRepository.getTeamByName(teamName); 
+  }
+
   @Mutation(() => Team)
   createTeam(
     @Args() { 
