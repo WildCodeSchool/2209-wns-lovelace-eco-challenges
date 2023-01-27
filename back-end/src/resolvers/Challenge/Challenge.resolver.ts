@@ -1,6 +1,9 @@
+
 import { Arg, Args, Mutation, Query, Resolver } from "type-graphql";
+import { ArrayContainedBy, ArrayContains } from "typeorm";
 import Challenge, { Category, Level } from "../../models/Challenge/Challenge.entity";
 import ChallengeRepository from "../../models/Challenge/Challenge.repository";
+import { CreateChallengeArgs, UpdateChallengeArgs } from "./Challenge.input";
 
 @Resolver(Challenge)
 export default class ChallengeResolver {
@@ -19,41 +22,58 @@ export default class ChallengeResolver {
     return ChallengeRepository.getChallengesByLevel(level); 
   }
 
-  // @Mutation(() => Team)
-  // createTeam(
-  //   @Args() { 
-  //     teamName, 
-  //     city, 
-  //     country,
-  //     isPublic, 
-  //     img, 
-  //   }: CreateTeamArgs
-  // ): Promise<Team> {
-  //   return TeamRepository.createTeam(
-  //     teamName, 
-  //     city, 
-  //     country, 
-  //     isPublic, 
-  //     img,
-  //   )
-  // }
+  @Mutation(() => Challenge)
+  createChallenge(
+    @Args() { 
+      challengeName, 
+      level, 
+      description,
+      category, 
+      startsAt, 
+      endAt,
+      img
+    }: CreateChallengeArgs
+  ): Promise<Challenge> {
+    return ChallengeRepository.createChallenge(
+      challengeName, 
+      level, 
+      description,
+      category, 
+      startsAt, 
+      endAt,
+      img
+    )
+  }
 
-  // @Mutation(() => Team)
-  // updateTeam(
+  // @Mutation(() => Challenge)
+  // updateChallengePremium(
   //   @Args() { 
   //     id, 
-  //     teamName, 
-  //     city, 
-  //     country, 
-  //     isPublic,  
-  //     img, 
-  //   }: UpdateTeamArgs
-  // ): Promise<Team> {
-  //   return TeamRepository.updateTeam(id, teamName, city, country, img, isPublic);
+  //     challengeName, 
+  //     level, 
+  //     description,
+  //     category, 
+  //     startsAt, 
+  //     endAt,
+  //     img
+  //   }: UpdateChallengeArgs
+  // ): Promise<Challenge> {
+  //   return ChallengeRepository.updateChallengePremium(id, challengeName, level, description, category, startsAt, endAt, img);
   // }
 
-  // @Mutation(() => Team)
-  // deleteTeam(@Arg("id") id: string): Promise<Team> {
-  //   return TeamRepository.deleteTeam(id);
-  // }
+  @Mutation(() => Challenge)
+  updateDatesChallenge(
+    @Args() { 
+      id, 
+      startsAt,
+      endAt
+    }: UpdateChallengeArgs
+  ): Promise<Challenge> {
+    return ChallengeRepository.updateDatesChallenge(id, startsAt, endAt);
+  }
+
+  @Mutation(() => Challenge)
+  deleteChallenge(@Arg("id") id: string): Promise<Challenge> {
+    return ChallengeRepository.deleteChallenge(id);
+  }
 }

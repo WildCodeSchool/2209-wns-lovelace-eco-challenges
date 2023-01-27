@@ -35,7 +35,7 @@ export default class ChallengeRepository extends ChallengeDb {
       // team: [bordeauxTeam]
     });
     await this.repository.save({
-      challengeName: "Je réduis ma consommation de viande",
+      challengeName: "Je réduis ma consommation de viande 🍖",
       level: Level.SUPERGREEN, 
       description: "'La viande d'élevage est à l'origine de 15% des émissions de gaz à effet de serre' - https://www.geo.fr/environnement/linvestissement-dans-les-alternatives-a-la-viande-delevage-serait-de-loin-la-meilleure-maniere-de-lutter-contre-le-rechauffement-climatique-210808 - Objectif : réduire de moitié sa consommation de viande et pour les plus résilients passer à 2 repas carnés par semaine. Végés, pour vous c'est déjà gagné !",
       category: [Category.MEAT, Category.PROTECTSNATURE, Category.LESS],
@@ -78,57 +78,87 @@ export default class ChallengeRepository extends ChallengeDb {
     return this.repository.findBy({ level: level });
   }
 
-  // static async createTeam(
-  //   teamName: string,
-  //   city: string, 
-  //   country: string, 
-  //   isPublic: boolean,
-  //   img: string,  
-  // ): Promise<Team> {
-  //   const newTeam = this.repository.create({ teamName, city, country, img, isPublic });
-  //   await this.repository.save(newTeam);
-  //   return newTeam;
-  // }
+  static async createChallenge(
+    challengeName: string,
+    level: Level, 
+    description: string, 
+    category: [Category],
+    startsAt?: Date,
+    endAt?: Date, 
+    img?: string, 
+  ): Promise<Challenge> { 
+    const newChallenge = this.repository.create({ challengeName, level, description, category, startsAt, endAt, img });
+    await this.repository.save(newChallenge);
+    return newChallenge;
+  }
 
-  // static async updateTeam(
-  //   id: string, 
-  //   teamName: string, 
-  //   city: string, 
-  //   country: string, 
-  //   img: string,
-  //   isPublic: boolean 
-  // ): Promise<
-  //   {
-  //     id: string; 
-  //     teamName: string;
-  //     city: string; 
-  //     country: string;
-  //     img: string;
-  //     isPublic: boolean;
-  //   } & Team
-  // > {
-  //   const existingTeam = await this.repository.findOneBy({ id }); 
-  //   if (!existingTeam) {
-  //     throw Error("No existing Team matching ID.");
-  //   }
-  //   return this.repository.save({
-  //     id, 
-  //     teamName,
-  //     city,
-  //     country,
-  //     img,
-  //     isPublic,
-  //   });
-  // }
+  static async updateDatesChallenge(
+    id: string, 
+    startsAt?: Date,
+    endAt?: Date, 
+  ): Promise<
+    {
+    id: string, 
+    startsAt?: Date,
+    endAt?: Date, 
+    } & Challenge
+  > {
+    const existingChallenge = await this.repository.findOneBy({ id }); 
+    if (!existingChallenge) {
+      throw Error("No existing Challenge matching ID.");
+    }
+    return this.repository.save({
+      id, 
+      startsAt,
+      endAt,
+    });
+  }
 
-  // static async deleteTeam(id: string): Promise<Team> {
-  //   const existingTeam = await this.findTeamById(id);
-  //   if (!existingTeam) {
-  //     throw Error("No existing Team matching ID.");
-  //   }
-  //   await this.repository.remove(existingTeam);
-  //   // resetting ID because existingTeam loses ID after calling remove
-  //   existingTeam.id = id;
-  //   return existingTeam;
-  // }
+  static async updateChallengePremium(
+    id: string, 
+    challengeName: string,
+    level: Level, 
+    description: string, 
+    category: [Category],
+    startsAt?: Date,
+    endAt?: Date, 
+    img?: string, 
+  ): Promise<
+    {
+    id: string, 
+    challengeName: string,
+    level: Level, 
+    description: string, 
+    category: [Category],
+    startsAt?: Date,
+    endAt?: Date, 
+    img?: string, 
+    } & Challenge
+  > {
+    const existingChallenge = await this.repository.findOneBy({ id }); 
+    if (!existingChallenge) {
+      throw Error("No existing Challenge matching ID.");
+    }
+    return this.repository.save({
+      id, 
+      challengeName,
+      level,
+      description,
+      category,
+      startsAt,
+      endAt,
+      img
+    });
+  }
+
+  static async deleteChallenge(id: string): Promise<Challenge> {
+    const existingChallenge = await this.findChallengeById(id);
+    if (!existingChallenge) {
+      throw Error("No existing Challenge matching ID.");
+    }
+    await this.repository.remove(existingChallenge);
+    // resetting ID because existingChallenge loses ID after calling remove
+    existingChallenge.id = id;
+    return existingChallenge;
+  }
 }

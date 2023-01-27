@@ -98,7 +98,7 @@ export default class Challenge {
   @Column({
     type: "enum",
     enum: Category,
-    array: true
+    array: true,
   })
   @Field(type => [Category])
   category: Category[];
