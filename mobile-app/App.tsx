@@ -3,29 +3,24 @@ import Signin from './src/Pages/Auth/Signin';
 import { ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 import Signup from './src/Pages/Auth/Signup';
 
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
 const client = new ApolloClient({
-  uri: "http://localhost:4000",
+  uri: "http://192.168.1.8:4000/",
   cache: new InMemoryCache()
 })
 
+const Tab = createBottomTabNavigator()
 
 export default function App() {
   return (
-    <View style={styles.container}>
       <ApolloProvider client={client}>
-        <Signup/>
+        <NavigationContainer>
+          <Tab.Navigator>
+            <Tab.Screen name="Inscription" component={Signup}/>
+            <Tab.Screen name="Connexion" component={Signin}/>
+          </Tab.Navigator>
+        </NavigationContainer>
       </ApolloProvider>
-    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    marginTop:24,
-    justifyContent:'center'
-  },
-});
