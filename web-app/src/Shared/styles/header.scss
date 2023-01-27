@@ -1,6 +1,5 @@
 .header {
-    @apply bg-primary flex justify-between p-5;
-    height: 75px;
+    @apply bg-primary flex justify-between p-5 h-20;
 
     .header-logo {
         @apply w-10 mr-4;

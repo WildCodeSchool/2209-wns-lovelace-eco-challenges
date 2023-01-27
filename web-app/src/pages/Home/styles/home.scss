@@ -1,102 +1,7 @@
 .home {
 
-  .home-page {
-    @apply flex flex-col items-center justify-center;
-
-    .card {
-      @apply flex flex-col items-center justify-center border-solid border-4 border-primary w-3/4 sm:w-2/3 lg:w-1/2 p-2 rounded-lg my-7;
-
-      .card-image {
-        @apply w-20;
-      }
-
-      .text {
-        @apply font-bold text-lg;
-      }
-
-      .subcard {
-        @apply text-center;
-      }
-
-      .subtext {
-        @apply my-3;
-      }
-    }
-
-    .green-card {
-      @apply bg-primary py-7 w-full flex flex-col items-center justify-center;
-
-      .green-card-display {
-        @apply flex flex-wrap w-11/12 sm:w-2/3 md:w-2/3 lg:w-1/2 flex justify-around;
-      }
-
-      .green-card-box {
-        @apply bg-white rounded-lg flex items-center justify-center flex-col p-5 m-5;
-
-      }
-
-      .button {
-        @apply flex justify-center mt-4;
-      }
-    }
-
-    .challenges {
-      .title {
-        @apply font-bold text-center text-xl flex justify-center items-center p-2;
-      }
-    }
-
-    .gray-card {
-      @apply bg-gray-100 rounded-lg w-11/12 sm:w-11/12 px-4 pt-4;
-
-      .subtitle {
-        @apply font-bold text-start text-lg;
-      }
-
-      .underline {
-        @apply bg-primary h-2 w-20;
-      }
-
-      .grey-card-icon {
-        @apply flex justify-end;
-      }
-
-      .gray-card-partners {
-        @apply flex flex-wrap items-center justify-around;
-
-        .gray-card-logos {
-          @apply w-1/4 lg:w-1/5 xl:w-1/6  m-4;
-        }
-      }
-    }
-
-    .versions {
-      @apply flex items-center justify-center flex-col my-5;
-
-      .versions-free {
-        @apply mb-4 flex flex-col justify-center items-center;
-      }
-
-      .versions-premium {
-        @apply flex flex-col justify-center items-center;
-      }
-
-      .versions-title {
-        @apply text-primary font-bold border-4 border-primary rounded-lg w-fit p-2 -rotate-3 mb-2;
-      }
-
-      .versions-line {
-        @apply flex mb-2;
-      }
-
-      .versions-subtitle {
-        @apply text-center mb-5;
-      }
-    }
-  }
-
   .header-image {
-    @apply bg-[url('../assets/images/test10.webp')] h-80 relative bg-cover bg-center;
+    @apply bg-[url('../assets/images/imageHeader.webp')] h-80 relative bg-cover bg-center;
 
     .header-text {
       @apply text-white absolute left-1/2 top-1/2 w-11/12 bg-transparent rounded-xl;
@@ -113,6 +18,107 @@
 
     .buttons {
       @apply m-3 flex justify-around;
+    }
+  }
+
+  .home-page {
+    @apply custom-flex-center lg:flex-wrap lg:flex-row lg:justify-around;
+
+    .card {
+      @apply custom-flex-center border-solid border-4 border-primary w-3/4 sm:w-2/3 lg:w-2/5 p-2 rounded-lg my-7 shadow-xl lg:h-[486px] lg:justify-between;
+
+      .card-image {
+        @apply w-20;
+      }
+
+      .text {
+        @apply font-bold text-lg;
+      }
+
+      .subcard {
+        @apply custom-flex-center text-center;
+      }
+
+      .subtext {
+        @apply my-3;
+      }
+    }
+
+    .green-card {
+      @apply bg-primary py-7 w-full custom-flex-center shadow-xl lg:w-2/5 lg:bg-white lg:shadow-none lg:border-solid lg:border-4 lg:border-primary lg:rounded-lg lg:p-2 lg:h-[486px] lg:justify-between lg:bg-primary;
+
+      .green-card-display {
+        @apply flex flex-wrap w-11/12 sm:w-2/3 md:w-2/3 lg:w-1/2 flex justify-around lg:w-full;
+      }
+
+      .green-card-box {
+        @apply bg-white rounded-lg custom-flex-center p-5 m-5 shadow-xl;
+
+      }
+    }
+
+    .challenges {
+      @apply py-2 w-11/12;
+
+      .challenges-box {
+        @apply custom-flex-center px-4;
+
+        .challenge-image {
+          @apply w-10/12;
+
+          div {
+            @apply shadow-xl;
+          }
+        }
+
+        .challenges-text {
+          @apply text-center font-bold text-lg;
+        }
+      }
+
+      .title {
+        @apply font-bold text-center text-xl flex justify-center items-center pt-2;
+      }
+    }
+
+    .gray-card {
+      @apply bg-gray-100 rounded-lg w-11/12 sm:w-11/12 p-4 shadow-xl;
+
+      .grey-card-icon {
+        @apply flex justify-end;
+      }
+
+      .gray-card-partners {
+        @apply flex flex-wrap items-center justify-around;
+
+        .gray-card-logos {
+          @apply w-1/4 lg:w-1/5 xl:w-1/6  m-4 lg:w-1/12;
+        }
+      }
+    }
+
+    .versions {
+      @apply custom-flex-center my-5 lg:flex-row lg:justify-around lg:w-full;
+
+      .versions-free {
+        @apply mb-4 custom-flex-center;
+      }
+
+      .versions-premium {
+        @apply custom-flex-center;
+      }
+
+      .versions-title {
+        @apply text-primary font-bold border-4 border-primary rounded-lg w-fit p-2 -rotate-3 mb-2;
+      }
+
+      .versions-line {
+        @apply flex mb-2;
+      }
+
+      .versions-subtitle {
+        @apply text-center mb-5;
+      }
     }
   }
 }

@@ -15,10 +15,8 @@ import SignIn from "../../pages/SignIn/SignIn";
 import SignUp from "../../pages/SignUp/SignUp";
 */
 import Button from "../../Shared/Buttons/Button";
-import PngLogo from "../../Shared/Logos/PngLogo";
+import Image from "../../Shared/Images/Image";
 import VersionsLine from "../../Shared/Lines/VersionsLine";
-import WithFriends from "../../assets/logos/WithFriends";
-import Company from "../../assets/logos/Company";
 import LaunchChallenge from "../../assets/logos/LaunchChallenge";
 import ArrowLinkTo from "../../assets/logos/ArrowLinkTo";
 import Partners from "../../assets/logos/Partners";
@@ -29,7 +27,8 @@ import {
   versionPremiumText,
   cardLogo,
   greenCardLogo,
-} from "../../data/HomePage";
+  challengesImages,
+} from "../../data/HomePageData";
 
 import { PRIMARY } from '../../Shared/Constants/Color';
 
@@ -65,7 +64,7 @@ const Home = () => {
       <div className="card">
         {cardLogo.map((element) => (
           <>
-            <PngLogo style="card-image" source={element.source} description={element.description} />
+            <Image style="card-image" source={element.source} description={element.description} />
             <div className="text">
               <p>{element.text}</p>
             </div>
@@ -82,22 +81,30 @@ const Home = () => {
         <div className="green-card-display">
           {greenCardLogo.map((element) => (
             <div className="green-card-box">
-              <PngLogo source={element.source} description={element.description} style="w-20" />
+              <Image source={element.source} description={element.description} style="w-20" />
               <p className="text-center">{element.text}</p>
           </div>
           ))}
         </div>
-        <div className="button">
           <Button
             icon={<LaunchChallenge width="20px" height="20px" fill={PRIMARY} />}
             type="button-secondary"
             name="Lancer un challenge"
           />
-        </div>
       </div>
       <div className="challenges">
+        <h3 className="subtitle">Challenges en cours</h3>
+        <div className="underline"></div>
+        <div className="challenges-box">
+        {challengesImages.map((element, index) => (
+          <div className="w-11/12 shadow-xl" key={index}>
+            <Image source={element.source} description={element.description} />
+            <p className="challenges-text">{element.text}</p>
+          </div>
+        ))}
+        </div>
         <h2 className="title">
-          Voir les challenges en cours
+          Voir les autres challenges en cours
           <i>
             <ArrowLinkTo width="50px" height="50px" fill={PRIMARY} />
           </i>
@@ -108,7 +115,7 @@ const Home = () => {
           <div className="underline"></div>
           <div className="gray-card-partners">
             {partnersLogo.map((element) => (
-              <PngLogo style="gray-card-logos" source={element.source} description={element.description} />
+              <Image style="gray-card-logos" source={element.source} description={element.description} />
             ))}
           </div>
           <i className="grey-card-icon">

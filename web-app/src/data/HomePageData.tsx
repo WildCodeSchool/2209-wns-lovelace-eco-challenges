@@ -10,6 +10,9 @@ import Groups from "../assets/logos/groups.png";
 import Business from "../assets/logos/business.png";
 import Association from "../assets/logos/association.png";
 import People from "../assets/logos/people.png";
+import ImageOne from "../assets/images/challenge1.webp";
+import ImageTwo from "../assets/images/challenge2.webp";
+import ImageThree from "../assets/images/challenge3.webp";
 
 export const partnersLogo = [
     {
@@ -84,5 +87,23 @@ export const greenCardLogo = [
     "source": People,
     "description": "illustration d'une maison de particuliers",
     "text": "Particuliers",
+  },
+];
+
+export const challengesImages = [
+  {
+    "source": ImageOne,
+    "description": "photo de la nature",
+    "text": "Nettoyage du lieu",
+  },
+  {
+    "source": ImageTwo,
+    "description": "photo d'une forêt",
+    "text": "Débrousaillage forestier",
+  },
+  {
+    "source": ImageThree,
+    "description": "photo d'une plage",
+    "text": "Ramassage de déchêts",
   },
 ];

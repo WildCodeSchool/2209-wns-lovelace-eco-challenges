@@ -2,10 +2,10 @@
 type Props = {
     source: string,
     description: string,
-    style: string,
+    style?: string,
 };
 
-const PngLogo = (props: Props) => {
+const Image = (props: Props) => {
     const {
         source,
         description,
@@ -19,4 +19,4 @@ const PngLogo = (props: Props) => {
     );   
 };
 
-export default PngLogo;
+export default Image;
