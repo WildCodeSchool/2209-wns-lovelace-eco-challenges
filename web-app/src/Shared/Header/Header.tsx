@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Ecology from "../../assets/logos/ecology.png";
 
 import Nav from '../../Shared/Nav/Nav';
-import NavList from '../../Shared/Nav/NavList';
+import NavList from '../../Shared/Nav/ResponsiveNav';
 
 const Header = () => {
     const [open, setOpen] = useState(false);

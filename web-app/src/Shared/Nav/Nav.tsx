@@ -1,4 +1,4 @@
-const Nav = (props: any) => {
+const ResponsiveNav = (props: any) => {
     const { open } = props;
 
     if (!open) {
@@ -8,13 +8,13 @@ const Nav = (props: any) => {
     return(
         <nav className="nav">
             <ul>
-                <li>Home</li>
+                <li>Accueil</li>
                 <li>Challenges</li>
-                <li>Profil</li>
-                <li>Groupes</li>
+                <li>Équipes</li>
+                <li>Se connecter/S'inscrire</li>
             </ul>
         </nav>
     );
 };
 
-export default Nav;
+export default ResponsiveNav;

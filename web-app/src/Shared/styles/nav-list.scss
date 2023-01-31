@@ -1,11 +1,22 @@
 .nav-list {
-    @apply text-white w-2/3 hidden items-center justify-end md:flex;
+    @apply
+        text-white
+        w-2/3
+        hidden
+        items-center
+        justify-end
+        md:flex;
 
     .nav-list-ul {
-        @apply flex justify-end;
+        @apply
+            flex
+            justify-end;
 
         .nav-list-items {
-            @apply px-2;
+            @apply
+                px-2
+                text-base
+                lg:text-2xl;
         }
     }
 }

@@ -45,15 +45,13 @@ const Home = () => {
 
   return (
     <div className="home">
-      <div className="header-image" >
-        <div className="header-text">
-          <h2 className="title">
-            Défiez vos groupes d'amis dans des challenges écolo !
+      <div className="home-image" >
+        <div className="home-text">
+          <h2 className="home-title">
+            Eco Playground
           </h2>
-          <p className="subtitle">
-            Sensibilisez, mobilisez et jouez avec vos amis avec Eco Playground,
-            testez le tout de suite dans sa version gratuite
-          </p>
+          <p className="subtitle">le premier réseau social et plateforme de jeu écolo</p>
+          <p className="subtitle">Inscrivez-vous gratuitement, créez des groupes, invitez vos amis, lancez des challenges écologiques et jouez !</p>
           <div className="buttons">
             <Button type="button-primary" name="S'inscrire" />
             <Button type="button-primary" name="Se connecter" />
@@ -64,23 +62,23 @@ const Home = () => {
       <div className="card">
         {cardLogo.map((element) => (
           <>
-            <Image style="card-image" source={element.source} description={element.description} />
-            <div className="text">
+            <Image style="w-20" source={element.source} description={element.description} />
+            <div className="font-bold text-lg">
               <p>{element.text}</p>
             </div>
           </>
         ))}
-        <div className="subcard">
-          <p className="subtext">
+        <div className="custom-flex-center text-center">
+          <p className="my-3 xl:text-start">
             Nous vous proposons des challenges écologiques à partager avec vos amis et/ou inconnus, que le meilleur gagne, avec un maximum de points !
           </p>
-          <Button type="button-primary" name="Découvrir les challenges" />
+          <Button type="button-primary" name="Découvrir le concept" />
         </div>
       </div>
       <div className="green-card">
-        <div className="green-card-div">
+        <div className="w-11/12">
           <h3 className="subtitle text-white">Venez comme vous êtes !</h3>
-          <div className="underline bg-white"></div>
+          <div className="custom-underline bg-white"></div>
           <p className="green-card-subtext">Association, entreprises ou bien particuliers, venez donc créer un groupe et un challenge afin de jouer immédiatemment avec vos amis !</p>
             <div className="green-card-display">
               {greenCardLogo.map((element) => (
@@ -100,8 +98,8 @@ const Home = () => {
           </div>
       </div>
       <div className="challenges">
-        <h3 className="subtitle text-center">Challenges en cours</h3>
-        <div className="underline bg-primary text-center"></div>
+        <h3 className="subtitle">Challenges en cours</h3>
+        <div className="custom-underline bg-primary text-center"></div>
         <div className="challenges-box">
         {challengesImages.map((element, index) => (
           <div className="challenges-image" key={index}>
@@ -112,7 +110,7 @@ const Home = () => {
           </div>
         ))}
         </div>
-        <h2 className="title">
+        <h2 className="see-more-title">
           Voir les autres challenges en cours
           <i>
             <ArrowLinkTo width="50px" height="50px" fill={PRIMARY} />
@@ -121,24 +119,24 @@ const Home = () => {
       </div>
         <div className="gray-card">
           <h3 className="subtitle">Nos partenaires</h3>
-          <div className="underline bg-primary"></div>
+          <div className="custom-underline bg-primary"></div>
           <div className="gray-card-partners">
             {partnersLogo.map((element) => (
               <Image style="gray-card-logos" source={element.source} description={element.description} />
             ))}
           </div>
-          <i className="grey-card-icon">
+          <i className="flex justify-end">
             <Partners width="100px" height="100px" fill={PRIMARY} />
           </i>
         </div>
       <div className="versions">
-        <div className="versions-free">
+        <div className="mb-4 custom-flex-center">
           <p className="versions-title">Version 100% gratuite</p>
           {versionFreeText.map((element) => (
             <VersionsLine text={element} />
           ))}
         </div>
-        <div className="versions-premium">
+        <div className="custom-flex-center">
           <p className="versions-title">Version Premium</p>
           <p className="versions-subtitle">
             Créée et pensée pour répondre aux besoins spécifiques des entreprises

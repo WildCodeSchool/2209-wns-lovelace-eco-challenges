@@ -1,3 +1,19 @@
 .footer {
-    @apply bg-primary text-white p-5 text-center;
-}
+    @apply
+        bg-primary
+        text-white
+        custom-flex-center
+        text-center
+        lg:p-7
+        lg:flex-row
+        lg:justify-around
+        lg:text-start;
+
+    .footer-box {
+        @apply
+            p-5
+            lg:w-1/2
+            lg:mr-3
+            lg:last:mr-0;
+    }
+};
