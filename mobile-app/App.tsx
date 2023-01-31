@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import Profil from './src/Pages/Profil/Profil';
 // import Perso from './src/Pages/Perso/Perso'
 import Naviguate from './src/components/Naviguate'
-import Header from './src/Shared/Header/Header';
+import Header from './src/Pages/Perso/Shared/Header/Header';
+import MyChallenge from './src/Pages/MyChallenge/MyChallenge'
 
 export default function App() {
   return (
@@ -11,7 +11,7 @@ export default function App() {
       <Header />
       <View style={styles.pages}>
         {/* <Perso /> */}
-        <Profil />
+        <MyChallenge />
       </View>
       <View style={styles.naviguate}>
         <Naviguate />

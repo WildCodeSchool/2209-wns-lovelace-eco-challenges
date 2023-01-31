@@ -1,8 +1,8 @@
 import { View, StyleSheet } from 'react-native';
-import Space from '../../Shared/Space/Space';
 import { StatusBar } from 'expo-status-bar';
-import Notifs from '../../Shared/Notifcations/Notifs';
-import Challenge from '../../Shared/Challenge/Challenge';
+import Notifs from './Shared/Notifcations/Notifs';
+import Challenge from './Shared/Challenge/Challenge';
+import Space from './Shared/Space/Space';
 
 export default function App() {
   return (

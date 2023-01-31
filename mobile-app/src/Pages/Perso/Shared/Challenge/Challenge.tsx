@@ -1,27 +1,39 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 
+
 export default function Challenge() {
   return (
     <View style={styles.challengeCtn}>
       <View style={styles.chall}>
         <View style={styles.challenge}>
           <Text style={styles.txt}>Lancer un Challenge</Text>
+          <Image
+            source={require('./golf.png')}
+            style={styles.img}
+          />
         </View>
       </View>
       <View style={styles.rubriqueCtn}>
         <View style={styles.rubrique}>
-          <Text style={styles.rubriqueTxt}>Mes Challenges
-            {/* <Image
-              source={require('./fleche2.png')}
-              style={styles.img}
-            /> */}
-          </Text>
+          <Text style={styles.rubriqueTxt}>Mes Challenges</Text>
+          <Image
+            source={require('./fleche2.png')}
+            style={styles.img}
+          />
         </View>
         <View style={styles.rubrique}>
           <Text style={styles.rubriqueTxt}>Mes Teams</Text>
+          <Image
+            source={require('./fleche2.png')}
+            style={styles.img}
+          />
         </View>
         <View style={styles.rubrique}>
           <Text style={styles.rubriqueTxt}>Personnalisation profil</Text>
+          <Image
+            source={require('./fleche2.png')}
+            style={styles.img}
+          />
         </View>
       </View>
     </View>
@@ -41,18 +53,20 @@ const styles = StyleSheet.create({
   },
   challenge: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     backgroundColor: "#3B8574",
     borderRadius: 10,
     height: 35,
     width: 170,
+    display: "flex",
+    flexDirection: "row",
   },
   txt: {
     color: "white",
   },
   img: {
-    width: 2,
-    height: 2
+    width: 18,
+    height: 18,
   },
   rubriqueCtn: {
     height: 120,
@@ -61,15 +75,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   rubriqueTxt: {
-    width: 130,
-    marginLeft: 60
+    width: 150,
   },
   rubrique: {
-    borderBottomColor: "black",
-    borderBottomWidth: 1,
-    borderTopWidth: 1,
     height: 32,
-    alignItems: "flex-start",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
+    flexDirection: "row"
   }
 });

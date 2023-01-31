@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, StyleSheet, Image, BackHandler } from "react-native";
+import { Text, View, StyleSheet, Image } from "react-native";
 
 export default function Space() {
   return (
