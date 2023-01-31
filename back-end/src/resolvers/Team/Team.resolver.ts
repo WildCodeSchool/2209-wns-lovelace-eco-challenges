@@ -1,4 +1,4 @@
-import { Arg, Args, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Args, ID, Mutation, Query, Resolver } from "type-graphql";
 import Team from "../../models/Team/Team.entity";
 import TeamRepository from "../../models/Team/Team.repository";
 import { CreateTeamArgs, UpdateTeamArgs } from "./Team.input";
@@ -12,12 +12,12 @@ export default class TeamResolver {
 
   @Query(() => [Team])
   teamsByCity(@Arg("city") city : string): Promise<Team[] | null> {
-    return TeamRepository.getTeamByCity(city); 
+    return TeamRepository.getTeamsByCity(city); 
   }
 
   @Query(() => [Team])
   teamsByCountry(@Arg("country") country : string): Promise<Team[] | null> {
-    return TeamRepository.getTeamByCountry(country); 
+    return TeamRepository.getTeamsByCountry(country); 
   }
 
   @Query(() => Team)
@@ -61,5 +61,13 @@ export default class TeamResolver {
   @Mutation(() => Team)
   deleteTeam(@Arg("id") id: string): Promise<Team> {
     return TeamRepository.deleteTeam(id);
+  }
+
+  @Mutation(() => Team)
+  addChallengeToTeam(
+    @Arg("teamId") teamId: string,
+    @Arg("challengeId") challengeId: string
+  ): Promise<Team> {
+    return TeamRepository.addChallengeToTeam(teamId, challengeId);
   }
 }

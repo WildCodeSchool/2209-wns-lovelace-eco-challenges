@@ -1,16 +1,10 @@
 import ChallengeDb from "./Challenge.db";
 import Challenge, { Category, Level } from "./Challenge.entity";
-import { ArrayContains } from "typeorm"
+import { ArrayContains, ILike } from "typeorm"
 
 export default class ChallengeRepository extends ChallengeDb {
-  static async initializeChallenges(): Promise<void> {
+  static async initializeChallenges(): Promise<void> { 
     await ChallengeRepository.clearRepository();
-    // const parisTeam = (await TeamRepository.getTeamByName("Team Paris")) as Team;
-    // const barceloneTeam =(await TeamRepository.getTeamByName("Team Barcelone")) as Team; 
-    // const bordeauxTeam =(await TeamRepository.getTeamByName("Team Bordeaux")) as Team; 
-
-    // console.log('YYYYYYYOOOOOO',bordeauxTeam);
-
     await this.repository.save({
       challengeName: "Nettoyons nos plages",
       level: Level.SUPERGREEN, 
@@ -19,7 +13,6 @@ export default class ChallengeRepository extends ChallengeDb {
       startsAt: "2023-03-11 09:00:00+00",
       endAt: "2023-03-12 12:00:00+00",
       img: "https://www.wedemain.fr/wp-content/uploads/2020/04/35637228-32170106.jpg",
-      // team: [parisTeam, barceloneTeam]
     });
     await this.repository.save({
       challengeName: "Covoiturage",
@@ -29,7 +22,6 @@ export default class ChallengeRepository extends ChallengeDb {
       startsAt: "2023-02-17T08:00:00+0000",
       endAt: "2023-02-17T20:00:00+0000",
       img: "https://images.caradisiac.com/images/4/7/9/8/194798/S1-blablacar-attention-aux-arnaques-706768.jpg",
-      // team: [bordeauxTeam]
     });
     await this.repository.save({
       challengeName: "Je réduis ma consommation de viande 🍖",
@@ -49,7 +41,6 @@ export default class ChallengeRepository extends ChallengeDb {
       startsAt: undefined,
       endAt: undefined,
       img: undefined,
-      // team: [parisTeam]
     });
     await this.repository.save({
       challengeName: "Tous au potager 👨‍🌾",
@@ -64,7 +55,12 @@ export default class ChallengeRepository extends ChallengeDb {
   }
 
   static async getChallenges(): Promise<Challenge[]> {
-    return this.repository.find({order: {startsAt: "ASC"}}); 
+    return this.repository.find({
+      relations: {
+        teams: true
+      },
+      order: {startsAt: "ASC"}
+    }); 
   }
 
   static async getChallengesByCategory(category: Category): Promise<Challenge[] | null> {
@@ -73,6 +69,14 @@ export default class ChallengeRepository extends ChallengeDb {
 
   static async getChallengesByLevel(level: Level): Promise<Challenge[] | null> {
     return this.repository.findBy({ level: level });
+  }
+
+  static async getChallengeById(id: string): Promise<Challenge | null> {
+    return this.repository.findOneBy({ id }); 
+  }
+
+  static async getChallengeByName(challengeName: string): Promise<Challenge | null> {
+    return this.repository.findOneBy({ challengeName: ILike(`%${challengeName}%`) });
   }
 
   static async createChallenge(
