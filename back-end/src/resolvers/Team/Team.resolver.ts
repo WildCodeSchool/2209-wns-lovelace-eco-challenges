@@ -10,22 +10,37 @@ export default class TeamResolver {
     return TeamRepository.getTeams(); 
   }
 
+  @Query(() => [Team])
+  teamsByCity(@Arg("city") city : string): Promise<Team[] | null> {
+    return TeamRepository.getTeamByCity(city); 
+  }
+
+  @Query(() => [Team])
+  teamsByCountry(@Arg("country") country : string): Promise<Team[] | null> {
+    return TeamRepository.getTeamByCountry(country); 
+  }
+
+  @Query(() => Team)
+  teamByName(@Arg("teamName") teamName : string): Promise<Team | null> {
+    return TeamRepository.getTeamByName(teamName); 
+  }
+
   @Mutation(() => Team)
   createTeam(
     @Args() { 
       teamName, 
       city, 
-      country, 
+      country,
+      isPublic, 
       img, 
-      isPublic
     }: CreateTeamArgs
   ): Promise<Team> {
     return TeamRepository.createTeam(
       teamName, 
       city, 
       country, 
-      img, 
-      isPublic 
+      isPublic, 
+      img,
     )
   }
 
@@ -36,8 +51,8 @@ export default class TeamResolver {
       teamName, 
       city, 
       country, 
+      isPublic,  
       img, 
-      isPublic  
     }: UpdateTeamArgs
   ): Promise<Team> {
     return TeamRepository.updateTeam(id, teamName, city, country, img, isPublic);

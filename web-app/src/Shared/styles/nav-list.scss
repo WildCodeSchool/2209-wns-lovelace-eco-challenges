@@ -1,0 +1,11 @@
+.nav-list {
+    @apply text-white w-2/3 hidden items-center justify-end md:flex;
+
+    .nav-list-ul {
+        @apply flex justify-end;
+
+        .nav-list-items {
+            @apply px-2;
+        }
+    }
+}

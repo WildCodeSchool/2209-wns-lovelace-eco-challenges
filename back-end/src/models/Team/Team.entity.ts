@@ -3,10 +3,12 @@ import {
   Column,
   Entity,
   Index,
+  JoinTable,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import AppUser from "../AppUser/AppUser.entity";
+import Challenge from "../Challenge/Challenge.entity";
 import UserTeam from "../UserTeam/UserTeam.entity";
 
 
@@ -17,17 +19,23 @@ export default class Team {
     teamName: string,
     city: string,
     country: string, 
-    img: string, 
     isPublic : boolean,
-    userTeams?: UserTeam[]
+    img?: string, 
+    userTeams?: UserTeam[],
+    challenges?: Challenge[]
   ) {
     this.teamName = teamName;
     this.city = city;
-    this.country = country; 
-    this.img = img; 
+    this.country = country;  
     this.isPublic = isPublic; 
+    if (img) {
+      this.img = img; 
+    };
     if (userTeams) {
       this.userTeams = userTeams;
+    };
+    if (challenges) {
+      this.challenges = challenges;
     }
   }
 
@@ -41,16 +49,16 @@ export default class Team {
   teamName: string;
 
   @Column("varchar", { length: 100 })
-  @Field({ nullable: true })
+  @Field()
   city: string; 
 
   @Column("varchar", { length: 100 })
-  @Field({ nullable: true })
+  @Field()
   country: string; 
 
-  @Column()
+  @Column("varchar", { nullable: true })
   @Field({ nullable: true })
-  img: string; 
+  img?: string; 
 
   @Column("boolean")
   @Field()
@@ -60,4 +68,8 @@ export default class Team {
   @Field(() => [UserTeam])
   userTeams: UserTeam[]; 
 
+  @ManyToMany(() => Challenge, { eager: true })
+  @Field(() => [Challenge])
+  @JoinTable()
+  challenges: Challenge[];
 }

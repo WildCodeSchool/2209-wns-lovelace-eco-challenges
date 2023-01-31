@@ -1,9 +1,12 @@
 .header {
-    @apply bg-primary flex justify-between p-5;
-    height: 75px;
+    @apply bg-primary flex justify-between p-5 h-20;
+
+    .header-logo {
+        @apply w-10 mr-4;
+    }
 
     .title {
-        @apply text-white text-2xl relative w-fit;
+        @apply text-white text-2xl relative w-fit text-2xl;
     }
 
     .title::after {
@@ -12,7 +15,7 @@
     }
 
     .burger-container {
-        @apply w-10 flex flex-col justify-around;
+        @apply w-10 flex flex-col justify-around md:hidden;
 
         .burger-line {
             @apply border-2 border-white;

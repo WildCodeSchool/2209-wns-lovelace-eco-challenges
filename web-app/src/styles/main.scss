@@ -4,7 +4,26 @@
 @use "../Shared/styles/button.scss";
 @use "../Shared/styles/footer.scss";
 @use "../Shared/styles/nav.scss";
+@use "../Shared/styles/nav-list.scss";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@500&family=Lato:wght@300&display=swap');
+
+h1, h2, h3, p, li {
+    @apply font-['Lato'];
+};
+
+.custom-flex-center {
+    @apply flex items-center justify-center flex-col;
+};
+
+.underline {
+    @apply h-2 w-20 mb-7;
+};
+
+.subtitle {
+    @apply font-bold text-start text-lg;
+};
