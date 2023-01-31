@@ -94,16 +94,19 @@ export const challengesImages = [
   {
     "source": ImageOne,
     "description": "photo de la nature",
-    "text": "Nettoyage du lieu",
+    "title": "Nettoyage du lieu",
+    "text": "Velaux, le 12/05/2023 à 9h",
   },
   {
     "source": ImageTwo,
     "description": "photo d'une forêt",
-    "text": "Débrousaillage forestier",
+    "title": "Débrousaillage forestier",
+    "text": "Grenoble, le 26/05/2023 à 11h",
   },
   {
     "source": ImageThree,
     "description": "photo d'une plage",
-    "text": "Ramassage de déchêts",
+    "title": "Ramassage de déchêts",
+    "text": "Vitrolles, le 08/06/2023 à 15h",
   },
 ];

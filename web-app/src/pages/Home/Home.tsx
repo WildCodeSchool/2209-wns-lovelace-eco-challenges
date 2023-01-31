@@ -78,28 +78,37 @@ const Home = () => {
         </div>
       </div>
       <div className="green-card">
-        <div className="green-card-display">
-          {greenCardLogo.map((element) => (
-            <div className="green-card-box">
-              <Image source={element.source} description={element.description} style="w-20" />
-              <p className="text-center">{element.text}</p>
+        <div className="green-card-div">
+          <h3 className="subtitle text-white">Venez comme vous êtes !</h3>
+          <div className="underline bg-white"></div>
+          <p className="green-card-subtext">Association, entreprises ou bien particuliers, venez donc créer un groupe et un challenge afin de jouer immédiatemment avec vos amis !</p>
+            <div className="green-card-display">
+              {greenCardLogo.map((element) => (
+                <div className="green-card-box">
+                  <Image source={element.source} description={element.description} style="w-20" />
+                  <p className="text-center">{element.text}</p>
+              </div>
+              ))}
+            </div>
+            <div className="custom-flex-center">
+              <Button
+                icon={<LaunchChallenge width="20px" height="20px" fill={PRIMARY} />}
+                type="button-secondary"
+                name="Lancer un challenge"
+              />
+            </div>
           </div>
-          ))}
-        </div>
-          <Button
-            icon={<LaunchChallenge width="20px" height="20px" fill={PRIMARY} />}
-            type="button-secondary"
-            name="Lancer un challenge"
-          />
       </div>
       <div className="challenges">
-        <h3 className="subtitle">Challenges en cours</h3>
-        <div className="underline"></div>
+        <h3 className="subtitle text-center">Challenges en cours</h3>
+        <div className="underline bg-primary text-center"></div>
         <div className="challenges-box">
         {challengesImages.map((element, index) => (
-          <div className="w-11/12 shadow-xl" key={index}>
+          <div className="challenges-image" key={index}>
             <Image source={element.source} description={element.description} />
+            <p className="challenges-title">{element.title}</p>
             <p className="challenges-text">{element.text}</p>
+            <p className="challenges-see-more">Voir plus</p>
           </div>
         ))}
         </div>
@@ -112,7 +121,7 @@ const Home = () => {
       </div>
         <div className="gray-card">
           <h3 className="subtitle">Nos partenaires</h3>
-          <div className="underline"></div>
+          <div className="underline bg-primary"></div>
           <div className="gray-card-partners">
             {partnersLogo.map((element) => (
               <Image style="gray-card-logos" source={element.source} description={element.description} />

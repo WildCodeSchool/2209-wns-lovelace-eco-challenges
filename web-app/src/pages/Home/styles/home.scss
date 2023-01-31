@@ -25,7 +25,7 @@
     @apply custom-flex-center lg:flex-wrap lg:flex-row lg:justify-around;
 
     .card {
-      @apply custom-flex-center border-solid border-4 border-primary w-3/4 sm:w-2/3 lg:w-2/5 p-2 rounded-lg my-7 shadow-xl lg:h-[486px] lg:justify-between;
+      @apply custom-flex-center border-solid border-4 border-primary w-3/4 sm:w-2/3 lg:w-5/12 p-2 rounded-lg my-7 shadow-xl lg:h-[570px] lg:justify-between;
 
       .card-image {
         @apply w-20;
@@ -40,49 +40,62 @@
       }
 
       .subtext {
-        @apply my-3;
+        @apply my-3 xl:text-start;
       }
     }
 
     .green-card {
-      @apply bg-primary py-7 w-full custom-flex-center shadow-xl lg:w-2/5 lg:bg-white lg:shadow-none lg:border-solid lg:border-4 lg:border-primary lg:rounded-lg lg:p-2 lg:h-[486px] lg:justify-between lg:bg-primary;
+      @apply custom-flex-center bg-primary py-7 w-full lg:w-5/12 lg:bg-white lg:shadow-none lg:border-solid lg:border-4 lg:border-primary lg:rounded-lg lg:p-2 lg:justify-between lg:bg-primary lg:h-[570px] xl:justify-end;
+
+      .green-card-div {
+        @apply w-11/12;
+
+        .green-card-subtext {
+          @apply text-center text-white xl:text-start;
+        }
+
+      };
 
       .green-card-display {
-        @apply flex flex-wrap w-11/12 sm:w-2/3 md:w-2/3 lg:w-1/2 flex justify-around lg:w-full;
+        @apply flex flex-wrap justify-around;
       }
 
       .green-card-box {
-        @apply bg-white rounded-lg custom-flex-center p-5 m-5 shadow-xl;
+        @apply bg-white rounded-lg custom-flex-center p-5 m-5 shadow-xl flex-[33%] lg:flex-[34%];
 
       }
     }
 
     .challenges {
-      @apply py-2 w-11/12;
+      @apply my-7 w-11/12;
 
       .challenges-box {
-        @apply custom-flex-center px-4;
+        @apply custom-flex-center px-4 md:flex-row md:justify-around;
 
-        .challenge-image {
-          @apply w-10/12;
+        .challenges-image {
+          @apply w-10/12 pb-6 last:pb-0 md:pb-0 md:w-1/4 lg:w-1/4 xl:w-1/4 2xl:w-1/4;
 
-          div {
-            @apply shadow-xl;
+          .challenges-text {
+            @apply text-center xl:text-start;
+          }
+
+          .challenges-see-more {
+            @apply text-center text-blue-600 xl:text-start;
           }
         }
 
-        .challenges-text {
-          @apply text-center font-bold text-lg;
+        .challenges-title {
+          @apply text-center font-bold text-lg xl:text-start;
         }
       }
 
       .title {
-        @apply font-bold text-center text-xl flex justify-center items-center pt-2;
+        @apply font-bold text-center text-xl flex justify-center items-center pt-2 xl:justify-start;
       }
     }
 
     .gray-card {
-      @apply bg-gray-100 rounded-lg w-11/12 sm:w-11/12 p-4 shadow-xl;
+      @apply bg-gray-100 rounded-lg w-11/12 sm:w-11/12 px-7 pt-7 shadow-xl;
 
       .grey-card-icon {
         @apply flex justify-end;
@@ -92,13 +105,13 @@
         @apply flex flex-wrap items-center justify-around;
 
         .gray-card-logos {
-          @apply w-1/4 lg:w-1/5 xl:w-1/6  m-4 lg:w-1/12;
+          @apply w-1/4 md:w-1/6 lg:w-1/5 xl:w-1/6  m-4 lg:w-1/12 xl:w-1/12;
         }
       }
     }
 
     .versions {
-      @apply custom-flex-center my-5 lg:flex-row lg:justify-around lg:w-full;
+      @apply custom-flex-center my-7 lg:flex-row lg:justify-around lg:w-full xl:items-start;
 
       .versions-free {
         @apply mb-4 custom-flex-center;
@@ -109,7 +122,7 @@
       }
 
       .versions-title {
-        @apply text-primary font-bold border-4 border-primary rounded-lg w-fit p-2 -rotate-3 mb-2;
+        @apply text-primary font-bold border-4 border-primary rounded-lg w-fit p-2 -rotate-3 mb-5;
       }
 
       .versions-line {
