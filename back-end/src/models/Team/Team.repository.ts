@@ -1,23 +1,44 @@
 import Team from "./Team.entity";
 import TeamDb from "./Team.db";
+import { ILike, Like } from "typeorm";
 
 export default class TeamRepository extends TeamDb {
   static async initializeTeams(): Promise<void> {
-    // await TeamRepository.clearRepository();
-    // await this.repository.delete({});
+    await TeamRepository.clearRepository();
     await this.repository.save({
-      teamName: "Test1",
+      teamName: "Team Paris",
       city: "Paris", 
       country: "France", 
       img: undefined, 
       isPublic: true,
     });
     await this.repository.save({
-      teamName: "Test2",
+      teamName: "Team Bordeaux",
       city: "Bordeaux", 
       country: "France", 
       img: undefined, 
       isPublic: false,
+    });
+    await this.repository.save({
+      teamName: "Team Tours",
+      city: "TOURS", 
+      country: "France", 
+      img: undefined, 
+      isPublic: false,
+    });
+    await this.repository.save({
+      teamName: "Team Toulouse",
+      city: "Toulouse", 
+      country: "France", 
+      img: undefined, 
+      isPublic: false,
+    });
+    await this.repository.save({
+      teamName: "Team Barcelone",
+      city: "Barcelone", 
+      country: "Espagne", 
+      img: undefined, 
+      isPublic: true,
     });
   }
 
@@ -25,20 +46,24 @@ export default class TeamRepository extends TeamDb {
     return this.repository.find(); 
   }
 
-  static async getTeamByCity(city: string): Promise<Team | null> {
-    return this.repository.findOneBy({ city: city });
+  static async getTeamByCity(city: string): Promise<Team[] | null> {
+    return this.repository.findBy({ city: ILike(`%${city}%`) });
   }
 
-  static async getTeamByCountry(country: string): Promise<Team | null> {
-    return this.repository.findOneBy({  country: country });
+  static async getTeamByCountry(country: string): Promise<Team[] | null> {
+    return this.repository.findBy({ country: ILike(`%${country}%`) });
+  }
+
+  static async getTeamByName(teamName: string): Promise<Team | null> {
+    return this.repository.findOneBy({ teamName: ILike(`%${teamName}%`) });
   }
 
   static async createTeam(
     teamName: string,
     city: string, 
     country: string, 
-    img: string, 
-    isPublic: boolean, 
+    isPublic: boolean,
+    img: string,  
   ): Promise<Team> {
     const newTeam = this.repository.create({ teamName, city, country, img, isPublic });
     await this.repository.save(newTeam);

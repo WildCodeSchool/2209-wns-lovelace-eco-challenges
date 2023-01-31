@@ -21,7 +21,7 @@ class  CreateTeamArgs {
   })
   country: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   img: string;
 
