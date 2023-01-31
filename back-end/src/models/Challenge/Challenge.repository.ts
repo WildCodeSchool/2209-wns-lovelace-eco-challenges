@@ -1,6 +1,3 @@
-import { ILike } from "typeorm";
-import Team from "../Team/Team.entity";
-import TeamRepository from "../Team/Team.repository";
 import ChallengeDb from "./Challenge.db";
 import Challenge, { Category, Level } from "./Challenge.entity";
 import { ArrayContains } from "typeorm"
@@ -82,7 +79,7 @@ export default class ChallengeRepository extends ChallengeDb {
     challengeName: string,
     level: Level, 
     description: string, 
-    category: [Category],
+    category: Category[],
     startsAt?: Date,
     endAt?: Date, 
     img?: string, 
@@ -119,7 +116,7 @@ export default class ChallengeRepository extends ChallengeDb {
     challengeName: string,
     level: Level, 
     description: string, 
-    category: [Category],
+    category: Category[],
     startsAt?: Date,
     endAt?: Date, 
     img?: string, 
@@ -129,7 +126,7 @@ export default class ChallengeRepository extends ChallengeDb {
     challengeName: string,
     level: Level, 
     description: string, 
-    category: [Category],
+    category: Category[],
     startsAt?: Date,
     endAt?: Date, 
     img?: string, 

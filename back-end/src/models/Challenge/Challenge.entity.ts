@@ -15,8 +15,6 @@ export enum Level {
   SUPERGREEN = "Supergreen"
 }
 
-// export type CategoryType = "Covoiturage" | "Déchets" | "Eau" | "Electricité" | "Viande" | "Protection Nature" | "Autosuffisance" | "Réduction";
-
 export enum Category {
   CARPOOLING = "Covoiturage",
   WASTE = "Déchets", 
@@ -88,7 +86,7 @@ export default class Challenge {
     type: 'enum',
     enum: Level,
   })
-  @Field(type => Level)
+  @Field(_type => Level)
   level:Level;  
 
   @Column("varchar", { length: 500 })
@@ -100,7 +98,7 @@ export default class Challenge {
     enum: Category,
     array: true,
   })
-  @Field(type => [Category])
+  @Field(_type => [Category])
   category: Category[];
 
   @Column("varchar", { nullable: true })

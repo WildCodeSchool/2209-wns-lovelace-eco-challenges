@@ -1,9 +1,8 @@
 
 import { Arg, Args, Mutation, Query, Resolver } from "type-graphql";
-import { ArrayContainedBy, ArrayContains } from "typeorm";
 import Challenge, { Category, Level } from "../../models/Challenge/Challenge.entity";
 import ChallengeRepository from "../../models/Challenge/Challenge.repository";
-import { CreateChallengeArgs, UpdateChallengeArgs } from "./Challenge.input";
+import { CreateChallengeArgs, UpdateChallengePremiumArgs, UpdateDatesChallengeArgs } from "./Challenge.input";
 
 @Resolver(Challenge)
 export default class ChallengeResolver {
@@ -13,7 +12,7 @@ export default class ChallengeResolver {
   }
 
   @Query(() => [Challenge])
-  challengeByCategory(@Arg("category", type => Category) category : Category): Promise<Challenge[] | null> {
+  challengeByCategory(@Arg("category", type => [Category]) category : Category): Promise<Challenge[] | null> {
     return ChallengeRepository.getChallengesByCategory(category); 
   }
 
@@ -45,31 +44,31 @@ export default class ChallengeResolver {
     )
   }
 
-  // @Mutation(() => Challenge)
-  // updateChallengePremium(
-  //   @Args() { 
-  //     id, 
-  //     challengeName, 
-  //     level, 
-  //     description,
-  //     category, 
-  //     startsAt, 
-  //     endAt,
-  //     img
-  //   }: UpdateChallengeArgs
-  // ): Promise<Challenge> {
-  //   return ChallengeRepository.updateChallengePremium(id, challengeName, level, description, category, startsAt, endAt, img);
-  // }
-
   @Mutation(() => Challenge)
   updateDatesChallenge(
     @Args() { 
       id, 
       startsAt,
       endAt
-    }: UpdateChallengeArgs
+    }: UpdateDatesChallengeArgs
   ): Promise<Challenge> {
     return ChallengeRepository.updateDatesChallenge(id, startsAt, endAt);
+  }
+
+  @Mutation(() => Challenge)
+  updateChallengePremium(
+    @Args() { 
+      id, 
+      challengeName, 
+      level, 
+      description,
+      category, 
+      startsAt, 
+      endAt,
+      img
+    }: UpdateChallengePremiumArgs
+  ): Promise<Challenge> {
+    return ChallengeRepository.updateChallengePremium(id, challengeName, level, description, category, startsAt, endAt, img);
   }
 
   @Mutation(() => Challenge)

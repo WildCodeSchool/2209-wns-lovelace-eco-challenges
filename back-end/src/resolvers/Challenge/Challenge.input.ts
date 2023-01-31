@@ -10,7 +10,7 @@ class CreateChallengeArgs {
   })
   challengeName: string; 
 
-  @Field(type => Level) 
+  @Field(_type => Level) 
   @IsEnum(Level)
   level : Level; 
 
@@ -20,14 +20,14 @@ class CreateChallengeArgs {
   })
   description: string; 
 
-  @Field(type => Category) 
-  @IsEnum(Category)
-  category: [Category];
+  @Field(_type => [Category]) 
+  @IsEnum(Category, { each: true })
+  category: Category[];
 
   @Field({ nullable: true })
   @IsOptional()
   @IsDate()
-  @MinDate(new Date())
+  @MinDate(new Date(),{ message: "La date de début ne peut être inférieure à la date du jour"})
   startsAt?: Date;
 
   @Field({ nullable: true })
@@ -42,10 +42,10 @@ class CreateChallengeArgs {
 }
 
 @ArgsType()
-class UpdateChallengeArgs {
+class UpdateDatesChallengeArgs {
   @Field(() => ID)
   @IsUUID()
-  id: string;
+  id: string; 
 
   @Field()
   @IsDate()
@@ -59,4 +59,11 @@ class UpdateChallengeArgs {
   endAt?: Date; 
 }
 
-export { CreateChallengeArgs, UpdateChallengeArgs }
+@ArgsType() 
+class UpdateChallengePremiumArgs extends CreateChallengeArgs {
+  @Field(() => ID)
+  @IsUUID()
+  id: string; 
+}
+
+export { CreateChallengeArgs, UpdateDatesChallengeArgs, UpdateChallengePremiumArgs }
