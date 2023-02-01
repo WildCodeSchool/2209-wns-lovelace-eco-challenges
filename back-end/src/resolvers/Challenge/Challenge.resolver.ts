@@ -1,5 +1,5 @@
 
-import { Arg, Args, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Args, ID, Mutation, Query, Resolver } from "type-graphql";
 import Challenge, { Category, Level } from "../../models/Challenge/Challenge.entity";
 import ChallengeRepository from "../../models/Challenge/Challenge.repository";
 import { CreateChallengeArgs, UpdateChallengePremiumArgs, UpdateDatesChallengeArgs } from "./Challenge.input";
@@ -12,13 +12,23 @@ export default class ChallengeResolver {
   }
 
   @Query(() => [Challenge])
-  challengeByCategory(@Arg("category", type => [Category]) category : Category): Promise<Challenge[] | null> {
+  challengesByCategory(@Arg("category", type => [Category]) category : Category): Promise<Challenge[] | null> {
     return ChallengeRepository.getChallengesByCategory(category); 
   }
 
   @Query(() => [Challenge])
-  challengeByLevel(@Arg("level", type => Level) level : Level): Promise<Challenge[] | null> {
+  challengesByLevel(@Arg("level", type => Level) level : Level): Promise<Challenge[] | null> {
     return ChallengeRepository.getChallengesByLevel(level); 
+  }
+
+  @Query(() => Challenge)
+  challengeById(@Arg("id") id : string): Promise<Challenge | null> {
+    return ChallengeRepository.getChallengeById(id); 
+  }
+
+  @Query(() => Challenge)
+  challengeByName(@Arg("challengeName") challengeName : string): Promise<Challenge | null> {
+    return ChallengeRepository.getChallengeByName(challengeName); 
   }
 
   @Mutation(() => Challenge)

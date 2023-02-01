@@ -68,7 +68,7 @@ export default class Team {
   @Field(() => [UserTeam])
   userTeams: UserTeam[]; 
 
-  @ManyToMany(() => Challenge, { eager: true })
+  @ManyToMany(() => Challenge, (challenge) => challenge.teams, { eager: true })
   @Field(() => [Challenge])
   @JoinTable()
   challenges: Challenge[];

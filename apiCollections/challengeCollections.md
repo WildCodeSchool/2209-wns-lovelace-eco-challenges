@@ -1,39 +1,45 @@
-# Operation Collections
+# Challenge Collections
 
 _For gql requests_
 
 ## Features
 
-| Challenge               | Team              |
-| :---------------------- | :---------------- |
-| GetChallenges           | GetTeams          |
-| GetChallengesByCategory | GetTeamsByCity    |
-| GetChallengesByLevel    | GetTeamsByCountry |
-| CreateChallenge         | GetTeamByName     |
-| UpdateChallengeDates    | CreateTeam        |
-| UpdateChallengePremium  | UpdateTeam        |
-| DeleteChallenge         | DeleteTeam        |
+- GetChallenges
+- GetChallengesByCategory
+- GetChallengesByLevel
+- GetChallengeById
+- GetChallengeByName
+- CreateChallenge
+- UpdateChallengeDates
+- UpdateChallengePremium
+- DeleteChallenge
 
-## Challenges
+---
 
 ### Get all challenges
 
 ```
 query GetChallenges {
-    challenges {
-        id
-        challengeName
-        description
-        level
-        category
-        startsAt
-        endAt
-        img
+  challenges {
+    id
+    challengeName
+    description
+    level
+    category
+    startsAt
+    endAt
+    img
+    teams {
+      id
+      teamName
+      city
+      country
+      isPublic
+      img
     }
+  }
 }
 ```
-
----
 
 ---
 
@@ -41,7 +47,7 @@ query GetChallenges {
 
 ```
 query GetChallengesByCategory($category: [Category!]!) {
-  challengeByCategory(category: $category) {
+  challengesByCategory(category: $category) {
     id
     challengeName
     description
@@ -60,13 +66,11 @@ query GetChallengesByCategory($category: [Category!]!) {
 
 ---
 
----
-
 ### Get challenges by level
 
 ```
 query GetChallengesByLevel($level: Level!) {
-  challengeByLevel(level: $level) {
+  challengesByLevel(level: $level) {
     id
     challengeName
     startsAt
@@ -84,6 +88,45 @@ query GetChallengesByLevel($level: Level!) {
 | `level`   | `enum` | EASY, MODERATE, CHALLENGING, SUPERGREEN |
 
 ---
+
+### Get a challenge by id
+
+```
+query GetChallengeById($Id: String!) {
+  challengeById(id: $Id) {
+    id
+    challengeName
+    description
+    category
+    level
+    startsAt
+    endAt
+  }
+}
+```
+
+---
+
+### Get a challenge by name
+
+```
+query ChallengeByName($challengeName: String!) {
+  challengeByName(challengeName: $challengeName) {
+    id
+    challengeName
+    description
+    category
+    level
+    startsAt
+    endAt
+    img
+  }
+}
+```
+
+| Parameter       | Type     | Description      |
+| :-------------- | :------- | :--------------- |
+| `challengeName` | `string` | example: "plage" |
 
 ---
 
@@ -116,8 +159,6 @@ mutation CreateChallenge($challengeName: String!, $level: Level!, $description: 
 
 ---
 
----
-
 ### Update challenge dates
 
 ```
@@ -135,8 +176,6 @@ mutation UpdateDatesChallenge($Id: ID!, $startsAt: DateTime!, $endAt: DateTime) 
 | `id`       | `uuid`     | **required** |
 | `startsAt` | `DateTime` | **required** |
 | `endAt`    | `DateTime` |              |
-
----
 
 ---
 
@@ -170,8 +209,6 @@ mutation UpdateChallengePremium($challengeName: String!, $level: Level!, $descri
 
 ---
 
----
-
 ### Delete a challenge
 
 ```
@@ -186,178 +223,5 @@ mutation DeleteChallenge($Id: String!) {
 | Parameter | Type   | Description  |
 | :-------- | :----- | :----------- |
 | `id`      | `uuid` | **required** |
-
----
-
----
-
----
-
-## Teams
-
-### Get all Teams
-
-```
-query GetTeams {
-  teams {
-    id
-    teamName
-    isPublic
-    city
-    country
-    img
-  }
-}
-```
-
----
-
----
-
-### Get teams by city
-
-```
-query GetTeamsByCity($city: String!) {
-  teamsByCity(city: $city) {
-    id
-    teamName
-    isPublic
-    country
-    city
-    img
-  }
-}
-```
-
-| Parameter | Type     | Description |
-| :-------- | :------- | :---------- |
-| `city`    | `string` |             |
-
----
-
----
-
-### Get teams by country
-
-```
-query GetTeamsByCountry($country: String!) {
-  teamsByCountry(country: $country) {
-    id
-    teamName
-    isPublic
-    city
-    country
-    img
-  }
-}
-```
-
-| Parameter | Type     | Description |
-| :-------- | :------- | :---------- |
-| `country` | `string` |             |
-
----
-
----
-
-### Get teams by Name
-
-```
-query GetTeamByName($teamName: String!) {
-  teamByName(teamName: $teamName) {
-    id
-    teamName
-    isPublic
-    country
-    city
-    img
-    challenges {
-      id
-      challengeName
-    }
-  }
-}
-```
-
-| Parameter  | Type     | Description |
-| :--------- | :------- | :---------- |
-| `teamName` | `string` |             |
-
----
-
----
-
-### Create a new team
-
-```
-mutation CreateTeam($teamName: String!, $city: String!, $country: String!, $isPublic: Boolean!, $img: String) {
-  createTeam(teamName: $teamName, city: $city, country: $country, isPublic: $isPublic, img: $img) {
-    teamName
-    city
-    country
-    isPublic
-    img
-  }
-}
-```
-
-| Parameter  | Type      | Description  |
-| :--------- | :-------- | :----------- |
-| `teamName` | `string`  | **required** |
-| `city`     | `string`  | **required** |
-| `country`  | `string`  | **required** |
-| `isPublic` | `boolean` | **required** |
-| `img`      | `string`  |              |
-
----
-
----
-
-### Update a team
-
-```
-mutation UpdateTeam($teamName: String!, $city: String!, $country: String!, $isPublic: Boolean!, $Id: ID!, $img: String) {
-  updateTeam(teamName: $teamName, city: $city, country: $country, isPublic: $isPublic, id: $Id, img: $img) {
-    id
-    teamName
-    isPublic
-    img
-    country
-    city
-  }
-}
-```
-
-| Parameter  | Type      | Description  |
-| :--------- | :-------- | :----------- |
-| `Id`       | `uuid`    | **required** |
-| `teamName` | `string`  | **required** |
-| `city`     | `string`  | **required** |
-| `country`  | `string`  | **required** |
-| `isPublic` | `boolean` | **required** |
-| `img`      | `string`  |              |
-
----
-
----
-
-### Delete a team
-
-```
-mutation DeleteTeam($Id: String!) {
-  deleteTeam(id: $Id) {
-    id
-    teamName
-  }
-}
-```
-
-| Parameter | Type   | Description  |
-| :-------- | :----- | :----------- |
-| `id`      | `uuid` | **required** |
-
----
-
----
 
 ---

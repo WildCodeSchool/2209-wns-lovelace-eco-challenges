@@ -53,8 +53,8 @@ const startServer = async () => {
   const { url } = await server.listen();
   await initializeDatabaseRepositories();
 
-  await TeamRepository.initializeTeams();
   await ChallengeRepository.initializeChallenges();
+  await TeamRepository.initializeTeams();
 
   console.log(`🚀  Server ready at ${url}`);
 };

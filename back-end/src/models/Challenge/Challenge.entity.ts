@@ -105,7 +105,7 @@ export default class Challenge {
   @Field({ nullable: true })
   img?: string; 
 
-  @ManyToMany(() => Team, (team) => team.challenges)
+  @ManyToMany(() => Team, (team) => team.challenges, {onDelete: "CASCADE", onUpdate: "CASCADE"})
   @Field(() => [Team], { nullable: true })
   teams: Team[];
 }
