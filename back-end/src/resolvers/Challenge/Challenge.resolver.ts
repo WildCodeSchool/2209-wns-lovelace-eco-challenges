@@ -1,14 +1,21 @@
 
-import { Arg, Args, ID, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Args, ID, Int, Mutation, Query, Resolver } from "type-graphql";
 import Challenge, { Category, Level } from "../../models/Challenge/Challenge.entity";
 import ChallengeRepository from "../../models/Challenge/Challenge.repository";
+import { Pagination } from "../InputArgsForAll";
 import { CreateChallengeArgs, UpdateChallengePremiumArgs, UpdateDatesChallengeArgs } from "./Challenge.input";
+
+// const PAGE_SIZE = 6;
 
 @Resolver(Challenge)
 export default class ChallengeResolver {
   @Query(() => [Challenge])
-  challenges(): Promise<Challenge[]> {
-    return ChallengeRepository.getChallenges(); 
+  challenges(@Args() { 
+    itemsByPage, 
+    pageNumber 
+  } : Pagination
+  ): Promise<Challenge[]> {
+    return ChallengeRepository.getChallenges(itemsByPage, pageNumber); 
   }
 
   @Query(() => [Challenge])

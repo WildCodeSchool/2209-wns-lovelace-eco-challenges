@@ -54,12 +54,17 @@ export default class ChallengeRepository extends ChallengeDb {
     });
   }
 
-  static async getChallenges(): Promise<Challenge[]> {
+  static async getChallenges(
+    itemsByPage: number,
+    pageNumber: number
+  ): Promise<Challenge[]> {
     return this.repository.find({
       relations: {
         teams: true
       },
-      order: {startsAt: "ASC"}
+      order: {startsAt: "ASC"},
+      take: itemsByPage,
+      skip: (pageNumber -1) * itemsByPage,
     }); 
   }
 
