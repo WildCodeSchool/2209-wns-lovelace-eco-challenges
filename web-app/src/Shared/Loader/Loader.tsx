@@ -1,15 +1,12 @@
-import { MAIN_THEME_COLOR } from "../styles/style-constants";
+import React from "react";
 
-import React from 'react'
+// import { MAIN_THEME_COLOR } from "../styles/style-constants";
 
 const Loader = () => {
-  return (
-    <div>Loader</div>
-  )
-}
+  return <div>Loader</div>;
+};
 
-export default Loader
-
+export default Loader;
 
 //   width: 48px;
 //   height: 48px;
@@ -28,4 +25,3 @@ export default Loader
 //       transform: rotate(360deg);
 //     }
 //   }
-

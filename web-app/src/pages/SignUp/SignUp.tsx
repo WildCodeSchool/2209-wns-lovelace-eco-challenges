@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import Loader from "../../components/Loader";
+import Loader from "../../Shared/Loader/Loader";
 import { SignUpMutation, SignUpMutationVariables } from "../../gql/graphql";
 import { getErrorMessage } from "../../utils";
 import { SIGN_IN_PATH } from "../paths";

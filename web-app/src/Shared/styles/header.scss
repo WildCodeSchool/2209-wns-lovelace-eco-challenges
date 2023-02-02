@@ -1,46 +1,40 @@
 .header {
-    @apply
-        bg-primary
+  @apply bg-primary
         flex
         justify-between
         p-5
         h-20;
 
-    .header-logo {
-        @apply
-            w-10
+  .header-logo {
+    @apply w-10
             mr-4;
-    }
+  }
 
-    .title {
-        @apply
-            text-white
+  .title {
+    @apply text-white
             relative
             w-fit
             text-3xl;
-    }
+  }
 
-    .title::after {
-        @apply
-            right-0
+  .title::after {
+    @apply right-0
             top-9
             absolute
             text-xs;
-        content: 'Make a better World'
-    }
+    content: "Make a better World";
+  }
 
-    .burger-container {
-        @apply
-            w-10
+  .burger-container {
+    @apply w-10
             flex
             flex-col
             justify-around
             md:hidden;
 
-        .burger-line {
-            @apply
-                border-2
+    .burger-line {
+      @apply border-2
                 border-white;
-        }
     }
+  }
 }
