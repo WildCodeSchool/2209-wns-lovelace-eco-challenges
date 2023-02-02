@@ -17,8 +17,8 @@ _For gql requests_
 ### Get all Teams
 
 ```
-query GetTeams {
-  teams {
+query GetTeams($itemsByPage: Int!, $pageNumber: Int!) {
+  teams(itemsByPage: $itemsByPage, pageNumber: $pageNumber) {
     id
     teamName
     isPublic
@@ -39,13 +39,18 @@ query GetTeams {
 }
 ```
 
+| Parameter     | Type     | Description |
+| :------------ | :------- | :---------- |
+| `itemsByPage` | `number` |             |
+| `pageNumber`  | `number` |             |
+
 ---
 
 ### Get teams by city
 
 ```
-query GetTeamByCity($city: String!) {
-  teamsByCity(city: $city) {
+query GetTeamByCity($city: String!, $itemsByPage: Int!, $pageNumber: Int!) {
+  teamsByCity(city: $city, itemsByPage: $itemsByPage, pageNumber: $pageNumber) {
     id
     teamName
     isPublic
@@ -61,17 +66,19 @@ query GetTeamByCity($city: String!) {
 }
 ```
 
-| Parameter | Type     | Description |
-| :-------- | :------- | :---------- |
-| `city`    | `string` |             |
+| Parameter     | Type     | Description |
+| :------------ | :------- | :---------- |
+| `city`        | `string` |             |
+| `itemsByPage` | `number` |             |
+| `pageNumber`  | `number` |             |
 
 ---
 
 ### Get teams by country
 
 ```
-query GetTeamByCountry($country: String!) {
-  teamsByCountry(country: $country) {
+query GetTeamByCountry($country: String!, $itemsByPage: Int!, $pageNumber: Int!) {
+  teamsByCountry(country: $country, itemsByPage: $itemsByPage, pageNumber: $pageNumber) {
     id
     teamName
     isPublic
@@ -87,9 +94,11 @@ query GetTeamByCountry($country: String!) {
 }
 ```
 
-| Parameter | Type     | Description |
-| :-------- | :------- | :---------- |
-| `country` | `string` |             |
+| Parameter     | Type     | Description |
+| :------------ | :------- | :---------- |
+| `country`     | `string` |             |
+| `itemsByPage` | `number` |             |
+| `pageNumber`  | `number` |             |
 
 ---
 

@@ -54,29 +54,76 @@ export default class ChallengeRepository extends ChallengeDb {
     });
   }
 
-  static async getChallenges(): Promise<Challenge[]> {
+  static async getChallenges(
+    itemsByPage: number,
+    pageNumber: number
+  ): Promise<Challenge[]> {
     return this.repository.find({
       relations: {
         teams: true
       },
-      order: {startsAt: "ASC"}
+      order: {startsAt: "ASC"},
+      take: itemsByPage,
+      skip: (pageNumber -1) * itemsByPage,
     }); 
   }
 
-  static async getChallengesByCategory(category: Category): Promise<Challenge[] | null> {
-    return this.repository.findBy({ category: ArrayContains([category]) });
+  static async getChallengesByCategory(
+    category: Category,
+    itemsByPage: number, 
+    pageNumber: number
+    ): Promise<Challenge[] | null> {
+    return this.repository.find({ 
+      where: {
+        category: ArrayContains([category]) 
+      }, 
+      relations: {
+        teams: true
+      },
+      order: {startsAt: "ASC"},
+      take: itemsByPage,
+      skip: (pageNumber -1) * itemsByPage,
+      });
   }
 
-  static async getChallengesByLevel(level: Level): Promise<Challenge[] | null> {
-    return this.repository.findBy({ level: level });
+  static async getChallengesByLevel(
+    level: Level,
+    itemsByPage: number, 
+    pageNumber: number
+    ): Promise<Challenge[] | null> {
+    return this.repository.find({ 
+      where: {
+        level: level 
+      },
+      relations: {
+        teams: true
+      },
+      order: {startsAt: "ASC"},
+      take: itemsByPage,
+      skip: (pageNumber -1) * itemsByPage,
+    });
   }
 
   static async getChallengeById(id: string): Promise<Challenge | null> {
-    return this.repository.findOneBy({ id }); 
+    return this.repository.findOne({ 
+      where: {
+        id 
+      }, 
+      relations: {
+        teams: true
+      }
+    }); 
   }
 
   static async getChallengeByName(challengeName: string): Promise<Challenge | null> {
-    return this.repository.findOneBy({ challengeName: ILike(`%${challengeName}%`) });
+    return this.repository.findOne({ 
+      where : {
+        challengeName: ILike(`%${challengeName}%`) 
+      },
+      relations: {
+        teams: true
+      }
+    });
   }
 
   static async createChallenge(

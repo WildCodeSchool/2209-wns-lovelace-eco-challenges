@@ -1,24 +1,37 @@
 
-import { Arg, Args, ID, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Args, ID, Int, Mutation, Query, Resolver } from "type-graphql";
 import Challenge, { Category, Level } from "../../models/Challenge/Challenge.entity";
 import ChallengeRepository from "../../models/Challenge/Challenge.repository";
+import { Pagination } from "../InputArgsForAll";
 import { CreateChallengeArgs, UpdateChallengePremiumArgs, UpdateDatesChallengeArgs } from "./Challenge.input";
+
+// const PAGE_SIZE = 6;
 
 @Resolver(Challenge)
 export default class ChallengeResolver {
   @Query(() => [Challenge])
-  challenges(): Promise<Challenge[]> {
-    return ChallengeRepository.getChallenges(); 
+  challenges(@Args() { 
+    itemsByPage, 
+    pageNumber 
+  } : Pagination
+  ): Promise<Challenge[]> {
+    return ChallengeRepository.getChallenges(itemsByPage, pageNumber); 
   }
 
   @Query(() => [Challenge])
-  challengesByCategory(@Arg("category", type => [Category]) category : Category): Promise<Challenge[] | null> {
-    return ChallengeRepository.getChallengesByCategory(category); 
+  challengesByCategory(
+    @Arg("category", type => [Category]) category : Category,
+    @Args() { itemsByPage, pageNumber } : Pagination
+    ): Promise<Challenge[] | null> {
+    return ChallengeRepository.getChallengesByCategory(category, itemsByPage, pageNumber); 
   }
 
   @Query(() => [Challenge])
-  challengesByLevel(@Arg("level", type => Level) level : Level): Promise<Challenge[] | null> {
-    return ChallengeRepository.getChallengesByLevel(level); 
+  challengesByLevel(
+    @Arg("level", type => Level) level : Level,
+    @Args() { itemsByPage, pageNumber } : Pagination
+    ): Promise<Challenge[] | null> {
+    return ChallengeRepository.getChallengesByLevel(level, itemsByPage, pageNumber); 
   }
 
   @Query(() => Challenge)

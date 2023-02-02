@@ -1,23 +1,33 @@
 import { Arg, Args, ID, Mutation, Query, Resolver } from "type-graphql";
 import Team from "../../models/Team/Team.entity";
 import TeamRepository from "../../models/Team/Team.repository";
+import { Pagination } from "../InputArgsForAll";
 import { CreateTeamArgs, UpdateTeamArgs } from "./Team.input";
 
 @Resolver(Team)
 export default class TeamResolver {
   @Query(() => [Team])
-  teams(): Promise<Team[]> {
-    return TeamRepository.getTeams(); 
+  teams(@Args() { 
+    itemsByPage, 
+    pageNumber 
+  } : Pagination): Promise<Team[]> {
+    return TeamRepository.getTeams(itemsByPage, pageNumber); 
   }
 
   @Query(() => [Team])
-  teamsByCity(@Arg("city") city : string): Promise<Team[] | null> {
-    return TeamRepository.getTeamsByCity(city); 
+  teamsByCity(
+    @Arg("city") city : string,
+    @Args() { itemsByPage, pageNumber } : Pagination
+    ): Promise<Team[] | null> {
+    return TeamRepository.getTeamsByCity(city, itemsByPage, pageNumber); 
   }
 
   @Query(() => [Team])
-  teamsByCountry(@Arg("country") country : string): Promise<Team[] | null> {
-    return TeamRepository.getTeamsByCountry(country); 
+  teamsByCountry(
+    @Arg("country") country : string,
+    @Args() { itemsByPage, pageNumber } : Pagination
+    ): Promise<Team[] | null> {
+    return TeamRepository.getTeamsByCountry(country, itemsByPage, pageNumber); 
   }
 
   @Query(() => Team)
