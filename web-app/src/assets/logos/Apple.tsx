@@ -25,4 +25,4 @@ export const Apple = (props: any) => (
       />
     </defs>
   </svg>
-)
+);

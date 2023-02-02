@@ -25,4 +25,4 @@ export const Facebook = (props: any) => (
       />
     </defs>
   </svg>
-)
+);

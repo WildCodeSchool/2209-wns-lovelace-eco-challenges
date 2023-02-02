@@ -11,6 +11,6 @@ const Partners = (props: any) => (
       fillRule="evenodd"
     />
   </svg>
-)
+);
 
 export default Partners;

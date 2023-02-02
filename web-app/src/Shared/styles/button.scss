@@ -1,18 +1,15 @@
 .button-primary {
-  @apply
-    text-white
+  @apply text-white
     bg-primary;
 }
 
 .button-secondary {
-  @apply
-    text-primary
+  @apply text-primary
     bg-white;
 }
 
 .button {
-  @apply
-    rounded-lg
+  @apply rounded-lg
     p-2
     min-w-[180px]
     min-h-[42px]

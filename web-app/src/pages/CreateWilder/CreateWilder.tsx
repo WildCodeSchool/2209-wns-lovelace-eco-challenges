@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Loader from "../../components/Loader";
+import Loader from "../../Shared/Loader/Loader";
 import {
   CreateWilderMutation,
   CreateWilderMutationVariables,

@@ -1,24 +1,24 @@
 import clsx from "clsx";
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
 type Props = {
-  name: string,
-  type: string,
-  icon?: any,
+  name: string;
+  type: string;
+  icon?: any;
 };
 
 const Button = (props: Props) => {
-  const {
-    name,
-    type,
-    icon = null
-  } = props;
+  const { name, type, icon = null } = props;
 
-  const buttonClassName = useMemo((): string => clsx({
-    'button': true,
-    'button-primary': type === 'button-primary' ?? true,
-    'button-secondary': type === 'button-secondary' ?? true,
-  }), [type]);
+  const buttonClassName = useMemo(
+    (): string =>
+      clsx({
+        button: true,
+        "button-primary": type === "button-primary" ?? true,
+        "button-secondary": type === "button-secondary" ?? true,
+      }),
+    [type]
+  );
 
   return (
     <button className={buttonClassName}>

@@ -1,7 +1,6 @@
 .home {
   .home-image {
-    @apply
-      bg-[url('../assets/images/imageHeader.webp')]
+    @apply bg-[url('../assets/images/imageHeader.webp')]
       h-80
       relative
       bg-cover
@@ -9,8 +8,7 @@
       xl:h-[500px];
 
     .home-text {
-      @apply
-        text-white
+      @apply text-white
         absolute
         left-1/2
         top-1/2
@@ -22,16 +20,14 @@
     }
 
     .home-title {
-      @apply
-        text-2xl
+      @apply text-2xl
         text-center
         font-bold
         xl:text-6xl;
     }
 
     .buttons {
-      @apply
-        m-3
+      @apply m-3
         flex
         justify-around
         md:hidden;
@@ -39,16 +35,14 @@
   }
 
   .home-page {
-    @apply
-      custom-flex-center
+    @apply custom-flex-center
       flex-wrap
       lg:flex-row
       lg:justify-around
       xl:justify-center;
 
     .card {
-      @apply
-        custom-flex-center
+      @apply custom-flex-center
         custom-border-primary
         w-3/4
         p-2
@@ -64,8 +58,7 @@
     }
 
     .green-card {
-      @apply
-        custom-flex-center
+      @apply custom-flex-center
         bg-primary
         py-7
         w-full
@@ -81,22 +74,19 @@
         xl:ml-10;
 
       .green-card-subtext {
-        @apply
-          text-center
+        @apply text-center
           text-white
           xl:text-start;
       }
 
       .green-card-display {
-        @apply
-          flex
+        @apply flex
           flex-wrap
           justify-around;
       }
 
       .green-card-box {
-        @apply
-          custom-flex-center
+        @apply custom-flex-center
           bg-white
           rounded-lg
           p-5
@@ -104,18 +94,15 @@
           shadow-xl
           flex-[33%]
           lg:flex-[34%];
-
       }
     }
 
     .challenges {
-      @apply
-        my-7
+      @apply my-7
         w-11/12;
 
       .challenges-box {
-        @apply
-          custom-flex-center
+        @apply custom-flex-center
           px-4
           flex-wrap
           md:flex-row
@@ -123,8 +110,7 @@
           md:items-baseline;
 
         .challenges-image {
-          @apply
-            w-10/12
+          @apply w-10/12
             pb-6
             mb-4
             last:pb-0
@@ -132,22 +118,19 @@
             md:w-[26%];
 
           .challenges-text {
-            @apply
-              text-center
+            @apply text-center
               xl:text-start;
           }
 
           .challenges-see-more {
-            @apply
-              text-center
+            @apply text-center
               text-blue-600
               xl:text-start;
           }
         }
 
         .challenges-title {
-          @apply
-            text-center
+          @apply text-center
             font-bold
             text-lg
             xl:text-start;
@@ -155,8 +138,7 @@
       }
 
       .see-more-title {
-        @apply
-          font-bold
+        @apply font-bold
           text-center
           text-xl
           flex
@@ -168,8 +150,7 @@
     }
 
     .gray-card {
-      @apply
-        bg-gray-100
+      @apply bg-gray-100
         rounded-lg
         w-11/12
         px-7
@@ -177,15 +158,13 @@
         shadow-xl;
 
       .gray-card-partners {
-        @apply
-          flex
+        @apply flex
           flex-wrap
           items-center
           justify-around;
 
         .gray-card-logos {
-          @apply
-            w-1/4
+          @apply w-1/4
             m-4
             md:w-1/6
             lg:w-1/12
@@ -195,8 +174,7 @@
     }
 
     .versions {
-      @apply
-        custom-flex-center
+      @apply custom-flex-center
         my-7
         lg:flex-row
         lg:justify-around
@@ -204,8 +182,7 @@
         xl:items-start;
 
       .versions-title {
-        @apply
-          text-primary
+        @apply text-primary
           font-bold
           border-4
           border-primary
@@ -217,8 +194,7 @@
       }
 
       .versions-subtitle {
-        @apply
-          text-center
+        @apply text-center
           mb-5;
       }
     }
