@@ -35,6 +35,14 @@ query GetTeams($itemsByPage: Int!, $pageNumber: Int!) {
       level
       img
     }
+    userToTeams {
+      userRole
+      ...
+      user {
+        nickname
+        ...
+      }
+    }
   }
 }
 ```
@@ -61,6 +69,14 @@ query GetTeamByCity($city: String!, $itemsByPage: Int!, $pageNumber: Int!) {
       id
       challengeName
       ...
+    }
+    userToTeams {
+      userRole
+      ...
+      user {
+        nickname
+        ...
+      }
     }
   }
 }
@@ -90,6 +106,14 @@ query GetTeamByCountry($country: String!, $itemsByPage: Int!, $pageNumber: Int!)
       challengeName
       ...
     }
+    userToTeams {
+      userRole
+      ...
+      user {
+        nickname
+        ...
+      }
+    }
   }
 }
 ```
@@ -117,6 +141,15 @@ query GetTeamByName($teamName: String!) {
       id
       challengeName
       ...
+    }
+    userToTeams {
+      userRole
+      ...
+      user {
+        nickname
+        city
+        ...
+      }
     }
   }
 }

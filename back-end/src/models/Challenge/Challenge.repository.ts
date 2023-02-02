@@ -60,7 +60,11 @@ export default class ChallengeRepository extends ChallengeDb {
   ): Promise<Challenge[]> {
     return this.repository.find({
       relations: {
-        teams: true
+        teams: {
+          userToTeams: {
+            user: true
+          }
+        }
       },
       order: {startsAt: "ASC"},
       take: itemsByPage,
@@ -78,7 +82,11 @@ export default class ChallengeRepository extends ChallengeDb {
         category: ArrayContains([category]) 
       }, 
       relations: {
-        teams: true
+        teams: {
+          userToTeams: {
+            user: true
+          }
+        }
       },
       order: {startsAt: "ASC"},
       take: itemsByPage,
@@ -96,7 +104,11 @@ export default class ChallengeRepository extends ChallengeDb {
         level: level 
       },
       relations: {
-        teams: true
+        teams: {
+          userToTeams: {
+            user: true
+          }
+        }
       },
       order: {startsAt: "ASC"},
       take: itemsByPage,
@@ -110,7 +122,11 @@ export default class ChallengeRepository extends ChallengeDb {
         id 
       }, 
       relations: {
-        teams: true
+        teams: {
+          userToTeams: {
+            user: true
+          }
+        }
       }
     }); 
   }
@@ -121,7 +137,11 @@ export default class ChallengeRepository extends ChallengeDb {
         challengeName: ILike(`%${challengeName}%`) 
       },
       relations: {
-        teams: true
+        teams: {
+          userToTeams: {
+            user: true
+          }
+        }
       }
     });
   }

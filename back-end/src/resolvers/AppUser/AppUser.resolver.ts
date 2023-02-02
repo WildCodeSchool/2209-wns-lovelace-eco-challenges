@@ -1,4 +1,4 @@
-import { Args, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Args, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import AppUser from "../../models/AppUser/AppUser.entity";
 import AppUserRepository from "../../models/AppUser/AppUser.repository";
 import { SignInArgs, SignUpArgs } from "./AppUser.input";
@@ -39,5 +39,15 @@ export default class AppUserResolver {
   @Query(() => AppUser)
   async myProfile(@Ctx() context: GlobalContext): Promise<AppUser> {
     return context.user as AppUser;
+  }
+
+  @Query(() => AppUser)
+  userByNickname(@Arg("nickname") nickname : string): Promise<AppUser | null> {
+    return AppUserRepository.getUserByNickname(nickname); 
+  }
+
+  @Query(() => AppUser)
+  userById(@Arg("id") id : string): Promise<AppUser | null> {
+    return AppUserRepository.getUserById(id); 
   }
 }

@@ -1,6 +1,6 @@
-import { Field, ID, ObjectType } from "type-graphql";
+import { Field, ID, ObjectType, registerEnumType } from "type-graphql";
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import UserTeam from "../UserTeam/UserTeam.entity";
+import UserToTeam from "../UserToTeam/UserToTeam.entity";
 
 
 export enum InvitationStatus {
@@ -8,6 +8,9 @@ export enum InvitationStatus {
   ACCEPTED = "accepted", 
   DENIED ="denied",
 }
+registerEnumType(InvitationStatus, {
+  name: "InvitationStatus",
+});
 
 @Entity()
 @ObjectType()
@@ -29,14 +32,14 @@ export default class Invitation {
     enum: InvitationStatus,
     default: InvitationStatus.PENDING
   })
-  @Field()
+  @Field(_type => InvitationStatus)
   status: InvitationStatus; 
 
-  @CreateDateColumn({type: 'date'})
+  @CreateDateColumn({ type: 'date' })
   @Field()
   createdAt: Date; 
 
-  @OneToMany(() => UserTeam, (userTeam) => userTeam.invitation)
-  @Field(() => UserTeam)
-  userTeams: UserTeam; 
+  @OneToMany(() => UserToTeam, (userToTeam) => userToTeam.invitation)
+  @Field(() => [UserToTeam])
+  userToTeams: UserToTeam[]; 
 }
