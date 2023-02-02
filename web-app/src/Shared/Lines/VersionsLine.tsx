@@ -11,7 +11,7 @@ const VersionsLine = (props: Props) => {
 
     return (
         <>
-            <p className="versions-line">
+            <p className="flex items-center mb-3">
                 <i className="mr-5">
                     <Check width="30px" height="30px" fill={PRIMARY} />
                 </i>
