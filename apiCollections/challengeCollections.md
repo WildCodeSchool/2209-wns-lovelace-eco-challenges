@@ -19,8 +19,8 @@ _For gql requests_
 ### Get all challenges
 
 ```
-query GetChallenges {
-  challenges {
+query GetChallenges($itemsByPage: Int!, $pageNumber: Int!) {
+  challenges(itemsByPage: $itemsByPage, pageNumber: $pageNumber) {
     id
     challengeName
     description
@@ -41,13 +41,18 @@ query GetChallenges {
 }
 ```
 
+| Parameter     | Type     | Description |
+| :------------ | :------- | :---------- |
+| `itemsByPage` | `number` |             |
+| `pageNumber`  | `number` |             |
+
 ---
 
 ### Get challenges by category
 
 ```
-query GetChallengesByCategory($category: [Category!]!) {
-  challengesByCategory(category: $category) {
+query GetChallengesByCategory($category: [Category!]!, $itemsByPage: Int!, $pageNumber: Int!) {
+  challengesByCategory(category: $category, itemsByPage: $itemsByPage, pageNumber: $pageNumber) {
     id
     challengeName
     description
@@ -56,21 +61,31 @@ query GetChallengesByCategory($category: [Category!]!) {
     endAt
     img
     category
+    teams {
+      id
+      teamName
+      city
+      country
+      isPublic
+      img
+    }
   }
 }
 ```
 
-| Parameter  | Type     | Description                                                                          |
-| :--------- | :------- | :----------------------------------------------------------------------------------- |
-| `category` | `[enum]` | [CARPOOLING, WASTE, WATER, ELECTRICITY, MEAT, PROTECTSNATURE, SELFSUFFICIENCY, LESS] |
+| Parameter     | Type     | Description                                                                          |
+| :------------ | :------- | :----------------------------------------------------------------------------------- |
+| `category`    | `[enum]` | [CARPOOLING, WASTE, WATER, ELECTRICITY, MEAT, PROTECTSNATURE, SELFSUFFICIENCY, LESS] |
+| `itemsByPage` | `number` |                                                                                      |
+| `pageNumber`  | `number` |                                                                                      |
 
 ---
 
 ### Get challenges by level
 
 ```
-query GetChallengesByLevel($level: Level!) {
-  challengesByLevel(level: $level) {
+query GetChallengeByLevel($level: Level!, $itemsByPage: Int!, $pageNumber: Int!) {
+  challengesByLevel(level: $level, itemsByPage: $itemsByPage, pageNumber: $pageNumber) {
     id
     challengeName
     startsAt
@@ -79,13 +94,23 @@ query GetChallengesByLevel($level: Level!) {
     description
     category
     img
+    teams {
+      id
+      teamName
+      city
+      country
+      isPublic
+      img
+    }
   }
 }
 ```
 
-| Parameter | Type   | Description                             |
-| :-------- | :----- | :-------------------------------------- |
-| `level`   | `enum` | EASY, MODERATE, CHALLENGING, SUPERGREEN |
+| Parameter     | Type     | Description                             |
+| :------------ | :------- | :-------------------------------------- |
+| `level`       | `enum`   | EASY, MODERATE, CHALLENGING, SUPERGREEN |
+| `itemsByPage` | `number` |                                         |
+| `pageNumber`  | `number` |                                         |
 
 ---
 
@@ -101,6 +126,11 @@ query GetChallengeById($Id: String!) {
     level
     startsAt
     endAt
+    teams {
+      id
+      teamName
+      ...
+    }
   }
 }
 ```
@@ -120,6 +150,11 @@ query ChallengeByName($challengeName: String!) {
     startsAt
     endAt
     img
+    teams {
+      id
+      teamName
+      ...
+    }
   }
 }
 ```
@@ -179,7 +214,7 @@ mutation UpdateDatesChallenge($Id: ID!, $startsAt: DateTime!, $endAt: DateTime) 
 
 ---
 
-### Update all challenge - _premium_
+### Update challenge - _premium_
 
 ```
 mutation UpdateChallengePremium($challengeName: String!, $level: Level!, $description: String!, $category: [Category!]!, $Id: ID!, $startsAt: DateTime, $endAt: DateTime, $img: String) {

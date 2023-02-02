@@ -19,16 +19,45 @@ export default class TeamRepository extends TeamDb {
     await this.repository.save([teamBarcelone, teamBordeaux, teamParis, teamToulouse, teamTours])
   }
 
-  static async getTeams(): Promise<Team[]> {
-    return this.repository.find(); 
+  static async getTeams(
+    itemsByPage: number,
+    pageNumber: number
+  ): Promise<Team[]> {
+    return this.repository.find({
+      order: {teamName: "ASC"},
+      take: itemsByPage,
+      skip: (pageNumber -1) * itemsByPage,
+    }); 
   }
 
-  static async getTeamsByCity(city: string): Promise<Team[] | null> {
-    return this.repository.findBy({ city: ILike(`%${city}%`) });
+  static async getTeamsByCity(
+    city: string,
+    itemsByPage: number, 
+    pageNumber: number
+    ): Promise<Team[] | null> {
+    return this.repository.find({ 
+      where : {
+        city: ILike(`%${city}%`) 
+      }, 
+      order: {teamName: "ASC"},
+      take: itemsByPage,
+      skip: (pageNumber -1) * itemsByPage,
+    });
   }
 
-  static async getTeamsByCountry(country: string): Promise<Team[] | null> {
-    return this.repository.findBy({ country: ILike(`%${country}%`) });
+  static async getTeamsByCountry(
+    country: string,
+    itemsByPage: number, 
+    pageNumber: number
+    ): Promise<Team[] | null> {
+    return this.repository.find({ 
+      where: {
+        country: ILike(`%${country}%`) 
+      }, 
+      order: {teamName: "ASC"},
+      take: itemsByPage,
+      skip: (pageNumber -1) * itemsByPage,
+    });
   }
 
   static async getTeamByName(teamName: string): Promise<Team | null> {

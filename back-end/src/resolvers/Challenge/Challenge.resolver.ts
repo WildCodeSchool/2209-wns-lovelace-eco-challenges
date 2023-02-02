@@ -19,13 +19,19 @@ export default class ChallengeResolver {
   }
 
   @Query(() => [Challenge])
-  challengesByCategory(@Arg("category", type => [Category]) category : Category): Promise<Challenge[] | null> {
-    return ChallengeRepository.getChallengesByCategory(category); 
+  challengesByCategory(
+    @Arg("category", type => [Category]) category : Category,
+    @Args() { itemsByPage, pageNumber } : Pagination
+    ): Promise<Challenge[] | null> {
+    return ChallengeRepository.getChallengesByCategory(category, itemsByPage, pageNumber); 
   }
 
   @Query(() => [Challenge])
-  challengesByLevel(@Arg("level", type => Level) level : Level): Promise<Challenge[] | null> {
-    return ChallengeRepository.getChallengesByLevel(level); 
+  challengesByLevel(
+    @Arg("level", type => Level) level : Level,
+    @Args() { itemsByPage, pageNumber } : Pagination
+    ): Promise<Challenge[] | null> {
+    return ChallengeRepository.getChallengesByLevel(level, itemsByPage, pageNumber); 
   }
 
   @Query(() => Challenge)
