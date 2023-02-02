@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Ecology from "../../assets/logos/ecology.png";
 
-import Nav from "../../Shared/Nav/Nav";
-import NavList from "../../Shared/Nav/ResponsiveNav";
+import Nav from '../../Shared/Nav/Nav';
+import ResponsiveNav from '../../Shared/Nav/ResponsiveNav';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -20,8 +20,8 @@ const Header = () => {
         <div className="burger-line"></div>
         <div className="burger-line"></div>
       </div>
-      <Nav open={open} />
-      <NavList />
+      <ResponsiveNav open={open} />
+      <Nav />
     </header>
   );
 };

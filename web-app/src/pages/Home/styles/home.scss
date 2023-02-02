@@ -1,4 +1,4 @@
-.home {
+.home-page {
   .home-image {
     @apply bg-[url('../assets/images/imageHeader.webp')]
       h-80
@@ -17,13 +17,17 @@
         rounded-xl
         -translate-x-2/4
         -translate-y-2/4;
-    }
 
-    .home-title {
-      @apply text-2xl
-        text-center
-        font-bold
-        xl:text-6xl;
+        .home-title {
+          @apply text-2xl
+            text-center
+            font-bold
+            xl:text-6xl;
+        }
+
+        .home-subtitle {
+          @apply text-center;
+        }
     }
 
     .buttons {
@@ -97,11 +101,11 @@
       }
     }
 
-    .challenges {
+    .challenge {
       @apply my-7
         w-11/12;
 
-      .challenges-box {
+      .challenge-box {
         @apply custom-flex-center
           px-4
           flex-wrap
@@ -109,7 +113,7 @@
           md:justify-around
           md:items-baseline;
 
-        .challenges-image {
+        .challenge-image {
           @apply w-10/12
             pb-6
             mb-4
@@ -117,19 +121,19 @@
             md:pb-0
             md:w-[26%];
 
-          .challenges-text {
+          .challenge-text {
             @apply text-center
               xl:text-start;
           }
 
-          .challenges-see-more {
+          .challenge-see-more {
             @apply text-center
               text-blue-600
               xl:text-start;
           }
         }
 
-        .challenges-title {
+        .challenge-title {
           @apply text-center
             font-bold
             text-lg

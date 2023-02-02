@@ -1,14 +1,26 @@
-const NavList = () => {
+import { Link } from 'react-router-dom';
+
+type Props = {
+  open: boolean,
+};
+
+const ResponsiveNav = (props: Props) => {
+  const { open } = props;
+
+  if (!open) {
+    return null;
+  }
+
   return (
-    <nav className="nav-list">
-      <ul className="nav-list-ul">
-        <li className="nav-list-items">Accueil</li>
-        <li className="nav-list-items">Challenges</li>
-        <li className="nav-list-items">Équipes</li>
-        <li className="nav-list-items">Se connecter/S'inscrire</li>
+    <nav className="nav">
+      <ul>
+        <Link to="/">Accueil</Link>
+        <Link to="/challenges">Challenges</Link>
+        <Link to="/">Équipes</Link>
+        <Link to="/">Se connecter/S'inscrire</Link>
       </ul>
     </nav>
   );
 };
 
-export default NavList;
+export default ResponsiveNav;

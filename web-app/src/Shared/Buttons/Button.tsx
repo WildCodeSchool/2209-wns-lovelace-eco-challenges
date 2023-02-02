@@ -16,8 +16,9 @@ const Button = (props: Props) => {
         button: true,
         "button-primary": type === "button-primary" ?? true,
         "button-secondary": type === "button-secondary" ?? true,
+        "flex items-center justify-between": !!icon,
       }),
-    [type]
+    [type, icon]
   );
 
   return (
