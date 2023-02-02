@@ -4,7 +4,7 @@ import Notifs from './Shared/Notifcations/Notifs';
 import Challenge from './Shared/Challenge/Challenge';
 import Space from './Shared/Space/Space';
 
-export default function App() {
+export default function PersoScreenPerso() {
   return (
     <View style={styles.pageCtn}>
       <View style={styles.pages}>

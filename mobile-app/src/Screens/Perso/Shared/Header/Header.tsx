@@ -14,16 +14,14 @@ export default function Header() {
 const styles = StyleSheet.create({
   container: {
     marginTop: 55,
-    flex: .08,
     backgroundColor: '#3B8574',
     justifyContent: "center",
-    alignItems: "flex-end",
-    width: 428,
+    alignItems: "center",
+    padding: 8
   },
 
   navbar: {
     display: "flex",
-    width: 290,
   },
 
   title: {

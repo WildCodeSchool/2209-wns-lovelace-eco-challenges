@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   pages: {
-    height: '95%'
+    height: '85%'
   },
   flex: {
     justifyContent: 'space-between',
