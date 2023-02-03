@@ -54,6 +54,7 @@ const startServer = async () => {
   const { url } = await server.listen();
   await initializeDatabaseRepositories();
 
+  await AppUserRepository.initializeUsers();
   await ChallengeRepository.initializeChallenges();
   await TeamRepository.initializeTeams();
   await UserToTeamRepository.initializeUserToTeam();
