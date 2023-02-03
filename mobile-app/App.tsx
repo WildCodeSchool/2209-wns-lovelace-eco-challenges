@@ -15,12 +15,7 @@ const Tab = createBottomTabNavigator()
 export default function App() {
   return (
       <ApolloProvider client={client}>
-        <NavigationContainer>
-          <Tab.Navigator>
-            <Tab.Screen name="Inscription" component={Signup}/>
-            <Tab.Screen name="Connexion" component={Signin}/>
-          </Tab.Navigator>
-        </NavigationContainer>
+        <Signup/>
       </ApolloProvider>
   );
 }
