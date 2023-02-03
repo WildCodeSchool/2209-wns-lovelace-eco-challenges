@@ -9,7 +9,8 @@
   .challenges-search {
     @apply w-11/12
       m-7
-      text-center;
+      text-center
+      xl:text-start;
 
     .search {
       @apply border-4

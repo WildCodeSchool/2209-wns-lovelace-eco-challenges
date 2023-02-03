@@ -5,10 +5,11 @@ type Props = {
   name: string;
   type: string;
   icon?: any;
+  size?: string;
 };
 
 const Button = (props: Props) => {
-  const { name, type, icon = null } = props;
+  const { name, type, icon = null, size = 'min-w-[180px]' } = props;
 
   const buttonClassName = useMemo(
     (): string =>
@@ -17,8 +18,9 @@ const Button = (props: Props) => {
         "button-primary": type === "button-primary" ?? true,
         "button-secondary": type === "button-secondary" ?? true,
         "flex items-center justify-between": !!icon,
+        [String(size)]: true,
       }),
-    [type, icon]
+    [type, icon, size]
   );
 
   return (
