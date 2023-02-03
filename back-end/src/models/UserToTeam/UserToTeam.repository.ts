@@ -20,9 +20,9 @@ export default class UserToTeamRepository extends UserToTeamDb {
     const userTeamOne = new UserToTeam(teamParis, userOne, UserRole.ADMIN, 0, false, undefined)
     const userTeamTwo = new UserToTeam(teamParis, userTwo, UserRole.PLAYER, 0, false, undefined)
     const userTeamThree = new UserToTeam(teamBarca, userThree, UserRole.ADMIN, 0, false, undefined)
-    const userTeamFor = new UserToTeam(teamTours, userOne, UserRole.PLAYER, 0, false, undefined)
+    const userTeamFour = new UserToTeam(teamTours, userOne, UserRole.PLAYER, 0, false, undefined)
 
-    await this.repository.save([userTeamOne, userTeamTwo, userTeamThree, userTeamFor])
+    await this.repository.save([userTeamOne, userTeamTwo, userTeamThree, userTeamFour])
   }
 
   static async getUserToTeams(): Promise<UserToTeam[]> {
