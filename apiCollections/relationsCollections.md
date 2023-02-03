@@ -5,6 +5,7 @@ _For gql requests_
 ## Features
 
 - AddChallengeToteam
+- GetUserToTeams
 
 ---
 
@@ -35,5 +36,40 @@ mutation AddChallengeToTeam($challengeId: String!, $teamId: String!) {
 | :------------ | :------- | :---------- |
 | `challengeId` | `string` | uuid        |
 | `teamId`      | `string` | uuid        |
+
+---
+
+### Get User to Team
+
+```
+query GetUserToTeams {
+  userToTeams {
+    id
+    user {
+      id
+      firstName
+      lastName
+      ...
+    }
+    team {
+      id
+      teamName
+      challenges {
+        challengeName
+        ...
+      }
+      ...
+    }
+    score
+    invitation {
+      id
+      status
+      createdAt
+    }
+    userRole
+    disabled
+  }
+}
+```
 
 ---

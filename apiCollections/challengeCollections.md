@@ -36,6 +36,14 @@ query GetChallenges($itemsByPage: Int!, $pageNumber: Int!) {
       country
       isPublic
       img
+      userToTeams {
+        userRole
+        ...
+        user {
+          nickname
+          ...
+        }
+      }
     }
   }
 }
@@ -68,6 +76,14 @@ query GetChallengesByCategory($category: [Category!]!, $itemsByPage: Int!, $page
       country
       isPublic
       img
+      userToTeams {
+        userRole
+        ...
+        user {
+          nickname
+          ...
+        }
+      }
     }
   }
 }
@@ -101,6 +117,14 @@ query GetChallengeByLevel($level: Level!, $itemsByPage: Int!, $pageNumber: Int!)
       country
       isPublic
       img
+      userToTeams {
+        userRole
+        ...
+        user {
+          nickname
+          ...
+        }
+      }
     }
   }
 }
@@ -130,6 +154,14 @@ query GetChallengeById($Id: String!) {
       id
       teamName
       ...
+      userToTeams {
+        userRole
+        ...
+        user {
+          nickname
+          ...
+        }
+      }
     }
   }
 }
@@ -154,6 +186,14 @@ query ChallengeByName($challengeName: String!) {
       id
       teamName
       ...
+      userToTeams {
+        userRole
+        ...
+        user {
+          nickname
+          ...
+        }
+      }
     }
   }
 }

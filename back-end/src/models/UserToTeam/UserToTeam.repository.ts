@@ -1,10 +1,31 @@
-import UserTeamDb from "./UserTeam.db";
-import UserTeam from "./UserTeam.entity";
+import AppUser from "../AppUser/AppUser.entity";
+import AppUserRepository from "../AppUser/AppUser.repository";
+import Team from "../Team/Team.entity";
+import TeamRepository from "../Team/Team.repository";
+import UserToTeamDb from "./UserToTeam.db";
+import UserToTeam, { UserRole } from "./UserToTeam.entity";
 
 
-export default class UserTeamRepository extends UserTeamDb {
 
-  static async getUserTeams(): Promise<UserTeam[]> {
+export default class UserToTeamRepository extends UserToTeamDb {
+  static async initializeUserToTeam(): Promise<void> {
+    await UserToTeamRepository.clearRepository(); 
+
+    const userOne = (await AppUserRepository.getUserByNickname("User1")) as AppUser; 
+    const userTwo = (await AppUserRepository.getUserByNickname("User2")) as AppUser; 
+    const userThree = (await AppUserRepository.getUserByNickname("User3")) as AppUser; 
+    const teamParis = (await TeamRepository.getTeamByName("Team Paris")) as Team; 
+    const teamBarca = (await TeamRepository.getTeamByName("Team Barcelone")) as Team;
+    const teamTours = (await TeamRepository.getTeamByName("Team Tours")) as Team;
+    const userTeamOne = new UserToTeam(teamParis, userOne, UserRole.ADMIN, 0, false, undefined)
+    const userTeamTwo = new UserToTeam(teamParis, userTwo, UserRole.PLAYER, 0, false, undefined)
+    const userTeamThree = new UserToTeam(teamBarca, userThree, UserRole.ADMIN, 0, false, undefined)
+    const userTeamFor = new UserToTeam(teamTours, userOne, UserRole.PLAYER, 0, false, undefined)
+
+    await this.repository.save([userTeamOne, userTeamTwo, userTeamThree, userTeamFor])
+  }
+
+  static async getUserToTeams(): Promise<UserToTeam[]> {
     return this.repository.find(); 
   }
 

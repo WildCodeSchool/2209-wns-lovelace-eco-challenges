@@ -4,6 +4,7 @@ import AppUser from "./AppUser.entity";
 import { hashSync, compareSync } from "bcryptjs";
 import SessionRepository from "./Session.repository";
 import Session from "./Session.entity";
+import { ILike } from "typeorm";
 
 export const INVALID_CREDENTIALS_ERROR_MESSAGE = "Identifiants incorrects.";
 
@@ -53,5 +54,35 @@ export default class AppUserRepository extends AppUserDb {
       return null;
     }
     return session.user;
+  }
+
+  static async getUserByNickname(userName: string): Promise<AppUser | null> {
+    return this.repository.findOne({ 
+      where: {
+        nickname: ILike(`%${userName}%`)
+      },
+      relations: {
+        userToTeams : {
+          team : {
+            challenges : true
+          }
+        }
+      } 
+    });
+  }
+
+  static async getUserById(id: string): Promise<AppUser | null> {
+    return this.repository.findOne({ 
+      where: {
+        id 
+      }, 
+      relations: {
+        userToTeams : {
+          team : {
+            challenges : true
+          }
+        }
+      },
+    }); 
   }
 }

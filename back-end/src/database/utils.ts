@@ -4,7 +4,7 @@ import AppUserRepository from "../models/AppUser/AppUser.repository";
 import SessionRepository from "../models/AppUser/Session.repository";
 import ChallengeRepository from "../models/Challenge/Challenge.repository";
 import TeamRepository from "../models/Team/Team.repository";
-import UserTeamRepository from "../models/UserTeam/UserTeam.repository";
+import UserToTeamRepository from "../models/UserToTeam/UserToTeam.repository";
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -34,8 +34,8 @@ async function initializeDatabaseRepositories() {
   await AppUserRepository.initializeRepository();
   await SessionRepository.initializeRepository();
   await TeamRepository.initializeRepository();
-  await UserTeamRepository.initializeRepository();
   await ChallengeRepository.initializeRepository();
+  await UserToTeamRepository.initializeRepository();
 }
 
 async function closeConnection() {

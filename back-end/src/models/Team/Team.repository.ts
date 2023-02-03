@@ -25,6 +25,9 @@ export default class TeamRepository extends TeamDb {
   ): Promise<Team[]> {
     return this.repository.find({
       order: {teamName: "ASC"},
+      relations: {
+        userToTeams: true
+      },
       take: itemsByPage,
       skip: (pageNumber -1) * itemsByPage,
     }); 
@@ -39,6 +42,11 @@ export default class TeamRepository extends TeamDb {
       where : {
         city: ILike(`%${city}%`) 
       }, 
+      relations : {
+        userToTeams: {
+          user: true
+        }
+      },
       order: {teamName: "ASC"},
       take: itemsByPage,
       skip: (pageNumber -1) * itemsByPage,
@@ -53,7 +61,12 @@ export default class TeamRepository extends TeamDb {
     return this.repository.find({ 
       where: {
         country: ILike(`%${country}%`) 
-      }, 
+      },
+      relations : {
+        userToTeams: {
+          user: true
+        }
+      },
       order: {teamName: "ASC"},
       take: itemsByPage,
       skip: (pageNumber -1) * itemsByPage,
@@ -61,7 +74,16 @@ export default class TeamRepository extends TeamDb {
   }
 
   static async getTeamByName(teamName: string): Promise<Team | null> {
-    return this.repository.findOneBy({ teamName: ILike(`%${teamName}%`) });
+    return this.repository.findOne({ 
+      where: {
+        teamName: ILike(`%${teamName}%`)
+      },
+      relations : {
+        userToTeams: {
+          user: true
+        }
+      }
+    });
   }
 
   static async createTeam(

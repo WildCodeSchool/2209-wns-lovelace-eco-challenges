@@ -12,9 +12,10 @@ import { getSessionIdInCookie } from "./http-utils";
 import AppUser from "./models/AppUser/AppUser.entity";
 import { initializeDatabaseRepositories } from "./database/utils";
 import TeamRepository from "./models/Team/Team.repository";
-import UserTeamResolver from "./resolvers/UserTeam/UserTeam.resolver";
 import ChallengeRepository from "./models/Challenge/Challenge.repository";
 import ChallengeResolver from "./resolvers/Challenge/Challenge.resolver";
+import UserToTeamResolver from "./resolvers/UserToTeam/UserToTeam.resolver";
+import UserToTeamRepository from "./models/UserToTeam/UserToTeam.repository";
 
 
 export type GlobalContext = ExpressContext & {
@@ -24,7 +25,7 @@ export type GlobalContext = ExpressContext & {
 const startServer = async () => {
   const server = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [TeamResolver, AppUserResolver, UserTeamResolver, ChallengeResolver],
+      resolvers: [TeamResolver, AppUserResolver, UserToTeamResolver, ChallengeResolver],
       authChecker: async ({ context }) => {
         return Boolean(context.user);
       },
@@ -55,6 +56,7 @@ const startServer = async () => {
 
   await ChallengeRepository.initializeChallenges();
   await TeamRepository.initializeTeams();
+  await UserToTeamRepository.initializeUserToTeam();
 
   console.log(`🚀  Server ready at ${url}`);
 };
