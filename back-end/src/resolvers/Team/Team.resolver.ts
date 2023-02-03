@@ -35,6 +35,11 @@ export default class TeamResolver {
     return TeamRepository.getTeamByName(teamName); 
   }
 
+  @Query(() => Team)
+  teamById(@Arg("id") id : string): Promise<Team | null> {
+    return TeamRepository.getTeamById(id); 
+  }
+
   @Mutation(() => Team)
   createTeam(
     @Args() { 

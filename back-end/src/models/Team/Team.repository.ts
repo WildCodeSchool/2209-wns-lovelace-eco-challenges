@@ -73,6 +73,19 @@ export default class TeamRepository extends TeamDb {
     });
   }
 
+  static async getTeamById(id: string): Promise<Team | null> {
+    return this.repository.findOne({ 
+      where: {
+        id
+      },
+      relations : {
+        userToTeams: {
+          user: true
+        }
+      }
+    });
+  }
+
   static async createTeam(
     teamName: string,
     city: string, 
