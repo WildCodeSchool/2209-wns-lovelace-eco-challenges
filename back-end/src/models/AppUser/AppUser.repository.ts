@@ -30,18 +30,6 @@ export default class AppUserRepository extends AppUserDb {
     return this.saveUser(user);
   }
 
-  static async initializeUsers(): Promise<void> {
-    await AppUserRepository.clearRepository(); 
-
-    const userOne = new AppUser("Christopher", "Nafrere", "User1", "user1@gmail.com", "Paris", "France", "792fedf21730fd3099dfcdccaada2e38",undefined)
-    const userTwo = new AppUser("Jules", "Charles", "User2", "user2@gmail.com", "Paris", "France", "62dee9386ca2fda33380c1bca1026775",undefined)
-    const userThree = new AppUser("Marco", "Da Silva", "User3", "user3@gmail.com", "Bordeaux", "France", "a5194a644366b58bb20f78c48508d22e",undefined)
-    const userFour = new AppUser("Bénédicte", "Laurain", "User4", "user4@gmail.com", "Tours", "France", "fa2a3c3f183dba350b4bddafa1cf8524",undefined)
-    const userFive = new AppUser("Cinquième Elément", "Le", "User5", "user5@gmail.com", "Barcelone", "Espagne", "eae52589ff2a43856e1940793161eecc",undefined)
-
-    await this.repository.save([userOne, userTwo, userThree, userFour, userFive])
-  }
-
   static async signIn(
     email: string,
     password: string

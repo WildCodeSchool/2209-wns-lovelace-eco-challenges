@@ -8,6 +8,7 @@ _For gql requests_
 - GetTeamsByCity
 - GetTeamsByCountry
 - GetTeamByName
+- GetTeamById
 - CreateTeam
 - UpdateTeam
 - DeleteTeam
@@ -158,6 +159,36 @@ query GetTeamByName($teamName: String!) {
 | Parameter  | Type     | Description |
 | :--------- | :------- | :---------- |
 | `teamName` | `string` |             |
+
+---
+
+### Get team by Id
+
+```
+query TeamById($Id: String!) {
+  teamById(id: $Id) {
+    id
+    teamName
+    ...
+    challenges {
+      challengeName
+      ...
+    }
+    userToTeams {
+      userRole
+      ...
+      user {
+        nickname
+        ...
+      }
+    }
+  }
+}
+```
+
+| Parameter | Type     | Description |
+| :-------- | :------- | :---------- |
+| `Id`      | `string` | uuid        |
 
 ---
 

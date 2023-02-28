@@ -6,6 +6,7 @@ _For gql requests_
 
 - AddChallengeToteam
 - GetUserToTeams
+- CreateUserToTeam (without invitation -> in progress)
 
 ---
 
@@ -71,5 +72,32 @@ query GetUserToTeams {
   }
 }
 ```
+
+---
+
+### Create User To Team
+
+```
+mutation CreateUserToTeam($teamId: ID!, $userId: ID!, $userRole: UserRole!) {
+  createUserToTeam(teamId: $teamId, userId: $userId, userRole: $userRole) {
+    team {
+      teamName
+      ...
+    }
+    user {
+      nickname
+      ...
+    }
+    score
+    userRole
+  }
+}
+```
+
+| Parameter  | Type     | Description   |
+| :--------- | :------- | :------------ |
+| `teamId`   | `string` | uuid          |
+| `userId`   | `string` | uuid          |
+| `userRole` | `enum`   | ADMIN, PLAYER |
 
 ---
