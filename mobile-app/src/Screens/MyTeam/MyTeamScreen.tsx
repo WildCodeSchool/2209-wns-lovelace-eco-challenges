@@ -2,6 +2,44 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import InfoTeam from './Shared/InfoTeam';
 import Friends from './Shared/Friends'
 import TeamChallenge from "./Shared/TeamChallenge";
+import { gql } from "@apollo/client";
+
+export const GET_USERSBYID = gql`
+query userById($Id: String!) {
+  userById(id: $Id) {
+    id
+    lastName
+    firstName
+    email
+    country
+    city
+    nickname
+    score
+    userToTeams {
+      userRole
+      score
+      team {
+        id
+        teamName
+        country
+        city
+        isPublic
+        img
+        challenges {
+          id
+          challengeName
+          level
+          description
+          img
+          startsAt
+          endAt
+          category
+        }
+      }
+    }
+  }
+}
+`
 
 export default function MyChallenge() {
   return (
