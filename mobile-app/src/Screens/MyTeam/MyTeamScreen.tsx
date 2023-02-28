@@ -2,7 +2,8 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import InfoTeam from './Shared/InfoTeam';
 import Friends from './Shared/Friends'
 import TeamChallenge from "./Shared/TeamChallenge";
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
+import { UserByIdQuery, UserByIdQueryVariables } from "../../../gql/graphql";
 
 export const GET_USERSBYID = gql`
 query userById($Id: String!) {
@@ -42,6 +43,16 @@ query userById($Id: String!) {
 `
 
 export default function MyChallenge() {
+  const Id = "86d2fc22-1101-44e1-8e69-d9f081576c04"
+  const { data, loading, error, refetch } = useQuery<UserByIdQuery, UserByIdQueryVariables
+  >(GET_USERSBYID, {
+    variables: { Id },
+    fetchPolicy: "cache-and-network",
+  });
+  console.log('data', data?.userById)
+  console.log({ loading, data, error, refetch })
+
+
   return (
     <View style={styles.pageCtn}>
       <View style={styles.pages}>

@@ -11,7 +11,7 @@ import React from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 
-const GRAPHQL_API_URL = '192.168.1.91:4000';
+const GRAPHQL_API_URL = 'http://localhost:4000';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -21,6 +21,10 @@ const client = new ApolloClient({
 });
 
 export default function App() {
+  // const isLoadingComplete = useCachedResources();
+  // if (!isLoadingComplete) {
+  //   return null;
+  // } else {
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>
@@ -57,3 +61,8 @@ export default function App() {
     </ApolloProvider>
   );
 }
+// }
+
+// function useCachedResources() {
+//   throw new Error('Function not implemented.');
+// }
