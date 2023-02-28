@@ -1,0 +1,45 @@
+.challenges-page {
+  @apply my-7
+    custom-flex-center;
+
+  .challenges-intro {
+    @apply w-11/12;
+  }
+
+  .challenges-search {
+    @apply w-11/12
+      m-7
+      text-center
+      xl:text-start;
+
+    .search {
+      @apply border-4
+        border-primary
+        rounded-lg;
+    }
+  }
+
+  .challenges-list {
+    @apply custom-flex-center
+      w-11/12
+      flex-wrap
+      md:flex-row
+      md:justify-around
+      md:items-baseline;
+
+    .challenges-images {
+      @apply w-10/12
+            pb-6
+            mb-4
+            last:pb-0
+            md:pb-0
+            md:w-[26%];
+    }
+
+    .challenges-see-more {
+      @apply text-center
+          text-blue-600
+          xl:text-start;
+    }
+  }
+}

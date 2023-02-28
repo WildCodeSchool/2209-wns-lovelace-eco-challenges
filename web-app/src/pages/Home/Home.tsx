@@ -20,6 +20,7 @@ import VersionsLine from "../../Shared/Lines/VersionsLine";
 import LaunchChallenge from "../../assets/logos/LaunchChallenge";
 import ArrowLinkTo from "../../assets/logos/ArrowLinkTo";
 import Partners from "../../assets/logos/Partners";
+import List from "../../Shared/List/List";
 // import imageHeader from "../../assets/images/imageHeader.jpg";
 import {
   partnersLogo,
@@ -46,20 +47,20 @@ const Home = () => {
   // const { data, refetch } = useQuery<MyProfileQuery>(MY_PROFILE);
 
   return (
-    <div className="home">
+    <div className="home-page">
       <div className="home-image">
         <div className="home-text">
           <h2 className="home-title">Eco Playground</h2>
-          <p className="subtitle">
+          <p className="home-subtitle">
             le premier réseau social et plateforme de jeu écolo
           </p>
-          <p className="subtitle">
+          <p className="home-subtitle">
             Inscrivez-vous gratuitement, créez des groupes, invitez vos amis,
             lancez des challenges écologiques et jouez !
           </p>
           <div className="buttons">
-            <Button type="button-primary" name="S'inscrire" />
-            <Button type="button-primary" name="Se connecter" />
+            <Button type="button-primary" name="S'inscrire"  size="min-w-[140px]" />
+            <Button type="button-primary" name="Se connecter"  size="min-w-[140px]" />
           </div>
         </div>
       </div>
@@ -118,20 +119,18 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="challenges">
+        <div className="challenge">
           <h3 className="subtitle">Challenges en cours</h3>
           <div className="custom-underline bg-primary text-center"></div>
-          <div className="challenges-box">
+          <div className="challenge-box">
             {challengesImages.map((element, index) => (
-              <div className="challenges-image" key={index}>
-                <Image
-                  source={element.source}
-                  description={element.description}
+              <List
+                key={index}
+                source={element.source}
+                description={element.description}
+                text={element.text}
+                title={element.title}
                 />
-                <p className="challenges-title">{element.title}</p>
-                <p className="challenges-text">{element.text}</p>
-                <p className="challenges-see-more">Voir plus</p>
-              </div>
             ))}
           </div>
           <h2 className="see-more-title">

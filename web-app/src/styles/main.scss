@@ -5,6 +5,8 @@
 @use "../Shared/styles/footer.scss";
 @use "../Shared/styles/nav.scss";
 @use "../Shared/styles/nav-list.scss";
+@use "../pages/Challenges/style/challenges.scss";
+@use "../Shared/styles/list.scss";
 
 @tailwind base;
 @tailwind components;
@@ -18,6 +20,13 @@ h3,
 p,
 li {
   @apply font-['Lato'];
+}
+
+.app-container {
+  @apply min-h-screen
+    flex
+    flex-col
+    justify-between;
 }
 
 .custom-flex-center {
