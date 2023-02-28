@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 100,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   challengeCtn: {
     height: '100%',

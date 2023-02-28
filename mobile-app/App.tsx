@@ -2,6 +2,7 @@ import PersoScreen from './src/Screens/Perso/PersoScreen'
 import ProfilScreen from './src/Screens/Profil/ProfilScreen'
 import Header from './src/Screens/Perso/Shared/Header/Header';
 import MyChallengeScreen from './src/Screens/MyChallenge/MyChallengeScreen';
+import MyTeamScreen from './src/Screens/MyTeam/MyTeamScreen'
 import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -20,20 +21,27 @@ export default function App() {
             let iconName;
 
             if (route.name === "Perso") {
-              iconName = focused ? "camera" : "camera-outline";
+              iconName = focused ? "home" : "home-outline";
             } else if (route.name === "Profil") {
-              iconName = focused ? "image" : "image-outline";
+              iconName = focused ? "people" : "people-outline";
+            }
+            else if (route.name === "MyChallenge") {
+              iconName = focused ? "ribbon" : "ribbon-outline";
+            }
+            else if (route.name === "MyTeam") {
+              iconName = focused ? "american-football" : "american-football-outline";
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
           headerShown: false,
-          tabBarActiveTintColor: "blue",
+          tabBarActiveTintColor: "#3B8574",
           tabBarInactiveTintColor: "gray",
         })}
       >
         <Tab.Screen name="Perso" component={PersoScreen} />
-        <Stack.Screen name="MyChallenge" component={MyChallengeScreen} />
         <Tab.Screen name="Profil" component={ProfilScreen} options={{ unmountOnBlur: true }} />
+        <Stack.Screen name="MyChallenge" component={MyChallengeScreen} />
+        <Stack.Screen name="MyTeam" component={MyTeamScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );

@@ -46,15 +46,12 @@ export default function Notifs() {
 const styles = StyleSheet.create({
   container: {
     height: 265,
-    display: "flex",
   },
   notifs: {
-    display: 'flex',
     alignItems: "flex-start",
     width: 190
   },
   notifsFlex: {
-    display: 'flex',
     flexDirection: 'row'
   },
   img: {
@@ -62,7 +59,6 @@ const styles = StyleSheet.create({
     height: 20
   },
   ctn: {
-    display: "flex",
     justifyContent: 'space-around',
     alignItems: 'center',
     height: 250

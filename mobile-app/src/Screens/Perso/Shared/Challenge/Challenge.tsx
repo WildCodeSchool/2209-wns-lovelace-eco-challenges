@@ -9,7 +9,8 @@ export default function Challenge() {
     <View style={styles.challengeCtn}>
       <View style={styles.chall}>
         <View style={styles.challenge}>
-          {/* <Button title="Go to Home" onPress={() => navigation.navigate({ MyChallengeScreen })} /> */}
+          {/* <Button title="Lancer un challenge" onPress={() => navigation.navigate({ MyChallengeScreen })} /> */}
+          <Text style={styles.txt}>Lancer un challenge</Text>
           <Image
             source={require('./golf.png')}
             style={styles.img}
@@ -46,12 +47,10 @@ export default function Challenge() {
 const styles = StyleSheet.create({
   challengeCtn: {
     height: 170,
-    display: "flex",
     justifyContent: "space-around",
   },
   chall: {
     width: 390,
-    display: 'flex',
     alignItems: "center"
   },
   challenge: {
@@ -61,7 +60,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 35,
     width: 170,
-    display: "flex",
     flexDirection: "row",
   },
   txt: {

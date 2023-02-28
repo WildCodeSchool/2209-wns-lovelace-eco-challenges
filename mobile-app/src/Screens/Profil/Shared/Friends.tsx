@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     fontSize: 12
   },
   sticker: {
-    display: "flex",
     height: 150,
     width: 300,
     flexDirection: "row",

@@ -20,7 +20,6 @@ export default function Profil() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    display: 'flex',
     justifyContent: 'space-around',
   },
   pages: {

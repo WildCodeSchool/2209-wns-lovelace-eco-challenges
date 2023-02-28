@@ -22,7 +22,6 @@ export default function PersoScreenPerso() {
 const styles = StyleSheet.create({
   pageCtn: {
     flex: 1,
-    display: 'flex',
     justifyContent: 'space-around',
   },
   pages: {

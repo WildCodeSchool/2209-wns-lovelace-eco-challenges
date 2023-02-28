@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TouchableWithoutFeedbackComponent } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 
 export default function Presentation() {
   return (

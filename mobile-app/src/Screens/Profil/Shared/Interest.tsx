@@ -24,14 +24,13 @@ const styles = StyleSheet.create({
   },
   texte: {
     fontWeight: "bold",
-    fontSize: 12
+    fontSize: 12,
   },
   stickerCtn: {
     justifyContent: "center",
     alignItems: "center"
   },
   sticker: {
-    display: "flex",
     height: 120,
     flexDirection: "row",
     justifyContent: "space-around",

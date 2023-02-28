@@ -22,7 +22,6 @@ export default function Space() {
 
 const styles = StyleSheet.create({
   container: {
-    display: "flex",
     alignItems: "center",
     justifyContent: "space-around",
     height: 180,

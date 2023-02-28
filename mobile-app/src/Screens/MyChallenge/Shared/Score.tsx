@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   date: {
-    display: "flex",
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
@@ -38,7 +37,6 @@ const styles = StyleSheet.create({
     width: '50%'
   },
   score: {
-    display: "flex",
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',

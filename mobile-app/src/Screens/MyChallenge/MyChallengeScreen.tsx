@@ -35,7 +35,6 @@ export default function MyChallenge() {
 const styles = StyleSheet.create({
   pageCtn: {
     flex: 1,
-    display: 'flex',
     justifyContent: 'space-around',
   },
   pages: {
@@ -48,7 +47,6 @@ const styles = StyleSheet.create({
   texte: {
     width: 130,
     height: 70,
-    display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",
     alignItems: "flex-end",
@@ -80,7 +78,4 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 420
   },
-  endBlock: {
-
-  }
 });

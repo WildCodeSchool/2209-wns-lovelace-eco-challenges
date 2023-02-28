@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
-export default function MyChallenge() {
+export default function InfoTeam() {
   return (
     <View style={styles.header}>
       <View style={styles.background}>
@@ -11,7 +11,7 @@ export default function MyChallenge() {
         />
       </View>
       <View style={styles.texte}>
-        <Text style={styles.name}>Nom Team</Text>
+        <Text style={styles.name}>Nom Challenge</Text>
         <Text style={styles.loca}>Paris, France</Text>
       </View>
     </View>
