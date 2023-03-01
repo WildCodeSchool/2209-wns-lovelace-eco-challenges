@@ -12,7 +12,6 @@ export default class UserToTeamRepository extends UserToTeamDb {
     return this.repository.find(); 
   }
 
-
   static async createUserToTeam(
     teamId: string,
     userId: string, 

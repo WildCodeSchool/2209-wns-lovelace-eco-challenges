@@ -70,6 +70,10 @@ export default class AppUser {
   @Column()
   country:string;
 
+  // @Field()
+  // @Column("boolean")
+  // isVerified: boolean;
+
   @OneToMany(() => UserToTeam, (userToTeam) => userToTeam.user)
   @Field(() => [UserToTeam], { nullable: true })
   userToTeams: UserToTeam[]; 

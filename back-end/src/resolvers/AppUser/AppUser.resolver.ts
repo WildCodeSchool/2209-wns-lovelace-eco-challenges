@@ -4,6 +4,7 @@ import AppUserRepository from "../../models/AppUser/AppUser.repository";
 import { SignInArgs, SignUpArgs } from "./AppUser.input";
 import { setSessionIdInCookie } from "../../http-utils";
 import { GlobalContext } from "../..";
+import { Email } from "../InputArgsForAll";
 
 @Resolver(AppUser)
 export default class AppUserResolver {
@@ -42,12 +43,17 @@ export default class AppUserResolver {
   }
 
   @Query(() => AppUser)
-  userByNickname(@Arg("nickname") nickname : string): Promise<AppUser | null> {
+  userByNickname(@Arg("nickname") nickname : string): Promise<AppUser> {
     return AppUserRepository.getUserByNickname(nickname); 
   }
 
   @Query(() => AppUser)
-  userById(@Arg("id") id : string): Promise<AppUser | null> {
+  userById(@Arg("id") id : string): Promise<AppUser> {
     return AppUserRepository.getUserById(id); 
+  }
+
+  @Query(() => AppUser)
+  userByEmail(@Args() { email }: Email): Promise<AppUser> {
+    return AppUserRepository.getUserByEmail(email); 
   }
 }
