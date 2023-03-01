@@ -8,18 +8,18 @@ import { getErrorMessage } from "../../utils";
 import { HOME_PATH } from "../paths";
 
 const SIGN_IN = gql`
-  mutation SignIn($emailAddress: String!, $password: String!) {
-    signIn(emailAddress: $emailAddress, password: $password) {
+  mutation SignIn($email: String!, $password: String!) {
+    signIn(email: $email, password: $password) {
       id
-      emailAddress
+      email
       firstName
       lastName
     }
   }
 `;
 
-const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
-  const [emailAddress, setEmailAddress] = useState("");
+const SignIn = () => {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [signIn, { loading }] = useMutation<
@@ -31,11 +31,10 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
   const submit = async () => {
     try {
       await signIn({
-        variables: { emailAddress, password },
+        variables: { email, password },
       });
       toast.success(`Vous vous êtes connecté avec succès.`);
-      onSuccess();
-      navigate(HOME_PATH);
+      /* navigate(HOME_PATH); */
     } catch (error) {
       toast.error(getErrorMessage(error));
     }
@@ -49,6 +48,8 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
           event.preventDefault();
           await submit();
         }}
+
+        className=""
       >
         <label>
           Adresse email
@@ -57,11 +58,11 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
             type="email"
             required
             autoComplete="email"
-            id="emailAddress"
-            name="emailAddress"
-            value={emailAddress}
+            id="email"
+            name="email"
+            value={email}
             onChange={(event) => {
-              setEmailAddress(event.target.value);
+              setEmail(event.target.value);
             }}
           />
         </label>
@@ -82,7 +83,8 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
           />
         </label>
         <br />
-        <button disabled={loading}>{loading ? <Loader /> : "Valider"}</button>
+        <button> Valider </button>
+        {/* <button disabled={loading}>{loading ? <Loader /> : "Valider"}</button> */}
       </form>
     </>
   );
