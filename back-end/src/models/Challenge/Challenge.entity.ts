@@ -103,7 +103,7 @@ export default class Challenge {
 
   @Column("varchar", { nullable: true })
   @Field({ nullable: true })
-  img?: string; 
+  img: string; 
 
   @ManyToMany(() => Team, (team) => team.challenges, {onDelete: "CASCADE", onUpdate: "CASCADE"})
   @Field(() => [Team], { nullable: true })

@@ -56,8 +56,8 @@ export default class AppUserRepository extends AppUserDb {
     return session.user;
   }
 
-  static async getUserByNickname(userName: string): Promise<AppUser | null> {
-    return this.repository.findOne({ 
+  static async getUserByNickname(userName: string): Promise<AppUser> {
+    const existingUser = await this.repository.findOne({ 
       where: {
         nickname: ILike(`%${userName}%`)
       },
@@ -69,10 +69,14 @@ export default class AppUserRepository extends AppUserDb {
         }
       } 
     });
+    if (!existingUser) {
+      throw Error("No existing User matching Nickname")
+    } 
+    return existingUser;
   }
 
-  static async getUserById(id: string): Promise<AppUser | null> {
-    return this.repository.findOne({ 
+  static async getUserById(id: string): Promise<AppUser> {
+    const existingUser = await this.repository.findOne({ 
       where: {
         id 
       }, 
@@ -84,5 +88,28 @@ export default class AppUserRepository extends AppUserDb {
         }
       },
     }); 
+    if (!existingUser) {
+      throw Error("No existing User matching Id")
+    } 
+    return existingUser;
+  }
+
+  static async getUserByEmail(email: string): Promise<AppUser> {
+    const existingUser = await this.repository.findOne({ 
+      where: {
+        email 
+      }, 
+      relations: {
+        userToTeams : {
+          team : {
+            challenges : true
+          }
+        }
+      },
+    }); 
+    if (!existingUser) {
+      throw Error("No existing User matching email")
+    } 
+    return existingUser;
   }
 }

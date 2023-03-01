@@ -18,7 +18,7 @@ export default class TeamResolver {
   teamsByCity(
     @Arg("city") city : string,
     @Args() { itemsByPage, pageNumber } : Pagination
-    ): Promise<Team[] | null> {
+    ): Promise<Team[]> {
     return TeamRepository.getTeamsByCity(city, itemsByPage, pageNumber); 
   }
 
@@ -26,17 +26,17 @@ export default class TeamResolver {
   teamsByCountry(
     @Arg("country") country : string,
     @Args() { itemsByPage, pageNumber } : Pagination
-    ): Promise<Team[] | null> {
+    ): Promise<Team[]> {
     return TeamRepository.getTeamsByCountry(country, itemsByPage, pageNumber); 
   }
 
   @Query(() => Team)
-  teamByName(@Arg("teamName") teamName : string): Promise<Team | null> {
+  teamByName(@Arg("teamName") teamName : string): Promise<Team> {
     return TeamRepository.getTeamByName(teamName); 
   }
 
   @Query(() => Team)
-  teamById(@Arg("id") id : string): Promise<Team | null> {
+  teamById(@Arg("id") id : string): Promise<Team> {
     return TeamRepository.getTeamById(id); 
   }
 
