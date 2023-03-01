@@ -7,6 +7,8 @@
 @use "../Shared/styles/nav-list.scss";
 @use "../pages/Challenges/style/challenges.scss";
 @use "../Shared/styles/list.scss";
+@use "../pages/SignIn/styles/SignIn.scss";
+@use "../pages/SignUp/styles/SignUp.scss";
 
 @tailwind base;
 @tailwind components;

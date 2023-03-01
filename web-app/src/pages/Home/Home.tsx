@@ -1,7 +1,17 @@
 // import { gql, useQuery } from "@apollo/client";
 // import { Routes, Route, Link } from "react-router-dom";
 
-// import { MyProfileQuery } from "../../gql/graphql";
+import ArrowLinkTo from "../../assets/logos/ArrowLinkTo";
+import LaunchChallenge from "../../assets/logos/LaunchChallenge";
+import Partners from "../../assets/logos/Partners";
+import { cardLogo, challengesImages, greenCardLogo, partnersLogo, versionFreeText, versionPremiumText } from "../../data/HomePageData";
+import Button from "../../Shared/Buttons/Button";
+import { PRIMARY } from "../../Shared/Constants/Color";
+import Image from "../../Shared/Images/Image";
+import VersionsLine from "../../Shared/Lines/VersionsLine";
+import List from "../../Shared/List/List";
+
+/* import { MyProfileQuery } from "../../gql/graphql"; */
 
 /* import { ToastContainer } from "react-toastify";
 import CreateWilder from "../../pages/CreateWilder/CreateWilder";
@@ -11,25 +21,16 @@ import {
   SIGN_IN_PATH,
   SIGN_UP_PATH,
 } from "../../pages/paths";
-import SignIn from "../../pages/SignIn/SignIn";
-import SignUp from "../../pages/SignUp/SignUp";
-*/
 import Button from "../../Shared/Buttons/Button";
-import Image from "../../Shared/Images/Image";
-import VersionsLine from "../../Shared/Lines/VersionsLine";
-import LaunchChallenge from "../../assets/logos/LaunchChallenge";
-import ArrowLinkTo from "../../assets/logos/ArrowLinkTo";
-import Partners from "../../assets/logos/Partners";
-import List from "../../Shared/List/List";
-// import imageHeader from "../../assets/images/imageHeader.jpg";
-import {
-  partnersLogo,
-  versionFreeText,
-  versionPremiumText,
-  cardLogo,
-  greenCardLogo,
-  challengesImages,
-} from "../../data/HomePageData";
+import MakeDifference from "../../assets/MakeDifference";
+import GoodForPlanet from "../../assets/GoodForPlanet";
+import Solidarity from "../../assets/Solidarity";
+import WithFriends from "../../assets/WithFriends";
+import Company from "../../assets/Company";
+import LaunchChallenge from "../../assets/LaunchChallenge";
+import Partners from "../../assets/Partners";
+import Check from "../../assets/Check";
+import { ArrowLinkTo } from "../../assets/ArrowContinue";
 
 import { PRIMARY } from "../../Shared/Constants/Color";
 
@@ -41,11 +42,9 @@ import { PRIMARY } from "../../Shared/Constants/Color";
     }
   }
 `;*/
-}
 
 const Home = () => {
-  // const { data, refetch } = useQuery<MyProfileQuery>(MY_PROFILE);
-
+  /* const { data, refetch } = useQuery<MyProfileQuery>(MY_PROFILE); */
   return (
     <div className="home-page">
       <div className="home-image">
@@ -180,39 +179,3 @@ const Home = () => {
 };
 
 export default Home;
-
-{
-  /*
- <Header>
-        <Container>
-          <PageTitle>
-            <PageTitleLink to={HOME_PATH}>Wilders Book</PageTitleLink>
-          </PageTitle>
-          {data?.myProfile ? (
-            <i>{data?.myProfile.emailAddress}</i>
-          ) : (
-            <nav>
-              <Link to={SIGN_UP_PATH}>Inscription</Link>
-              {" | "}
-              <Link to={SIGN_IN_PATH}>Connexion</Link>
-            </nav>
-          )}
-        </Container>
-      </Header>
-      <MainContainer>
-        <Routes>
-          <Route path={HOME_PATH} element={<Home />} />
-          <Route path={CREATE_WILDER_PATH} element={<CreateWilder />} />
-          <Route path={SIGN_UP_PATH} element={<SignUp />} />
-          <Route path={SIGN_IN_PATH} element={<SignIn onSuccess={refetch} />} />
-        </Routes>
-      </MainContainer>
-      <Footer>
-        <Container>
-          <p>&copy; 2022 Wild Code School</p>
-        </Container>
-      </Footer>
-      <ToastContainer />
-
-*/
-}
