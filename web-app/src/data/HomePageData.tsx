@@ -92,36 +92,42 @@ export const greenCardLogo = [
 
 export const challengesImages = [
   {
+    id: 1,
     source: ImageOne,
     description: "photo de la nature",
     title: "Nettoyage du lieu",
     text: "Velaux, le 12/05/2023 à 9h",
   },
   {
+    id: 2,
     source: ImageTwo,
     description: "photo d'une forêt",
     title: "Débrousaillage forestier",
     text: "Grenoble, le 26/05/2023 à 11h",
   },
   {
+    id: 3,
     source: ImageThree,
     description: "photo d'une plage",
     title: "Ramassage de déchêts",
     text: "Vitrolles, le 08/06/2023 à 15h",
   },
   {
+    id: 4,
     source: ImageOne,
     description: "photo de la nature",
     title: "Nettoyage du lieu",
     text: "Velaux, le 12/05/2023 à 9h",
   },
   {
+    id: 5,
     source: ImageTwo,
     description: "photo d'une forêt",
     title: "Débrousaillage forestier",
     text: "Grenoble, le 26/05/2023 à 11h",
   },
   {
+    id: 6,
     source: ImageThree,
     description: "photo d'une plage",
     title: "Ramassage de déchêts",

@@ -5,6 +5,7 @@ import Page from "../Shared/Page";
 import Challenges from "../pages/Challenges/Challenges";
 import SignUp from "../pages/SignUp/SignUp";
 import SignIn from "../pages/SignIn/SignIn";
+import Challenge from "../pages/Challenge/Challenge";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/challenges" element={<Challenges />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/challenge/:id" element={<Challenge />} />
         </Routes>
       </Page>
     </div>

@@ -1,32 +1,27 @@
 import Image from "../../Shared/Images/Image";
-import Button from "../../Shared/Buttons/Button";
+import { Link } from "react-router-dom";
 
 type Props = {
-  source: string;
   description: string;
-  text: string;
   title: string;
-  type?: string;
+  source?: string|null;
+  endAt: string;
+  level: string;
+  id: string;
 };
 
 const List = (props: Props) => {
-  const { source, title, description, text, type } = props;
+  const { title, description, source, endAt, level, id } = props;
 
   return (
     <div className="list">
-      {type === "pin" && (
-        <div className="pin">
-          <Button
-            type="button-primary"
-            name="Ajouter"
-            size="w-fit"
-          />
-        </div>
-      )}
-      <Image source={source} description={description} />
+      <Image source={ source ? source : 'https://picsum.photos/400' } />
       <p className="list-title">{title}</p>
-      <p className="list-text">{text}</p>
-      <p className="list-see-more">Voir plus</p>
+      <p className="list-text">{description}</p>
+      <p>se termine le : {endAt}</p>
+      <p>Niveau de difficulté du challenge : {level}</p>
+      <Link to={`/challenge/${id}`}>Voir plus</Link>
+      {/* <p className="list-see-more">Voir plus</p> */}
     </div>
   );
 };
