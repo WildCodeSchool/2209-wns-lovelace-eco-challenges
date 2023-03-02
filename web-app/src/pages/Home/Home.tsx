@@ -5,7 +5,6 @@ import {
   GetChallengesQueryVariables,
 } from "../../gql/graphql";
 import { gql, useQuery } from "@apollo/client";
-import { CHALLENGES } from "../../gql/query";
 
 import Button from "../../Shared/Buttons/Button";
 import VersionsLine from "../../Shared/Lines/VersionsLine";
@@ -24,6 +23,35 @@ import {
 } from "../../data/HomePageData";
 
 import { PRIMARY } from "../../Shared/Constants/Color";
+
+export const CHALLENGES = gql`
+  query GetChallenges($itemsByPage: Int!, $pageNumber: Int!) {
+    challenges(itemsByPage: $itemsByPage, pageNumber: $pageNumber) {
+      id
+      challengeName
+      description
+      level
+      category
+      startsAt
+      endAt
+      img
+      teams {
+        id
+        teamName
+        city
+        country
+        isPublic
+        img
+        userToTeams {
+          userRole
+          user {
+            nickname
+          }
+        }
+      }
+    }
+  }
+`;
 
 const pageNumber = 1;
 const itemsByPage = 3;
