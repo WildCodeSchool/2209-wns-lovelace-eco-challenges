@@ -16,8 +16,6 @@ export default class UserToTeamRepository extends UserToTeamDb {
     teamId: string,
     userEmail: string, 
     userRole: UserRole, 
-    score: number, 
-    disabled: boolean, 
     invitation: string
   ): Promise<UserToTeam> {
     const team =(await TeamRepository.getTeamById(teamId)) as Team;
@@ -27,7 +25,6 @@ export default class UserToTeamRepository extends UserToTeamDb {
 
     if (!user) {
       user = await AppUserRepository.createUserToBeChecked(userEmail) as AppUser; 
-      console.log('😉', user)
     }
     // const existingInvitation = (await InvitationRepository.getUserById(invitation)) as Invitation;
     // if (!existingInvitation) {
@@ -37,9 +34,7 @@ export default class UserToTeamRepository extends UserToTeamDb {
     const newUserToTeam = this.repository.create({ 
       team, 
       user, 
-      userRole, 
-      score, 
-      disabled
+      userRole
     });
     await this.repository.save(newUserToTeam);
     return newUserToTeam;
