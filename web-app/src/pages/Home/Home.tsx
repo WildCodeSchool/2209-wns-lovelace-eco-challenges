@@ -1,50 +1,48 @@
-// import { gql, useQuery } from "@apollo/client";
-// import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import ArrowLinkTo from "../../assets/logos/ArrowLinkTo";
-import LaunchChallenge from "../../assets/logos/LaunchChallenge";
-import Partners from "../../assets/logos/Partners";
-import { cardLogo, challengesImages, greenCardLogo, partnersLogo, versionFreeText, versionPremiumText } from "../../data/HomePageData";
-import Button from "../../Shared/Buttons/Button";
-import { PRIMARY } from "../../Shared/Constants/Color";
-import Image from "../../Shared/Images/Image";
-import VersionsLine from "../../Shared/Lines/VersionsLine";
-import List from "../../Shared/List/List";
-
-/* import { MyProfileQuery } from "../../gql/graphql"; */
-
-/* import { ToastContainer } from "react-toastify";
-import CreateWilder from "../../pages/CreateWilder/CreateWilder";
 import {
-  CREATE_WILDER_PATH,
-  HOME_PATH,
-  SIGN_IN_PATH,
-  SIGN_UP_PATH,
-} from "../../pages/paths";
+  GetChallengesQuery,
+  GetChallengesQueryVariables,
+} from "../../gql/graphql";
+import { gql, useQuery } from "@apollo/client";
+import { CHALLENGES } from "../../gql/query";
+
 import Button from "../../Shared/Buttons/Button";
-import MakeDifference from "../../assets/MakeDifference";
-import GoodForPlanet from "../../assets/GoodForPlanet";
-import Solidarity from "../../assets/Solidarity";
-import WithFriends from "../../assets/WithFriends";
-import Company from "../../assets/Company";
-import LaunchChallenge from "../../assets/LaunchChallenge";
-import Partners from "../../assets/Partners";
-import Check from "../../assets/Check";
-import { ArrowLinkTo } from "../../assets/ArrowContinue";
+import VersionsLine from "../../Shared/Lines/VersionsLine";
+import LaunchChallenge from "../../assets/logos/LaunchChallenge";
+import ArrowLinkTo from "../../assets/logos/ArrowLinkTo";
+import Partners from "../../assets/logos/Partners";
+import List from "../../Shared/List/List";
+import Loader from "../../Shared/Loader/Loader";
+
+import {
+  partnersLogo,
+  versionFreeText,
+  versionPremiumText,
+  cardLogo,
+  greenCardLogo,
+} from "../../data/HomePageData";
 
 import { PRIMARY } from "../../Shared/Constants/Color";
 
-{
-  /* const MY_PROFILE = gql`
-  query MyProfile {
-    myProfile {
-      emailAddress
-    }
-  }
-`;*/
+const pageNumber = 1;
+const itemsByPage = 3;
 
 const Home = () => {
-  /* const { data, refetch } = useQuery<MyProfileQuery>(MY_PROFILE); */
+  const { data, loading, error, refetch } = useQuery<
+    GetChallengesQuery,
+    GetChallengesQueryVariables
+  >(CHALLENGES, {
+    variables: { pageNumber, itemsByPage },
+    fetchPolicy: "cache-and-network",
+  });
+
+  if (undefined === data?.challenges) {
+    return <Loader />;
+  }
+
+  console.log("challenges : ", data?.challenges);
+
   return (
     <div className="home-page">
       <div className="home-image">
@@ -58,24 +56,30 @@ const Home = () => {
             lancez des challenges écologiques et jouez !
           </p>
           <div className="buttons">
-            <Button type="button-primary" name="S'inscrire"  size="min-w-[140px]" />
-            <Button type="button-primary" name="Se connecter"  size="min-w-[140px]" />
+            <Button
+              type="button-primary"
+              name="S'inscrire"
+              size="min-w-[140px]"
+            />
+            <Button
+              type="button-primary"
+              name="Se connecter"
+              size="min-w-[140px]"
+            />
           </div>
         </div>
       </div>
       <div className="home-page">
         <div className="card">
-          {cardLogo.map((element) => (
-            <>
-              <Image
-                css="w-20"
-                source={element.source}
-                description={element.description}
-              />
+          {cardLogo.map((element, index) => (
+            <div key={index}>
+              <div className="w-20">
+                <img src={element.source} alt="alt" />
+              </div>
               <div className="font-bold text-lg">
                 <p>{element.text}</p>
               </div>
-            </>
+            </div>
           ))}
           <div className="custom-flex-center text-center">
             <p className="my-3 xl:text-start">
@@ -96,13 +100,11 @@ const Home = () => {
               !
             </p>
             <div className="green-card-display">
-              {greenCardLogo.map((element) => (
-                <div className="green-card-box">
-                  <Image
-                    source={element.source}
-                    description={element.description}
-                    css="w-20"
-                  />
+              {greenCardLogo.map((element, index) => (
+                <div key={index} className="green-card-box">
+                  <div className="w-20">
+                    <img src={element.source} alt="alt" />
+                  </div>
                   <p className="text-center">{element.text}</p>
                 </div>
               ))}
@@ -122,33 +124,35 @@ const Home = () => {
           <h3 className="subtitle">Challenges en cours</h3>
           <div className="custom-underline bg-primary text-center"></div>
           <div className="challenge-box">
-            {challengesImages.map((element, index) => (
+            {data?.challenges?.map((element, index) => (
               <List
                 key={index}
-                source={element.source}
+                id={element.id}
                 description={element.description}
-                text={element.text}
-                title={element.title}
-                />
+                title={element.challengeName}
+                source={element.img}
+                endAt={element.endAt}
+                level={element.level}
+              />
             ))}
           </div>
-          <h2 className="see-more-title">
-            Voir les autres challenges en cours
-            <i>
-              <ArrowLinkTo width="50px" height="50px" fill={PRIMARY} />
-            </i>
-          </h2>
+          <Link to="/challenges">
+            <h2 className="see-more-title">
+              Voir les autres challenges en cours
+              <i>
+                <ArrowLinkTo width="50px" height="50px" fill={PRIMARY} />
+              </i>
+            </h2>
+          </Link>
         </div>
         <div className="gray-card">
           <h3 className="subtitle">Nos partenaires</h3>
           <div className="custom-underline bg-primary"></div>
           <div className="gray-card-partners">
-            {partnersLogo.map((element) => (
-              <Image
-                css="gray-card-logos"
-                source={element.source}
-                description={element.description}
-              />
+            {partnersLogo.map((element, index) => (
+              <div key={index} className="gray-card-logos">
+                <img src={element.source} alt="alt" />
+              </div>
             ))}
           </div>
           <i className="flex justify-end">
@@ -158,8 +162,8 @@ const Home = () => {
         <div className="versions">
           <div className="mb-4 custom-flex-center">
             <p className="versions-title">Version 100% gratuite</p>
-            {versionFreeText.map((element) => (
-              <VersionsLine text={element} />
+            {versionFreeText.map((element, index) => (
+              <VersionsLine key={index} text={element} />
             ))}
           </div>
           <div className="custom-flex-center">
@@ -168,8 +172,8 @@ const Home = () => {
               Créée et pensée pour répondre aux besoins spécifiques des
               entreprises
             </p>
-            {versionPremiumText.map((element) => (
-              <VersionsLine text={element} />
+            {versionPremiumText.map((element, index) => (
+              <VersionsLine key={index} text={element} />
             ))}
           </div>
         </div>

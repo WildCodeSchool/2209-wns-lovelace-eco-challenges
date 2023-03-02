@@ -9,6 +9,8 @@
 @use "../Shared/styles/list.scss";
 @use "../pages/SignIn/styles/SignIn.scss";
 @use "../pages/SignUp/styles/SignUp.scss";
+@use "../pages/Challenge/style/challenge.scss";
+@use "../Shared/styles/image.scss";
 
 @tailwind base;
 @tailwind components;

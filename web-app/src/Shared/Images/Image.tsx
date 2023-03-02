@@ -1,15 +1,13 @@
 type Props = {
-  source: string;
-  description: string;
-  css?: string;
+  source: string|null;
 };
 
 const Image = (props: Props) => {
-  const { source, description, css } = props;
+  const { source } = props;
 
   return (
-    <div className={css}>
-      <img src={source} alt={description} />
+    <div className="image">
+      <img className="image-image" src={source !== null ? source : "https://picsum.photos/200"} alt="alt"/>
     </div>
   );
 };
