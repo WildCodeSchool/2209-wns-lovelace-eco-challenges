@@ -4,7 +4,30 @@ import {
   GetChallengeByIdQuery,
 } from "../../gql/graphql";
 import { useParams } from "react-router-dom";
-import { CHALLENGE } from "../../gql/query";
+
+export const CHALLENGE = gql`
+  query GetChallengeById($id: String!) {
+    challengeById(id: $id) {
+      id
+      challengeName
+      description
+      category
+      level
+      startsAt
+      endAt
+      teams {
+        id
+        teamName
+        userToTeams {
+          userRole
+          user {
+            nickname
+          }
+        }
+      }
+    }
+  }
+`;
 
 const Challenge = () => {
   const id = useParams().id as string;
