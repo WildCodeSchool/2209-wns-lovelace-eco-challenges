@@ -1,17 +1,19 @@
 
+
 import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Apple from "../../../assets/logos/Apple";
+import ArrowLinkTo from "../../../assets/logos/ArrowLinkTo";
+import Facebook from "../../../assets/logos/Facebook";
+import { Mail } from "../../../assets/logos/Mail";
+import { SignUpMutation, SignUpMutationVariables } from "../../../gql/graphql";
+import Button from "../../../Shared/Buttons/Button";
+import { getErrorMessage } from "../../../utils";
+import { SIGN_IN_PATH } from "../../paths";
 
-import Loader from "../../Shared/Loader/Loader";
-import { getErrorMessage } from "../../utils";
-import { SIGN_IN_PATH } from "../paths";
-import { SignUpMutation, SignUpMutationVariables } from "../../gql/graphql";
-import ArrowLinkTo from "../../assets/logos/ArrowLinkTo";
-import Facebook from "../../assets/logos/Facebook";
-import { Mail } from "../../assets/logos/Mail";
-import Apple from "../../assets/logos/Apple";
+
 
 const SIGN_UP = gql`
   mutation SignUp($firstName: String!, $lastName: String!, $nickname: String!, $email: String!, $city: String!, $country: String!, $password: String!) {
@@ -29,6 +31,7 @@ const SIGN_UP = gql`
   }
 `;
 
+
 const SignUp = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -38,13 +41,15 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+
   const [confirmedPassword, setConfirmedPassword] = useState(false)
-  
+ 
   const [signUp, { loading }] = useMutation<
     SignUpMutation,
     SignUpMutationVariables
   >(SIGN_UP);
   const navigate = useNavigate();
+
 
   const submit = async () => {
     try {
@@ -62,6 +67,8 @@ const SignUp = () => {
     }
   };
 
+
+  const openSignIn = () => navigate("/signin");
   return (
     <>
       <form
@@ -69,10 +76,11 @@ const SignUp = () => {
           event.preventDefault();
           await submit();
         }}
+        className="AuthForm"
       >
         <fieldset className="form">
           <legend className="legend"> <h1 className="rotate-2"> S'inscrire </h1> </legend>
-          <label>
+          <label className="label">
             Prénom
             <br />
             <input
@@ -88,7 +96,7 @@ const SignUp = () => {
             />
           </label>
           <br />
-          <label>
+          <label className="label">
             Nom
             <br />
             <input
@@ -104,7 +112,7 @@ const SignUp = () => {
             />
           </label>
           <br />
-          <label>
+          <label className="label">
             Pseudo
             <br />
             <input
@@ -120,40 +128,8 @@ const SignUp = () => {
             />
           </label>
           <br />
-          <label>
-            Ville
-            <br />
-            <input
-              type="text"
-              required
-              id="city"
-              name="city"
-              placeholder="Paris"
-              value={city}
-              onChange={(event) => {
-                setCity(event.target.value);
-              }}
-            />
-          </label>
-          <br />
-          <label>
-            Pays
-            <br />
-            <input
-              type="text"
-              required
-              id="country"
-              name="country"
-              placeholder="France"
-              value={country}
-              onChange={(event) => {
-                setCountry(event.target.value);
-              }}
-            />
-          </label>
-          <br />
-          <label>
-            email
+          <label className="label">
+            Email
             <br />
             <input
               type="email"
@@ -169,7 +145,39 @@ const SignUp = () => {
             />
           </label>
           <br />
-          <label>
+          <label className="label">
+            Ville
+            <br />
+            <input
+              type="text"
+              required
+              id="city"
+              name="city"
+              placeholder="Paris"
+              value={city}
+              onChange={(event) => {
+                setCity(event.target.value);
+              }}
+            />
+          </label>
+          <br />
+          <label className="label">
+            Pays
+            <br />
+            <input
+              type="text"
+              required
+              id="country"
+              name="country"
+              placeholder="France"
+              value={country}
+              onChange={(event) => {
+                setCountry(event.target.value);
+              }}
+            />
+          </label>
+          <br />
+          <label className="label">
             Mot de passe
             <br />
             <input
@@ -187,7 +195,8 @@ const SignUp = () => {
           </label>
           <br />
 
-          <label>
+
+          <label className="label">
             Confirmer votre mot de passe
             <br />
             <input
@@ -207,37 +216,45 @@ const SignUp = () => {
               }}
             />
 
+
             {confirmedPassword ? <></> : <p className="error"> Le mot de passe ne correspond pas</p>}
           </label>
+
 
           <div className="otherSolution">
             <h2> ou créer un compte avec </h2>
           </div>
-        
+       
           <section className="iconContainer">
             <button>
               <Facebook/>
             </button>
 
+
             <button>
               <Mail/>
             </button>
+
 
             <button>
               <Apple/>
             </button>
           </section>
 
-          <button className="w-content m-auto"> <ArrowLinkTo /> </button>
+
+          <button className="h-0 w-full"> <ArrowLinkTo  width="96px"  height="96px" fill="#3B8574" className="m-auto" /> </button>
           {/* <button className="w-content m-auto" disabled={loading || !confirmedPassword}> <ArrowLinkTo /> </button> */}
         </fieldset>
         <br />        
       </form>
-      <h2> Vous avez déjà un compte ? </h2>
-      <button className="button-cta m-auto"> Se connecter </button>
-      {/* <button className="button-cta m-auto">{loading ? <Loader /> : "Se connecter"}</button> */}
+
+      <div className="flex items-center justify-center flex-col m-4">
+        <h2> Vous avez déjà un compte ? </h2>
+        <Button onClickEvent={openSignIn} type="button-primary" name="Se Connecter"/>
+      </div>
     </>
   );
 };
+
 
 export default SignUp;

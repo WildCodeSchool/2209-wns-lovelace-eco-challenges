@@ -6,10 +6,11 @@ type Props = {
   type: string;
   icon?: any;
   size?: string;
+  onClickEvent?:() => void;
 };
 
 const Button = (props: Props) => {
-  const { name, type, icon = null, size = 'min-w-[180px]' } = props;
+  const { name, type, icon = null, size = 'min-w-[180px]', onClickEvent } = props;
 
   const buttonClassName = useMemo(
     (): string =>
@@ -24,7 +25,7 @@ const Button = (props: Props) => {
   );
 
   return (
-    <button className={buttonClassName}>
+    <button onClick={onClickEvent} className={buttonClassName}>
       {name}
       {icon ?? <i>{icon}</i>}
     </button>
