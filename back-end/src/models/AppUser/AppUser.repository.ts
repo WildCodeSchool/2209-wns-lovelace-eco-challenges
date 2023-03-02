@@ -94,7 +94,7 @@ export default class AppUserRepository extends AppUserDb {
     return existingUser;
   }
 
-  static async getUserByEmail(email: string): Promise<AppUser> {
+  static async getUserByEmailThrow(email: string): Promise<AppUser> {
     const existingUser = await this.repository.findOne({ 
       where: {
         email 
@@ -111,5 +111,13 @@ export default class AppUserRepository extends AppUserDb {
       throw Error("No existing User matching email")
     } 
     return existingUser;
+  }
+
+  static async createUserToBeChecked(
+    email: string,
+  ): Promise<AppUser> {
+    const newUser = new AppUser("", "", "", email, "", "", "");
+    await this.repository.save(newUser);
+    return newUser;
   }
 }

@@ -12,7 +12,7 @@ export default class AppUserDb {
     return this.repository.save(user);
   }
 
-  protected static findByEmail(
+  static findByEmail(
     email: string
   ): Promise<AppUser | null> {
     return this.repository.findOneBy({ email });
