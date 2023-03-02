@@ -54,6 +54,6 @@ export default class AppUserResolver {
 
   @Query(() => AppUser)
   userByEmail(@Args() { email }: Email): Promise<AppUser> {
-    return AppUserRepository.getUserByEmail(email); 
+    return AppUserRepository.getUserByEmailThrow(email); 
   }
 }

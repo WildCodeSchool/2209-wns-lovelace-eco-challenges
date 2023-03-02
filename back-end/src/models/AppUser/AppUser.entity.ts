@@ -51,6 +51,7 @@ export default class AppUser {
   hashedPassword: string;
 
   @Field()
+  @Index({ unique: true })
   @Column()
   nickname:string;
 

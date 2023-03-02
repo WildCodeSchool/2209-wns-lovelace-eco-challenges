@@ -141,8 +141,8 @@ query GetChallengeByLevel($level: Level!, $itemsByPage: Int!, $pageNumber: Int!)
 ### Get a challenge by id
 
 ```
-query GetChallengeById($Id: String!) {
-  challengeById(id: $Id) {
+query GetChallengeById($id: String!) {
+  challengeById(id: $id) {
     id
     challengeName
     description
@@ -237,8 +237,8 @@ mutation CreateChallenge($challengeName: String!, $level: Level!, $description: 
 ### Update challenge dates
 
 ```
-mutation UpdateDatesChallenge($Id: ID!, $startsAt: DateTime!, $endAt: DateTime) {
-  updateDatesChallenge(id: $Id, startsAt: $startsAt, endAt: $endAt) {
+mutation UpdateDatesChallenge($id: ID!, $startsAt: DateTime!, $endAt: DateTime) {
+  updateDatesChallenge(id: $id, startsAt: $startsAt, endAt: $endAt) {
     id
     startsAt
     endAt
@@ -257,8 +257,8 @@ mutation UpdateDatesChallenge($Id: ID!, $startsAt: DateTime!, $endAt: DateTime) 
 ### Update challenge - _premium_
 
 ```
-mutation UpdateChallengePremium($challengeName: String!, $level: Level!, $description: String!, $category: [Category!]!, $Id: ID!, $startsAt: DateTime, $endAt: DateTime, $img: String) {
-  updateChallengePremium(challengeName: $challengeName, level: $level, description: $description, category: $category, id: $Id, startsAt: $startsAt, endAt: $endAt, img: $img) {
+mutation UpdateChallengePremium($challengeName: String!, $level: Level!, $description: String!, $category: [Category!]!, $id: ID!, $startsAt: DateTime, $endAt: DateTime, $img: String) {
+  updateChallengePremium(challengeName: $challengeName, level: $level, description: $description, category: $category, id: $id, startsAt: $startsAt, endAt: $endAt, img: $img) {
     id
     challengeName
     startsAt
@@ -287,8 +287,8 @@ mutation UpdateChallengePremium($challengeName: String!, $level: Level!, $descri
 ### Delete a challenge
 
 ```
-mutation DeleteChallenge($Id: String!) {
-  deleteChallenge(id: $Id) {
+mutation DeleteChallenge($id: String!) {
+  deleteChallenge(id: $id) {
     id
     challengeName
   }

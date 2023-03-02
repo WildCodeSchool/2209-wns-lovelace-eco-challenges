@@ -2,7 +2,6 @@ import Team from "./Team.entity";
 import TeamDb from "./Team.db";
 import { ILike, Like } from "typeorm";
 import ChallengeRepository from "../Challenge/Challenge.repository";
-import Challenge from "../Challenge/Challenge.entity";
 
 export default class TeamRepository extends TeamDb {
 
