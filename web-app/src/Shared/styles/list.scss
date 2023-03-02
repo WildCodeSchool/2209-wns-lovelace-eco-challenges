@@ -10,7 +10,15 @@
   .list-title {
     @apply text-center
           font-bold
-          text-lg
+          text-2xl
+          xl:text-start;
+  }
+
+  .list-text-subtitle {
+    @apply text-center
+          italic
+          font-extralight
+          text-gray-400
           xl:text-start;
   }
 
@@ -20,8 +28,11 @@
   }
 
   .list-see-more {
-    @apply text-center
-          text-blue-600
-          xl:text-start;
+    @apply text-blue-600;
+  }
+
+  .list-div {
+    @apply custom-flex-center
+          xl:block;
   }
 }

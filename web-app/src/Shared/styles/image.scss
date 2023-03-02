@@ -1,5 +1,14 @@
 .image {
-    .image-image {
-        @apply h-80 w-full;
-    }
+  @apply w-full;
+  
+  .image-image {
+    @apply h-60
+        sm:h-72
+        md:h-32
+        lg:h-44
+        xl:h-64
+        object-cover
+        w-full
+        object-bottom;
+  }
 }
