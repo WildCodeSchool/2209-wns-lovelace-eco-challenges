@@ -2,6 +2,7 @@ const ArrowLinkTo = (props: any) => (
   <svg
     width="128pt"
     height="128pt"
+    className="fill-primary m-auto"
     viewBox="0 0 128 128"
     xmlns="http://www.w3.org/2000/svg"
     {...props}

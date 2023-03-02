@@ -3,8 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home/Home";
 import Page from "../Shared/Page";
 import Challenges from "../pages/Challenges/Challenges";
-import SignUp from "../pages/SignUp/SignUp";
-import SignIn from "../pages/SignIn/SignIn";
+import SignUp from "../pages/Auth/SignUp/SignUp";
+import SignIn from "../pages/Auth/SignIn/SignIn";
 import Challenge from "../pages/Challenge/Challenge";
 
 const App = () => {
