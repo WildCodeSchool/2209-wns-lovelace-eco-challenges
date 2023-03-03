@@ -33,6 +33,7 @@ class CreateChallengeArgs {
   @Field({ nullable: true })
   @IsOptional()
   @IsDate()
+  
   // @MinDate()
   endAt?: Date; 
 
@@ -67,3 +68,5 @@ class UpdateChallengePremiumArgs extends CreateChallengeArgs {
 }
 
 export { CreateChallengeArgs, UpdateDatesChallengeArgs, UpdateChallengePremiumArgs }
+
+

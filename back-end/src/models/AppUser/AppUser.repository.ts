@@ -116,7 +116,6 @@ export default class AppUserRepository extends AppUserDb {
   static async createUserToBeChecked(
     email: string,
   ): Promise<AppUser> {
-    // const newUser = new AppUser("", "", "", email, "", "", "", false);
     const newUser = this.repository.create({
       firstName : "",
       lastName : "", 

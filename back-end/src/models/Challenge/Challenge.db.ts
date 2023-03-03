@@ -23,8 +23,8 @@ export default class ChallengeDb {
       level: Level.SUPERGREEN, 
       description: "Mobilisation nationale pour nettoyer les plages près de chez vous. En équipe ou solo, rejoignez ce challenge sportif en partenariat avec Sea Shepherd France",
       category: [Category.PROTECTSNATURE, Category.WASTE], 
-      startsAt: "2023-03-11 09:00:00+00",
-      endAt: "2023-03-12 12:00:00+00",
+      startsAt: "2023-03-11T09:00:00+0000",
+      endAt: "2023-03-12T12:00:00+0000",
       img: "https://www.wedemain.fr/wp-content/uploads/2020/04/35637228-32170106.jpg",
     });
     await this.repository.save({
@@ -64,6 +64,15 @@ export default class ChallengeDb {
       endAt: undefined,
       img: undefined,
       team: null
+    });
+    await this.repository.save({
+      challengeName: "Adopte une ruche 🐝",
+      level: Level.SUPERGREEN, 
+      description: "Pas d'abeilles - pas de pollen, pas de pollen - pas de cultures,  pas de culture - pas de manger, pas de manger = ☠️. Via une association, sur le toit, sur ton balcon, dans ton jardin... deviens petit apiculteur",
+      category: [Category.PROTECTSNATURE, Category.SELFSUFFICIENCY], 
+      startsAt: "2023-03-11T09:00:00+0000",
+      endAt: undefined,
+      img: "https://fr.jardins-animes.com/images/media/mini-ruche-abeille-sauvage.jpg",
     });
   }
 }
