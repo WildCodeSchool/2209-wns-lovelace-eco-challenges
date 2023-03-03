@@ -1,7 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { Team } from "../../../gql/graphql";
 
-export default function CompletedChallenge() {
+type PropType = {
+  teamName: Team
+}
+
+const CompletedChallenge = ({ teamName }: PropType) => {
   return (
     <View style={styles.bloc}>
       <View style={styles.textCtn}>
@@ -12,12 +17,12 @@ export default function CompletedChallenge() {
         <View style={styles.challengeCtn}>
           <View style={styles.challenge}>
             <View style={styles.name}>
-              <Text style={styles.nameTxt}>Nom</Text>
+              <Text style={styles.nameTxt}>{teamName.teamName}</Text>
             </View>
           </View>
           <View style={styles.challenge}>
             <View style={styles.name}>
-              <Text style={styles.nameTxt}>Nom</Text>
+              <Text style={styles.nameTxt}>{teamName.teamName}</Text>
             </View>
           </View>
         </View>
@@ -78,3 +83,5 @@ const styles = StyleSheet.create({
     fontSize: 10
   }
 });
+
+export default CompletedChallenge

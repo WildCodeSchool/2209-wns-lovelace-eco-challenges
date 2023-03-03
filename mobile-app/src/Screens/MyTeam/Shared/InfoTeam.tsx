@@ -1,7 +1,12 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
+import { Team } from "../../../gql/graphql";
 
-export default function InfoTeam() {
+type PropType = {
+  teamName: Team
+}
+
+const InfoTeam = ({ teamName }: PropType) => {
   return (
     <View style={styles.header}>
       <View style={styles.background}>
@@ -11,8 +16,8 @@ export default function InfoTeam() {
         />
       </View>
       <View style={styles.texte}>
-        <Text style={styles.name}>Nom Challenge</Text>
-        <Text style={styles.loca}>Paris, France</Text>
+        <Text style={styles.name}>{teamName.teamName}</Text>
+        <Text style={styles.loca}>{teamName.city}</Text>
       </View>
     </View>
   )
@@ -56,3 +61,5 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   }
 });
+
+export default InfoTeam

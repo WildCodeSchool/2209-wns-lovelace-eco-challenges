@@ -1,6 +1,5 @@
 import { View, StyleSheet, Text, Image } from 'react-native';
-
-export default function Notifs() {
+const Notifs = () => {
   return (
     <View style={styles.container}>
       <View style={styles.ctn}>
@@ -91,3 +90,5 @@ const styles = StyleSheet.create({
     fontSize: 11
   }
 });
+
+export default Notifs

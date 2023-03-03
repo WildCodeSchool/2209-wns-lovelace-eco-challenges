@@ -1,12 +1,64 @@
 import { StyleSheet, Text, View } from "react-native";
 import InfoChallenge from './Shared/InfoChallenge'
-import Score from './Shared/Score'
-import Partenariat from './Shared/Partenariat'
-import Teams from './Shared/Teams'
 import Theme from './Shared/Theme'
 import CompletedChallenge from './Shared/CompletedChallenge'
+import { gql, useQuery } from "@apollo/client";
+import { UserByIdQuery, UserByIdQueryVariables } from "../../gql/graphql";
+
+export const GET_USERSBYID = gql`
+query userById($Id: String!) {
+  userById(id: $Id) {
+    id
+    lastName
+    firstName
+    email
+    country
+    city
+    nickname
+    score
+    userToTeams {
+      userRole
+      score
+      team {
+        id
+        teamName
+        country
+        city
+        isPublic
+        img
+        challenges {
+          id
+          challengeName
+          level
+          description
+          img
+          startsAt
+          endAt
+          category
+        }
+      }
+    }
+  }
+}
+`
 
 export default function MyChallenge() {
+  const Id = "436b2e94-6df5-44b4-8c72-077eb608c0e3"
+  const { data } = useQuery<UserByIdQuery, UserByIdQueryVariables
+  >(GET_USERSBYID, {
+    variables: { Id },
+    fetchPolicy: "cache-and-network",
+  });
+  const test = data?.userById.userToTeams
+  const challenges = test?.flatMap(userTeam =>
+    userTeam.team.challenges?.map(challenge => ({
+      teamName: userTeam.team.teamName,
+      ...challenge
+    }))
+  );
+
+  console.log(challenges)
+
   return (
     <View style={styles.pageCtn}>
       <View style={styles.pages}>
@@ -17,16 +69,26 @@ export default function MyChallenge() {
             <View style={styles.separation} />
           </View>
           <View style={styles.blocCtn}>
-            <View style={styles.bloc}>
-              <InfoChallenge />
-              <Score />
-              <Partenariat />
-              <Teams />
+            {/* <View style={styles.bloc}> */}
+            <View>
+              {challenges && challenges.length > 0 && challenges.map((challenge) => (
+                <>
+                  <InfoChallenge
+                    challenge={challenge}
+                    key={challenge?.id}
+                  />
+                </>
+              ))}
               <Theme />
             </View>
+            {/* </View> */}
           </View>
         </View>
-        <CompletedChallenge />
+        {/* {teams?.map((team) => (
+          <CompletedChallenge
+            teamName={team?.team}
+          />
+        ))} */}
       </View>
     </View>
   )
@@ -70,12 +132,5 @@ const styles = StyleSheet.create({
   blocCtn: {
     alignItems: "center",
     justifyContent: "center",
-  },
-  bloc: {
-    width: '60%',
-    borderColor: "#3B8574",
-    borderWidth: 1,
-    borderRadius: 10,
-    height: 420
   },
 });

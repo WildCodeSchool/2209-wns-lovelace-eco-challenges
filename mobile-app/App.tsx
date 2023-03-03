@@ -1,5 +1,4 @@
 import PersoScreen from './src/Screens/Perso/PersoScreen'
-import ProfilScreen from './src/Screens/Profil/ProfilScreen'
 import Header from './src/Screens/Perso/Shared/Header/Header';
 import MyChallengeScreen from './src/Screens/MyChallenge/MyChallengeScreen';
 import MyTeamScreen from './src/Screens/MyTeam/MyTeamScreen'
@@ -21,10 +20,6 @@ const client = new ApolloClient({
 });
 
 export default function App() {
-  // const isLoadingComplete = useCachedResources();
-  // if (!isLoadingComplete) {
-  //   return null;
-  // } else {
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>
@@ -53,7 +48,6 @@ export default function App() {
           })}
         >
           <Tab.Screen name="Perso" component={PersoScreen} />
-          <Tab.Screen name="Profil" component={ProfilScreen} options={{ unmountOnBlur: true }} />
           <Stack.Screen name="MyChallenge" component={MyChallengeScreen} />
           <Stack.Screen name="MyTeam" component={MyTeamScreen} />
         </Tab.Navigator>
@@ -61,8 +55,3 @@ export default function App() {
     </ApolloProvider>
   );
 }
-// }
-
-// function useCachedResources() {
-//   throw new Error('Function not implemented.');
-// }

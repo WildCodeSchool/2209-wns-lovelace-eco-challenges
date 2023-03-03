@@ -1,7 +1,11 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
+import { Challenge } from "../../../gql/graphql";
 
-export default function Score() {
+type PropType = {
+  endTime: Challenge
+}
+const Score = ({ endTime }: PropType) => {
   return (
     <View style={styles.bloc}>
       <View style={styles.date}>
@@ -10,7 +14,7 @@ export default function Score() {
           style={styles.img}
         />
         <Text style={styles.txt}>fin le</Text>
-        <Text style={styles.txt}>XX/XX/XXXX</Text>
+        {/* <Text style={styles.txt}>{endTime.endAt}</Text> */}
       </View>
       <View style={styles.score}>
         <Image
@@ -18,7 +22,7 @@ export default function Score() {
           style={styles.img}
         />
         <Text style={styles.txt}>Ton score est</Text>
-        <Text style={styles.txt}>XXX points</Text>
+        {/* <Text style={styles.txt}></Text> */}
       </View>
     </View>
   )
@@ -51,3 +55,5 @@ const styles = StyleSheet.create({
     fontSize: 11
   }
 });
+
+export default Score

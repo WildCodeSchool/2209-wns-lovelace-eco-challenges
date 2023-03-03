@@ -1,17 +1,68 @@
 import { View, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Notifs from './Shared/Notifcations/Notifs';
-import Challenge from './Shared/Challenge/Challenge';
 import Space from './Shared/Space/Space';
+import { gql, useQuery } from "@apollo/client";
+import { UserByIdQuery, UserByIdQueryVariables } from "../../gql/graphql";
+import Challenge from './Shared/Challenge/Challenge';
 
-export default function PersoScreenPerso() {
+export const GET_USERSBYID = gql`
+query userById($Id: String!) {
+  userById(id: $Id) {
+    id
+    lastName
+    firstName
+    email
+    country
+    city
+    nickname
+    score
+    userToTeams {
+      userRole
+      score
+      team {
+        id
+        teamName
+        country
+        city
+        isPublic
+        img
+        challenges {
+          id
+          challengeName
+          level
+          description
+          img
+          startsAt
+          endAt
+          category
+        }
+      }
+    }
+  }
+}
+`
+
+const PersoScreen = () => {
+  const Id = "42924e77-b6bd-48ec-abd9-6b6ffe4cef67"
+  const { data } = useQuery<UserByIdQuery, UserByIdQueryVariables
+  >(GET_USERSBYID, {
+    variables: { Id },
+    fetchPolicy: "cache-and-network",
+  });
+  const users = data?.userById;
   return (
     <View style={styles.pageCtn}>
       <View style={styles.pages}>
         <View style={styles.flex}>
-          <Space />
-          <Notifs />
-          <Challenge />
+          <>
+            <Space
+              name={users?.firstName}
+              lastName={users?.lastName}
+            />
+            <Notifs />
+            <Challenge />
+          </>
         </View>
       </View>
       <StatusBar style="auto" />
@@ -32,3 +83,5 @@ const styles = StyleSheet.create({
     height: '100%'
   }
 });
+
+export default PersoScreen

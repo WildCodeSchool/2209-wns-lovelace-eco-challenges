@@ -1,7 +1,12 @@
 import React from "react";
 import { Text, View, StyleSheet, Image } from "react-native";
 
-export default function Space() {
+type PropType = {
+  name: string | undefined
+  lastName: string | undefined
+}
+
+const Space = ({ name, lastName }: PropType) => {
   return (
     <View style={styles.container}>
       <Image
@@ -14,7 +19,8 @@ export default function Space() {
         style={styles.imageVisage}
       /> */}
       <View style={styles.nameCtn}>
-        <Text style={styles.name}>NOM PRENOM</Text>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.name}>{lastName}</Text>
       </View>
     </View>
   )
@@ -32,6 +38,7 @@ const styles = StyleSheet.create({
   },
   nameCtn: {
     backgroundColor: "#3B8574",
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
@@ -41,9 +48,11 @@ const styles = StyleSheet.create({
   name: {
     color: "white",
     fontSize: 13,
-    width: 100,
+    width: 50,
   },
   space: {
     fontSize: 20
   }
 });
+
+export default Space

@@ -1,15 +1,10 @@
-import { Button, Image, StyleSheet, Text, View } from "react-native";
-import { useNavigation } from '@react-navigation/native';
-import MyChallengeScreen from "../../../MyChallenge/MyChallengeScreen";
-import { CommonActions } from '@react-navigation/native';
+import { Image, StyleSheet, Text, View } from "react-native";
 
 export default function Challenge() {
-  const navigation = useNavigation();
   return (
     <View style={styles.challengeCtn}>
       <View style={styles.chall}>
         <View style={styles.challenge}>
-          {/* <Button title="Lancer un challenge" onPress={() => navigation.navigate({ MyChallengeScreen })} /> */}
           <Text style={styles.txt}>Lancer un challenge</Text>
           <Image
             source={require('./golf.png')}

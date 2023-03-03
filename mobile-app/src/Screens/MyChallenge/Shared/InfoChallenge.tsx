@@ -1,20 +1,40 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View, ScrollView } from "react-native";
+import { Challenge } from "../../../gql/graphql";
+import Partenariat from "./Partenariat";
+import Score from "./Score";
+import Teams from "./Teams";
 
-export default function MyChallenge() {
+type PropType = {
+  challenge: any;
+}
+
+const InfoChallenge = ({ challenge }: PropType) => {
   return (
-    <View style={styles.header}>
-      <View style={styles.background}>
-        <Image
-          source={require('../../../../assets/icons/visagehomme.png')}
-          style={styles.img}
-        />
+    <ScrollView style={styles.bloc}>
+      <View style={styles.header}>
+        <View style={styles.background}>
+          <Image
+            source={require('../../../../assets/icons/visagehomme.png')}
+            style={styles.img}
+          />
+        </View>
+        <View style={styles.texte}>
+          <Text style={styles.name}>{challenge.challengeName}</Text>
+          {/* <Text style={styles.loca}>{team?.city}</Text> */}
+        </View>
+        <View
+          key={challenge.id}>
+          <Score
+            endTime={challenge.endAt}
+          />
+          <Partenariat />
+          <Teams
+            teamName={challenge.teamName}
+          />
+        </View>
       </View>
-      <View style={styles.texte}>
-        <Text style={styles.name}>Nom Team</Text>
-        <Text style={styles.loca}>Paris, France</Text>
-      </View>
-    </View>
+    </ScrollView>
   )
 }
 
@@ -54,5 +74,15 @@ const styles = StyleSheet.create({
   texte: {
     height: 60,
     justifyContent: 'flex-end',
-  }
+  },
+  bloc: {
+    width: '60%',
+    borderColor: "#3B8574",
+    borderWidth: 1,
+    borderRadius: 10,
+    height: 420
+  },
+
 });
+
+export default InfoChallenge

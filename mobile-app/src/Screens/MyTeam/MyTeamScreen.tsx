@@ -3,7 +3,7 @@ import InfoTeam from './Shared/InfoTeam';
 import Friends from './Shared/Friends'
 import TeamChallenge from "./Shared/TeamChallenge";
 import { gql, useQuery } from "@apollo/client";
-import { UserByIdQuery, UserByIdQueryVariables } from "../../../gql/graphql";
+import { UserByIdQuery, UserByIdQueryVariables } from "../../gql/graphql";
 
 export const GET_USERSBYID = gql`
 query userById($Id: String!) {
@@ -42,17 +42,14 @@ query userById($Id: String!) {
 }
 `
 
-export default function MyChallenge() {
-  const Id = "86d2fc22-1101-44e1-8e69-d9f081576c04"
-  const { data, loading, error, refetch } = useQuery<UserByIdQuery, UserByIdQueryVariables
+const MyTeam = () => {
+  const Id = "42924e77-b6bd-48ec-abd9-6b6ffe4cef67"
+  const { data, } = useQuery<UserByIdQuery, UserByIdQueryVariables
   >(GET_USERSBYID, {
     variables: { Id },
     fetchPolicy: "cache-and-network",
   });
-  console.log('data', data?.userById)
-  console.log({ loading, data, error, refetch })
-
-
+  const teams = data?.userById.userToTeams;
   return (
     <View style={styles.pageCtn}>
       <View style={styles.pages}>
@@ -63,15 +60,29 @@ export default function MyChallenge() {
           </View>
           <View style={styles.blocCtn}>
             <View style={styles.bloc}>
-              <InfoTeam />
-              <Friends />
-              <View style={styles.separation} />
-              <TeamChallenge />
-              <View style={styles.separation} />
-              <View style={styles.img}>
-                <Image style={styles.image} source={require('../../../assets/icons/25.png')} />
-                <Image style={styles.image} source={require('../../../assets/icons/10.png')} />
-              </View>
+              <>
+                {teams?.map((team) => (
+                  <>
+                    <InfoTeam
+                      teamName={team.team}
+                      key={team.team.id}
+                    />
+                    <Friends />
+                  </>
+                ))}
+                <View style={styles.separation} />
+                {teams && teams.forEach(team => team.team.challenges?.map(challenge =>
+                  <TeamChallenge
+                    key={challenge.id}
+                    challengeName={challenge}
+                  />
+                ))}
+                <View style={styles.separation} />
+                <View style={styles.img}>
+                  <Image style={styles.image} source={require('../../../assets/icons/25.png')} />
+                  <Image style={styles.image} source={require('../../../assets/icons/10.png')} />
+                </View>
+              </>
             </View>
           </View>
         </View>
@@ -133,3 +144,5 @@ const styles = StyleSheet.create({
     height: 50
   }
 });
+
+export default MyTeam
