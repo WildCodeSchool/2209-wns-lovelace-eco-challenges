@@ -1,11 +1,12 @@
 import { IsEmail } from "class-validator";
 // import { count } from "console";
 import { Field, ID, ObjectType } from "type-graphql";
-import { Entity, PrimaryGeneratedColumn, Column, Index, ManyToMany, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany } from "typeorm";
 import UserToTeam from "../UserToTeam/UserToTeam.entity";
 
 @Entity()
 @ObjectType()
+@Index(['nickname'], { unique: true,  where: `"isVerified"=true` })
 export default class AppUser {
   constructor(
     firstName: string,
@@ -15,6 +16,7 @@ export default class AppUser {
     city:string,
     country:string,
     hashedPassword: string,
+    isVerified?: boolean, 
     userToTeams?: UserToTeam[]
   ) {
     this.firstName = firstName;
@@ -24,6 +26,9 @@ export default class AppUser {
     this.hashedPassword = hashedPassword;
     this.city = city;
     this.country = country;
+    if (isVerified) {
+      this.isVerified = isVerified;
+    }
     if (userToTeams) {
       this.userToTeams = userToTeams;
     }
@@ -51,7 +56,6 @@ export default class AppUser {
   hashedPassword: string;
 
   @Field()
-  @Index({ unique: true })
   @Column()
   nickname:string;
 
@@ -71,12 +75,11 @@ export default class AppUser {
   @Column()
   country:string;
 
-  // @Field()
-  // @Column("boolean")
-  // isVerified: boolean;
+  @Field()
+  @Column("boolean", {default:true})
+  isVerified: boolean;
 
   @OneToMany(() => UserToTeam, (userToTeam) => userToTeam.user)
   @Field(() => [UserToTeam], { nullable: true })
   userToTeams: UserToTeam[]; 
-
 }
