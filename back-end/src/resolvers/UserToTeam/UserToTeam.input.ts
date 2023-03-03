@@ -15,11 +15,6 @@ class  CreateUserToTeamArgs {
   @Field(_type => UserRole) 
   @IsEnum(UserRole)
   userRole : UserRole;
-
-  @Field(() => ID, { nullable: true })
-  @IsOptional()
-  @IsUUID()
-  invitation: string;
 }
 
 export { CreateUserToTeamArgs };

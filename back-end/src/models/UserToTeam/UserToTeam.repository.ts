@@ -15,8 +15,7 @@ export default class UserToTeamRepository extends UserToTeamDb {
   static async createUserToTeam(
     teamId: string,
     userEmail: string, 
-    userRole: UserRole, 
-    invitation: string
+    userRole: UserRole,
   ): Promise<UserToTeam> {
     const team =(await TeamRepository.getTeamById(teamId)) as Team;
 
@@ -26,10 +25,6 @@ export default class UserToTeamRepository extends UserToTeamDb {
     if (!user) {
       user = await AppUserRepository.createUserToBeChecked(userEmail) as AppUser; 
     }
-    // const existingInvitation = (await InvitationRepository.getUserById(invitation)) as Invitation;
-    // if (!existingInvitation) {
-    //   throw Error("No existing Invitation matching ID.");
-    // }
 
     const newUserToTeam = this.repository.create({ 
       team, 
