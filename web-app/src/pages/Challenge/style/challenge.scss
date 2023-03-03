@@ -1,0 +1,19 @@
+.challenge-page {
+    @apply custom-flex-center my-10;
+
+    .challenge-div {
+        @apply block w-11/12;
+    }
+
+    .challenge-title {
+        @apply text-2xl
+    }
+
+    .challenge-teams {
+        @apply flex justify-around;
+
+        .challenge-team {
+            @apply w-2/5;
+        }
+    }
+}

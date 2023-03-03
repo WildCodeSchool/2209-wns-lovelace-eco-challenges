@@ -1,5 +1,5 @@
 type Props = {
-  source: string|null;
+  source?: string|null;
 };
 
 const Image = (props: Props) => {

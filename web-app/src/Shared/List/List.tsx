@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 type Props = {
   description: string;
   title: string;
-  source?: string|null;
+  source?: string | null;
   endAt: string;
   level: string;
-  id: string;
+  id?: string;
 };
 
 const List = (props: Props) => {
@@ -15,13 +15,20 @@ const List = (props: Props) => {
 
   return (
     <div className="list">
-      <Image source={ source ? source : 'https://picsum.photos/400' } />
-      <p className="list-title">{title}</p>
+      <Image source={source ? source : "https://picsum.photos/400"} />
+      <h3 className="list-title">{title}</h3>
+      <p className="list-text-subtitle">
+        {endAt ? endAt : "Aucune date de fin"}
+      </p>
+      <p className="list-text-subtitle">{level}</p>
       <p className="list-text">{description}</p>
-      <p>se termine le : {endAt}</p>
-      <p>Niveau de difficulté du challenge : {level}</p>
-      <Link to={`/challenge/${id}`}>Voir plus</Link>
-      {/* <p className="list-see-more">Voir plus</p> */}
+      <div className="list-div">
+        {id && (
+          <Link className="list-see-more" to={`/challenge/${id}`}>
+            Voir plus
+          </Link>
+        )}
+      </div>
     </div>
   );
 };
