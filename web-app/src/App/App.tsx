@@ -6,6 +6,7 @@ import Challenges from "../pages/Challenges/Challenges";
 import SignUp from "../pages/Auth/SignUp/SignUp";
 import SignIn from "../pages/Auth/SignIn/SignIn";
 import Challenge from "../pages/Challenge/Challenge";
+import FormLaunchChallenge from "../pages/FormLaunchChallenge/FormLaunchChallenge";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/challenge/:id" element={<Challenge />} />
+          <Route path="/launch-challenge" element={<FormLaunchChallenge />} />
         </Routes>
       </Page>
     </div>
