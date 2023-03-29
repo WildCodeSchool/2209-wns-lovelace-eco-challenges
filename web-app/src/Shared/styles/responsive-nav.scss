@@ -1,0 +1,18 @@
+.responsive-nav {
+  @apply absolute
+        left-0
+        bg-primary
+        text-white
+        w-full
+        h-full
+        top-20
+        z-40;
+
+  .responsive-nav-ul {
+    @apply custom-flex-center text-5xl;
+  }
+
+  .responsive-nav-li {
+    @apply py-5 w-full;
+  }
+}

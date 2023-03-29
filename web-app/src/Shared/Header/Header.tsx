@@ -1,18 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Ecology from "../../assets/logos/ecology.png";
 
 import Nav from "../../Shared/Nav/Nav";
 import ResponsiveNav from "../../Shared/Nav/ResponsiveNav";
 
+import { disableScroll } from "../../Utils/Browser";
+
 const Header = () => {
   const [open, setOpen] = useState(false);
 
-  return (
+  const isClicked = () => {
+      setOpen(!open)
+  };
+
+  useEffect(() => {
+    disableScroll(open);
+  }, [open])
+
+    return (
     <header className="header">
-      <Link to="/">
+      <Link to="/" onClick={isClicked}>
         <div className="flex">
           <div className="header-logo">
             <img src={Ecology} alt="logo eco playground" />
@@ -25,7 +35,7 @@ const Header = () => {
         <div className="burger-line"></div>
         <div className="burger-line"></div>
       </div>
-      <ResponsiveNav open={open} />
+      <ResponsiveNav open={open} isClicked={isClicked}/>
       <Nav />
     </header>
   );
