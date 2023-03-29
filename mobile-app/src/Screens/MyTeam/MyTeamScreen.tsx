@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View } from "react-native";
-import InfoTeam from './Shared/InfoTeam';
-import Friends from './Shared/Friends'
-import TeamChallenge from "./Shared/TeamChallenge";
+import InfoTeam from '../../Shared/components/team/InfoTeam';
+import Friends from '../../Shared/components/team/Friends'
+import TeamChallenge from "../../Shared/components/team/TeamChallenge";
 import { gql, useQuery } from "@apollo/client";
 import { UserByIdQuery, UserByIdQueryVariables } from "../../gql/graphql";
 

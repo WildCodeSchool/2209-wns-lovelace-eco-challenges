@@ -1,10 +1,10 @@
 import { View, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import Notifs from './Shared/Notifcations/Notifs';
-import Space from './Shared/Space/Space';
+import Notifs from '../../Shared/components/perso/Notifcations/Notifs';
+import Space from '../../Shared/components/perso/Space/Space';
 import { gql, useQuery } from "@apollo/client";
 import { UserByIdQuery, UserByIdQueryVariables } from "../../gql/graphql";
-import Challenge from './Shared/Challenge/Challenge';
+import Challenge from '../../Shared/components/perso/Challenge/Challenge';
 
 export const GET_USERSBYID = gql`
 query userById($Id: String!) {

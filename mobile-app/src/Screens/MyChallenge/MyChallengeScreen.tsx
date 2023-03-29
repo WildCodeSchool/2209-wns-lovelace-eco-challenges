@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
-import InfoChallenge from './Shared/InfoChallenge'
-import Theme from './Shared/Theme'
-import CompletedChallenge from './Shared/CompletedChallenge'
+import InfoChallenge from '../../Shared/components/challenge/InfoChallenge'
+import Theme from '../../Shared/components/challenge/Theme'
+import CompletedChallenge from '../../Shared/components/challenge/CompletedChallenge'
 import { gql, useQuery } from "@apollo/client";
 import { UserByIdQuery, UserByIdQueryVariables } from "../../gql/graphql";
 
@@ -69,7 +69,6 @@ export default function MyChallenge() {
             <View style={styles.separation} />
           </View>
           <View style={styles.blocCtn}>
-            {/* <View style={styles.bloc}> */}
             <View>
               {challenges && challenges.length > 0 && challenges.map((challenge) => (
                 <>
@@ -81,14 +80,13 @@ export default function MyChallenge() {
               ))}
               <Theme />
             </View>
-            {/* </View> */}
           </View>
         </View>
-        {/* {teams?.map((team) => (
+        {challenges?.map((team) => (
           <CompletedChallenge
-            teamName={team?.team}
+            teamName={team?.teamName}
           />
-        ))} */}
+        ))}
       </View>
     </View>
   )

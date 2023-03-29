@@ -1,5 +1,5 @@
 import PersoScreen from './src/Screens/Perso/PersoScreen'
-import Header from './src/Screens/Perso/Shared/Header/Header';
+import Header from './src/Shared/components/perso/Header/Header';
 import MyChallengeScreen from './src/Screens/MyChallenge/MyChallengeScreen';
 import MyTeamScreen from './src/Screens/MyTeam/MyTeamScreen'
 import { NavigationContainer } from '@react-navigation/native';

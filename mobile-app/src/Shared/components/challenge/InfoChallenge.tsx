@@ -21,7 +21,6 @@ const InfoChallenge = ({ challenge }: PropType) => {
         </View>
         <View style={styles.texte}>
           <Text style={styles.name}>{challenge.challengeName}</Text>
-          {/* <Text style={styles.loca}>{team?.city}</Text> */}
         </View>
         <View
           key={challenge.id}>
