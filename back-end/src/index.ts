@@ -16,7 +16,7 @@ import ChallengeRepository from "./models/Challenge/Challenge.repository";
 import ChallengeResolver from "./resolvers/Challenge/Challenge.resolver";
 import UserToTeamResolver from "./resolvers/UserToTeam/UserToTeam.resolver";
 import UserToTeamRepository from "./models/UserToTeam/UserToTeam.repository";
-
+import { IS_PRODUCTION } from "./config";
 
 export type GlobalContext = ExpressContext & {
   user: AppUser | null;
@@ -54,11 +54,13 @@ const startServer = async () => {
   const { url } = await server.listen();
   await initializeDatabaseRepositories();
 
-  await AppUserRepository.initializeUsers();
-  await ChallengeRepository.initializeChallenges();
-  await TeamRepository.initializeTeams();
-  await UserToTeamRepository.initializeUserToTeam();
-
+  if (!IS_PRODUCTION) {
+    await AppUserRepository.initializeUsers();
+    await ChallengeRepository.initializeChallenges();
+    await TeamRepository.initializeTeams();
+    await UserToTeamRepository.initializeUserToTeam();
+  }
+  
   console.log(`🚀  Server ready at ${url}`);
 };
 
