@@ -41,17 +41,17 @@ export const cardLogo = [
   {
     source: MakeDifference,
     description: "illustration d'une planète défendue",
-    text: "Faites la différence",
+    text: "home.makedifference",
   },
   {
     source: GoodForPlanet,
     description: "illustration d'une planète avec des arbres dessus",
-    text: "En prennant soin de la planète",
+    text: "home.goodforplanet",
   },
   {
     source: Solidarity,
     description: "illustration d'une femme calinant une planète",
-    text: "Tout en participant avec vos amis",
+    text: "home.solidarity",
   },
 ];
 
@@ -71,22 +71,22 @@ export const greenCardLogo = [
   {
     source: Association,
     description: "illustration d'une tête avec des idées écolo",
-    text: "Association",
+    text: "home.association",
   },
   {
     source: Business,
     description: "illustration d'une entreprise",
-    text: "Entreprise",
+    text: "home.business",
   },
   {
     source: Groups,
     description: "illustration d'une personne",
-    text: "Groupes",
+    text: "home.groups",
   },
   {
     source: People,
     description: "illustration d'une maison de particuliers",
-    text: "Particuliers",
+    text: "home.people",
   },
 ];
 

@@ -6,6 +6,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import "./styles/main.scss";
 import App from "./App/App";
 import reportWebVitals from "./reportWebVitals";
+import './App/i18n';
 
 const client = new ApolloClient({
   uri: "/api",
