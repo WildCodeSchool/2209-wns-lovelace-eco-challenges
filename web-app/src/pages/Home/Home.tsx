@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
   GetChallengesQuery,
@@ -23,6 +23,7 @@ import {
 } from "../../data/HomePageData";
 
 import { PRIMARY } from "../../Shared/Constants/Color";
+import TiltedLabel from "../../Shared/TiltedLabel/TiltedLabel";
 
 export const CHALLENGES = gql`
   query GetChallenges($itemsByPage: Int!, $pageNumber: Int!) {
@@ -57,6 +58,7 @@ const pageNumber = 1;
 const itemsByPage = 3;
 
 const Home = () => {
+  const navigate = useNavigate();
   const { data, loading, error, refetch } = useQuery<
     GetChallengesQuery,
     GetChallengesQueryVariables
@@ -148,6 +150,7 @@ const Home = () => {
                     }
                     type="button-secondary"
                     name="Lancer un challenge"
+                    onClickEvent={()=> navigate("/launch-challenge")}
                   />
                 </div>
               </div>
@@ -193,13 +196,13 @@ const Home = () => {
             </div>
             <div className="versions">
               <div className="mb-4 custom-flex-center">
-                <p className="versions-title">Version 100% gratuite</p>
+                <TiltedLabel>Version 100% gratuite</TiltedLabel>
                 {versionFreeText.map((element, index) => (
                   <VersionsLine key={index} text={element} />
                 ))}
               </div>
               <div className="custom-flex-center">
-                <p className="versions-title">Version Premium</p>
+                <TiltedLabel>Version Premium</TiltedLabel>
                 <p className="versions-subtitle">
                   Créée et pensée pour répondre aux besoins spécifiques des
                   entreprises

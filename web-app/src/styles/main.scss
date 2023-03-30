@@ -11,6 +11,8 @@
 @use "../pages/Challenge/style/challenge.scss";
 @use "../Shared/styles/image.scss";
 @use "../Shared/styles/loader.scss";
+@use "../Shared/styles/tilted-label.scss";
+@use "../pages/FormLaunchChallenge/FormLaunchChallenge.scss";
 
 @tailwind base;
 @tailwind components;

@@ -164,18 +164,6 @@
         lg:w-full
         xl:items-start;
 
-      .versions-title {
-        @apply text-primary
-          font-bold
-          border-4
-          border-primary
-          rounded-lg
-          w-fit
-          p-2
-          -rotate-3
-          mb-5;
-      }
-
       .versions-subtitle {
         @apply text-center
           mb-5;
