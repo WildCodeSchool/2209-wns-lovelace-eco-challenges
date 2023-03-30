@@ -9,10 +9,14 @@
         z-40;
 
   .responsive-nav-ul {
-    @apply custom-flex-center text-5xl;
+    @apply custom-flex-center text-3xl mt-5 ml-5;
   }
 
   .responsive-nav-li {
-    @apply py-5 w-full;
+    @apply py-5 w-full flex items-baseline;
+
+    .responsive-nav-logo {
+      @apply mr-3;
+    }
   }
 }
