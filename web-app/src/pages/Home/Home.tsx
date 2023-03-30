@@ -13,6 +13,7 @@ import ArrowLinkTo from "../../assets/logos/ArrowLinkTo";
 import Partners from "../../assets/logos/Partners";
 import List from "../../Shared/List/List";
 import Loader from "../../Shared/Loader/Loader";
+import { useTranslation } from "react-i18next";
 
 import {
   partnersLogo,
@@ -67,6 +68,8 @@ const Home = () => {
     fetchPolicy: "cache-and-network",
   });
 
+  const { t } = useTranslation();
+
   return (
     <div className="home-page">
       {loading ? (
@@ -77,14 +80,9 @@ const Home = () => {
         <>
           <div className="home-image">
             <div className="home-text">
-              <h2 className="home-title">Eco Playground</h2>
-              <p className="home-subtitle">
-                le premier réseau social et plateforme de jeu écolo
-              </p>
-              <p className="home-subtitle">
-                Inscrivez-vous gratuitement, créez des groupes, invitez vos
-                amis, lancez des challenges écologiques et jouez !
-              </p>
+              <h2 className="home-title">{t("app.name")}</h2>
+              <p className="home-subtitle">{t("home.title")}</p>
+              <p className="home-subtitle">{t("home.subtitle")}</p>
               <div className="buttons">
                 <Button
                   type="button-primary"
@@ -101,33 +99,31 @@ const Home = () => {
           </div>
           <div className="home-page">
             <div className="card">
-              {cardLogo.map((element, index) => (
-                <div className="custom-flex-center" key={index}>
-                  <div className="w-20">
-                    <img src={element.source} alt="alt" />
+              {cardLogo.map((element, index) => {
+                return (
+                  <div className="custom-flex-center" key={index}>
+                    <div className="w-20">
+                      <img src={element.source} alt="alt" />
+                    </div>
+                    <div className="font-bold text-lg">
+                      <p>{t(element.text)}</p>
+                    </div>
                   </div>
-                  <div className="font-bold text-lg">
-                    <p>{element.text}</p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
               <div className="custom-flex-center text-center">
                 <p className="my-3 xl:text-start">
-                  Nous vous proposons des challenges écologiques à partager avec
-                  vos amis et/ou inconnus, que le meilleur gagne, avec un
-                  maximum de points !
+                  {t("home.whitecard.subtitle")}
                 </p>
-                <Button type="button-primary" name="Découvrir le concept" />
+                <Button type="button-primary" name={t('home.button.discover')} />
               </div>
             </div>
             <div className="green-card">
               <div className="w-11/12">
-                <h3 className="subtitle text-white">Venez comme vous êtes !</h3>
+                <h3 className="subtitle text-white">{t("home.come")}</h3>
                 <div className="custom-underline bg-white"></div>
                 <p className="green-card-subtext">
-                  Association, entreprises ou bien particuliers, venez donc
-                  créer un groupe et un challenge afin de jouer immédiatemment
-                  avec vos amis !
+                  {t("home.greencard.title")}
                 </p>
                 <div className="green-card-display">
                   {greenCardLogo.map((element, index) => (
@@ -135,7 +131,7 @@ const Home = () => {
                       <div className="w-20">
                         <img src={element.source} alt="alt" />
                       </div>
-                      <p className="text-center">{element.text}</p>
+                      <p className="text-center">{t(element.text)}</p>
                     </div>
                   ))}
                 </div>
@@ -149,14 +145,14 @@ const Home = () => {
                       />
                     }
                     type="button-secondary"
-                    name="Lancer un challenge"
+                    name={t('home.button.startchallenge')}
                     onClickEvent={()=> navigate("/launch-challenge")}
                   />
                 </div>
               </div>
             </div>
             <div className="challenge">
-              <h3 className="subtitle">Challenges en cours</h3>
+              <h3 className="subtitle">{t("home.actualchallenge")}</h3>
               <div className="custom-underline bg-primary text-center"></div>
               <div className="challenge-box">
                 {data?.challenges?.map((element, index) => (
@@ -173,7 +169,7 @@ const Home = () => {
               </div>
               <Link to="/challenges">
                 <h2 className="see-more-title">
-                  Voir les autres challenges en cours
+                  {t("home.seemore")}
                   <i>
                     <ArrowLinkTo width="50px" height="50px" fill={PRIMARY} />
                   </i>
@@ -181,7 +177,7 @@ const Home = () => {
               </Link>
             </div>
             <div className="gray-card">
-              <h3 className="subtitle">Nos partenaires</h3>
+              <h3 className="subtitle">{t("home.partners")}</h3>
               <div className="custom-underline bg-primary"></div>
               <div className="gray-card-partners">
                 {partnersLogo.map((element, index) => (
@@ -196,16 +192,15 @@ const Home = () => {
             </div>
             <div className="versions">
               <div className="mb-4 custom-flex-center">
-                <TiltedLabel>Version 100% gratuite</TiltedLabel>
+                <TiltedLabel>{t("home.free")}</TiltedLabel>
                 {versionFreeText.map((element, index) => (
                   <VersionsLine key={index} text={element} />
                 ))}
               </div>
               <div className="custom-flex-center">
-                <TiltedLabel>Version Premium</TiltedLabel>
+                <TiltedLabel>{t("home.premium")}</TiltedLabel>
                 <p className="versions-subtitle">
-                  Créée et pensée pour répondre aux besoins spécifiques des
-                  entreprises
+                  {t("home.versionsubtitle")}
                 </p>
                 {versionPremiumText.map((element, index) => (
                   <VersionsLine key={index} text={element} />
