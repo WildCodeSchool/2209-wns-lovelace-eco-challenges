@@ -12,4 +12,8 @@ export default class InvitationDB  {
     static async clearRepsoitory (): Promise<void> {
         this.repository.delete({});
     }
+
+    static async getInvitationById(_id:string) {
+        return this.repository.findOneBy({id:_id})
+    }
 }

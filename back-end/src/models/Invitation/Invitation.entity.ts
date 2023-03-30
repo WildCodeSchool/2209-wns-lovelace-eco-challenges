@@ -16,9 +16,11 @@ registerEnumType(InvitationStatus, {
 @ObjectType()
 export default class Invitation {
   constructor(
+    name:string,
     status: InvitationStatus, 
     createdAt: Date,
   ){
+    this.name = name;
     this.status = status; 
     this.createdAt = createdAt;
   }
@@ -26,6 +28,10 @@ export default class Invitation {
   @PrimaryGeneratedColumn("uuid")
   @Field(() => ID)
   id: string; 
+
+  @Field()
+  @Column()
+  name: string;
 
   @Column({
     type: 'enum',
