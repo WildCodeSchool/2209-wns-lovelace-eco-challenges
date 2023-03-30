@@ -8,11 +8,15 @@ const FormLaunchChallenge = () => {
   const [isPublic, setIsPublic] = useState(false); 
   const [img, setImg] = useState(null);  
 
+  const handleImageChange = (e: any) => {
+    const imageFile = e.target.files
+    console.log(imageFile)
+  }
   return (
     <>
       <h1>Lancer un challenge</h1>
       <TiltedLabel>Règles du jeu</TiltedLabel>
-      <form>
+      <form className="launch-challenge">
         <fieldset>
           <legend> 1 - Je créer ma Team</legend>
           <label>
@@ -59,7 +63,9 @@ const FormLaunchChallenge = () => {
             <input 
               type="file" 
               id="imgTeam"  
-              onChange={(e)=>""}
+              accept=".jpg, .jpeg, .png, .svg, .webp, .gif, .pdf"
+              capture="environment"
+              onChange={handleImageChange}
             />
           </label>
           {img && (
