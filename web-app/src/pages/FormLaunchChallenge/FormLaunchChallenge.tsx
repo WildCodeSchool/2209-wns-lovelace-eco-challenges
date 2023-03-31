@@ -22,6 +22,7 @@ const FormLaunchChallenge = () => {
           <label>
             Nom de ma Team *
             <input 
+              className="bg-terciary p-2 w-full rounded-xl"
               required
               type="text" 
               id="teamName" 
@@ -35,6 +36,7 @@ const FormLaunchChallenge = () => {
           <label>
             Ville *
             <input 
+              className="bg-terciary p-2 w-full rounded-xl"
               required
               type="text" 
               id="city" 
@@ -48,6 +50,7 @@ const FormLaunchChallenge = () => {
           <label>
             Pays *
             <input 
+              className="bg-terciary p-2 w-full rounded-xl"
               required
               type="text" 
               id="country" 
@@ -61,6 +64,7 @@ const FormLaunchChallenge = () => {
           <label>
             Fanion, photo...
             <input 
+              className="bg-terciary p-2 w-full rounded-xl"
               type="file" 
               id="imgTeam"  
               accept=".jpg, .jpeg, .png, .svg, .webp, .gif, .pdf"
@@ -74,6 +78,7 @@ const FormLaunchChallenge = () => {
           <label>
             Groupe ouvert
             <input 
+              className="bg-terciary p-2 w-full rounded-xl"
               type="checkbox" 
               id="isPublic" 
               checked={isPublic}

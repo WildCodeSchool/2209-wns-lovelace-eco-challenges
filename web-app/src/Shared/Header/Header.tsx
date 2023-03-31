@@ -23,19 +23,34 @@ const Header = () => {
   }, [open]);
 
   return (
-    <header className="header">
+    <header className="hbg-primary
+    flex
+    justify-between
+    p-5
+    h-20">
       <Link to="/" onClick={isClicked}>
         <div className="flex">
-          <div className="header-logo">
+          <div className="w-10
+            mr-4">
             <img src={Ecology} alt="logo eco playground" />
           </div>
-          <h1 className="title">Eco Playground</h1>
+          <h1 className="text-white
+            relative
+            w-fit
+            text-3xl after:right-0 after:top-9 after:absolute after:text-xs after:content-['Make a better World']">Eco Playground</h1>
         </div>
       </Link>
-      <div onClick={() => setOpen(!open)} className="burger-container">
-        <div className="burger-line"></div>
-        <div className="burger-line"></div>
-        <div className="burger-line"></div>
+      <div onClick={() => setOpen(!open)} className="w-10
+            flex
+            flex-col
+            justify-around
+            md:hidden">
+        <div className=" border-2
+                border-white"></div>
+        <div className=" border-2
+                border-white"></div>
+        <div className=" border-2
+                border-white"></div>
       </div>
       <ResponsiveNav open={open} isClicked={isClicked} />
       <Nav />
