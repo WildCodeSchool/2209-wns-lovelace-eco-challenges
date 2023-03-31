@@ -58,7 +58,7 @@ const Challenge = () => {
   console.log(challengeById?.teams?.map((element) => element.img));
 
   return (
-    <div className="challenge-page">
+    <div className="custom-flex-center my-10">
       {loading ? (
         <div className="custom-flex-center">
           <Loader />
@@ -77,11 +77,11 @@ const Challenge = () => {
             type="button-primary"
             icon={<LaunchChallenge width="20px" height="20px" fill={WHITE} />}
           />
-          <div className="challenge-div">
-            <h2 className="challenge-title">Teams</h2>
-            <div className="challenge-teams">
+          <div className="block w-11/12">
+            <h2 className="text-2xl">Teams</h2>
+            <div className="flex justify-around">
               {challengeById?.teams?.map((element, index) => (
-                <div className="challenge-team" key={index}>
+                <div className="w-2/5" key={index}>
                   <Image source={element.img} />
                   <h3>{element.teamName}</h3>
                 </div>

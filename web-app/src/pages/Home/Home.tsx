@@ -78,12 +78,41 @@ const Home = () => {
         </div>
       ) : (
         <>
-          <div className="home-image">
-            <div className="home-text">
-              <h2 className="home-title">{t("app.name")}</h2>
-              <p className="home-subtitle">{t("home.title")}</p>
-              <p className="home-subtitle">{t("home.subtitle")}</p>
-              <div className="buttons">
+          <div className="bg-[url('../assets/images/imageHeader3.webp')]
+      h-80
+      relative
+      bg-auto
+      bg-no-repeat
+      xl:h-[500px]
+      bg-[#f8f8f8];">
+            <div className="text-white
+        absolute
+        left-1/2
+        top-1/2
+        w-11/12
+        bg-transparent
+        rounded-xl
+        -translate-x-2/4
+        -translate-y-2/4">
+              <h2 className="text-2xl
+            text-center
+            font-bold
+            text-primary
+            xl:text-6xl">{t("app.name")}</h2>
+              <p className="ext-center
+            text-primary
+            md:text-xl
+            xl:text-2xl
+            mix-blend-difference">{t("home.title")}</p>
+              <p className="ext-center
+            text-primary
+            md:text-xl
+            xl:text-2xl
+            mix-blend-difference">{t("home.subtitle")}</p>
+              <div className="m-3
+        flex
+        justify-around
+        md:hidden">
                 <Button
                   type="button-primary"
                   name="S'inscrire"
@@ -97,8 +126,24 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="home-page">
-            <div className="card">
+          <div className="custom-flex-center
+      flex-wrap
+      lg:flex-row
+      lg:justify-around
+      xl:justify-center">
+            <div className="custom-flex-center
+        custom-border-primary
+        w-3/4
+        p-2
+        rounded-lg
+        my-7
+        shadow-xl
+        sm:w-2/3
+        lg:w-5/12
+        lg:h-[570px]
+        lg:justify-between
+        xl:w-1/3
+        xl:mr-10">
               {cardLogo.map((element, index) => {
                 return (
                   <div className="custom-flex-center" key={index}>
@@ -118,16 +163,40 @@ const Home = () => {
                 <Button type="button-primary" name={t('home.button.discover')} />
               </div>
             </div>
-            <div className="green-card">
+            <div className="custom-flex-center
+        bg-primary
+        py-7
+        w-full
+        shadow-xl
+        justify-between
+        lg:w-5/12
+        lg:rounded-lg
+        lg:p-2
+        lg:bg-primary
+        lg:h-[570px]
+        xl:justify-end
+        xl:w-1/3
+        xl:ml-10">
               <div className="w-11/12">
                 <h3 className="subtitle text-white">{t("home.come")}</h3>
                 <div className="custom-underline bg-white"></div>
-                <p className="green-card-subtext">
+                <p className="text-center
+          text-white
+          xl:text-start">
                   {t("home.greencard.title")}
                 </p>
-                <div className="green-card-display">
+                <div className="lex
+          flex-wrap
+          justify-around">
                   {greenCardLogo.map((element, index) => (
-                    <div key={index} className="green-card-box">
+                    <div key={index} className="custom-flex-center
+                    bg-white
+                    rounded-lg
+                    p-5
+                    m-5
+                    shadow-xl
+                    flex-[33%]
+                    lg:flex-[34%]">
                       <div className="w-20">
                         <img src={element.source} alt="alt" />
                       </div>
@@ -151,10 +220,16 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="challenge">
+            <div className="my-7
+        w-11/12">
               <h3 className="subtitle">{t("home.actualchallenge")}</h3>
               <div className="custom-underline bg-primary text-center"></div>
-              <div className="challenge-box">
+              <div className="custom-flex-center
+          px-4
+          flex-wrap
+          md:flex-row
+          md:justify-around
+          md:items-baseline">
                 {data?.challenges?.map((element, index) => (
                   <List
                     key={index}
@@ -168,7 +243,14 @@ const Home = () => {
                 ))}
               </div>
               <Link to="/challenges">
-                <h2 className="see-more-title">
+                <h2 className="font-bold
+          text-center
+          text-xl
+          flex
+          justify-center
+          items-center
+          pt-2
+          xl:justify-start">
                   {t("home.seemore")}
                   <i>
                     <ArrowLinkTo width="50px" height="50px" fill={PRIMARY} />
@@ -176,12 +258,24 @@ const Home = () => {
                 </h2>
               </Link>
             </div>
-            <div className="gray-card">
+            <div className="bg-gray-100
+        rounded-lg
+        w-11/12
+        px-7
+        pt-7
+        shadow-xl">
               <h3 className="subtitle">{t("home.partners")}</h3>
               <div className="custom-underline bg-primary"></div>
-              <div className="gray-card-partners">
+              <div className="flex
+          flex-wrap
+          items-center
+          justify-arounds">
                 {partnersLogo.map((element, index) => (
-                  <div key={index} className="gray-card-logos">
+                  <div key={index} className="w-1/4
+                  m-4
+                  md:w-1/6
+                  lg:w-1/12
+                  xl:w-[5%]">
                     <img src={element.source} alt="alt" />
                   </div>
                 ))}
@@ -190,7 +284,12 @@ const Home = () => {
                 <Partners width="100px" height="100px" fill={PRIMARY} />
               </i>
             </div>
-            <div className="versions">
+            <div className="custom-flex-center
+        my-7
+        lg:flex-row
+        lg:justify-around
+        lg:w-full
+        xl:items-start">
               <div className="mb-4 custom-flex-center">
                 <TiltedLabel>{t("home.free")}</TiltedLabel>
                 {versionFreeText.map((element, index) => (
@@ -199,7 +298,8 @@ const Home = () => {
               </div>
               <div className="custom-flex-center">
                 <TiltedLabel>{t("home.premium")}</TiltedLabel>
-                <p className="versions-subtitle">
+                <p className="text-center
+          mb-5">
                   {t("home.versionsubtitle")}
                 </p>
                 {versionPremiumText.map((element, index) => (

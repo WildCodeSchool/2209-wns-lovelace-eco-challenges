@@ -3,7 +3,15 @@ type Prop = {
 };
 const TiltedLabel = ({ children } : Prop ) => {
   return (
-    <p className="tilted-label">{children}</p>
+    <p className="text-primary
+    font-bold
+    border-4
+    border-primary
+    rounded-lg
+    w-fit
+    p-2
+    -rotate-3
+    mb-5">{children}</p>
   )
 }
 

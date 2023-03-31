@@ -53,12 +53,13 @@ const Challenges = () => {
   });
 
   return (
-    <div className="challenges-page">
+    <div className="my-7
+    custom-flex-center">
       {loading ? (
         <Loader />
       ) : (
         <>
-          <div className="challenges-intro">
+          <div className="w-11/12">
             <h2 className="subtitle">Les challenges</h2>
             <div className="custom-underline bg-primary"></div>
             <p className="text-center xl:text-start">
@@ -71,14 +72,22 @@ const Challenges = () => {
               <span className="text-blue-600">En savoir plus</span>
             </p>
           </div>
-          <div className="challenges-search">
+          <div className="w-11/12
+      m-7
+      text-center
+      xl:text-start">
             <input
               className="search"
               type="text"
               placeholder="TODO..."
             />
           </div>
-          <div className="challenges-list">
+          <div className="ustom-flex-center
+      w-11/12
+      flex-wrap
+      md:flex-row
+      md:justify-around
+      md:items-baseline">
             {data?.challenges?.map((element, index) => (
               <List
                 key={index}

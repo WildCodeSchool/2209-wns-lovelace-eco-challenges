@@ -5,13 +5,28 @@ const Nav = () => {
   const { t } = useTranslation();
 
   return (
-    <nav className="nav-list">
-      <ul className="nav-list-ul">
-        <Link to="/challenges" className="nav-list-items">{t('menu.challenges')}</Link>
-        <Link to="/teams" className="nav-list-items">{t('menu.teams')}</Link>
-        <Link to="/signin" className="nav-list-items">{t('menu.login')}</Link>
-        <Link to="/signup" className="nav-list-items">{t('menu.signin')}</Link>
-        <Link to="" className="nav-list-items">{t('menu.profile')}</Link>
+    <nav className="text-white
+    hidden
+    items-center
+    justify-end
+    md:flex">
+      <ul className="flex
+            justify-end">
+        <Link to="/challenges" className="px-2
+                text-base
+                lg:text-2xl">{t('menu.challenges')}</Link>
+        <Link to="/teams" className="px-2
+                text-base
+                lg:text-2xl">{t('menu.teams')}</Link>
+        <Link to="/signin" className="px-2
+                text-base
+                lg:text-2xl">{t('menu.login')}</Link>
+        <Link to="/signup" className="px-2
+                text-base
+                lg:text-2xl">{t('menu.signin')}</Link>
+        <Link to="" className="px-2
+                text-base
+                lg:text-2xl">{t('menu.profile')}</Link>
       </ul>
     </nav>
   );
