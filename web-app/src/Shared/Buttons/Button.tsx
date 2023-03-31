@@ -15,9 +15,9 @@ const Button = (props: Props) => {
   const buttonClassName = useMemo(
     (): string =>
       clsx({
-        button: true,
-        "button-primary": type === "button-primary" ?? true,
-        "button-secondary": type === "button-secondary" ?? true,
+        "rounded-lg p-2 min-h-[42px] flex items-center justify-center shadow-xl": true,
+        "text-white bg-primary": type === "button-primary" ?? true,
+        "text-primary bg-white": type === "button-secondary" ?? true,
         "flex items-center justify-between": !!icon,
         [String(size)]: true,
       }),

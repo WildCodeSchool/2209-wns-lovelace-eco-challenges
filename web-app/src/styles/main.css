@@ -9,6 +9,14 @@ h1, h2, h3, p, li {
   @apply font-['Lato'];
 }
 
+.after::after {
+  content: 'Make a better World';
+  top: 1.5rem;
+  right: 0;
+  position: absolute;
+  font-size: 0.75rem;
+}
+
 @layer components {
   .app-container {
     @apply min-h-screen

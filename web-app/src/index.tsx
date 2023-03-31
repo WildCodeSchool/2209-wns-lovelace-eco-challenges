@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 import "./styles/main.css";
+import "./styles/normalize.css"
 import App from "./App/App";
 import reportWebVitals from "./reportWebVitals";
 import './App/i18n';
