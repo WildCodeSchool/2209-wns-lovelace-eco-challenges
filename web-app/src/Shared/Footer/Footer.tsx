@@ -1,7 +1,12 @@
 import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const lngs: any = {
+    en: { nativeName: 'EN' },
+    fr: { nativeName: 'FR' }
+  };
 
   return (
     <footer className="footer">
@@ -29,6 +34,16 @@ const Footer = () => {
         <p>{t('footer.legal')}</p>
         <p>{t('footer.blog')}</p>
       </div>
+      <div className="footer-box flex items-center justify-center">
+        <p className="mr-3">{t('change.language')}</p>
+          {Object.keys(lngs).map((lng) => (
+            <button className="p-2 border-2" key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => {
+              i18n.changeLanguage(lng);
+            }}>
+              {lngs[lng].nativeName}
+            </button>
+          ))}
+        </div>
     </footer>
   );
 };
