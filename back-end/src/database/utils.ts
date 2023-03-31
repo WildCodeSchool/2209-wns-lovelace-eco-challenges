@@ -13,7 +13,7 @@ const dataSource = new DataSource({
   entities: [
     __dirname + `/../models/**/*.entity.${NODE_ENV === "test" ? "ts" : "js"}`,
   ],
-  logging: ["error"],
+  logging: NODE_ENV === "development" ? ["query", "error"] : ["error"],
   // logging: ["query", "error"],
 });
 
