@@ -13,14 +13,16 @@ const Header = () => {
   const [open, setOpen] = useState(false);
 
   const isClicked = () => {
-      setOpen(!open)
+    if (document.body.offsetWidth < 768 && open) {
+      setOpen(!open);
+    }
   };
 
   useEffect(() => {
     disableScroll(open);
-  }, [open])
+  }, [open]);
 
-    return (
+  return (
     <header className="header">
       <Link to="/" onClick={isClicked}>
         <div className="flex">
@@ -35,7 +37,7 @@ const Header = () => {
         <div className="burger-line"></div>
         <div className="burger-line"></div>
       </div>
-      <ResponsiveNav open={open} isClicked={isClicked}/>
+      <ResponsiveNav open={open} isClicked={isClicked} />
       <Nav />
     </header>
   );
