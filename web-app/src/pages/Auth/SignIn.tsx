@@ -2,12 +2,12 @@ import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Loader from "../../../Shared/Loader/Loader";
-import { SignInMutation, SignInMutationVariables } from "../../../gql/graphql";
-import { getErrorMessage } from "../../../utils";
-import { HOME_PATH } from "../../paths";
-import Button from "../../../Shared/Buttons/Button";
-import ArrowLinkTo from "../../../assets/logos/ArrowLinkTo";
+import Loader from "../../Shared/Loader/Loader";
+import { SignInMutation, SignInMutationVariables } from "../../gql/graphql";
+import { getErrorMessage } from "../../utils";
+import { HOME_PATH } from "../paths";
+import Button from "../../Shared/Buttons/Button";
+import ArrowLinkTo from "../../assets/logos/ArrowLinkTo";
 
 
 const SIGN_IN = gql`
@@ -58,12 +58,11 @@ const SignIn = () => {
         }}
 
 
-        className="AuthForm"
+        className="w-10/12 mx-auto my-8 border-2 rounded-xl border-primary"
       >
         <fieldset className="form">
-          <legend className="legend"> <h1 className="rotate-2"> S'inscrire </h1> </legend>
-           
-          <label className="label">
+          <legend className="bg-white font-bold -translate-y-1/2 border-2 mx-auto rounded-md border-primary text-primary -rotate-2 px-8"> <h1 className="rotate-2"> S'inscrire </h1> </legend>
+          <label className="block mx-auto w-9/12  font-bold">
             Adresse email
             <br />
             <input
@@ -79,10 +78,11 @@ const SignIn = () => {
             />
           </label>
           <br />
-          <label className="label">
+          <label className="block mx-auto w-9/12  font-bold">
             Mot de passe
             <br />
             <input
+              className="bg-terciary p-2 w-full  rounded-xl"
               type="password"
               required
               autoComplete="current-password"
@@ -96,7 +96,10 @@ const SignIn = () => {
           </label>
           <br />
           <div className=" inline-block text-center w-full m-auto">
-            <input type="checkbox"/> Restez connecté
+            <input 
+              type="checkbox"
+              className="bg-terciary p-2 w-full  rounded-xl"
+            /> Restez connecté
           </div>
 
 

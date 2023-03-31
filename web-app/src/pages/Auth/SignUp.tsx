@@ -4,14 +4,14 @@ import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Apple from "../../../assets/logos/Apple";
-import ArrowLinkTo from "../../../assets/logos/ArrowLinkTo";
-import Facebook from "../../../assets/logos/Facebook";
-import { Mail } from "../../../assets/logos/Mail";
-import { SignUpMutation, SignUpMutationVariables } from "../../../gql/graphql";
-import Button from "../../../Shared/Buttons/Button";
-import { getErrorMessage } from "../../../utils";
-import { SIGN_IN_PATH } from "../../paths";
+import Apple from "../../assets/logos/Apple";
+import ArrowLinkTo from "../../assets/logos/ArrowLinkTo";
+import Facebook from "../../assets/logos/Facebook";
+import { Mail } from "../../assets/logos/Mail";
+import { SignUpMutation, SignUpMutationVariables } from "../../gql/graphql";
+import Button from "../../Shared/Buttons/Button";
+import { getErrorMessage } from "../../utils";
+import { SIGN_IN_PATH } from "../paths";
 
 
 
@@ -76,14 +76,15 @@ const SignUp = () => {
           event.preventDefault();
           await submit();
         }}
-        className="AuthForm"
+        className="w-10/12 mx-auto my-8 border-2 rounded-xl border-primary"
       >
         <fieldset className="form">
-          <legend className="legend"> <h1 className="rotate-2"> S'inscrire </h1> </legend>
-          <label className="label">
+          <legend className="bg-white font-bold -translate-y-1/2 border-2 mx-auto rounded-md border-primary text-primary -rotate-2 px-8"> <h1 className="rotate-2"> S'inscrire </h1> </legend>
+          <label className="block mx-auto w-9/12  font-bold">
             Prénom
             <br />
             <input
+              className="bg-terciary p-2 w-full  rounded-xl"
               type="text"
               required
               id="firstName"
@@ -96,10 +97,11 @@ const SignUp = () => {
             />
           </label>
           <br />
-          <label className="label">
+          <label className="block mx-auto w-9/12  font-bold">
             Nom
             <br />
             <input
+              className="bg-terciary p-2 w-full  rounded-xl"
               type="text"
               required
               id="lastName"
@@ -112,10 +114,11 @@ const SignUp = () => {
             />
           </label>
           <br />
-          <label className="label">
+          <label className="block mx-auto w-9/12  font-bold">
             Pseudo
             <br />
             <input
+              className="bg-terciary p-2 w-full  rounded-xl"
               type="text"
               required
               id="Nickname"
@@ -128,10 +131,11 @@ const SignUp = () => {
             />
           </label>
           <br />
-          <label className="label">
+          <label className="block mx-auto w-9/12  font-bold">
             Email
             <br />
             <input
+              className="bg-terciary p-2 w-full  rounded-xl"
               type="email"
               required
               autoComplete="email"
@@ -145,10 +149,11 @@ const SignUp = () => {
             />
           </label>
           <br />
-          <label className="label">
+          <label className="block mx-auto w-9/12  font-bold">
             Ville
             <br />
             <input
+              className="bg-terciary p-2 w-full  rounded-xl"
               type="text"
               required
               id="city"
@@ -161,10 +166,11 @@ const SignUp = () => {
             />
           </label>
           <br />
-          <label className="label">
+          <label className="block mx-auto w-9/12  font-bold">
             Pays
             <br />
             <input
+              className="bg-terciary p-2 w-full  rounded-xl"
               type="text"
               required
               id="country"
@@ -177,10 +183,11 @@ const SignUp = () => {
             />
           </label>
           <br />
-          <label className="label">
+          <label className="block mx-auto w-9/12  font-bold">
             Mot de passe
             <br />
             <input
+              className="bg-terciary p-2 w-full  rounded-xl"
               type="password"
               required
               autoComplete="new-password"
@@ -196,10 +203,11 @@ const SignUp = () => {
           <br />
 
 
-          <label className="label">
+          <label className="block mx-auto w-9/12  font-bold">
             Confirmer votre mot de passe
             <br />
             <input
+              className="bg-terciary p-2 w-full  rounded-xl"
               type="password"
               required
               autoComplete="new-password"
@@ -221,11 +229,11 @@ const SignUp = () => {
           </label>
 
 
-          <div className="otherSolution">
+          <div className="text-center font-semibold text-primary pt-4 pb-2">
             <h2> ou créer un compte avec </h2>
           </div>
        
-          <section className="iconContainer">
+          <section className="flex w-full justify-around">
             <button>
               <Facebook/>
             </button>
