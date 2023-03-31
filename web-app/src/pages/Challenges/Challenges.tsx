@@ -75,7 +75,7 @@ const Challenges = () => {
             <input
               className="search"
               type="text"
-              placeholder=" Chercher un challenge..."
+              placeholder="TODO..."
             />
           </div>
           <div className="challenges-list">
