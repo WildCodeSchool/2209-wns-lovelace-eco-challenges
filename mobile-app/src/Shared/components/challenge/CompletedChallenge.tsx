@@ -3,31 +3,31 @@ import { StyleSheet, Text, View } from "react-native";
 import { Team } from "../../../gql/graphql";
 
 type PropType = {
-  teamName: Team
+  name: Team
 }
 
-const CompletedChallenge = ({ teamName }: PropType) => {
+const CompletedChallenge = ({ name }: PropType) => {
   return (
     <View style={styles.bloc}>
       <View style={styles.textCtn}>
-        <Text>Terminés</Text>
+        <Text style={styles.termine}>Terminés</Text>
         <View style={styles.separation} />
       </View>
       <View style={styles.blocCtn}>
         <View style={styles.challengeCtn}>
           <View style={styles.challenge}>
             <View style={styles.name}>
-              <Text style={styles.nameTxt}>{teamName.teamName}</Text>
+              <Text style={styles.nameTxt}>{name.teamName}</Text>
             </View>
           </View>
           <View style={styles.challenge}>
             <View style={styles.name}>
-              <Text style={styles.nameTxt}>{teamName.teamName}</Text>
+              <Text style={styles.nameTxt}>{name.teamName}</Text>
             </View>
           </View>
         </View>
       </View>
-    </View>
+    </View >
   )
 }
 
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   challengeCtn: {
     height: '100%',
-    width: 200,
+    width: 225,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between"
@@ -64,13 +64,18 @@ const styles = StyleSheet.create({
     borderColor: "#3B8574",
     borderWidth: 1,
     justifyContent: "flex-end",
-    alignItems: "center"
+    alignItems: "center",
+    top: 30
+  },
+  termine: {
+    left: 110
   },
   separation: {
-    width: 60,
+    width: 80,
     height: 2,
     backgroundColor: "#7BE07E",
-    marginRight: 45
+    marginRight: 45,
+    left: 100
   },
   name: {
     width: 80,
@@ -80,7 +85,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   nameTxt: {
-    fontSize: 10
+    fontSize: 10,
   }
 });
 

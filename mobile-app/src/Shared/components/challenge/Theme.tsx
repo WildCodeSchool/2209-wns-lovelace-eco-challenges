@@ -1,13 +1,18 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { Challenge } from "../../../gql/graphql";
 
-export default function Theme() {
+type PropType = {
+  challenge?: Challenge
+}
+
+const Theme = ({ challenge }: PropType) => {
   return (
     <View style={styles.container}>
       <View style={styles.separation}></View>
       <View style={styles.theme}>
         <Text style={styles.title}>Thème</Text>
-        <Text style={styles.bio}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, ad. Sequi</Text>
+        <Text style={styles.bio}>{challenge?.description}</Text>
       </View>
     </View>
   )
@@ -15,27 +20,33 @@ export default function Theme() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30,
+    right: 40,
+    bottom: 10,
     alignItems: 'center',
     height: '20%',
     width: 208,
   },
   separation: {
-    width: 180,
+    width: 220,
     height: 1,
     backgroundColor: "#7BE07E",
-    marginLeft: 25
+    marginLeft: 80,
+    bottom: 10,
   },
   theme: {
-    marginTop: 10,
     justifyContent: "center",
     width: '70%'
   },
   title: {
     fontWeight: "bold",
-    fontSize: 12
+    fontSize: 12,
+    bottom: 3
   },
   bio: {
-    fontSize: 10
+    fontSize: 10,
+    width: 245,
+    bottom: 2
   }
 });
+
+export default Theme

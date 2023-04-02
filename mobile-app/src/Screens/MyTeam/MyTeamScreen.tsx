@@ -42,8 +42,8 @@ query userById($Id: String!) {
 }
 `
 
-const MyTeam = () => {
-  const Id = "42924e77-b6bd-48ec-abd9-6b6ffe4cef67"
+const MyTeamScreen = () => {
+  const Id = "98c27cf1-8b6b-48a0-a7da-1ca47d9424eb"
   const { data, } = useQuery<UserByIdQuery, UserByIdQueryVariables
   >(GET_USERSBYID, {
     variables: { Id },
@@ -71,12 +71,22 @@ const MyTeam = () => {
                   </>
                 ))}
                 <View style={styles.separation} />
-                {teams && teams.forEach(team => team.team.challenges?.map(challenge =>
+                {/* {teams && teams.forEach(team => team.team.challenges?.map(challenge =>
                   <TeamChallenge
                     key={challenge.id}
                     challengeName={challenge}
                   />
-                ))}
+                ))} */}
+                <View style={styles.challengeBloc}>
+                  <View style={styles.ctnTxt}>
+                    <Text>Challenge en cours</Text>
+                  </View>
+                  <View style={styles.challenge}>
+                    <View style={styles.name}>
+                      <Text>Team Barcelone</Text>
+                    </View>
+                  </View>
+                </View>
                 <View style={styles.separation} />
                 <View style={styles.img}>
                   <Image style={styles.image} source={require('../../../assets/icons/25.png')} />
@@ -127,7 +137,7 @@ const styles = StyleSheet.create({
     height: 420
   },
   separation: {
-    width: 180,
+    width: 200,
     height: 1,
     backgroundColor: "#7BE07E",
     marginLeft: 22
@@ -142,7 +152,33 @@ const styles = StyleSheet.create({
   image: {
     width: 50,
     height: 50
+  },
+  challengeBloc: {
+    width: "100%",
+    height: 150,
+    justifyContent: "space-evenly",
+    alignItems: "center",
+  },
+  challenge: {
+    height: 65,
+    width: 90,
+    borderColor: "#3B8574",
+    borderWidth: 1,
+    borderRadius: 5,
+  },
+  ctnTxt: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  name: {
+    justifyContent: "flex-end",
+    alignItems: 'flex-end',
+    height: "20%",
+    top: 50,
+    borderTopColor: "black",
+    borderTopWidth: 1,
+    borderColor: "#3B8574",
   }
 });
 
-export default MyTeam
+export default MyTeamScreen

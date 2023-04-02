@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { Challenge } from "../../../gql/graphql";
+import Theme from "./Theme";
 
 type PropType = {
   endTime: Challenge
@@ -14,7 +15,7 @@ const Score = ({ endTime }: PropType) => {
           style={styles.img}
         />
         <Text style={styles.txt}>fin le</Text>
-        {/* <Text style={styles.txt}>{endTime.endAt}</Text> */}
+        <Text style={styles.txt}>{endTime.endAt}</Text>
       </View>
       <View style={styles.score}>
         <Image
@@ -22,7 +23,7 @@ const Score = ({ endTime }: PropType) => {
           style={styles.img}
         />
         <Text style={styles.txt}>Ton score est</Text>
-        {/* <Text style={styles.txt}></Text> */}
+        <Text style={styles.txt}>{50}</Text>
       </View>
     </View>
   )

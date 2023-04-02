@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import InfoChallenge from '../../Shared/components/challenge/InfoChallenge'
-import Theme from '../../Shared/components/challenge/Theme'
 import CompletedChallenge from '../../Shared/components/challenge/CompletedChallenge'
 import { gql, useQuery } from "@apollo/client";
 import { UserByIdQuery, UserByIdQueryVariables } from "../../gql/graphql";
+import { ScrollView } from "react-native";
+import Theme from "../../Shared/components/challenge/Theme";
 
 export const GET_USERSBYID = gql`
 query userById($Id: String!) {
@@ -43,7 +44,7 @@ query userById($Id: String!) {
 `
 
 export default function MyChallenge() {
-  const Id = "436b2e94-6df5-44b4-8c72-077eb608c0e3"
+  const Id = "c0ba612a-4ec8-49a2-add3-d646b8763354"
   const { data } = useQuery<UserByIdQuery, UserByIdQueryVariables
   >(GET_USERSBYID, {
     variables: { Id },
@@ -60,56 +61,49 @@ export default function MyChallenge() {
   console.log(challenges)
 
   return (
-    <View style={styles.pageCtn}>
-      <View style={styles.pages}>
-        <View style={styles.flex}>
-          <View style={styles.texte}>
-            <Text style={styles.title}>Mes challenges</Text>
-            <Text style={styles.subtitle}>En cours</Text>
-            <View style={styles.separation} />
-          </View>
-          <View style={styles.blocCtn}>
-            <View>
-              {challenges && challenges.length > 0 && challenges.map((challenge) => (
-                <>
-                  <InfoChallenge
-                    challenge={challenge}
-                    key={challenge?.id}
-                  />
-                </>
-              ))}
-              <Theme />
-            </View>
+    <SafeAreaView style={styles.pageCtn}>
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.header}>
+          <Text style={styles.title}>Mes challenges</Text>
+          <Text style={styles.subtitle}>En cours</Text>
+        </View>
+        <View style={styles.container}>
+          <View style={styles.bloc}>
+            {challenges && challenges.length > 0 && challenges.map((challenge) => (
+              <>
+                <InfoChallenge
+                  challenge={challenge}
+                  key={challenge?.id}
+                />
+                <Theme
+                  challenge={challenge} />
+              </>
+            ))}
           </View>
         </View>
-        {challenges?.map((team) => (
-          <CompletedChallenge
-            teamName={team?.teamName}
-          />
-        ))}
-      </View>
-    </View>
+        <View style={styles.completed}>
+          {challenges?.map((team, i) => (
+            <CompletedChallenge
+              key={i}
+              name={team?.teamName}
+            />
+          ))}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   pageCtn: {
     flex: 1,
-    justifyContent: 'space-around',
   },
-  pages: {
-    height: '100%',
+  scrollView: {
+    marginHorizontal: 10,
   },
-  flex: {
-    height: '79%',
-    justifyContent: 'space-around',
-  },
-  texte: {
-    width: 130,
-    height: 70,
-    flexDirection: "column",
+  header: {
     justifyContent: "space-around",
-    alignItems: "flex-end",
+    height: 70,
   },
   title: {
     fontSize: 13,
@@ -118,17 +112,18 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 11,
     fontWeight: "bold",
-    marginTop: 15,
-    marginRight: 52
   },
-  separation: {
-    width: 60,
-    height: 2,
-    backgroundColor: "#7BE07E",
-    marginRight: 45
+  container: {
+    marginTop: 50
   },
-  blocCtn: {
+  bloc: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-around",
+    height: 750,
   },
+  completed: {
+    height: 200,
+    overflow: "hidden",
+    marginLeft: 12,
+  }
 });

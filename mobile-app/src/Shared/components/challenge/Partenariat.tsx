@@ -21,13 +21,13 @@ export default function Partenariat() {
 
 const styles = StyleSheet.create({
   partenariatCtn: {
-    height: 55,
+    // height: 55,
     alignItems: 'center',
     justifyContent: 'center'
   },
   partenariat: {
     justifyContent: 'space-around',
-    height: 55
+    // height: 55
   },
   separation: {
     width: 180,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     height: 25,
   },
   txt: {
-    marginTop: 5,
+    // marginTop: 5,
     fontWeight: 'bold',
     fontSize: 12
   },
