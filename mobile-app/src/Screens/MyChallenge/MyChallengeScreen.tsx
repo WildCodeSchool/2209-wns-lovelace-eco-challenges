@@ -1,10 +1,11 @@
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import InfoChallenge from '../../Shared/components/challenge/InfoChallenge'
-import CompletedChallenge from '../../Shared/components/challenge/CompletedChallenge'
 import { gql, useQuery } from "@apollo/client";
 import { UserByIdQuery, UserByIdQueryVariables } from "../../gql/graphql";
 import { ScrollView } from "react-native";
-import Theme from "../../Shared/components/challenge/Theme";
+import React from "react";
+import ChallengeCard from "../../Shared/components/challengeNew/ChallengeCard";
+import CompletedChallenge from "../../Shared/components/challenge/CompletedChallenge";
+import ChallengeCompleted from "../../Shared/components/challengeNew/ChallengeCompleted";
 
 export const GET_USERSBYID = gql`
 query userById($Id: String!) {
@@ -44,7 +45,7 @@ query userById($Id: String!) {
 `
 
 export default function MyChallenge() {
-  const Id = "c0ba612a-4ec8-49a2-add3-d646b8763354"
+  const Id = "05073bb6-652a-4ee4-9168-069fcd170599"
   const { data } = useQuery<UserByIdQuery, UserByIdQueryVariables
   >(GET_USERSBYID, {
     variables: { Id },
@@ -67,25 +68,24 @@ export default function MyChallenge() {
           <Text style={styles.title}>Mes challenges</Text>
           <Text style={styles.subtitle}>En cours</Text>
         </View>
-        <View style={styles.container}>
-          <View style={styles.bloc}>
-            {challenges && challenges.length > 0 && challenges.map((challenge) => (
-              <>
-                <InfoChallenge
-                  challenge={challenge}
-                  key={challenge?.id}
-                />
-                <Theme
-                  challenge={challenge} />
-              </>
-            ))}
-          </View>
+        <View style={styles.challengeCard}>
+          {challenges && challenges.length > 0 && challenges.map((challenge) => (
+            <>
+              <ChallengeCard
+                challenge={challenge}
+                key={challenge?.id} />
+            </>
+          ))}
         </View>
-        <View style={styles.completed}>
-          {challenges?.map((team, i) => (
-            <CompletedChallenge
-              key={i}
-              name={team?.teamName}
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Terminé</Text>
+          <View style={styles.separator} />
+        </View>
+        <View>
+          {challenges?.map((challenge, i) => (
+            <ChallengeCompleted
+              key={challenge?.id}
+              challenge={challenge}
             />
           ))}
         </View>
@@ -99,31 +99,32 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollView: {
-    marginHorizontal: 10,
+    marginHorizontal: 30,
   },
   header: {
     justifyContent: "space-around",
     height: 70,
   },
-  title: {
-    fontSize: 13,
-    fontWeight: "bold"
-  },
   subtitle: {
     fontSize: 11,
     fontWeight: "bold",
   },
-  container: {
-    marginTop: 50
+  challengeCard: {
+    marginTop: 25
   },
-  bloc: {
-    alignItems: "center",
-    justifyContent: "space-around",
-    height: 750,
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
   },
-  completed: {
-    height: 200,
-    overflow: "hidden",
-    marginLeft: 12,
-  }
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginRight: 8,
+  },
+  separator: {
+    flex: 1,
+    height: 1,
+    backgroundColor: '#7BE07E',
+  },
 });
