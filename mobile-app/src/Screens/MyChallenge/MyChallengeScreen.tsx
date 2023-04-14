@@ -4,7 +4,6 @@ import { UserByIdQuery, UserByIdQueryVariables } from "../../gql/graphql";
 import { ScrollView } from "react-native";
 import React from "react";
 import ChallengeCard from "../../Shared/components/challengeNew/ChallengeCard";
-import CompletedChallenge from "../../Shared/components/challenge/CompletedChallenge";
 import ChallengeCompleted from "../../Shared/components/challengeNew/ChallengeCompleted";
 
 export const GET_USERSBYID = gql`
