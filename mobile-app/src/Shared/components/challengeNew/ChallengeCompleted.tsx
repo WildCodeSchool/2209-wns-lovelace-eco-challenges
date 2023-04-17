@@ -15,7 +15,7 @@ const ChallengeCompleted = ({ challenge }: PropType) => {
             <Text style={styles.badgeText}>Terminé</Text>
           </View>
         </View>
-        <Text style={styles.teamName}>Team: TeamName</Text>
+        <Text style={styles.teamName}>Team: Paris</Text>
         <View style={styles.infoContainer}>
           <Text style={styles.scoreText}>Score atteint: score</Text>
           <Text style={styles.dateText}>Date de fin: fin</Text>

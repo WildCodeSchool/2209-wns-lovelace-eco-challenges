@@ -1,29 +1,97 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { gql, useQuery } from "@apollo/client";
+import { UserByIdQuery, UserByIdQueryVariables } from "../../gql/graphql";
 
-const ProfilePage = () => {
+export const GET_USERSBYID = gql`
+query userById($Id: String!) {
+  userById(id: $Id) {
+    id
+    lastName
+    firstName
+    email
+    country
+    city
+    nickname
+    score
+    userToTeams {
+      userRole
+      score
+      team {
+        id
+        teamName
+        country
+        city
+        isPublic
+        img
+        challenges {
+          id
+          challengeName
+          level
+          description
+          img
+          startsAt
+          endAt
+          category
+        }
+      }
+    }
+  }
+}
+`
+
+const PersoScreen = () => {
+  const Id = "74155267-5564-480c-acfa-8da0efa48dfd"
+  const { data } = useQuery<UserByIdQuery, UserByIdQueryVariables
+  >(GET_USERSBYID, {
+    variables: { Id },
+    fetchPolicy: "cache-and-network",
+  });
+  const users = data?.userById;
   return (
     <View style={styles.container}>
-      <Image source={require('../../../assets/icons/maison.png')} style={styles.homeIcon} />
-      <View style={styles.profileContainer}>
-        <Image source={require('../../../assets/icons/visagehomme.png')} style={styles.profilePic} />
+      <View style={styles.profileCard}>
+        <View style={styles.profileImageContainer}>
+          <Image
+            style={styles.img}
+            source={require('../../../assets/icons/visagehomme.png')}
+          />
+        </View>
         <TouchableOpacity style={styles.editProfileButton}>
           <Text style={styles.editProfileButtonText}>Modifier le profil</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.nameContainer}>
-        <Text style={styles.firstName}>John</Text>
-        <Text style={styles.lastName}>Doe</Text>
-      </View>
-      <View style={styles.notificationsContainer}>
-        <Text style={styles.notificationsText}>Notifications</Text>
-        <View style={styles.notificationContainer}>
-          <Image source={require('../../../assets/icons/createChallenge.png')} style={styles.notificationIcon} />
-          <Text style={styles.notificationMessage}>Nouveau challenge créé</Text>
+      <View style={styles.infoCard}>
+        {/* Carte d'information */}
+        <Text style={styles.name}>{users?.firstName} {users?.lastName}</Text>
+        <View style={styles.locationContainer}>
+          <Text style={styles.info}>{users?.city}, {users?.country}</Text>
         </View>
-        <View style={styles.notificationContainer}>
-          <Image source={require('../../../assets/icons/exclamation.png')} style={styles.notificationIcon} />
-          <Text style={styles.notificationMessage}>Nouvelle invitation d'ami</Text>
+        <Text style={styles.description}>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</Text>
+      </View>
+      <View style={styles.scoreCard}>
+        {/* Carte du score */}
+        <Text style={styles.nickname}>{users?.nickname}</Text>
+        <View style={styles.profileInfo}>
+          <Text style={styles.profileInfoLabel}>Amis</Text>
+          <View style={styles.friendContainer}>
+            <View style={styles.friendItem}>
+              <Image source={require('../../../assets/icons/visagehomme.png')} style={styles.friendIcon} />
+              <Text style={styles.friendName}>Mathieu Goulet</Text>
+            </View>
+            <View style={styles.friendItem}>
+              <Image source={require('../../../assets/icons/visagehomme.png')} style={styles.friendIcon} />
+              <Text style={styles.friendName}>Samuel Renard</Text>
+            </View>
+            <View style={styles.friendItem}>
+              <Image source={require('../../../assets/icons/visagehomme.png')} style={styles.friendIcon} />
+              <Text style={styles.friendName}>Guillaume Cheron</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.scoreInfo}>
+          <Text style={styles.scoreInfoLabel}>Score Total</Text>
+          <Text style={styles.score}>{users?.score}</Text>
         </View>
       </View>
     </View>
@@ -33,78 +101,135 @@ const ProfilePage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#3B8574',
-    paddingHorizontal: 16,
-    paddingTop: 32,
+    padding: 16,
   },
-  homeIcon: {
-    width: 24,
-    height: 24,
-    tintColor: '#3B8574',
-    alignSelf: 'flex-end',
-  },
-  profileContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 32,
+  profileCard: {
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    padding: 16,
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
     marginBottom: 16,
   },
-  profilePic: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    marginRight: 16,
+  profileImageContainer: {
+    alignSelf: 'center',
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    overflow: 'hidden',
+    marginBottom: 16,
   },
   editProfileButton: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    backgroundColor: '#3B8574',
+    borderRadius: 5,
+    padding: 10,
+    alignSelf: 'center',
   },
   editProfileButtonText: {
-    color: '#3B8574',
-    fontSize: 14,
+    color: '#ffffff',
+    fontSize: 16,
     fontWeight: 'bold',
   },
-  nameContainer: {
-    flexDirection: 'row',
-    marginBottom: 32,
+  img: {
+    width: 100,
+    height: 100
   },
-  firstName: {
-    color: 'black',
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginRight: 8,
-  },
-  lastName: {
-    color: 'black',
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  notificationsContainer: {
-    flex: 1,
-  },
-  notificationsText: {
-    color: 'black',
-    fontSize: 18,
-    fontWeight: 'bold',
+  infoCard: {
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    padding: 16,
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
     marginBottom: 16,
   },
-  notificationContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  name: {
+    fontSize: 24,
+    fontWeight: 'bold',
     marginBottom: 8,
   },
-  notificationIcon: {
-    width: 24,
-    height: 24,
-    marginRight: 8,
-    color: 'black',
+  info: {
+    fontSize: 16,
+    color: '#666666',
+    marginBottom: 8,
   },
-  notificationMessage: {
-    color: 'black',
+  locationContainer: {
+    flexDirection: 'row',
+    marginBottom: 8,
+  },
+  description: {
+    fontSize: 16,
+    color: '#666666',
+    marginBottom: 16,
+  },
+  scoreCard: {
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    padding: 16,
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  nickname: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  profileInfo: {
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  profileInfoLabel: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  scoreInfoLabel: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  scoreInfo: {
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  score: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    marginTop: 8,
+  },
+  friendContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    marginLeft: 35
+  },
+  friendItem: {
+    alignItems: 'center',
+  },
+  friendIcon: {
+    width: 60,
+    height: 60,
+    marginBottom: 8,
+    borderRadius: 40,
+  },
+  friendName: {
     fontSize: 14,
+    textAlign: 'center',
   },
+
 });
 
-export default ProfilePage;
+export default PersoScreen
