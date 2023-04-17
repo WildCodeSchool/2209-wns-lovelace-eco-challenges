@@ -3,9 +3,10 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 
 type PropType = {
   challenge: any
+  userToTeams: any
 }
 
-const ChallengeCard = ({ challenge }: PropType) => {
+const ChallengeCard = ({ challenge, userToTeams }: PropType) => {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -21,7 +22,7 @@ const ChallengeCard = ({ challenge }: PropType) => {
           <Text style={styles.value}>18 octobre 2023</Text>
         </View>
         <View style={styles.scoreContainer}>
-          <Text style={styles.label}>Ton score est:</Text>
+          <Text style={styles.label}>Ton score est: {userToTeams.score}</Text>
           <Text style={styles.value}>{challenge.score}</Text>
         </View>
       </View>

@@ -57,13 +57,13 @@ const PersoScreen = () => {
             source={require('../../../assets/icons/visagehomme.png')}
           />
         </View>
+        <Text style={styles.name}>{users?.firstName} {users?.lastName}</Text>
         <TouchableOpacity style={styles.editProfileButton}>
           <Text style={styles.editProfileButtonText}>Modifier le profil</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.infoCard}>
         {/* Carte d'information */}
-        <Text style={styles.name}>{users?.firstName} {users?.lastName}</Text>
         <View style={styles.locationContainer}>
           <Text style={styles.info}>{users?.city}, {users?.country}</Text>
         </View>
@@ -113,6 +113,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 2,
     marginBottom: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   profileImageContainer: {
     alignSelf: 'center',

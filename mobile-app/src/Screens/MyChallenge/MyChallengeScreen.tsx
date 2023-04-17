@@ -50,15 +50,14 @@ export default function MyChallenge() {
     variables: { Id },
     fetchPolicy: "cache-and-network",
   });
+  const userToTeams = data?.userById.userToTeams
   const test = data?.userById.userToTeams
   const challenges = test?.flatMap(userTeam =>
     userTeam.team.challenges?.map(challenge => ({
       teamName: userTeam.team.teamName,
       ...challenge
     }))
-  );
-
-  console.log(challenges)
+  )
 
   return (
     <SafeAreaView style={styles.pageCtn}>
@@ -71,6 +70,7 @@ export default function MyChallenge() {
           {challenges && challenges.length > 0 && challenges.map((challenge) => (
             <>
               <ChallengeCard
+                userToTeams={userToTeams}
                 challenge={challenge}
                 key={challenge?.id} />
             </>
