@@ -1,6 +1,6 @@
 import Check from "@assets/logos/Check";
 
-import { PRIMARY } from "@shared/Constants/Color";
+import { PRIMARY } from "@constants/color";
 
 type Props = {
   text: string;

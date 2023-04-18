@@ -6,6 +6,16 @@ const nextConfig = {
   reactStrictMode: true,
   serverRuntimeConfig: {},
   publicRuntimeConfig: {},
+  images: {
+    domains: [
+      'images.caradisiac.com',
+      'www.wedemain.fr',
+      'fr.jardins-animes.com',
+      'www.wedemain.fr',
+      'picsum.photos',
+      'assets.letemps.ch'
+    ],
+  },
 }
 
 module.exports = nextConfig

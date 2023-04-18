@@ -17,7 +17,10 @@
       "@shared/*": ["./src/src-frontend/shared/*"],
       "@src/*": ["./src/*"],
       "@styles/*": ["./src/styles/*"],
-      "@utils/*": ["./src/src-frontend/utils/*"]
+      "@utils/*": ["./src/src-frontend/utils/*"],
+      "@constants/*": ["./src/src-frontend/constants/*"],
+      "@customTypes/*": ["./src/src-frontend/customTypes/*"],
+      "@api/*": ["./src/api/*"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,

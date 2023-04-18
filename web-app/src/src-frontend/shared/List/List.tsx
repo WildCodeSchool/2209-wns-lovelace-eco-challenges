@@ -1,4 +1,4 @@
-import Image from "@shared/Images/Image";
+import Image from "next/image";
 import Link from "next/link";
 
 type Props = {
@@ -21,7 +21,7 @@ const List = (props: Props) => {
     last:pb-0
     md:pb-0
     md:w-[26%]">
-      <Image source={source ? source : "https://picsum.photos/400"} />
+      <Image src={source || "https://picsum.photos/200/150"} alt="alt" width={200} height={150} />
       <h3 className="text-center
           font-bold
           text-2xl
