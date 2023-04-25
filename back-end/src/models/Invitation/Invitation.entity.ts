@@ -41,7 +41,7 @@ export default class Invitation {
   @Field(_type => InvitationStatus)
   status: InvitationStatus; 
 
-  @CreateDateColumn({ type: 'date' })
+  @CreateDateColumn({ type:"timestamptz" })
   @Field()
   createdAt: Date; 
 

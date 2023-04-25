@@ -1,7 +1,7 @@
 import { Args, Mutation, Query, Resolver } from "type-graphql";
 import Invitation from "../../models/Invitation/Invitation.entity";
 import InvitationRepository from "../../models/Invitation/Invitation.repository";
-import { ReactToInvitationArgs } from "./Invitation.input";
+import { ReactToInvitation } from "./Invitation.input";
 
 @Resolver(Invitation)
 export default class InvitationResolver {
@@ -10,13 +10,18 @@ export default class InvitationResolver {
         return InvitationRepository.createInvitation()
     } */
 
+    @Query(() => [Invitation])
+    async getInvitations():Promise<Invitation[]> {
+        return InvitationRepository.getInvitations()
+    }
+
     @Mutation(() => Invitation)
-    static async acceptInvitation(@Args(){id}:ReactToInvitationArgs):Promise<Invitation> {
+    async acceptInvitation(@Args(){id}:ReactToInvitation):Promise<Invitation> {
         return InvitationRepository.acceptInvitation(id) 
     }
 
     @Mutation(() => Invitation)
-    static async deniInvitation(@Args(){id}:ReactToInvitationArgs):Promise<Invitation> {
-        return InvitationRepository.denniInvitation(id)
+    async deniInvitation(@Args(){id}:ReactToInvitation):Promise<Invitation> {
+        return InvitationRepository.declinInvitation(id)
     }
 }

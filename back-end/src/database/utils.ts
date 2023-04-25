@@ -3,6 +3,7 @@ import { DATABASE_URL, NODE_ENV, TEST_DATABASE_URL } from "../config";
 import AppUserRepository from "../models/AppUser/AppUser.repository";
 import SessionRepository from "../models/AppUser/Session.repository";
 import ChallengeRepository from "../models/Challenge/Challenge.repository";
+import InvitationRepository from "../models/Invitation/Invitation.repository";
 import TeamRepository from "../models/Team/Team.repository";
 import UserToTeamRepository from "../models/UserToTeam/UserToTeam.repository";
 
@@ -37,6 +38,7 @@ async function initializeDatabaseRepositories() {
   await TeamRepository.initializeRepository();
   await ChallengeRepository.initializeRepository();
   await UserToTeamRepository.initializeRepository();
+  await InvitationRepository.initializeRepository();
 }
 
 async function closeConnection() {

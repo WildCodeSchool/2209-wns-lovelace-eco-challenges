@@ -1,7 +1,7 @@
 import { ArgsType, Field } from "type-graphql";
 
 @ArgsType()
-export class AcceptInvitationArgs {
+export class ReactToInvitation {
     @Field()
     id:string
 }
