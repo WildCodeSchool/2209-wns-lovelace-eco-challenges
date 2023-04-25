@@ -45,8 +45,8 @@ query UserByNickname($nickname: String!) {
 ### Get user by Id
 
 ```
-query UserById($Id: String!) {
-  userById(id: Id) {
+query UserById($id: String!) {
+  userById(id: id) {
     nickname
     ...
     userToTeams {
@@ -74,6 +74,6 @@ query UserById($Id: String!) {
 
 | Parameter | Type     | Description |
 | :-------- | :------- | :---------- |
-| `Id`      | `string` | uuid        |
+| `id`      | `string` | uuid        |
 
 ---

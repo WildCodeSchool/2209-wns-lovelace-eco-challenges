@@ -2,8 +2,10 @@ import { Field, ID, ObjectType, registerEnumType } from "type-graphql";
 import {
   Column,
   Entity,
+  Index,
   ManyToOne,
   PrimaryGeneratedColumn,
+  Unique,
 } from "typeorm";
 import AppUser from "../AppUser/AppUser.entity";
 import Team from "../Team/Team.entity";
@@ -18,21 +20,18 @@ registerEnumType(UserRole, {
 });
 
 @Entity()
+@Unique(["team", "user", "userRole"])
 @ObjectType()
 export default class UserToTeam {
   constructor(
     team: Team,
     user: AppUser,
     userRole: UserRole, 
-    score: number, 
-    disabled : boolean,
     invitation?: Invitation,
   ) {
     this.team = team;
     this.user = user;
     this.userRole = userRole; 
-    this.score = score; 
-    this.disabled = disabled; 
     if (invitation) {
     this.invitation = invitation;
     }

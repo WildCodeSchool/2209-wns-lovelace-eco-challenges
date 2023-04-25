@@ -22,7 +22,7 @@ export default class ChallengeResolver {
   challengesByCategory(
     @Arg("category", type => [Category]) category : Category,
     @Args() { itemsByPage, pageNumber } : Pagination
-    ): Promise<Challenge[] | null> {
+    ): Promise<Challenge[]> {
     return ChallengeRepository.getChallengesByCategory(category, itemsByPage, pageNumber); 
   }
 
@@ -30,17 +30,17 @@ export default class ChallengeResolver {
   challengesByLevel(
     @Arg("level", type => Level) level : Level,
     @Args() { itemsByPage, pageNumber } : Pagination
-    ): Promise<Challenge[] | null> {
+    ): Promise<Challenge[]> {
     return ChallengeRepository.getChallengesByLevel(level, itemsByPage, pageNumber); 
   }
 
   @Query(() => Challenge)
-  challengeById(@Arg("id") id : string): Promise<Challenge | null> {
+  challengeById(@Arg("id") id : string): Promise<Challenge> {
     return ChallengeRepository.getChallengeById(id); 
   }
 
   @Query(() => Challenge)
-  challengeByName(@Arg("challengeName") challengeName : string): Promise<Challenge | null> {
+  challengeByName(@Arg("challengeName") challengeName : string): Promise<Challenge> {
     return ChallengeRepository.getChallengeByName(challengeName); 
   }
 

@@ -14,20 +14,14 @@ export default class UserToTeamResolver {
   createUserToTeam(
     @Args() { 
       teamId, 
-      userId, 
+      userEmail, 
       userRole,
-      score, 
-      disabled,
-      invitation
     }: CreateUserToTeamArgs
   ): Promise<UserToTeam> {
     return UserToTeamRepository.createUserToTeam(
       teamId, 
-      userId, 
+      userEmail, 
       userRole,
-      score, 
-      disabled,
-      invitation
     )
   }
 }

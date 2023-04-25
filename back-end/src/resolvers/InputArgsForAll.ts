@@ -1,3 +1,4 @@
+import { IsEmail } from "class-validator";
 import { ArgsType, Field, ID, Int } from "type-graphql";
 
 @ArgsType() 
@@ -9,6 +10,14 @@ class Pagination {
   pageNumber : number; 
 }
 
-export { Pagination }
+
+@ArgsType()
+class Email {
+  @Field()
+  @IsEmail()
+  email: string;
+}
+
+export { Pagination, Email }
 
 

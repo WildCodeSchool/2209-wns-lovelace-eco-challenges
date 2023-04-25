@@ -9,10 +9,11 @@ import AppUserRepository, {
 import SessionRepository from "./Session.repository";
 
 describe("AppUserRepository integration", () => {
+
   beforeAll(async () => {
     await initializeDatabaseRepositories();
   });
-
+ 
   afterAll(async () => {
     await closeConnection();
   });
@@ -30,27 +31,31 @@ describe("AppUserRepository integration", () => {
 
   describe("signIn", () => {
     describe("when email address does not belong to existing user", () => {
+      
       it("throws invalid credentials error", async () => {
-        const emailAddress = "unknown@user.com";
+        const email = "unknown@user.com";
         expect(() =>
-          AppUserRepository.signIn(emailAddress, "whatever")
+          AppUserRepository.signIn(email, "whatever")
         ).rejects.toThrowError(INVALID_CREDENTIALS_ERROR_MESSAGE);
       });
-
+      
       describe("when email address belongs to existing user", () => {
-        const emailAddress = "jean@user.com";
+        const email = "jean@user.com";
 
         describe("when password invalid", () => {
           it("throws invalid credentials error", async () => {
             await AppUserRepository.createUser(
-              "Jean",
-              "User",
-              emailAddress,
-              "mot-de-passe-de-jean"
+              "john",
+              "doe",
+              "JohnD",
+              email,
+              "France",
+              "paris",
+              "password"
             );
 
             expect(() =>
-              AppUserRepository.signIn(emailAddress, "mot-de-passe-incorrect")
+              AppUserRepository.signIn(email, "mot-de-passe-incorrect")
             ).rejects.toThrowError(INVALID_CREDENTIALS_ERROR_MESSAGE);
           });
         });
@@ -58,43 +63,48 @@ describe("AppUserRepository integration", () => {
         describe("when password valid", () => {
           it("creates session in database", async () => {
             await AppUserRepository.createUser(
-              "Jean",
-              "User",
-              emailAddress,
-              "mot-de-passe-de-jean"
+              "John",
+              "Doe",
+              "JohnD",
+              email,
+              "Paris",
+              "france",
+              "password32*"
             );
 
             await AppUserRepository.signIn(
-              emailAddress,
-              "mot-de-passe-de-jean"
+              email,
+              "password32*"
             );
 
             const sessions = await SessionRepository.repository.find();
             expect(sessions).toHaveLength(1);
-            expect(sessions[0].user.emailAddress).toEqual(emailAddress);
+            expect(sessions[0].user.email).toEqual(email);
           });
 
           it("returns user and session", async () => {
             await AppUserRepository.createUser(
-              "Jean",
-              "User",
-              emailAddress,
-              "mot-de-passe-de-jean"
+              "John",
+              "Doe",
+              "JohnD",
+              email,
+              "Paris",
+              "france",
+              "password32*"
             );
 
             const result = await AppUserRepository.signIn(
-              emailAddress,
-              "mot-de-passe-de-jean"
+              email,
+              "password32*"
             );
             expect(result).toHaveProperty("user");
             expect(result).toHaveProperty("session");
-            expect(result.user.emailAddress).toEqual(emailAddress);
+            expect(result.user.email).toEqual(email);
           });
         });
       });
     });
   });
-
   describe("signOut", () => {
     describe("when passed existing user", () => {
       it("deletes session in database", () => {});

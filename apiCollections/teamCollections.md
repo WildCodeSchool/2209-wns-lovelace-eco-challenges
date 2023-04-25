@@ -165,8 +165,8 @@ query GetTeamByName($teamName: String!) {
 ### Get team by Id
 
 ```
-query TeamById($Id: String!) {
-  teamById(id: $Id) {
+query TeamById($id: String!) {
+  teamById(id: $id) {
     id
     teamName
     ...
@@ -188,7 +188,7 @@ query TeamById($Id: String!) {
 
 | Parameter | Type     | Description |
 | :-------- | :------- | :---------- |
-| `Id`      | `string` | uuid        |
+| `id`      | `string` | uuid        |
 
 ---
 
@@ -219,8 +219,8 @@ mutation CreateTeam($teamName: String!, $city: String!, $country: String!, $isPu
 ### Update a team
 
 ```
-mutation UpdateTeam($teamName: String!, $city: String!, $country: String!, $isPublic: Boolean!, $Id: ID!, $img: String) {
-  updateTeam(teamName: $teamName, city: $city, country: $country, isPublic: $isPublic, id: $Id, img: $img) {
+mutation UpdateTeam($teamName: String!, $city: String!, $country: String!, $isPublic: Boolean!, $id: ID!, $img: String) {
+  updateTeam(teamName: $teamName, city: $city, country: $country, isPublic: $isPublic, id: $id, img: $img) {
     id
     teamName
     isPublic
@@ -233,7 +233,7 @@ mutation UpdateTeam($teamName: String!, $city: String!, $country: String!, $isPu
 
 | Parameter  | Type      | Description  |
 | :--------- | :-------- | :----------- |
-| `Id`       | `uuid`    | **required** |
+| `id`       | `uuid`    | **required** |
 | `teamName` | `string`  | **required** |
 | `city`     | `string`  | **required** |
 | `country`  | `string`  | **required** |
@@ -245,8 +245,8 @@ mutation UpdateTeam($teamName: String!, $city: String!, $country: String!, $isPu
 ### Delete a team
 
 ```
-mutation DeleteTeam($Id: String!) {
-  deleteTeam(id: $Id) {
+mutation DeleteTeam($id: String!) {
+  deleteTeam(id: $id) {
     id
     teamName
   }

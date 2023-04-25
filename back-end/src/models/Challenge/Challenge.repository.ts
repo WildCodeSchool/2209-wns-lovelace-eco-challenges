@@ -26,7 +26,7 @@ export default class ChallengeRepository extends ChallengeDb {
     category: Category,
     itemsByPage: number, 
     pageNumber: number
-    ): Promise<Challenge[] | null> {
+    ): Promise<Challenge[]> {
     return this.repository.find({ 
       where: {
         category: ArrayContains([category]) 
@@ -48,7 +48,7 @@ export default class ChallengeRepository extends ChallengeDb {
     level: Level,
     itemsByPage: number, 
     pageNumber: number
-    ): Promise<Challenge[] | null> {
+    ): Promise<Challenge[]> {
     return this.repository.find({ 
       where: {
         level: level 
@@ -66,8 +66,8 @@ export default class ChallengeRepository extends ChallengeDb {
     });
   }
 
-  static async getChallengeById(id: string): Promise<Challenge | null> {
-    return this.repository.findOne({ 
+  static async getChallengeById(id: string): Promise<Challenge> {
+    const existingChallenge = await this.repository.findOne({ 
       where: {
         id 
       }, 
@@ -79,10 +79,14 @@ export default class ChallengeRepository extends ChallengeDb {
         }
       }
     }); 
+    if (!existingChallenge) {
+      throw Error("No existing Challenge matching Id")
+    } 
+    return existingChallenge;
   }
 
-  static async getChallengeByName(challengeName: string): Promise<Challenge | null> {
-    return this.repository.findOne({ 
+  static async getChallengeByName(challengeName: string): Promise<Challenge> {
+    const existingChallenge = await this.repository.findOne({ 
       where : {
         challengeName: ILike(`%${challengeName}%`) 
       },
@@ -94,6 +98,10 @@ export default class ChallengeRepository extends ChallengeDb {
         }
       }
     });
+    if (!existingChallenge) {
+      throw Error("No existing Challenge matching Name")
+    } 
+    return existingChallenge;
   }
 
   static async createChallenge(

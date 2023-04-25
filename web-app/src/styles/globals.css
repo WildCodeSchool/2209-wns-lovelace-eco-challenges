@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './normalize.css';
+@import './main.css';
+@import './loader.css';
+
+
+h1, h2, h3, p, li {
+  @apply font-['Lato'];
+}

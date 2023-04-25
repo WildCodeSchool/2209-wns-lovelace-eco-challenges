@@ -58,7 +58,7 @@ export default class Team {
 
   @Column("varchar", { nullable: true })
   @Field({ nullable: true })
-  img?: string; 
+  img: string; 
 
   @Column("boolean")
   @Field()

@@ -2,7 +2,6 @@ import Team from "./Team.entity";
 import TeamDb from "./Team.db";
 import { ILike, Like } from "typeorm";
 import ChallengeRepository from "../Challenge/Challenge.repository";
-import Challenge from "../Challenge/Challenge.entity";
 
 export default class TeamRepository extends TeamDb {
 
@@ -24,7 +23,7 @@ export default class TeamRepository extends TeamDb {
     city: string,
     itemsByPage: number, 
     pageNumber: number
-    ): Promise<Team[] | null> {
+    ): Promise<Team[]> {
     return this.repository.find({ 
       where : {
         city: ILike(`%${city}%`) 
@@ -44,7 +43,7 @@ export default class TeamRepository extends TeamDb {
     country: string,
     itemsByPage: number, 
     pageNumber: number
-    ): Promise<Team[] | null> {
+    ): Promise<Team[]> {
     return this.repository.find({ 
       where: {
         country: ILike(`%${country}%`) 
@@ -60,8 +59,8 @@ export default class TeamRepository extends TeamDb {
     });
   }
 
-  static async getTeamByName(teamName: string): Promise<Team | null> {
-    return this.repository.findOne({ 
+  static async getTeamByName(teamName: string): Promise<Team> {
+    const existingTeam = await this.repository.findOne({ 
       where: {
         teamName: ILike(`%${teamName}%`)
       },
@@ -71,10 +70,14 @@ export default class TeamRepository extends TeamDb {
         }
       }
     });
+    if (!existingTeam) {
+      throw Error("No existing Team matching Name")
+    } 
+    return existingTeam;
   }
 
-  static async getTeamById(id: string): Promise<Team | null> {
-    return this.repository.findOne({ 
+  static async getTeamById(id: string): Promise<Team> {
+    const existingTeam = await this.repository.findOne({ 
       where: {
         id
       },
@@ -84,6 +87,10 @@ export default class TeamRepository extends TeamDb {
         }
       }
     });
+    if (!existingTeam) {
+      throw Error("No existing Team matching Id")
+    } 
+    return existingTeam;
   }
 
   static async createTeam(
