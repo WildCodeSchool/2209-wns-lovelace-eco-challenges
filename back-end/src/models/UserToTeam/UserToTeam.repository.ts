@@ -17,7 +17,8 @@ export default class UserToTeamRepository extends UserToTeamDb {
     teamId: string,
     userEmail: string, 
     userRole: UserRole,
-    /* challengeName: string */
+    challengeName: string,
+    shouldInvite: boolean
   ): Promise<UserToTeam> {
     const team =(await TeamRepository.getTeamById(teamId)) as Team;
 
@@ -28,19 +29,29 @@ export default class UserToTeamRepository extends UserToTeamDb {
       user = await AppUserRepository.createUserToBeChecked(userEmail) as AppUser; 
     }
 
-    /* const invitName = `${team.teamName}-${challengeName}-${userEmail}` */
-
-    /* const invitation = await InvitationRepository.createInvitation(invitName) as Invitation; */
-
     const newUserToTeam = this.repository.create({ 
       team, 
-      user, 
+      user,                                      
       userRole,
-      /* invitation */
     });
+
+
+
+
+
+    if(shouldInvite) {
+      const invitName = `${team.teamName}-${challengeName}-${userEmail}`
+
+      const invitation = await InvitationRepository.createInvitation(invitName)
+
+      newUserToTeam.invitation = invitation      
+    }
+
     await this.repository.save(newUserToTeam);
+    
     return newUserToTeam;
   }
+
 }
 
 

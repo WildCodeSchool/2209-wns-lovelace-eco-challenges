@@ -26,7 +26,7 @@ export default class InvitationDB  {
         const invitation6 = await InvitationRepository.createInvitation("invitation-6")
         const invitation7 = await InvitationRepository.createInvitation("invitation-7")
         const invitation8 = await InvitationRepository.createInvitation("invitation-8")
-        console.log(invitation1)
+        
         await this.repository.save([invitation1, invitation2, invitation3, invitation4, invitation5, invitation6, invitation7, invitation8])
     }
 

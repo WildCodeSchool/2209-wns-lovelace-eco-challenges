@@ -5,11 +5,6 @@ import { ReactToInvitation } from "./Invitation.input";
 
 @Resolver(Invitation)
 export default class InvitationResolver {
-    /* @Mutation(() => Invitation)
-    static async sendInvitation(): Promise<Invitation>{
-        return InvitationRepository.createInvitation()
-    } */
-
     @Query(() => [Invitation])
     async getInvitations():Promise<Invitation[]> {
         return InvitationRepository.getInvitations()

@@ -42,4 +42,7 @@ export default class InvitationRepository extends InvitationDB {
             throw Error("No existing Invitation matching ID.")
         }
     }
+
+    /* créer une invitation et l'ajouter a l'inter */
+
 }
