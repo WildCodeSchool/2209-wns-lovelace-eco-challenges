@@ -41,7 +41,7 @@ query userById($Id: String!) {
 `
 
 const PersoScreen = () => {
-  const Id = "74155267-5564-480c-acfa-8da0efa48dfd"
+  const Id = "c28f0b3d-8d4e-4116-b881-d17d4e472a82"
   const { data } = useQuery<UserByIdQuery, UserByIdQueryVariables
   >(GET_USERSBYID, {
     variables: { Id },
