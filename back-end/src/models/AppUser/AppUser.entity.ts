@@ -1,5 +1,4 @@
 import { IsEmail } from "class-validator";
-// import { count } from "console";
 import { Field, ID, ObjectType } from "type-graphql";
 import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany } from "typeorm";
 import UserToTeam from "../UserToTeam/UserToTeam.entity";

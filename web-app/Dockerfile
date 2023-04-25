@@ -2,22 +2,20 @@ FROM node:16-alpine as base
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
 
 COPY . ./
 
 FROM base as build
 COPY src ./src 
-RUN npm run build
+RUN yarn run build
 
 FROM base as dev
-CMD npm start
+CMD yarn dev
 
 FROM build as ci
-CMD npm run test
+CMD yarn run test
 
 FROM build as prod
-RUN npm install -g serve
-
-CMD npx serve build
+RUN yarn run start
