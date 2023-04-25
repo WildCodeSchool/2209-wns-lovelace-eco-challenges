@@ -57,11 +57,14 @@ export async function getServerSideProps(context: ChallengeId) {
   if (!["en", "fr"].includes(locale)) {
     return { notFound: true };
   }
-
   const path = context.params;
   const { id } = path;
   
-  console.log(path);
+  if (!id) {
+    return {
+      notFound: true,
+    }
+  }
 
   const { data } = await client.query({
     query: CHALLENGE_DETAIL,
