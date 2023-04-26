@@ -17,6 +17,8 @@ import ChallengeResolver from "./resolvers/Challenge/Challenge.resolver";
 import UserToTeamResolver from "./resolvers/UserToTeam/UserToTeam.resolver";
 import UserToTeamRepository from "./models/UserToTeam/UserToTeam.repository";
 import { IS_PRODUCTION } from "./config";
+import InvitationResolver from "./resolvers/Invitation/Invitation.resolver";
+
 
 export type GlobalContext = ExpressContext & {
   user: AppUser | null;
@@ -25,7 +27,7 @@ export type GlobalContext = ExpressContext & {
 const startServer = async () => {
   const server = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [TeamResolver, AppUserResolver, UserToTeamResolver, ChallengeResolver],
+      resolvers: [TeamResolver, AppUserResolver, UserToTeamResolver, ChallengeResolver, InvitationResolver],
       authChecker: async ({ context }) => {
         return Boolean(context.user);
       },

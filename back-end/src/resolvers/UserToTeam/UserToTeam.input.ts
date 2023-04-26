@@ -15,6 +15,11 @@ class  CreateUserToTeamArgs {
   @Field(_type => UserRole) 
   @IsEnum(UserRole)
   userRole : UserRole;
+
+  @Field()
+  challengeName?:string;
+
+
 }
 
 export { CreateUserToTeamArgs };

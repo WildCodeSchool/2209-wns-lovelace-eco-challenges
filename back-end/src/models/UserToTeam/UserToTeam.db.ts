@@ -16,6 +16,8 @@ export default class UserToTeamDb {
     this.repository.delete({});
   }
 
+  
+
   static async initializeUserToTeam(): Promise<void> {
     await this.clearRepository(); 
 
