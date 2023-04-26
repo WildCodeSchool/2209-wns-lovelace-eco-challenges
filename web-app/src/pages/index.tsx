@@ -251,7 +251,7 @@ const Index = (props: any): JSX.Element => {
                 }
                 type="button-secondary"
                 name={t("home.button.startchallenge")}
-                onClickEvent={() => router.push("/launch-challenge")}
+                onClickEvent={() => router.push("/formlaunchchallenge")}
               />
             </div>
           </div>
