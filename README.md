@@ -21,6 +21,22 @@ Build and start in dev mode:
 ./build-start.dev.sh
 ```
 
-### Run tests back-end
+### Run tests
 
-docker compose -f docker-compose.dev.yml exec back-end npm run test
+Back-end:
+
+```
+docker compose exec back-end npm run test
+```
+
+_with watch:_
+
+```
+./run-test.sh
+```
+
+Web-app:
+
+```
+docker compose exec web-app npm run test
+```

@@ -11,11 +11,9 @@ const dataSource = new DataSource({
   type: "postgres",
   url: NODE_ENV === "test" ? TEST_DATABASE_URL : DATABASE_URL,
   synchronize: true,
-  entities: [
-    __dirname + `/../models/**/*.entity.${NODE_ENV === "test" ? "ts" : "js"}`,
-  ],
-  logging: NODE_ENV === "development" ? ["error"] : ["error"],
-  // logging: ["query", "error"],
+  entities: [__dirname + "/../models/**/*.entity.{js,ts}"],
+  //logging: NODE_ENV === "development" ? ["query", "error"] : ["error"],
+  logging: ["error"],
 });
 
 let initialized = false;
