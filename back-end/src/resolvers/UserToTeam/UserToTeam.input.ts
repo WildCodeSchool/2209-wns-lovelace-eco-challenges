@@ -17,10 +17,8 @@ class  CreateUserToTeamArgs {
   userRole : UserRole;
 
   @Field()
-  challengeName:string;
+  challengeName?:string;
 
-  @Field()
-  shouldInvite:boolean;
 
 }
 

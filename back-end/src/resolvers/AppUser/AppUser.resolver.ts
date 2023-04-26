@@ -36,12 +36,6 @@ export default class AppUserResolver {
     return user;
   }
 
-  
-  @Mutation(() => AppUser)
-  createEmptyUser(@Args() {email}: Email) {
-    return AppUserRepository.createUserToBeChecked(email)
-  }
-
   @Authorized()
   @Query(() => AppUser)
   async myProfile(@Ctx() context: GlobalContext): Promise<AppUser> {

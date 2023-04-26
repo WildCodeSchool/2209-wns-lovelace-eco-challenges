@@ -14,14 +14,14 @@ export default class InvitationRepository extends InvitationDB {
     static async acceptInvitation(_id:string): Promise<Invitation> {
         const invitation = await this.getInvitationById(_id)
         
-        if(invitation) {
+        if(!invitation) {
+            throw Error("No existing Invitation matching ID.")
+        } else {
             if(invitation.status == InvitationStatus.PENDING) {
                 return this.repository.save({...invitation, status:InvitationStatus.ACCEPTED})
             } else{
                 throw Error(`the invitation has already been close`)
             }
-        } else {
-            throw Error("No existing Invitation matching ID.")
         }
     }
 
@@ -32,14 +32,14 @@ export default class InvitationRepository extends InvitationDB {
     static async declinInvitation(_id:string): Promise<Invitation> {
         const invitation = await this.getInvitationById(_id)
 
-        if(invitation) {
+        if(!invitation) {
+            throw Error("No existing Invitation matching ID.")
+        } else {
             if(invitation.status == InvitationStatus.PENDING) {
                 return this.repository.save({...invitation, status:InvitationStatus.DENIED})
             } else{
                 throw Error(`the invitation has already been close`)
             }
-        } else {
-            throw Error("No existing Invitation matching ID.")
         }
     }
 
