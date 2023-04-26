@@ -17,7 +17,6 @@ export default class UserToTeamResolver {
       userEmail, 
       userRole,
       challengeName,
-      shouldInvite
     }: CreateUserToTeamArgs
   ): Promise<UserToTeam> {
     return UserToTeamRepository.createUserToTeam(
@@ -25,7 +24,6 @@ export default class UserToTeamResolver {
       userEmail, 
       userRole,
       challengeName,
-      shouldInvite
     )
   }
 }
