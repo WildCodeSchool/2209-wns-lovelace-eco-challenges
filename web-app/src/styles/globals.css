@@ -10,3 +10,7 @@
 h1, h2, h3, p, li {
   @apply font-['Lato'];
 }
+
+.input-launch-chall {
+  @apply border border-black p-2 w-1/2 rounded-md
+}

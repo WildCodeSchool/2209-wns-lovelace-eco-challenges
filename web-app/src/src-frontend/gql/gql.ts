@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\n  mutation CreateTeam($teamName: String!, $city: String!, $country: String!, $isPublic: Boolean!, $img: String) {\n    createTeam(teamName: $teamName, city: $city, country: $country, isPublic: $isPublic, img: $img) {\n      teamName\n      city\n      country\n      isPublic\n      img\n    }\n}\n": types.CreateTeamDocument,
     "\n  query GetChallenges($itemsByPage: Int!, $pageNumber: Int!) {\n    challenges(itemsByPage: $itemsByPage, pageNumber: $pageNumber) {\n      id\n      challengeName\n      description\n      level\n      category\n      startsAt\n      endAt\n      img\n    }\n  }\n": types.GetChallengesDocument,
     "\n  query GetChallengeById($id: String!) {\n    challengeById(id: $id) {\n      id\n      img\n      challengeName\n      description\n      category\n      level\n      startsAt\n      endAt\n      teams {\n        id\n        teamName\n        img\n        userToTeams {\n          userRole\n          user {\n            nickname\n          }\n        }\n      }\n    }\n  }\n": types.GetChallengeByIdDocument,
     "\n  mutation SignIn($email: String!, $password: String!) {\n    signIn(email: $email, password: $password) {\n      id\n      email\n      firstName\n      lastName\n    }\n  }\n": types.SignInDocument,
@@ -33,6 +34,10 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation CreateTeam($teamName: String!, $city: String!, $country: String!, $isPublic: Boolean!, $img: String) {\n    createTeam(teamName: $teamName, city: $city, country: $country, isPublic: $isPublic, img: $img) {\n      teamName\n      city\n      country\n      isPublic\n      img\n    }\n}\n"): (typeof documents)["\n  mutation CreateTeam($teamName: String!, $city: String!, $country: String!, $isPublic: Boolean!, $img: String) {\n    createTeam(teamName: $teamName, city: $city, country: $country, isPublic: $isPublic, img: $img) {\n      teamName\n      city\n      country\n      isPublic\n      img\n    }\n}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
