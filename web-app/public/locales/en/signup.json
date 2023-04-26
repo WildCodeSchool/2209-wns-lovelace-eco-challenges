@@ -1,0 +1,14 @@
+{
+    "signup.signup": "Signup",
+    "signup.firstname": "First Name",
+    "signup.lastname": "Last Name",
+    "signup.nickname": "Nickname",
+    "signup.email": "Email",
+    "signup.city": "City",
+    "signup.country": "Country",
+    "signup.password": "Password",
+    "signup.confirm": "Confirm password",
+    "signup.donotwork": "Password does not match",
+    "signup.orcreate": "or Create an account with",
+    "signup.account": "Do you already have an account ?"
+}

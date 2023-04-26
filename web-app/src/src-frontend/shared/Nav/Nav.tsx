@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 
 const Nav = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("page");
 
   return (
     <nav className="text-white

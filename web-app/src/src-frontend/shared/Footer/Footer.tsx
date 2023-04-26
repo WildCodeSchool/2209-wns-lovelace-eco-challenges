@@ -1,12 +1,7 @@
 import { useTranslation } from 'next-i18next'
 
 const Footer = () => {
-  const { t, i18n } = useTranslation();
-
-  const lngs: any = {
-    en: { nativeName: 'EN' },
-    fr: { nativeName: 'FR' }
-  };
+  const { t, i18n } = useTranslation("page");
 
   return (
     <footer className="bg-primary
@@ -56,19 +51,6 @@ const Footer = () => {
         <p>{t('footer.legal')}</p>
         <p>{t('footer.blog')}</p>
       </div>
-      <div className="p-5
-            lg:w-1/2
-            lg:mr-3
-            lg:last:mr-0 flex items-center justify-center">
-        <p className="mr-3">{t('change.language')}</p>
-          {Object.keys(lngs).map((lng) => (
-            <button className="p-2 border-2" key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => {
-              i18n.changeLanguage(lng);
-            }}>
-              {lngs[lng].nativeName}
-            </button>
-          ))}
-        </div>
     </footer>
   );
 };

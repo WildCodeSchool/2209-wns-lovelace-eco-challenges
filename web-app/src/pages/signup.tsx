@@ -2,7 +2,6 @@ import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-// import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Apple from "@assets/logos/Apple";
 import ArrowLinkTo from "@assets/logos/ArrowLinkTo";
@@ -10,6 +9,7 @@ import Facebook from "@assets/logos/Facebook";
 import { Mail } from "@assets/logos/Mail";
 import { SignUpMutation, SignUpMutationVariables } from "@gql/graphql";
 import Button from "@shared/Buttons/Button";
+import { useTranslation } from "next-i18next";
 // import { getErrorMessage } from "@utils";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -49,7 +49,9 @@ const SIGN_UP = gql`
   }
 `;
 
-const SignUp = () => {
+const SignUp = (props: any) => {
+  const { locale } = props;
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [city, setCity] = useState("");
@@ -57,6 +59,8 @@ const SignUp = () => {
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { t } = useTranslation("signup");
 
   const [confirmedPassword, setConfirmedPassword] = useState(false);
 
@@ -79,9 +83,15 @@ const SignUp = () => {
           password,
         },
       });
-      toast.success(
-        `Votre compte a été créé avec succès. Vous pouvez maintenant vous connecter.`
-      );
+      if (locale === "fr") {
+        toast.success(
+          "Votre compte a été créé avec succès. Vous pouvez maintenant vous connecter."
+        );
+      } else {
+        toast.success(
+          "Your account has been successfully created. You can now connect."
+        );
+      }
       router.push(SIGN_IN_PATH);
     } catch (error) {
       // toast.error(getErrorMessage(error));
@@ -100,11 +110,10 @@ const SignUp = () => {
       >
         <fieldset className="form">
           <legend className="bg-white font-bold -translate-y-1/2 border-2 mx-auto rounded-md border-primary text-primary -rotate-2 px-8">
-            {" "}
-            <h1 className="rotate-2"> S&apos;inscrire </h1>{" "}
+            <h1 className="rotate-2">{t('signup.signup')}</h1>{" "}
           </legend>
           <label className="block mx-auto w-9/12  font-bold">
-            Prénom
+            {t('signup.firstname')}
             <br />
             <input
               className="bg-terciary p-2 w-full  rounded-xl"
@@ -121,7 +130,7 @@ const SignUp = () => {
           </label>
           <br />
           <label className="block mx-auto w-9/12  font-bold">
-            Nom
+            {t('signup.lastname')}
             <br />
             <input
               className="bg-terciary p-2 w-full  rounded-xl"
@@ -138,7 +147,7 @@ const SignUp = () => {
           </label>
           <br />
           <label className="block mx-auto w-9/12  font-bold">
-            Pseudo
+            {t('signup.nickname')}
             <br />
             <input
               className="bg-terciary p-2 w-full  rounded-xl"
@@ -155,7 +164,7 @@ const SignUp = () => {
           </label>
           <br />
           <label className="block mx-auto w-9/12  font-bold">
-            Email
+          {t('signup.email')}
             <br />
             <input
               className="bg-terciary p-2 w-full  rounded-xl"
@@ -173,7 +182,7 @@ const SignUp = () => {
           </label>
           <br />
           <label className="block mx-auto w-9/12  font-bold">
-            Ville
+          {t('signup.city')}
             <br />
             <input
               className="bg-terciary p-2 w-full  rounded-xl"
@@ -190,7 +199,7 @@ const SignUp = () => {
           </label>
           <br />
           <label className="block mx-auto w-9/12  font-bold">
-            Pays
+          {t('signup.country')}
             <br />
             <input
               className="bg-terciary p-2 w-full  rounded-xl"
@@ -207,7 +216,7 @@ const SignUp = () => {
           </label>
           <br />
           <label className="block mx-auto w-9/12  font-bold">
-            Mot de passe
+          {t('signup.password')}
             <br />
             <input
               className="bg-terciary p-2 w-full  rounded-xl"
@@ -226,7 +235,7 @@ const SignUp = () => {
           <br />
 
           <label className="block mx-auto w-9/12  font-bold">
-            Confirmer votre mot de passe
+          {t('signup.confirm')}
             <br />
             <input
               className="bg-terciary p-2 w-full  rounded-xl"
@@ -247,12 +256,12 @@ const SignUp = () => {
             {confirmedPassword ? (
               <></>
             ) : (
-              <p className="error"> Le mot de passe ne correspond pas</p>
+              <p className="error">{t('signup.donotwork')}</p>
             )}
           </label>
 
           <div className="text-center font-semibold text-primary pt-4 pb-2">
-            <h2> ou créer un compte avec </h2>
+            <h2>{t('signup.orcreate')}</h2>
           </div>
 
           <section className="flex w-full justify-around">
@@ -270,13 +279,12 @@ const SignUp = () => {
           </section>
 
           <button className="h-0 w-full">
-            {" "}
             <ArrowLinkTo
               width="96px"
               height="96px"
               fill="#3B8574"
               className="m-auto"
-            />{" "}
+            />
           </button>
           {/* <button className="w-content m-auto" disabled={loading || !confirmedPassword}> <ArrowLinkTo /> </button> */}
         </fieldset>
@@ -284,7 +292,7 @@ const SignUp = () => {
       </form>
 
       <div className="flex items-center justify-center flex-col m-4">
-        <h2> Vous avez déjà un compte ? </h2>
+        <h2>{t('signup.account')}</h2>
         <Button
           onClickEvent={openSignIn}
           type="button-primary"
@@ -295,7 +303,7 @@ const SignUp = () => {
   );
 };
 
-export const getStaticProps = async (context: NextI18NContext) => {
+export const getServerSideProps = async (context: NextI18NContext) => {
   const { locale } = context;
   if (!["en", "fr"].includes(locale)) {
     return { notFound: true };
@@ -303,7 +311,8 @@ export const getStaticProps = async (context: NextI18NContext) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
+      ...(await serverSideTranslations(locale, ["page", "signup"])),
+      locale,
     },
   };
 };

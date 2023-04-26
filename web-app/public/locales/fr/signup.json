@@ -1,0 +1,14 @@
+{
+    "signup.signup": "S'inscrire",
+    "signup.firstname": "Prénom",
+    "signup.lastname": "Nom",
+    "signup.nickname": "Pseudo",
+    "signup.email": "Email",
+    "signup.city": "Ville",
+    "signup.country": "Pays",
+    "signup.password": "Mot de passe",
+    "signup.confirm": "Confirmer mot de passe",
+    "signup.donotwork": "Le mot de passe ne correspond pas",
+    "signup.orcreate": "ou créer un compte avec",
+    "signup.account": "Avez-vous déjà un compte ?"
+}
