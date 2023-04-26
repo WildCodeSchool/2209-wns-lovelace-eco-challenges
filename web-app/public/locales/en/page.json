@@ -1,0 +1,19 @@
+{
+    "app.name": "Eco Playground",
+    "menu.challenges":"Challenges",
+    "menu.teams": "Teams",
+    "menu.login": "Login",
+    "menu.signin": "Signin",
+    "menu.profile": "Profile",
+    "footer.title": "Eco Playground is hosted on PlanetHoster, green host",
+    "footer.contactus": "Contact Us",
+    "footer.phone": "Phone",
+    "footer.mail": "Email",
+    "footer.plan": "Sitemap",
+    "footer.home": "Home",
+    "footer.challenges": "Challenges",
+    "footer.teams": "Teams",
+    "footer.others": "Others",
+    "footer.legal": "Legal Notice",
+    "footer.blog": "Blog"
+}

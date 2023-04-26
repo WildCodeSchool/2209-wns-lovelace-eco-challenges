@@ -12,16 +12,14 @@ import { WHITE } from "@constants/color";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { CHALLENGE_DETAIL } from "@api/queries";
 import { client } from "@api/apolloClient";
+import { useTranslation } from "next-i18next";
 
 import { type ChallengeById } from "@customTypes/challenges";
 import { type ChallengeId } from "@customTypes/types";
 
-type Props = {
-  challengeById: ChallengeById;
-};
-
-const Challenge = (props: Props) => {
+const Challenge = (props: any) => {
   const { challengeById } = props;
+  const { t } = useTranslation("challenge");
 
   return (
     <>
@@ -33,12 +31,12 @@ const Challenge = (props: Props) => {
       level={challengeById.level}
     />
     <Button
-      name="Lancer le challenge"
+      name={t('challenge.gochallenge')}
       type="button-primary"
       icon={<LaunchChallenge width="20px" height="20px" fill={WHITE} />}
     />
     <div className="block w-11/12">
-      <h2 className="text-2xl">Teams</h2>
+      <h2 className="text-2xl">{t('challenge.teams')}</h2>
       <div className="flex justify-around">
         {challengeById.teams.map((element, index) => (
           <div className="w-2/5" key={index}>
@@ -69,14 +67,13 @@ export async function getServerSideProps(context: ChallengeId) {
   const { data } = await client.query({
     query: CHALLENGE_DETAIL,
     variables: { id },
-    // ssrMode: true,
   });
 
   const { challengeById } = data;
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
+      ...(await serverSideTranslations(locale, ["page", "challenge"])),
       challengeById: challengeById ?? [],
       locale,
     },

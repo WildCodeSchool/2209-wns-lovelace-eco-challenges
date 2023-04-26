@@ -14,7 +14,7 @@ type Props = {
 const ResponsiveNav = (props: Props) => {
   const { open, isClicked } = props;
 
-  const { t } = useTranslation();
+  const { t } = useTranslation("page");
 
   if (!open) {
     return null;
@@ -33,36 +33,36 @@ const ResponsiveNav = (props: Props) => {
           items-center
           justify-center
           flex-col text-3xl mt-5 ml-5">
-        {/* <Link className="py-5 w-full flex items-baseline" to="/challenges" onClick={() => isClicked()}>
+        <Link className="py-5 w-full flex items-baseline"href="/challenges" onClick={() => isClicked()}>
           <i className="mr-3">
             <Home width="30px" height="30px" fill="white" />
           </i>
           {t('menu.challenges')}
         </Link>
-        <Link className="py-5 w-full flex items-baseline" to="/teams" onClick={() => isClicked()}>
+        <Link className="py-5 w-full flex items-baseline" href="/teams" onClick={() => isClicked()}>
           <i className="mr-3">
             <Groups width="30px" height="30px" fill="white" />
           </i>
           {t('menu.teams')}
         </Link>
-        <Link className="py-5 w-full flex items-baseline" to="/signin" onClick={() => isClicked()}>
+        <Link className="py-5 w-full flex items-baseline" href="/signin" onClick={() => isClicked()}>
           <i className="mr-3">
             <Login width="30px" height="30px" fill="white" />
           </i>
           {t('menu.login')}
         </Link>
-        <Link className="py-5 w-full flex items-baseline" to="/signup" onClick={() => isClicked()}>
+        <Link className="py-5 w-full flex items-baseline" href="/signup" onClick={() => isClicked()}>
           <i className="mr-3">
             <Hands width="30px" height="30px" fill="white" />
           </i>
           {t('menu.signin')}
         </Link>
-        <Link className="py-5 w-full flex items-baseline" to="" onClick={() => isClicked()}>
+        <Link className="py-5 w-full flex items-baseline" href="" onClick={() => isClicked()}>
           <i className="mr-3">
             <Profile width="30px" height="30px" fill="white" />
           </i>
           {t('menu.profile')}
-        </Link> */}
+        </Link>
       </ul>
     </nav>
   );

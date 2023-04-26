@@ -1,0 +1,19 @@
+{
+    "app.name": "Eco Playground",
+    "menu.challenges":"Challenges",
+    "menu.teams": "Équipes",
+    "menu.login": "Se connecter",
+    "menu.signin": "S'inscrire",
+    "menu.profile": "Profil",
+    "footer.title": "Eco Playground est hebergé sur PlanetHoster, hébergeur vert",
+    "footer.contactus": "Nous contacter",
+    "footer.phone": "Par téléphone",
+    "footer.mail": "Mail",
+    "footer.plan": "Plan du site",
+    "footer.home": "Accueil",
+    "footer.challenges": "Challenges",
+    "footer.teams": "Équipes",
+    "footer.others": "Autres",
+    "footer.legal": "Mentions légales",
+    "footer.blog": "Blog"
+}

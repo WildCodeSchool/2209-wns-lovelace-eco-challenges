@@ -3,7 +3,10 @@ const nextI18NextConfig = {
     defaultLocale: 'fr',
     locales: ['fr', 'en'],
   },
-  react: { useSuspense: false },
+  fallbacking: {
+    default: ['fr']
+  },
+  ns: ["page", "home", "challenges", "challenge", "signin", "signup"],
 }
 
 module.exports = nextI18NextConfig

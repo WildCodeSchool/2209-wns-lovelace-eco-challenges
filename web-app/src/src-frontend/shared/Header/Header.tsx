@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
-
+import Image from "next/image";
 
 import Ecology from "@assets/logos/ecology.png";
 
 import Nav from "@shared/Nav/Nav";
 import ResponsiveNav from "@shared/Nav/ResponsiveNav";
+import { useTranslation } from "next-i18next";
 
 import { disableScroll } from "@utils/Browser";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation("page");
 
   const isClicked = () => {
     if (document.body.offsetWidth < 768 && open) {
@@ -36,7 +38,7 @@ const Header = () => {
             className="w-10
             mr-4"
           >
-            {/* <img src={Ecology} alt="logo eco playground" /> */}
+            <Image src={Ecology} alt="logo eco playground" />
           </div>
           <h1
             className="text-white
@@ -46,7 +48,8 @@ const Header = () => {
             m-0
             after"
           >
-            Eco Playground</h1>
+            {t('app.name')}
+          </h1>
         </div>
       </Link>
       <div

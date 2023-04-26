@@ -38,15 +38,11 @@ import { type NextI18NContext } from "@customTypes/types";
 const pageNumber = 1;
 const itemsByPage = 3;
 
-type Props = {
-  challenges: Array<any>;
-};
-
-const Index = (props: Props): JSX.Element => {
+const Index = (props: any): JSX.Element => {
   const { challenges } = props;
   const router = useRouter();
 
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["home", "page"]);
   // const { t: TranslationHome } = useTranslation('home');
 
   return (
@@ -425,7 +421,7 @@ export async function getServerSideProps(context: NextI18NContext) {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
+      ...(await serverSideTranslations(locale, ["home", "page"])),
       challenges: challenges ?? [],
       locale,
     },

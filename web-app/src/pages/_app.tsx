@@ -10,11 +10,13 @@ import Footer from "@shared/Footer/Footer";
 
 const App = (props: AppProps): JSX.Element => {
   const { Component, pageProps } = props;
+  const { locale } = pageProps;
+
   return (
     <ApolloProvider client={ client }>
       <Header />
         <Component {...pageProps} />
-      <Footer />
+      <Footer locale={locale} />
     </ApolloProvider>
   );
 };
