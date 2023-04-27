@@ -1,9 +1,3 @@
-import { gql, useQuery } from "@apollo/client";
-import {
-  GetChallengeByIdQueryVariables,
-  GetChallengeByIdQuery,
-} from "@gql/graphql";
-import Loader from "@shared/Loader/Loader";
 import Image from "next/image";
 import List from "@shared/List/List";
 import Button from "@shared/Buttons/Button";
@@ -14,21 +8,27 @@ import { CHALLENGE_DETAIL } from "@api/queries";
 import { client } from "@api/apolloClient";
 import { useTranslation } from "next-i18next";
 
-import { type ChallengeById } from "@customTypes/challenges";
-import { type ChallengeId } from "@customTypes/types";
+import { type Challenge } from "@gql/graphql";
+import { type SSRConfig } from "@customTypes/i18next";
+import { type ParamsI18NextContext} from "@customTypes/types";
 
-const Challenge = (props: any) => {
-  const { challengeById } = props;
+type Props = {
+  challenge: Challenge,
+  locale: string;
+  _nextI18Next: SSRConfig;
+};
+const Challenge = (props: Props) => {
+  const { challenge } = props;
   const { t } = useTranslation("challenge");
 
   return (
     <>
     <List
-      description={challengeById.description}
-      title={challengeById.challengeName}
-      source={challengeById.img}
-      endAt={challengeById.endAt}
-      level={challengeById.level}
+      description={challenge.description}
+      title={challenge.challengeName}
+      source={challenge.img}
+      endAt={challenge.endAt}
+      level={challenge.level}
     />
     <Button
       name={t('challenge.gochallenge')}
@@ -38,7 +38,7 @@ const Challenge = (props: any) => {
     <div className="block w-11/12">
       <h2 className="text-2xl">{t('challenge.teams')}</h2>
       <div className="flex justify-around">
-        {challengeById.teams.map((element, index) => (
+        {challenge?.teams?.map((element, index) => (
           <div className="w-2/5" key={index}>
             <Image src={element.img || "https://picsum.photos/300/150" } alt="" width={300} height={150} />
             <h3>{element.teamName}</h3>
@@ -50,7 +50,7 @@ const Challenge = (props: any) => {
   );
 };
 
-export async function getServerSideProps(context: ChallengeId) {
+export async function getServerSideProps(context: ParamsI18NextContext) {
   const { locale } = context;
   if (!["en", "fr"].includes(locale)) {
     return { notFound: true };
@@ -74,7 +74,7 @@ export async function getServerSideProps(context: ChallengeId) {
   return {
     props: {
       ...(await serverSideTranslations(locale, ["page", "challenge"])),
-      challengeById: challengeById ?? [],
+      challenge: challengeById ?? [],
       locale,
     },
   }

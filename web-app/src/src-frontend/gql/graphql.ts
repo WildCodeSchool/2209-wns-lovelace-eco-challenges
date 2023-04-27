@@ -24,6 +24,7 @@ export type AppUser = {
   email: Scalars['String'];
   firstName: Scalars['String'];
   id: Scalars['ID'];
+  isVerified: Scalars['Boolean'];
   lastName: Scalars['String'];
   nickname: Scalars['String'];
   score: Scalars['Float'];
@@ -58,6 +59,7 @@ export type Invitation = {
   __typename?: 'Invitation';
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
+  name: Scalars['String'];
   status: InvitationStatus;
   userToTeams: Array<UserToTeam>;
 };
@@ -77,17 +79,24 @@ export enum Level {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  acceptInvitation: Invitation;
   addChallengeToTeam: Team;
   createChallenge: Challenge;
   createTeam: Team;
   createUserToTeam: UserToTeam;
   deleteChallenge: Challenge;
   deleteTeam: Team;
+  deniInvitation: Invitation;
   signIn: AppUser;
   signUp: AppUser;
   updateChallengePremium: Challenge;
   updateDatesChallenge: Challenge;
   updateTeam: Team;
+};
+
+
+export type MutationAcceptInvitationArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -118,11 +127,9 @@ export type MutationCreateTeamArgs = {
 
 
 export type MutationCreateUserToTeamArgs = {
-  disabled?: InputMaybe<Scalars['Boolean']>;
-  invitation?: InputMaybe<Scalars['ID']>;
-  score?: InputMaybe<Scalars['Int']>;
+  challengeName: Scalars['String'];
   teamId: Scalars['ID'];
-  userId: Scalars['ID'];
+  userEmail: Scalars['String'];
   userRole: UserRole;
 };
 
@@ -133,6 +140,11 @@ export type MutationDeleteChallengeArgs = {
 
 
 export type MutationDeleteTeamArgs = {
+  id: Scalars['String'];
+};
+
+
+export type MutationDeniInvitationArgs = {
   id: Scalars['String'];
 };
 
@@ -189,6 +201,7 @@ export type Query = {
   challenges: Array<Challenge>;
   challengesByCategory: Array<Challenge>;
   challengesByLevel: Array<Challenge>;
+  getInvitations: Array<Invitation>;
   myProfile: AppUser;
   teamById: Team;
   teamByName: Team;
@@ -304,20 +317,20 @@ export type UserToTeam = {
   userRole: UserRole;
 };
 
-export type GetChallengeByIdQueryVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type GetChallengeByIdQuery = { __typename?: 'Query', challengeById: { __typename?: 'Challenge', id: string, img?: string | null, challengeName: string, description: string, category: Array<Category>, level: Level, startsAt?: any | null, endAt?: any | null, teams?: Array<{ __typename?: 'Team', id: string, teamName: string, img?: string | null, userToTeams?: Array<{ __typename?: 'UserToTeam', userRole: UserRole, user: { __typename?: 'AppUser', nickname: string } }> | null }> | null } };
-
 export type GetChallengesQueryVariables = Exact<{
   itemsByPage: Scalars['Int'];
   pageNumber: Scalars['Int'];
 }>;
 
 
-export type GetChallengesQuery = { __typename?: 'Query', challenges: Array<{ __typename?: 'Challenge', id: string, challengeName: string, description: string, level: Level, category: Array<Category>, startsAt?: any | null, endAt?: any | null, img?: string | null, teams?: Array<{ __typename?: 'Team', id: string, teamName: string, city: string, country: string, isPublic: boolean, img?: string | null, userToTeams?: Array<{ __typename?: 'UserToTeam', userRole: UserRole, user: { __typename?: 'AppUser', nickname: string } }> | null }> | null }> };
+export type GetChallengesQuery = { __typename?: 'Query', challenges: Array<{ __typename?: 'Challenge', id: string, challengeName: string, description: string, level: Level, category: Array<Category>, startsAt?: any | null, endAt?: any | null, img?: string | null }> };
+
+export type GetChallengeByIdQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetChallengeByIdQuery = { __typename?: 'Query', challengeById: { __typename?: 'Challenge', id: string, img?: string | null, challengeName: string, description: string, category: Array<Category>, level: Level, startsAt?: any | null, endAt?: any | null, teams?: Array<{ __typename?: 'Team', id: string, teamName: string, img?: string | null, userToTeams?: Array<{ __typename?: 'UserToTeam', userRole: UserRole, user: { __typename?: 'AppUser', nickname: string } }> | null }> | null } };
 
 export type SignInMutationVariables = Exact<{
   email: Scalars['String'];
@@ -341,7 +354,7 @@ export type SignUpMutationVariables = Exact<{
 export type SignUpMutation = { __typename?: 'Mutation', signUp: { __typename?: 'AppUser', id: string, email: string, firstName: string, lastName: string, nickname: string, score: number, disabled: boolean, city: string, country: string } };
 
 
+export const GetChallengesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetChallenges"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"itemsByPage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"pageNumber"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"challenges"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"itemsByPage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"itemsByPage"}}},{"kind":"Argument","name":{"kind":"Name","value":"pageNumber"},"value":{"kind":"Variable","name":{"kind":"Name","value":"pageNumber"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"challengeName"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"category"}},{"kind":"Field","name":{"kind":"Name","value":"startsAt"}},{"kind":"Field","name":{"kind":"Name","value":"endAt"}},{"kind":"Field","name":{"kind":"Name","value":"img"}}]}}]}}]} as unknown as DocumentNode<GetChallengesQuery, GetChallengesQueryVariables>;
 export const GetChallengeByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetChallengeById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"challengeById"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"img"}},{"kind":"Field","name":{"kind":"Name","value":"challengeName"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"category"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"startsAt"}},{"kind":"Field","name":{"kind":"Name","value":"endAt"}},{"kind":"Field","name":{"kind":"Name","value":"teams"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"teamName"}},{"kind":"Field","name":{"kind":"Name","value":"img"}},{"kind":"Field","name":{"kind":"Name","value":"userToTeams"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userRole"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nickname"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetChallengeByIdQuery, GetChallengeByIdQueryVariables>;
-export const GetChallengesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetChallenges"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"itemsByPage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"pageNumber"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"challenges"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"itemsByPage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"itemsByPage"}}},{"kind":"Argument","name":{"kind":"Name","value":"pageNumber"},"value":{"kind":"Variable","name":{"kind":"Name","value":"pageNumber"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"challengeName"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"category"}},{"kind":"Field","name":{"kind":"Name","value":"startsAt"}},{"kind":"Field","name":{"kind":"Name","value":"endAt"}},{"kind":"Field","name":{"kind":"Name","value":"img"}},{"kind":"Field","name":{"kind":"Name","value":"teams"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"teamName"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"country"}},{"kind":"Field","name":{"kind":"Name","value":"isPublic"}},{"kind":"Field","name":{"kind":"Name","value":"img"}},{"kind":"Field","name":{"kind":"Name","value":"userToTeams"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userRole"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nickname"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetChallengesQuery, GetChallengesQueryVariables>;
 export const SignInDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignIn"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signIn"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}}]}}]}}]} as unknown as DocumentNode<SignInMutation, SignInMutationVariables>;
 export const SignUpDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignUp"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"nickname"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"city"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"country"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signUp"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"firstName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}}},{"kind":"Argument","name":{"kind":"Name","value":"lastName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}}},{"kind":"Argument","name":{"kind":"Name","value":"nickname"},"value":{"kind":"Variable","name":{"kind":"Name","value":"nickname"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"city"},"value":{"kind":"Variable","name":{"kind":"Name","value":"city"}}},{"kind":"Argument","name":{"kind":"Name","value":"country"},"value":{"kind":"Variable","name":{"kind":"Name","value":"country"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"nickname"}},{"kind":"Field","name":{"kind":"Name","value":"score"}},{"kind":"Field","name":{"kind":"Name","value":"disabled"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"country"}}]}}]}}]} as unknown as DocumentNode<SignUpMutation, SignUpMutationVariables>;
