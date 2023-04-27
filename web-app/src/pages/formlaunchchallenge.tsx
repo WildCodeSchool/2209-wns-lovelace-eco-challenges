@@ -24,23 +24,27 @@ const FormLaunchChallenge = () => {
     setImg(image);
   }
 
-  const [createTeam] = useMutation<
-    CreateTeamMutation,
-    CreateTeamMutationVariables
-  >(CREATE_TEAM, {
-    onError: (error) => {
-      toast.error(error.message);
-    },
-  });
+  // const [createTeam] = useMutation<
+  //   CreateTeamMutation,
+  //   CreateTeamMutationVariables
+  // >(CREATE_TEAM, {
+  //   client,
+  //   onError: (error) => {
+  //     toast.error(error.message);
+  //   },
+  // });
   const submitNewTeam = async () => {
-    await createTeam({ variables: { 
+    await client.mutate({
+      mutation: CREATE_TEAM,
+      variables: { 
       teamName,
       city,
       country,
       isPublic,
       img
-    }});
-    toast.success(`Votre Team ${teamName} est créé avec succès.`);
+      }
+    });
+    // toast.success(`Votre Team ${teamName} est créé avec succès.`);
     setTeamName("");
     setCity("");
     setCountry("");
