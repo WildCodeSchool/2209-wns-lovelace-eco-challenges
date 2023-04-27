@@ -2,7 +2,6 @@ import { useState } from "react";
 import Image from "next/image";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-
 import TiltedLabel from "@shared/TiltedLabel/TiltedLabel"
 import { NextI18NContext } from "@src/src-frontend/customTypes/types";
 import { useMutation } from "@apollo/client";
@@ -54,82 +53,159 @@ const FormLaunchChallenge = () => {
   }
 
   return (
+    <>
+      <h1>Lancer un challenge</h1>
+      <TiltedLabel>Règles du jeu</TiltedLabel>
+
       <form className="w-10/12 mx-auto my-8 flex flex-col"
       onSubmit={async (event) => {
         event.preventDefault();
         await submitNewTeam(); 
       }}>
-        <h1>Lancer un challenge</h1>
-        <TiltedLabel>Règles du jeu</TiltedLabel>
         <fieldset 
           className="flex flex-col"
         >
           <legend> 1 - Je créer ma Team</legend>
-            <label htmlFor="teamName">Nom de ma Team *</label>
-              <input 
-                className="input-launch-chall"
-                required
-                type="text" 
-                id="teamName" 
-                name="teamName"
-                value={teamName}
-                onChange={(event) => {
-                    setTeamName(event.target.value);
-                }}
-              />
-            <label htmlFor="city">Ville *</label>
-              <input 
-                className="input-launch-chall"
-                required
-                type="text" 
-                id="city" 
-                name="city"
-                value={city}
-                onChange={(event) => {
-                    setCity(event.target.value);
-                }}
-              />
-            <label htmlFor="country">Pays *</label>
-              <input 
-                className="input-launch-chall"
-                required
-                type="text" 
-                id="country" 
-                name="country"
-                value={country}
-                onChange={(event) => {
-                    setCountry(event.target.value);
-                }}
-              />
-            
-            <label htmlFor="imgTeam">Fanion, photo...</label>
-              <input 
-                className="input-launch-chall"
-                type="file" 
-                id="imgTeam"  
-                name="imgTeam"
-                accept="image/*"
-                capture="environment"
-                onChange={handleImageChange}
-              />
-            
-            {img && (
-              <Image src={img} width={300} height={300} alt="Mon équipe" />
-            )}
+          <label htmlFor="teamName">Nom de ma Team *</label>
+            <input 
+              className="input-launch-chall"
+              required
+              type="text" 
+              id="teamName" 
+              name="teamName"
+              value={teamName}
+              onChange={(event) => {
+                  setTeamName(event.target.value);
+              }}
+            />
+          <label htmlFor="city">Ville *</label>
+            <input 
+              className="input-launch-chall"
+              required
+              type="text" 
+              id="city" 
+              name="city"
+              value={city}
+              onChange={(event) => {
+                  setCity(event.target.value);
+              }}
+            />
+          <label htmlFor="country">Pays *</label>
+            <input 
+              className="input-launch-chall"
+              required
+              type="text" 
+              id="country" 
+              name="country"
+              value={country}
+              onChange={(event) => {
+                  setCountry(event.target.value);
+              }}
+            />
+          
+          <label htmlFor="imgTeam">Fanion, photo...</label>
+            <input 
+              className="input-launch-chall"
+              type="file" 
+              id="imgTeam"  
+              name="imgTeam"
+              accept="image/*"
+              capture="environment"
+              onChange={handleImageChange}
+            />
+          
+          {img && (
+            <Image src={img} width={300} height={300} alt="Mon équipe" />
+          )}
 
-            <label>Groupe ouvert
-              <input 
-                className="input-launch-chall"
-                type="checkbox" 
-                id="isPublic"
-                name="isPublic" 
-                checked={isPublic}
-                onChange={(e)=>setIsPublic(e.target.checked)}
-              />
-            </label>
-            <input type="submit" value="valider"/>
+          <label>Groupe ouvert
+            <input 
+              className="input-launch-chall"
+              type="checkbox" 
+              id="isPublic"
+              name="isPublic" 
+              checked={isPublic}
+              onChange={(e)=>setIsPublic(e.target.checked)}
+            />
+          </label>
+          <input type="submit" value="valider"/>
         </fieldset>
       </form>
+      <form className="w-10/12 mx-auto my-8 flex flex-col"
+      onSubmit={async (event) => {
+        event.preventDefault();
+        await submitNewTeam(); 
+      }}>
+        <fieldset 
+          className="flex flex-col"
+        >
+          <legend> 2 - Je choisi mon challenge</legend>
+          <label htmlFor="teamName">Nom de ma Team *</label>
+            <input 
+              className="input-launch-chall"
+              required
+              type="text" 
+              id="teamName" 
+              name="teamName"
+              value={teamName}
+              onChange={(event) => {
+                  setTeamName(event.target.value);
+              }}
+            />
+          <label htmlFor="city">Ville *</label>
+            <input 
+              className="input-launch-chall"
+              required
+              type="text" 
+              id="city" 
+              name="city"
+              value={city}
+              onChange={(event) => {
+                  setCity(event.target.value);
+              }}
+            />
+          <label htmlFor="country">Pays *</label>
+            <input 
+              className="input-launch-chall"
+              required
+              type="text" 
+              id="country" 
+              name="country"
+              value={country}
+              onChange={(event) => {
+                  setCountry(event.target.value);
+              }}
+            />
+          
+          <label htmlFor="imgTeam">Fanion, photo...</label>
+            <input 
+              className="input-launch-chall"
+              type="file" 
+              id="imgTeam"  
+              name="imgTeam"
+              accept="image/*"
+              capture="environment"
+              onChange={handleImageChange}
+            />
+          
+          {img && (
+            <Image src={img} width={300} height={300} alt="Mon équipe" />
+          )}
+
+          <label>Groupe ouvert
+            <input 
+              className="input-launch-chall"
+              type="checkbox" 
+              id="isPublic"
+              name="isPublic" 
+              checked={isPublic}
+              onChange={(e)=>setIsPublic(e.target.checked)}
+            />
+          </label>
+          <input type="submit" value="valider"/>
+        </fieldset>
+      </form>
+    </>
   )
 };
 
