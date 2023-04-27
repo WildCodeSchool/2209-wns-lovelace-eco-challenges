@@ -4,8 +4,12 @@ const { i18n } = require('./next-i18next.config.js');
 const nextConfig = {
   i18n,
   reactStrictMode: true,
-  serverRuntimeConfig: {},
-  publicRuntimeConfig: {},
+  serverRuntimeConfig: {
+    apiUrl: "http://back-end:4000/api"
+  },
+  publicRuntimeConfig: {
+    apiUrl: "http://localhost:4000"
+  },
   images: {
     domains: [
       'images.caradisiac.com',
