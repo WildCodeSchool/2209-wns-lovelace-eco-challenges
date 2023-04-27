@@ -206,7 +206,7 @@ const SignUp = (props: Props) => {
               required
               id="description"
               name="description"
-              placeholder="France"
+              placeholder="Ecrivez votre biographie"
               onChange={(event) => {
                 setDesc(event.target.value);
               }}
