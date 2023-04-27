@@ -141,7 +141,7 @@ export async function getServerSideProps(context: NextI18NContext) {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["page", "formlauchchallenge"])),
+      ...(await serverSideTranslations(locale, ["page", "formlaunchchallenge"])),
       locale,
     },
   };
