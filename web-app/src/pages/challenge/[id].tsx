@@ -1,5 +1,5 @@
 import Image from "next/image";
-import List from "@shared/List/List";
+import ShowChallenge from "@shared/Challenges/ShowChallenge";
 import Button from "@shared/Buttons/Button";
 import LaunchChallenge from "@assets/logos/LaunchChallenge";
 import { WHITE } from "@constants/color";
@@ -8,12 +8,12 @@ import { CHALLENGE_DETAIL } from "@api/queries";
 import { client } from "@api/apolloClient";
 import { useTranslation } from "next-i18next";
 
-import { type Challenge } from "@gql/graphql";
-import { type SSRConfig } from "@customTypes/i18next";
-import { type ParamsI18NextContext} from "@customTypes/types";
+import { type Challenge as ChallengeType } from "@gql/graphql";
+import { type SSRConfig } from "next-i18next";
+import { type ParamsI18NextContext } from "@customTypes/types";
 
 type Props = {
-  challenge: Challenge,
+  challenge: ChallengeType;
   locale: string;
   _nextI18Next: SSRConfig;
 };
@@ -23,30 +23,29 @@ const Challenge = (props: Props) => {
 
   return (
     <>
-    <List
-      description={challenge.description}
-      title={challenge.challengeName}
-      source={challenge.img}
-      endAt={challenge.endAt}
-      level={challenge.level}
-    />
-    <Button
-      name={t('challenge.gochallenge')}
-      type="button-primary"
-      icon={<LaunchChallenge width="20px" height="20px" fill={WHITE} />}
-    />
-    <div className="block w-11/12">
-      <h2 className="text-2xl">{t('challenge.teams')}</h2>
-      <div className="flex justify-around">
-        {challenge?.teams?.map((element, index) => (
-          <div className="w-2/5" key={index}>
-            <Image src={element.img || "https://picsum.photos/300/150" } alt="" width={300} height={150} />
-            <h3>{element.teamName}</h3>
-          </div>
-        ))}
+      <ShowChallenge src={challenge} />
+      <Button
+        name={t("challenge.gochallenge")}
+        type="button-primary"
+        icon={<LaunchChallenge width="20px" height="20px" fill={WHITE} />}
+      />
+      <div className="block w-11/12">
+        <h2 className="text-2xl">{t("challenge.teams")}</h2>
+        <div className="flex justify-around">
+          {challenge?.teams?.map((element, index) => (
+            <div className="w-2/5" key={index}>
+              <Image
+                src={element.img || "https://picsum.photos/300/150"}
+                alt=""
+                width={300}
+                height={150}
+              />
+              <h3>{element.teamName}</h3>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  </>
+    </>
   );
 };
 
@@ -57,11 +56,11 @@ export async function getServerSideProps(context: ParamsI18NextContext) {
   }
   const path = context.params;
   const { id } = path;
-  
+
   if (!id) {
     return {
       notFound: true,
-    }
+    };
   }
 
   const { data } = await client.query({
@@ -77,7 +76,7 @@ export async function getServerSideProps(context: ParamsI18NextContext) {
       challenge: challengeById ?? [],
       locale,
     },
-  }
+  };
 }
 
 export default Challenge;

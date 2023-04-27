@@ -14,7 +14,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { SIGN_IN_PATH } from "@constants/paths";
 
 import { type NextI18NContext } from "@customTypes/types";
-import { type SSRConfig } from "@customTypes/i18next";
+import { type SSRConfig } from "next-i18next";
 
 const SIGN_UP = gql`
   mutation SignUp(
@@ -114,10 +114,10 @@ const SignUp = (props: Props) => {
       >
         <fieldset className="form">
           <legend className="bg-white font-bold -translate-y-1/2 border-2 mx-auto rounded-md border-primary text-primary -rotate-2 px-8">
-            <h1 className="rotate-2">{t('signup.signup')}</h1>{" "}
+            <h1 className="rotate-2">{t("signup.signup")}</h1>{" "}
           </legend>
           <label className="block mx-auto w-9/12  font-bold">
-            {t('signup.firstname')}
+            {t("signup.firstname")}
             <br />
             <input
               className="bg-terciary p-2 w-full  rounded-xl"
@@ -134,7 +134,7 @@ const SignUp = (props: Props) => {
           </label>
           <br />
           <label className="block mx-auto w-9/12  font-bold">
-            {t('signup.lastname')}
+            {t("signup.lastname")}
             <br />
             <input
               className="bg-terciary p-2 w-full  rounded-xl"
@@ -151,7 +151,7 @@ const SignUp = (props: Props) => {
           </label>
           <br />
           <label className="block mx-auto w-9/12  font-bold">
-            {t('signup.nickname')}
+            {t("signup.nickname")}
             <br />
             <input
               className="bg-terciary p-2 w-full  rounded-xl"
@@ -168,7 +168,7 @@ const SignUp = (props: Props) => {
           </label>
           <br />
           <label className="block mx-auto w-9/12  font-bold">
-          {t('signup.email')}
+            {t("signup.email")}
             <br />
             <input
               className="bg-terciary p-2 w-full  rounded-xl"
@@ -186,7 +186,7 @@ const SignUp = (props: Props) => {
           </label>
           <br />
           <label className="block mx-auto w-9/12  font-bold">
-          {t('signup.city')}
+            {t("signup.city")}
             <br />
             <input
               className="bg-terciary p-2 w-full  rounded-xl"
@@ -203,7 +203,7 @@ const SignUp = (props: Props) => {
           </label>
           <br />
           <label className="block mx-auto w-9/12  font-bold">
-          {t('signup.country')}
+            {t("signup.country")}
             <br />
             <input
               className="bg-terciary p-2 w-full  rounded-xl"
@@ -220,7 +220,7 @@ const SignUp = (props: Props) => {
           </label>
           <br />
           <label className="block mx-auto w-9/12  font-bold">
-          {t('signup.password')}
+            {t("signup.password")}
             <br />
             <input
               className="bg-terciary p-2 w-full  rounded-xl"
@@ -239,7 +239,7 @@ const SignUp = (props: Props) => {
           <br />
 
           <label className="block mx-auto w-9/12  font-bold">
-          {t('signup.confirm')}
+            {t("signup.confirm")}
             <br />
             <input
               className="bg-terciary p-2 w-full  rounded-xl"
@@ -260,12 +260,12 @@ const SignUp = (props: Props) => {
             {confirmedPassword ? (
               <></>
             ) : (
-              <p className="error">{t('signup.donotwork')}</p>
+              <p className="error">{t("signup.donotwork")}</p>
             )}
           </label>
 
           <div className="text-center font-semibold text-primary pt-4 pb-2">
-            <h2>{t('signup.orcreate')}</h2>
+            <h2>{t("signup.orcreate")}</h2>
           </div>
 
           <section className="flex w-full justify-around">
@@ -296,7 +296,7 @@ const SignUp = (props: Props) => {
       </form>
 
       <div className="flex items-center justify-center flex-col m-4">
-        <h2>{t('signup.account')}</h2>
+        <h2>{t("signup.account")}</h2>
         <Button
           onClickEvent={openSignIn}
           type="button-primary"

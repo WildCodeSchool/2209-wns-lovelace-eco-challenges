@@ -10,7 +10,7 @@ import Button from "@shared/Buttons/Button";
 import ArrowLinkTo from "@assets/logos/ArrowLinkTo";
 
 import { type NextI18NContext } from "@customTypes/types";
-import { type SSRConfig} from "@customTypes/i18next";
+import { type SSRConfig } from "next-i18next";
 
 const SIGN_IN = gql`
   mutation SignIn($email: String!, $password: String!) {
@@ -70,10 +70,10 @@ const SignIn = (props: Props) => {
       >
         <fieldset className="form">
           <legend className="bg-white font-bold -translate-y-1/2 border-2 mx-auto rounded-md border-primary text-primary -rotate-2 px-8">
-            <h1 className="rotate-2">{t('signin.signin')}</h1>
+            <h1 className="rotate-2">{t("signin.signin")}</h1>
           </legend>
           <label className="block mx-auto w-9/12  font-bold">
-            {t('signin.mail')}
+            {t("signin.mail")}
             <br />
             <input
               type="email"
@@ -89,7 +89,7 @@ const SignIn = (props: Props) => {
           </label>
           <br />
           <label className="block mx-auto w-9/12  font-bold">
-            {t('signin.password')}
+            {t("signin.password")}
             <br />
             <input
               className="bg-terciary p-2 w-full  rounded-xl"
@@ -110,7 +110,7 @@ const SignIn = (props: Props) => {
               type="checkbox"
               className="bg-terciary p-2 w-full  rounded-xl"
             />
-            {t('signin.stay')}
+            {t("signin.stay")}
           </div>
 
           <button className="h-0 w-full">
@@ -125,11 +125,11 @@ const SignIn = (props: Props) => {
       </form>
 
       <div className="flex items-center justify-center flex-col">
-        <h2>{t('signin.notyet')}</h2>
+        <h2>{t("signin.notyet")}</h2>
         <Button
           onClickEvent={openSignUp}
           type="button-primary"
-          name={t('signin.create')}
+          name={t("signin.create")}
         />
       </div>
     </>
