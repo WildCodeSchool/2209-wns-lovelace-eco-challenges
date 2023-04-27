@@ -1,6 +1,5 @@
-import { GetChallengesQuery, GetChallengesQueryVariables } from "@gql/graphql";
+import { type Challenge } from "@gql/graphql";
 import { CHALLENGES } from "@api/queries";
-import { gql, useQuery } from "@apollo/client";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { client } from "@api/apolloClient";
 import { useTranslation } from "next-i18next";
@@ -8,15 +7,21 @@ import { useTranslation } from "next-i18next";
 import Button from "@shared/Buttons/Button";
 import DownArrow from "@assets/logos/DownArrow";
 import List from "@shared/List/List";
-import Loader from "@shared/Loader/Loader";
 
 import { PRIMARY } from "@constants/color";
 import { type NextI18NContext } from "@customTypes/types";
+import { type SSRConfig } from "@customTypes/i18next";
 
 const pageNumber = 1;
 const itemsByPage = 6;
 
-const Challenges = (props: any) => {
+type Props = {
+  challenges: Challenge[];
+  locale: string;
+  _nextI18next: SSRConfig;
+};
+
+const Challenges = (props: Props): JSX.Element => {
   const { challenges } = props;
   const { t } = useTranslation("challenges");
 
@@ -100,6 +105,6 @@ export async function getServerSideProps(context: NextI18NContext) {
       locale,
     },
   };
-}
+};
 
 export default Challenges;

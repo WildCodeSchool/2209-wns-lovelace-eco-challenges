@@ -4,15 +4,7 @@ import { useRouter } from "next/router";
 
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { GetChallengesQuery, GetChallengesQueryVariables } from "@gql/graphql";
-import { useQuery } from "@apollo/client";
 import { client } from "@api/apolloClient";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from "@apollo/client";
 import { CHALLENGES } from "@api/queries";
 
 import Button from "@shared/Buttons/Button";
@@ -21,7 +13,6 @@ import LaunchChallenge from "@assets/logos/LaunchChallenge";
 import ArrowLinkTo from "@assets/logos/ArrowLinkTo";
 import Partners from "@assets/logos/Partners";
 import List from "@shared/List/List";
-import Loader from "@shared/Loader/Loader";
 import TiltedLabel from "@shared/TiltedLabel/TiltedLabel";
 
 import {
@@ -34,16 +25,22 @@ import {
 
 import { PRIMARY } from "@constants/color";
 import { type NextI18NContext } from "@customTypes/types";
+import { type Challenge } from "@gql/graphql";
+import { type SSRConfig } from "@customTypes/i18next";
 
 const pageNumber = 1;
 const itemsByPage = 3;
 
-const Index = (props: any): JSX.Element => {
+type Props = {
+  challenges: Challenge[];
+  locale: string;
+  _nextI18Next: SSRConfig;
+};
+
+const Index = (props: Props): JSX.Element => {
   const { challenges } = props;
   const router = useRouter();
-
   const { t } = useTranslation(["home", "page"]);
-  // const { t: TranslationHome } = useTranslation('home');
 
   return (
     <div className="home-page">
@@ -414,7 +411,6 @@ export async function getServerSideProps(context: NextI18NContext) {
   const { data } = await client.query({
     query: CHALLENGES,
     variables: { itemsByPage, pageNumber },
-    // ssrMode: true,
   });
 
   const { challenges } = data;

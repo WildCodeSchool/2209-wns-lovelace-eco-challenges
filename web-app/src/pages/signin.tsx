@@ -2,16 +2,15 @@ import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
-import Loader from "@shared/Loader/Loader";
 import { SignInMutation, SignInMutationVariables } from "@gql/graphql";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
-import { HOME_PATH } from "@constants/paths";
 import Button from "@shared/Buttons/Button";
 import ArrowLinkTo from "@assets/logos/ArrowLinkTo";
 
 import { type NextI18NContext } from "@customTypes/types";
+import { type SSRConfig} from "@customTypes/i18next";
 
 const SIGN_IN = gql`
   mutation SignIn($email: String!, $password: String!) {
@@ -24,7 +23,12 @@ const SIGN_IN = gql`
   }
 `;
 
-const SignIn = (props: any) => {
+type Props = {
+  locale: string;
+  _nextI18Next: SSRConfig;
+};
+
+const SignIn = (props: Props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { t } = useTranslation("signin");

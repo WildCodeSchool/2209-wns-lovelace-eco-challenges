@@ -8,6 +8,6 @@ export type NextI18NContext = GetStaticProps & {
     locale: string;
 };
 
-export type ChallengeId = NextI18NContext & {
+export type ParamsI18NextContext = NextI18NContext & {
     params: Params;
 };

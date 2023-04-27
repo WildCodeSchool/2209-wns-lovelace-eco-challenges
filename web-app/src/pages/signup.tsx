@@ -1,6 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import Apple from "@assets/logos/Apple";
@@ -10,12 +9,12 @@ import { Mail } from "@assets/logos/Mail";
 import { SignUpMutation, SignUpMutationVariables } from "@gql/graphql";
 import Button from "@shared/Buttons/Button";
 import { useTranslation } from "next-i18next";
-// import { getErrorMessage } from "@utils";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { SIGN_IN_PATH } from "@constants/paths";
 
 import { type NextI18NContext } from "@customTypes/types";
+import { type SSRConfig } from "@customTypes/i18next";
 
 const SIGN_UP = gql`
   mutation SignUp(
@@ -49,7 +48,12 @@ const SIGN_UP = gql`
   }
 `;
 
-const SignUp = (props: any) => {
+type Props = {
+  locale: string;
+  _nextI18Next: SSRConfig;
+};
+
+const SignUp = (props: Props) => {
   const { locale } = props;
 
   const [firstName, setFirstName] = useState("");
