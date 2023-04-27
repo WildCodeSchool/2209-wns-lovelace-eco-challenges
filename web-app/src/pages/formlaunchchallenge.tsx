@@ -9,6 +9,7 @@ import { useMutation } from "@apollo/client";
 import { CreateTeamMutation, CreateTeamMutationVariables } from "@gql/graphql";
 import { CREATE_TEAM } from "@src/api/mutations";
 import { toast } from "react-toastify";
+import { client } from "@src/api/apolloClient";
 
 const FormLaunchChallenge = () => {
   const [teamName, setTeamName] = useState(""); 
@@ -40,6 +41,11 @@ const FormLaunchChallenge = () => {
       img
     }});
     toast.success(`Votre Team ${teamName} est créé avec succès.`);
+    setTeamName("");
+    setCity("");
+    setCountry("");
+    setIsPublic(false);
+    setImg("");
     console.log("TEEEEAAAAMMMM")
   }
 
@@ -129,18 +135,9 @@ export async function getServerSideProps(context: NextI18NContext) {
     return { notFound: true };
   }
 
-  // const { data } = await client.query({
-  //   query: CHALLENGES,
-  //   variables: { pageNumber, itemsByPage },
-  //   // ssrMode: true,
-  // });
-
-  // const { challenges } = data;
-
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
-      // challenges: challenges ?? [],
+      ...(await serverSideTranslations(locale, ["page", "formlauchchallenge"])),
       locale,
     },
   };
