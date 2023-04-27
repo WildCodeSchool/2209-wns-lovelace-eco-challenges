@@ -4,5 +4,6 @@
     "signin.password": "Password",
     "signin.stay": "Stay logged",
     "signin.notyet": "Not registered ?",
-    "signin.create": "Create an account"
+    "signin.create": "Create an account",
+    "signin.forget": "forget password ?"
 }

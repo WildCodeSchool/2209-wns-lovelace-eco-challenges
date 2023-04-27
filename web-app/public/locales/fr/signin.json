@@ -4,5 +4,6 @@
     "signin.password": "Mot de passe",
     "signin.stay": "Rester connecter",
     "signin.notyet": "Pas encore inscrit ?",
-    "signin.create": "Créer un compte"
+    "signin.create": "Créer un compte",
+    "signin.forget": "Mot de passe oublié ?"
 }

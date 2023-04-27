@@ -5,6 +5,7 @@ import { hashSync, compareSync } from "bcryptjs";
 import SessionRepository from "./Session.repository";
 import Session from "./Session.entity";
 import { ILike } from "typeorm";
+import { createTransport } from "nodemailer"
 
 export const INVALID_CREDENTIALS_ERROR_MESSAGE = "Identifiants incorrects.";
 
@@ -150,5 +151,72 @@ export default class AppUserRepository extends AppUserDb {
       ... existingAppUser, 
       ... updateAppUser
     });
+  }
+  static async askResetPassword( email:string ) {
+    const user = await this.getUserByEmailThrow(email)
+
+    if(!user) {
+      throw Error("No Existing User matching email")
+    } else {
+
+      const finalUser = await this.createResetPasswordTokenById(user.id)
+      await this.generateResetTokenEndDate(finalUser.id)
+      
+      const resetUrl = `http://localhost:3000/forget-password/${finalUser.resetPasswordToken}`
+
+      const transporter = createTransport({
+        service:"gmail",
+        auth:{
+          user:"eco.playground23@gmail.com",
+          pass:"zropdgemelzcdqzo"
+        }
+      })
+
+      const mailOptions = {
+        from:"eco.playground23@gmail.com",
+        to:finalUser.email,
+        subject:"no-reply: Changement de mot de passe",
+        text: `Bonjour ${finalUser.firstName} ${finalUser.lastName},\nNous venons de recevoir une requête de changement de mot de passe sur le site Eco Playground, si il s'agit bien de vous clicker sur le lien ci-dessous :\n${resetUrl}\n\nCe lien sera désactivé dans 15 minute `
+      }
+      transporter.sendMail(mailOptions, function(error, info) {
+        if(error) {
+          console.log(error)
+        } else {
+          console.log("Email sent:" + info.response);
+        }
+      }) 
+
+      return finalUser
+    }
+  }
+
+  static async changePassword ( userId:string, newPassword:string ) {
+    const user = await this.getUserByResetToken(userId);
+
+    if(!user) {
+      throw Error("No Existing User matching this Reset Password Token")
+    } else {
+      const current = new Date()
+
+      if(!user.resetTokenCreationDate) {
+        throw Error("The token is not valid anymore")
+        
+      } else {
+        
+        if((user.resetTokenCreationDate.getTime() - current.getTime()) / 1000 / 60 > 15 ) {
+          user.resetPasswordToken = undefined
+          user.resetTokenCreationDate = undefined
+
+          throw Error("The token is not valid anymore")
+        } else {
+          user.hashedPassword = hashSync(newPassword, 10)
+
+          user.resetPasswordToken = undefined
+          user.resetTokenCreationDate = undefined
+
+          return this.repository.save(user)
+        }     
+      }
+    }
   }
 }
