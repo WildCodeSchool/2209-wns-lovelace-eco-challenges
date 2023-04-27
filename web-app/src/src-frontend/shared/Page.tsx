@@ -16,3 +16,7 @@ const Page = (props: any) => {
 };
 
 export default Page;
+
+// mettre a jour le next config js
+// src/api/apolloclient
+// exemple form launch challenge (submit new team)

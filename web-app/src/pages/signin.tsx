@@ -11,6 +11,7 @@ import ArrowLinkTo from "@assets/logos/ArrowLinkTo";
 
 import { type NextI18NContext } from "@customTypes/types";
 import { type SSRConfig } from "next-i18next";
+import Link from "next/link";
 
 const SIGN_IN = gql`
   mutation SignIn($email: String!, $password: String!) {
@@ -51,9 +52,11 @@ const SignIn = (props: Props) => {
       } else {
         toast.success("You have successfully logged in.");
       }
-      /* navigate(HOME_PATH); */
+      router.push("/home")
+      alert("Connexion réussie")
     } catch (error) {
       // toast.error(getErrorMessage(error));
+      alert("Error")
     }
   };
 
@@ -66,7 +69,7 @@ const SignIn = (props: Props) => {
           event.preventDefault();
           await submit();
         }}
-        className="w-10/12 mx-auto my-8 border-2 rounded-xl border-primary"
+        className="w-10/12 mx-auto my-8 border-2 rounded-xl border-primary md:w-2/3 lg:w-1/4"
       >
         <fieldset className="form">
           <legend className="bg-white font-bold -translate-y-1/2 border-2 mx-auto rounded-md border-primary text-primary -rotate-2 px-8">
@@ -77,6 +80,7 @@ const SignIn = (props: Props) => {
             <br />
             <input
               type="email"
+              className="bg-terciary p-2 w-full  rounded-xl"
               required
               autoComplete="email"
               id="email"
@@ -104,14 +108,18 @@ const SignIn = (props: Props) => {
               }}
             />
           </label>
+
+              <Link href="/forget-password"> {t('signin.forget')} </Link>
+
           <br />
-          <div className=" inline-block text-center w-full m-auto">
+          
+          <label>
             <input
-              type="checkbox"
-              className="bg-terciary p-2 w-full  rounded-xl"
-            />
-            {t("signin.stay")}
-          </div>
+                type="checkbox"
+                className="bg-terciary  rounded-xl"
+              />
+              {t("signin.stay")}
+          </label>
 
           <button className="h-0 w-full">
             <ArrowLinkTo
@@ -123,9 +131,8 @@ const SignIn = (props: Props) => {
           </button>
         </fieldset>
       </form>
-
-      <div className="flex items-center justify-center flex-col">
-        <h2>{t("signin.notyet")}</h2>
+      <div className="flex items-center justify-center flex-col m-4">
+        <h2>{t('signin.notyet')}</h2>
         <Button
           onClickEvent={openSignUp}
           type="button-primary"
