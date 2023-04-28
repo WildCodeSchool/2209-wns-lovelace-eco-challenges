@@ -12,12 +12,13 @@ const nextConfig = {
   },
   images: {
     domains: [
+      'www.google.com',
       'images.caradisiac.com',
       'www.wedemain.fr',
       'fr.jardins-animes.com',
       'www.wedemain.fr',
       'picsum.photos',
-      'assets.letemps.ch'
+      'assets.letemps.ch',
     ],
   },
 }

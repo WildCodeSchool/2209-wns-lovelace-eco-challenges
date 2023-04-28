@@ -71,7 +71,7 @@ export function graphql(source: "\n  mutation SignIn($email: String!, $password:
 export function graphql(source: "\n  mutation SignUp(\n    $firstName: String!\n    $lastName: String!\n    $nickname: String!\n    $email: String!\n    $city: String!\n    $country: String!\n    $password: String!\n  ) {\n    signUp(\n      firstName: $firstName\n      lastName: $lastName\n      nickname: $nickname\n      email: $email\n      city: $city\n      country: $country\n      password: $password\n    ) {\n      id\n      email\n      firstName\n      lastName\n      nickname\n      score\n      disabled\n      city\n      country\n    }\n  }\n"): (typeof documents)["\n  mutation SignUp(\n    $firstName: String!\n    $lastName: String!\n    $nickname: String!\n    $email: String!\n    $city: String!\n    $country: String!\n    $password: String!\n  ) {\n    signUp(\n      firstName: $firstName\n      lastName: $lastName\n      nickname: $nickname\n      email: $email\n      city: $city\n      country: $country\n      password: $password\n    ) {\n      id\n      email\n      firstName\n      lastName\n      nickname\n      score\n      disabled\n      city\n      country\n    }\n  }\n"];
 
 export function graphql(source: string) {
-  return (documents as any)[source] ?? {};
+    return (documents as any)[source] ?? {};
 }
 
-export type DocumentType<TDocumentNode extends DocumentNode<any, any>> = TDocumentNode extends DocumentNode<  infer TType,  any>  ? TType  : never;
+export type DocumentType<TDocumentNode extends DocumentNode<any, any>> = TDocumentNode extends DocumentNode<infer TType, any> ? TType : never;

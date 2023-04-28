@@ -1,18 +1,61 @@
-import ShowChallenge from "@shared/Challenges/ShowChallenge";
-import { type Challenge } from "@gql/graphql";
+import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
-  src: Challenge[];
+  description: string;
+  title: string;
+  source?: string | null;
+  endAt: string;
+  level: string;
+  id?: string;
 };
 
 const List = (props: Props) => {
-  const { src } = props;
+  const { title, description, source, endAt, level, id } = props;
 
   return (
-    <div className="flex flex-wrap justify-center md:justify-center lg:justify-around">
-      {src.map((element, index) => (
-        <ShowChallenge src={element} key={index} />
-      ))}
+    <div className="w-10/12
+    pb-6
+    mb-4
+    relative
+    last:pb-0
+    md:pb-0
+    md:w-[26%]">
+      <div className="flex items-center justify-center">
+        <Image src={source || "https://picsum.photos/200/150"} alt="alt" width={200} height={150} />
+      </div>
+      <h3 className="text-center
+          font-bold
+          text-2xl
+          xl:text-start">{title}</h3>
+      <p className="text-center
+          italic
+          font-extralight
+          text-gray-400
+          xl:text-start">
+        {endAt ? endAt : "Aucune date de fin"}
+      </p>
+      <p className="text-center
+          italic
+          font-extralight
+          text-gray-400
+          xl:text-start">{level}</p>
+      <p className="text-center xl:text-start max-w-none
+          {window.innerWidth < 780 ? 'w-full' : ''}">
+        {description}
+      </p>
+      <div className="text-blue-600">
+        {id && (
+          <Link href={`/challenge/${id}`}>
+            <span className="flex
+          items-center
+          justify-center
+          flex-col xl:block">
+              Voir plus
+            </span>
+          </Link>
+        )}
+      </div>
     </div>
   );
 };
