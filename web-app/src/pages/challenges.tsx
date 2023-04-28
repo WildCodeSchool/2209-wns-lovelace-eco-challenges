@@ -10,7 +10,9 @@ import List from "@shared/List/List";
 
 import { PRIMARY } from "@constants/color";
 import { type NextI18NContext } from "@customTypes/types";
-import { type SSRConfig } from "@customTypes/i18next";
+import { type SSRConfig } from "next-i18next";
+import Image from "next/image";
+import Link from "next/link";
 
 const pageNumber = 1;
 const itemsByPage = 6;
@@ -28,14 +30,12 @@ const Challenges = (props: Props): JSX.Element => {
   return (
     <div>
       <div className="w-11/12">
-        <h2 className="subtitle">{t('challenges.title')}</h2>
+        <h2 className="subtitle">{t("challenges.title")}</h2>
         <div className="custom-underline bg-primary"></div>
+        <p className="text-center xl:text-start">{t("challenges.subtitle")}</p>
         <p className="text-center xl:text-start">
-          {t('challenges.subtitle')}
-        </p>
-        <p className="text-center xl:text-start">
-          {t('challenges.proposal')}
-          <span className="text-blue-600">{t('challenges.seemore')}</span>
+          {t("challenges.proposal")}
+          <span className="text-blue-600">{t("challenges.seemore")}</span>
         </p>
       </div>
       <div
@@ -46,29 +46,7 @@ const Challenges = (props: Props): JSX.Element => {
       >
         <input className="search" type="text" placeholder="TODO..." />
       </div>
-      <div
-        className="flex
-          items-center
-          justify-center
-          flex-col
-          w-11/12
-          flex-wrap
-          md:flex-row
-          md:justify-around
-          md:items-baseline"
-      >
-        {challenges.map((element, index) => (
-          <List
-            key={index}
-            title={element.challengeName}
-            source={element.img}
-            description={element.description}
-            endAt={element.endAt}
-            level={element.level}
-            id={element.id}
-          />
-        ))}
-      </div>
+      <List src={challenges} />
       <div
         className="flex
           items-center
@@ -76,7 +54,7 @@ const Challenges = (props: Props): JSX.Element => {
           flex-col m-7"
       >
         <Button
-          name={t('challenges.morechallenges')}
+          name={t("challenges.morechallenges")}
           type="button-secondary"
           icon={<DownArrow width="20px" height="20px" fill={PRIMARY} />}
         />
@@ -105,6 +83,6 @@ export async function getServerSideProps(context: NextI18NContext) {
       locale,
     },
   };
-};
+}
 
 export default Challenges;

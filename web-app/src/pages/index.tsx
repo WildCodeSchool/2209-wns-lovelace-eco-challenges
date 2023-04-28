@@ -26,7 +26,7 @@ import {
 import { PRIMARY } from "@constants/color";
 import { type NextI18NContext } from "@customTypes/types";
 import { type Challenge } from "@gql/graphql";
-import { type SSRConfig } from "@customTypes/i18next";
+import { type SSRConfig } from "next-i18next";
 
 const pageNumber = 1;
 const itemsByPage = 3;
@@ -229,7 +229,7 @@ const Index = (props: Props): JSX.Element => {
                     flex-[33%]
                     lg:flex-[34%]"
                 >
-                  <div className="w-20">
+                  <div className="w-20 relative">
                     <Image src={element.source} alt="alt" />
                   </div>
                   <p className="text-center">{t(element.text)}</p>
@@ -271,29 +271,7 @@ const Index = (props: Props): JSX.Element => {
               bg-primary
               text-center"
           ></div>
-          <div
-            className="flex
-              items-center
-              justify-center
-              flex-col
-              px-4
-              flex-wrap
-              md:flex-row
-              md:justify-around
-              md:items-baseline"
-          >
-            {challenges.map((element, index) => (
-              <List
-                key={index}
-                id={element.id}
-                description={element.description}
-                title={element.challengeName}
-                source={element.img}
-                endAt={element.endAt}
-                level={element.level}
-              />
-            ))}
-          </div>
+          <List src={challenges} />
           <Link href="/challenges">
             <h2
               className="font-bold
@@ -402,7 +380,6 @@ const Index = (props: Props): JSX.Element => {
 };
 
 export async function getServerSideProps(context: NextI18NContext) {
-  
   const { locale } = context;
   if (!["en", "fr"].includes(locale)) {
     return { notFound: true };
