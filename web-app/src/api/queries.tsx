@@ -40,3 +40,14 @@ export const CHALLENGE_DETAIL = gql`
     }
   }
 `;
+
+export const CHALLENGES_LIGHT = gql`
+  query GetChallengesLight {
+    challengesLight {
+      challengeName
+      id
+      level
+      category
+    }
+  }
+`;

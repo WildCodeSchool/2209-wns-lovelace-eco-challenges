@@ -34,10 +34,6 @@ export default class UserToTeamRepository extends UserToTeamDb {
       userRole,
     });
 
-
-
-
-
     if(userRole == UserRole.PLAYER) {
       const invitName = `${team.teamName}-${challengeName}-${userEmail}`
 

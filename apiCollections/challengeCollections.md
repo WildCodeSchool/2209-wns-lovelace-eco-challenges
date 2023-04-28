@@ -5,6 +5,7 @@ _For gql requests_
 ## Features
 
 - GetChallenges
+- GetChallengesLight
 - GetChallengesByCategory
 - GetChallengesByLevel
 - GetChallengeById
@@ -56,37 +57,54 @@ query GetChallenges($itemsByPage: Int!, $pageNumber: Int!) {
 
 ---
 
+### Get all challenges without relation or pagination
+
+```
+query GetChallengesLight {
+  challengesLight {
+    challengeName
+    id
+    level
+    category
+  }
+}
+```
+
+---
+
 ### Get challenges by category
 
 ```
+
 query GetChallengesByCategory($category: [Category!]!, $itemsByPage: Int!, $pageNumber: Int!) {
-  challengesByCategory(category: $category, itemsByPage: $itemsByPage, pageNumber: $pageNumber) {
-    id
-    challengeName
-    description
-    level
-    startsAt
-    endAt
-    img
-    category
-    teams {
-      id
-      teamName
-      city
-      country
-      isPublic
-      img
-      userToTeams {
-        userRole
-        ...
-        user {
-          nickname
-          ...
-        }
-      }
-    }
-  }
+challengesByCategory(category: $category, itemsByPage: $itemsByPage, pageNumber: $pageNumber) {
+id
+challengeName
+description
+level
+startsAt
+endAt
+img
+category
+teams {
+id
+teamName
+city
+country
+isPublic
+img
+userToTeams {
+userRole
+...
+user {
+nickname
+...
 }
+}
+}
+}
+}
+
 ```
 
 | Parameter     | Type     | Description                                                                          |
@@ -100,34 +118,36 @@ query GetChallengesByCategory($category: [Category!]!, $itemsByPage: Int!, $page
 ### Get challenges by level
 
 ```
+
 query GetChallengeByLevel($level: Level!, $itemsByPage: Int!, $pageNumber: Int!) {
-  challengesByLevel(level: $level, itemsByPage: $itemsByPage, pageNumber: $pageNumber) {
-    id
-    challengeName
-    startsAt
-    endAt
-    level
-    description
-    category
-    img
-    teams {
-      id
-      teamName
-      city
-      country
-      isPublic
-      img
-      userToTeams {
-        userRole
-        ...
-        user {
-          nickname
-          ...
-        }
-      }
-    }
-  }
+challengesByLevel(level: $level, itemsByPage: $itemsByPage, pageNumber: $pageNumber) {
+id
+challengeName
+startsAt
+endAt
+level
+description
+category
+img
+teams {
+id
+teamName
+city
+country
+isPublic
+img
+userToTeams {
+userRole
+...
+user {
+nickname
+...
 }
+}
+}
+}
+}
+
 ```
 
 | Parameter     | Type     | Description                             |
@@ -141,30 +161,32 @@ query GetChallengeByLevel($level: Level!, $itemsByPage: Int!, $pageNumber: Int!)
 ### Get a challenge by id
 
 ```
+
 query GetChallengeById($id: String!) {
-  challengeById(id: $id) {
-    id
-    challengeName
-    description
-    category
-    level
-    startsAt
-    endAt
-    teams {
-      id
-      teamName
-      ...
-      userToTeams {
-        userRole
-        ...
-        user {
-          nickname
-          ...
-        }
-      }
-    }
-  }
+challengeById(id: $id) {
+id
+challengeName
+description
+category
+level
+startsAt
+endAt
+teams {
+id
+teamName
+...
+userToTeams {
+userRole
+...
+user {
+nickname
+...
 }
+}
+}
+}
+}
+
 ```
 
 ---
@@ -172,31 +194,33 @@ query GetChallengeById($id: String!) {
 ### Get a challenge by name
 
 ```
+
 query ChallengeByName($challengeName: String!) {
-  challengeByName(challengeName: $challengeName) {
-    id
-    challengeName
-    description
-    category
-    level
-    startsAt
-    endAt
-    img
-    teams {
-      id
-      teamName
-      ...
-      userToTeams {
-        userRole
-        ...
-        user {
-          nickname
-          ...
-        }
-      }
-    }
-  }
+challengeByName(challengeName: $challengeName) {
+id
+challengeName
+description
+category
+level
+startsAt
+endAt
+img
+teams {
+id
+teamName
+...
+userToTeams {
+userRole
+...
+user {
+nickname
+...
 }
+}
+}
+}
+}
+
 ```
 
 | Parameter       | Type     | Description      |
@@ -208,18 +232,20 @@ query ChallengeByName($challengeName: String!) {
 ### Create a new challenge
 
 ```
+
 mutation CreateChallenge($challengeName: String!, $level: Level!, $description: String!, $category: [Category!]!, $startsAt: DateTime, $endAt: DateTime, $img: String) {
-  createChallenge(challengeName: $challengeName, level: $level, description: $description, category: $category, startsAt: $startsAt, endAt: $endAt, img: $img) {
-    id
-    challengeName
-    startsAt
-    endAt
-    level
-    description
-    category
-    img
-  }
+createChallenge(challengeName: $challengeName, level: $level, description: $description, category: $category, startsAt: $startsAt, endAt: $endAt, img: $img) {
+id
+challengeName
+startsAt
+endAt
+level
+description
+category
+img
 }
+}
+
 ```
 
 | Parameter       | Type       | Description                                                                                       |
@@ -237,13 +263,15 @@ mutation CreateChallenge($challengeName: String!, $level: Level!, $description: 
 ### Update challenge dates
 
 ```
+
 mutation UpdateDatesChallenge($id: ID!, $startsAt: DateTime!, $endAt: DateTime) {
-  updateDatesChallenge(id: $id, startsAt: $startsAt, endAt: $endAt) {
+    updateDatesChallenge(id: $id, startsAt: $startsAt, endAt: $endAt) {
     id
     startsAt
     endAt
   }
 }
+
 ```
 
 | Parameter  | Type       | Description  |
@@ -257,18 +285,20 @@ mutation UpdateDatesChallenge($id: ID!, $startsAt: DateTime!, $endAt: DateTime) 
 ### Update challenge - _premium_
 
 ```
+
 mutation UpdateChallengePremium($challengeName: String!, $level: Level!, $description: String!, $category: [Category!]!, $id: ID!, $startsAt: DateTime, $endAt: DateTime, $img: String) {
-  updateChallengePremium(challengeName: $challengeName, level: $level, description: $description, category: $category, id: $id, startsAt: $startsAt, endAt: $endAt, img: $img) {
-    id
-    challengeName
-    startsAt
-    endAt
-    level
-    description
-    category
-    img
-  }
+updateChallengePremium(challengeName: $challengeName, level: $level, description: $description, category: $category, id: $id, startsAt: $startsAt, endAt: $endAt, img: $img) {
+id
+challengeName
+startsAt
+endAt
+level
+description
+category
+img
 }
+}
+
 ```
 
 | Parameter       | Type       | Description                                                                                       |
@@ -287,12 +317,14 @@ mutation UpdateChallengePremium($challengeName: String!, $level: Level!, $descri
 ### Delete a challenge
 
 ```
+
 mutation DeleteChallenge($id: String!) {
-  deleteChallenge(id: $id) {
-    id
-    challengeName
-  }
+deleteChallenge(id: $id) {
+id
+challengeName
 }
+}
+
 ```
 
 | Parameter | Type   | Description  |
@@ -300,3 +332,7 @@ mutation DeleteChallenge($id: String!) {
 | `id`      | `uuid` | **required** |
 
 ---
+
+```
+
+```

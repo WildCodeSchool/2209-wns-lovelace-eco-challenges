@@ -19,6 +19,11 @@ export default class ChallengeResolver {
   }
 
   @Query(() => [Challenge])
+  challengesLight(): Promise<Challenge[]> {
+    return ChallengeRepository.getChallengesLight(); 
+  }
+
+  @Query(() => [Challenge])
   challengesByCategory(
     @Arg("category", type => [Category]) category : Category,
     @Args() { itemsByPage, pageNumber } : Pagination

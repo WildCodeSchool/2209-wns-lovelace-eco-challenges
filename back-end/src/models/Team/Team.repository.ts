@@ -100,6 +100,11 @@ export default class TeamRepository extends TeamDb {
     isPublic: boolean,
     img: string,  
   ): Promise<Team> {
+    const existingTeam = await this.repository.findOne({ where: { teamName } });
+    if (existingTeam) {
+      throw Error('This team Name already exists');
+    }
+
     const newTeam = this.repository.create({ teamName, city, country, img, isPublic });
     await this.repository.save(newTeam);
     return newTeam;

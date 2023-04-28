@@ -22,6 +22,12 @@ export default class ChallengeRepository extends ChallengeDb {
     }); 
   }
 
+  static async getChallengesLight(): Promise<Challenge[]> {
+    return this.repository.find({
+      order: {startsAt: "ASC"},
+    }); 
+  }
+
   static async getChallengesByCategory(
     category: Category,
     itemsByPage: number, 
