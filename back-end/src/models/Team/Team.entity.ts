@@ -3,13 +3,11 @@ import {
   Column,
   Entity,
   Index,
-  JoinTable,
-  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import Challenge from "../Challenge/Challenge.entity";
 import UserToTeam from "../UserToTeam/UserToTeam.entity";
+import ChallengeToTeam from "../ChallengeToTeam/ChallengeToTeam.entity";
 
 
 @Entity()
@@ -22,7 +20,7 @@ export default class Team {
     isPublic : boolean,
     img?: string, 
     userToTeams?: UserToTeam[],
-    challenges?: Challenge[]
+    challengeToTeams?: ChallengeToTeam[]
   ) {
     this.teamName = teamName;
     this.city = city;
@@ -34,8 +32,8 @@ export default class Team {
     if (userToTeams) {
       this.userToTeams = userToTeams;
     };
-    if (challenges) {
-      this.challenges = challenges;
+    if (challengeToTeams) {
+      this.challengeToTeams = challengeToTeams;
     }
   }
 
@@ -68,8 +66,7 @@ export default class Team {
   @Field(() => [UserToTeam], { nullable: true })
   userToTeams: UserToTeam[]; 
 
-  @ManyToMany(() => Challenge, (challenge) => challenge.teams, { eager: true })
-  @Field(() => [Challenge], { nullable: true })
-  @JoinTable()
-  challenges: Challenge[];
+  @OneToMany(() => ChallengeToTeam, (challengeToTeam) => challengeToTeam.team)
+  @Field(() => [ChallengeToTeam], { nullable: true })
+  challengeToTeams: ChallengeToTeam[]; 
 }

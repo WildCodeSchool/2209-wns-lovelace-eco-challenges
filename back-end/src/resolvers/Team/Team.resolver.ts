@@ -77,12 +77,4 @@ export default class TeamResolver {
   deleteTeam(@Arg("id") id: string): Promise<Team> {
     return TeamRepository.deleteTeam(id);
   }
-
-  @Mutation(() => Team)
-  addChallengeToTeam(
-    @Arg("teamId") teamId: string,
-    @Arg("challengeId") challengeId: string
-  ): Promise<Team> {
-    return TeamRepository.addChallengeToTeam(teamId, challengeId);
-  }
 }

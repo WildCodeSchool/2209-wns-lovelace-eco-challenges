@@ -1,7 +1,5 @@
 import { Repository } from "typeorm";
 import { getRepository } from "../../database/utils";
-import Challenge from "../Challenge/Challenge.entity";
-import ChallengeRepository from "../Challenge/Challenge.repository";
 import Team from "./Team.entity";
 
 
@@ -21,14 +19,11 @@ export default class TeamDb {
 
   static async initializeTeams(): Promise<void> {
     await this.clearRepository();
-    const carpooling = (await ChallengeRepository.getChallengeByName("Covoiturage")) as Challenge; 
-    const cleaningBeach = (await ChallengeRepository.getChallengeByName("Nettoyons")) as Challenge;
-    const turnOffLights = (await ChallengeRepository.getChallengeByName("Eteignez")) as Challenge;
-    const teamParis = new Team("Team Paris","Paris","France", true, undefined,undefined,[carpooling, turnOffLights])
-    const teamBordeaux = new Team("Team Bordeaux","Bordeaux","France", false, undefined,undefined, undefined)
-    const teamTours = new Team("Team Tours","TOURS","France", false, undefined,undefined, [carpooling])
-    const teamToulouse = new Team("Team Toulouse","Toulouse","France", false, undefined,undefined, undefined)
-    const teamBarcelone = new Team("Team Barcelone","Barcelone","Espagne",true, undefined,undefined, [cleaningBeach])
+    const teamParis = new Team("Team Paris","Paris","France", true)
+    const teamBordeaux = new Team("Team Bordeaux","Bordeaux","France", false)
+    const teamTours = new Team("Team Tours","TOURS","France", false)
+    const teamToulouse = new Team("Team Toulouse","Toulouse","France", false)
+    const teamBarcelone = new Team("Team Barcelone","Barcelone","Espagne",true)
     
     await this.repository.save([teamBarcelone, teamBordeaux, teamParis, teamToulouse, teamTours])
   }

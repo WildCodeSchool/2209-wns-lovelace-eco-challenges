@@ -64,7 +64,7 @@ export default class AppUserRepository extends AppUserDb {
       relations: {
         userToTeams : {
           team : {
-            challenges : true
+            challengeToTeams : true
           }
         }
       } 
@@ -83,7 +83,7 @@ export default class AppUserRepository extends AppUserDb {
       relations: {
         userToTeams : {
           team : {
-            challenges : true
+            challengeToTeams : true
           }
         }
       },
@@ -102,7 +102,7 @@ export default class AppUserRepository extends AppUserDb {
       relations: {
         userToTeams : {
           team : {
-            challenges : true
+            challengeToTeams : true
           }
         }
       },

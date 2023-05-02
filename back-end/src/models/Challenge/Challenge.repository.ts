@@ -10,9 +10,9 @@ export default class ChallengeRepository extends ChallengeDb {
   ): Promise<Challenge[]> {
     return this.repository.find({
       relations: {
-        teams: {
-          userToTeams: {
-            user: true
+        challengeToTeams: {
+          team : {
+            userToTeams: true
           }
         }
       },
@@ -38,9 +38,9 @@ export default class ChallengeRepository extends ChallengeDb {
         category: ArrayContains([category]) 
       }, 
       relations: {
-        teams: {
-          userToTeams: {
-            user: true
+        challengeToTeams: {
+          team : {
+            userToTeams: true
           }
         }
       },
@@ -60,9 +60,9 @@ export default class ChallengeRepository extends ChallengeDb {
         level: level 
       },
       relations: {
-        teams: {
-          userToTeams: {
-            user: true
+        challengeToTeams: {
+          team : {
+            userToTeams: true
           }
         }
       },
@@ -78,9 +78,9 @@ export default class ChallengeRepository extends ChallengeDb {
         id 
       }, 
       relations: {
-        teams: {
-          userToTeams: {
-            user: true
+        challengeToTeams: {
+          team : {
+            userToTeams: true
           }
         }
       }
@@ -97,9 +97,9 @@ export default class ChallengeRepository extends ChallengeDb {
         challengeName: ILike(`%${challengeName}%`) 
       },
       relations: {
-        teams: {
-          userToTeams: {
-            user: true
+        challengeToTeams: {
+          team : {
+            userToTeams: true
           }
         }
       }
