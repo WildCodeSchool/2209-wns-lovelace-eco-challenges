@@ -32,15 +32,15 @@ const Challenge = (props: Props) => {
       <div className="block w-11/12">
         <h2 className="text-2xl">{t("challenge.teams")}</h2>
         <div className="flex justify-around">
-          {challenge?.teams?.map((element, index) => (
+          {challenge?.challengeToTeams?.map((element, index) => (
             <div className="w-2/5" key={index}>
               <Image
-                src={element.img || "https://picsum.photos/300/150"}
+                src={element.team.img || "https://picsum.photos/300/150"}
                 alt=""
                 width={300}
                 height={150}
               />
-              <h3>{element.teamName}</h3>
+              <h3>{element.team.teamName}</h3>
             </div>
           ))}
         </div>

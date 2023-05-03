@@ -105,7 +105,7 @@ query GetChallengeToTeams {
 
 ---
 
-### Create User To Team
+### Create Challenge To Team
 
 ```
 mutation CreateChallengeToTeam($teamId: ID!, $challengeId: ID!, $startsAt: DateTime!, $endAt: DateTime!) {
