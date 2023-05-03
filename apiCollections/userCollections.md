@@ -24,9 +24,13 @@ query UserByNickname($nickname: String!) {
         isPublic
         city
         ...
-        challenges {
-          challengeName
-          ...
+        challengeToTeams {
+          startsAt
+          endAt
+          challenge {
+            challengeName
+            ...
+          }
         }
       }
       userRole
@@ -37,9 +41,9 @@ query UserByNickname($nickname: String!) {
 
 ```
 
-| Parameter  | Type     | Description |
-| :--------- | :------- | :---------- |
-| `nickname` | `string` |             |
+| Parameter  | Type     | Description  |
+| :--------- | :------- | :----------- |
+| `nickname` | `string` | **required** |
 
 ---
 
@@ -58,11 +62,13 @@ query UserById($id: String!) {
         isPublic
         city
         ...
-        challenges {
-          challengeName
+        challengeToTeams {
+          startsAt
           endAt
-          category
-          ...
+          challenge {
+            challengeName
+            ...
+          }
         }
       }
       score

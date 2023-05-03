@@ -8,7 +8,13 @@ import ChallengeRepository from "../Challenge/Challenge.repository";
 export default class ChallengeToTeamRepository extends ChallengeToTeamDb {
 
   static async getChallengeToTeams(): Promise<ChallengeToTeam[]> {
-    return this.repository.find(); 
+    return this.repository.find({
+      relations: {
+        team : {
+          userToTeams : true
+        }
+      }
+    }) 
   }
 
   static async createChallengeToTeam(
@@ -28,7 +34,8 @@ export default class ChallengeToTeamRepository extends ChallengeToTeamDb {
 
     const newChallengeToTeam = this.repository.create({ 
       team, 
-      challenge,                                 startsAt,     
+      challenge,
+      startsAt,     
       endAt,
     });
 

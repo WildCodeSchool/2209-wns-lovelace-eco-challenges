@@ -30,19 +30,27 @@ query GetChallenges($itemsByPage: Int!, $pageNumber: Int!) {
     startsAt
     endAt
     img
-    teams {
+    challengeToTeams {
       id
-      teamName
-      city
-      country
-      isPublic
-      img
-      userToTeams {
-        userRole
+      startsAt
+      endAt
+      challenge {
         ...
-        user {
-          nickname
+      }
+      teams {
+        id
+        teamName
+        city
+        country
+        isPublic
+        img
+        userToTeams {
+          userRole
           ...
+          user {
+            nickname
+            ...
+          }
         }
       }
     }
@@ -50,10 +58,10 @@ query GetChallenges($itemsByPage: Int!, $pageNumber: Int!) {
 }
 ```
 
-| Parameter     | Type     | Description |
-| :------------ | :------- | :---------- |
-| `itemsByPage` | `number` |             |
-| `pageNumber`  | `number` |             |
+| Parameter     | Type  | Description  |
+| :------------ | :---- | :----------- |
+| `itemsByPage` | `int` | **required** |
+| `pageNumber`  | `int` | **required** |
 
 ---
 
@@ -77,32 +85,40 @@ query GetChallengesLight {
 ```
 
 query GetChallengesByCategory($category: [Category!]!, $itemsByPage: Int!, $pageNumber: Int!) {
-challengesByCategory(category: $category, itemsByPage: $itemsByPage, pageNumber: $pageNumber) {
-id
-challengeName
-description
-level
-startsAt
-endAt
-img
-category
-teams {
-id
-teamName
-city
-country
-isPublic
-img
-userToTeams {
-userRole
-...
-user {
-nickname
-...
-}
-}
-}
-}
+  challengesByCategory(category: $category, itemsByPage: $itemsByPage, pageNumber: $pageNumber) {
+    id
+    challengeName
+    description
+    level
+    startsAt
+    endAt
+    img
+    category
+    challengeToTeams {
+      id
+      startsAt
+      endAt
+      challenge {
+        ...
+      }
+      teams {
+        id
+        teamName
+        city
+        country
+        isPublic
+        img
+        userToTeams {
+          userRole
+          ...
+          user {
+            nickname
+            ...
+          }
+        }
+      }
+    }
+  }
 }
 
 ```
@@ -110,8 +126,8 @@ nickname
 | Parameter     | Type     | Description                                                                          |
 | :------------ | :------- | :----------------------------------------------------------------------------------- |
 | `category`    | `[enum]` | [CARPOOLING, WASTE, WATER, ELECTRICITY, MEAT, PROTECTSNATURE, SELFSUFFICIENCY, LESS] |
-| `itemsByPage` | `number` |                                                                                      |
-| `pageNumber`  | `number` |                                                                                      |
+| `itemsByPage` | `int`    | **required**                                                                         |
+| `pageNumber`  | `int`    | **required**                                                                         |
 
 ---
 
@@ -120,41 +136,49 @@ nickname
 ```
 
 query GetChallengeByLevel($level: Level!, $itemsByPage: Int!, $pageNumber: Int!) {
-challengesByLevel(level: $level, itemsByPage: $itemsByPage, pageNumber: $pageNumber) {
-id
-challengeName
-startsAt
-endAt
-level
-description
-category
-img
-teams {
-id
-teamName
-city
-country
-isPublic
-img
-userToTeams {
-userRole
-...
-user {
-nickname
-...
-}
-}
-}
-}
+  challengesByLevel(level: $level, itemsByPage: $itemsByPage, pageNumber: $pageNumber) {
+    id
+    challengeName
+    description
+    level
+    startsAt
+    endAt
+    img
+    category
+    challengeToTeams {
+      id
+      startsAt
+      endAt
+      challenge {
+        ...
+      }
+      teams {
+        id
+        teamName
+        city
+        country
+        isPublic
+        img
+        userToTeams {
+          userRole
+          ...
+          user {
+            nickname
+            ...
+          }
+        }
+      }
+    }
+  }
 }
 
 ```
 
-| Parameter     | Type     | Description                             |
-| :------------ | :------- | :-------------------------------------- |
-| `level`       | `enum`   | EASY, MODERATE, CHALLENGING, SUPERGREEN |
-| `itemsByPage` | `number` |                                         |
-| `pageNumber`  | `number` |                                         |
+| Parameter     | Type   | Description                             |
+| :------------ | :----- | :-------------------------------------- |
+| `level`       | `enum` | EASY, MODERATE, CHALLENGING, SUPERGREEN |
+| `itemsByPage` | `int`  | **required**                            |
+| `pageNumber`  | `int`  | **required**                            |
 
 ---
 
@@ -163,28 +187,40 @@ nickname
 ```
 
 query GetChallengeById($id: String!) {
-challengeById(id: $id) {
-id
-challengeName
-description
-category
-level
-startsAt
-endAt
-teams {
-id
-teamName
-...
-userToTeams {
-userRole
-...
-user {
-nickname
-...
-}
-}
-}
-}
+  challengeById(id: $id) {
+    id
+    challengeName
+    description
+    level
+    startsAt
+    endAt
+    img
+    category
+    challengeToTeams {
+      id
+      startsAt
+      endAt
+      challenge {
+        ...
+      }
+      teams {
+        id
+        teamName
+        city
+        country
+        isPublic
+        img
+        userToTeams {
+          userRole
+          ...
+          user {
+            nickname
+            ...
+          }
+        }
+      }
+    }
+  }
 }
 
 ```
@@ -196,29 +232,40 @@ nickname
 ```
 
 query ChallengeByName($challengeName: String!) {
-challengeByName(challengeName: $challengeName) {
-id
-challengeName
-description
-category
-level
-startsAt
-endAt
-img
-teams {
-id
-teamName
-...
-userToTeams {
-userRole
-...
-user {
-nickname
-...
-}
-}
-}
-}
+  challengeByName(challengeName: $challengeName) {
+    id
+    challengeName
+    description
+    level
+    startsAt
+    endAt
+    img
+    category
+    challengeToTeams {
+      id
+      startsAt
+      endAt
+      challenge {
+        ...
+      }
+      teams {
+        id
+        teamName
+        city
+        country
+        isPublic
+        img
+        userToTeams {
+          userRole
+          ...
+          user {
+            nickname
+            ...
+          }
+        }
+      }
+    }
+  }
 }
 
 ```
@@ -332,7 +379,3 @@ challengeName
 | `id`      | `uuid` | **required** |
 
 ---
-
-```
-
-```

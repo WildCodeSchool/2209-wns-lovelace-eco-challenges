@@ -26,15 +26,17 @@ query GetTeams($itemsByPage: Int!, $pageNumber: Int!) {
     city
     country
     img
-    challenges {
-      id
-      challengeName
-      description
-      category
-      startsAt
-      endAt
-      level
-      img
+    challengeToTeams {
+      challenge {
+        id
+        challengeName
+        description
+        category
+        startsAt
+        endAt
+        level
+        img
+      }
     }
     userToTeams {
       userRole
@@ -48,10 +50,10 @@ query GetTeams($itemsByPage: Int!, $pageNumber: Int!) {
 }
 ```
 
-| Parameter     | Type     | Description |
-| :------------ | :------- | :---------- |
-| `itemsByPage` | `number` |             |
-| `pageNumber`  | `number` |             |
+| Parameter     | Type  | Description  |
+| :------------ | :---- | :----------- |
+| `itemsByPage` | `int` | **required** |
+| `pageNumber`  | `int` | **required** |
 
 ---
 
@@ -66,10 +68,17 @@ query GetTeamByCity($city: String!, $itemsByPage: Int!, $pageNumber: Int!) {
     country
     city
     img
-    challenges {
-      id
-      challengeName
-      ...
+    challengeToTeams {
+      challenge {
+        id
+        challengeName
+        description
+        category
+        startsAt
+        endAt
+        level
+        img
+      }
     }
     userToTeams {
       userRole
@@ -83,11 +92,11 @@ query GetTeamByCity($city: String!, $itemsByPage: Int!, $pageNumber: Int!) {
 }
 ```
 
-| Parameter     | Type     | Description |
-| :------------ | :------- | :---------- |
-| `city`        | `string` |             |
-| `itemsByPage` | `number` |             |
-| `pageNumber`  | `number` |             |
+| Parameter     | Type     | Description  |
+| :------------ | :------- | :----------- |
+| `city`        | `string` | **required** |
+| `itemsByPage` | `int`    | **required** |
+| `pageNumber`  | `int`    | **required** |
 
 ---
 
@@ -102,10 +111,17 @@ query GetTeamByCountry($country: String!, $itemsByPage: Int!, $pageNumber: Int!)
     city
     country
     img
-    challenges {
-      id
-      challengeName
-      ...
+    challengeToTeams {
+      challenge {
+        id
+        challengeName
+        description
+        category
+        startsAt
+        endAt
+        level
+        img
+      }
     }
     userToTeams {
       userRole
@@ -119,11 +135,11 @@ query GetTeamByCountry($country: String!, $itemsByPage: Int!, $pageNumber: Int!)
 }
 ```
 
-| Parameter     | Type     | Description |
-| :------------ | :------- | :---------- |
-| `country`     | `string` |             |
-| `itemsByPage` | `number` |             |
-| `pageNumber`  | `number` |             |
+| Parameter     | Type     | Description  |
+| :------------ | :------- | :----------- |
+| `country`     | `string` | **required** |
+| `itemsByPage` | `int`    | **required** |
+| `pageNumber`  | `int`    | **required** |
 
 ---
 
@@ -138,10 +154,17 @@ query GetTeamByName($teamName: String!) {
     country
     city
     img
-    challenges {
-      id
-      challengeName
-      ...
+    challengeToTeams {
+      challenge {
+        id
+        challengeName
+        description
+        category
+        startsAt
+        endAt
+        level
+        img
+      }
     }
     userToTeams {
       userRole
@@ -156,9 +179,9 @@ query GetTeamByName($teamName: String!) {
 }
 ```
 
-| Parameter  | Type     | Description |
-| :--------- | :------- | :---------- |
-| `teamName` | `string` |             |
+| Parameter  | Type     | Description  |
+| :--------- | :------- | :----------- |
+| `teamName` | `string` | **required** |
 
 ---
 
@@ -170,9 +193,12 @@ query TeamById($id: String!) {
     id
     teamName
     ...
-    challenges {
-      challengeName
-      ...
+    challengeToTeams {
+      challenge {
+        id
+        challengeName
+        ...
+      }
     }
     userToTeams {
       userRole
