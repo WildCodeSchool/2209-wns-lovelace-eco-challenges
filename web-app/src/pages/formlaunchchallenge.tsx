@@ -9,12 +9,10 @@ import {
   ADD_CHALLENGE_TO_TEAM,
   CREATE_TEAM,
   CREATE_USER_TO_TEAM,
-  UPDATE_CHALLENGE,
 } from "@src/api/mutations";
 import { client } from "@src/api/apolloClient";
 import SelectChallenge from "@shared/SelectChallenge/SelectChallenge";
 import { GraphQLError } from "graphql";
-import { start } from "repl";
 import { UserRole } from "@gql/graphql";
 
 const FormLaunchChallenge = () => {
@@ -26,12 +24,10 @@ const FormLaunchChallenge = () => {
   const [isPublic, setIsPublic] = useState(false);
   const [img, setImg] = useState("");
 
-  const [errorChallenge, setErrorChallenge] = useState<GraphQLError | null>(
-    null
-  );
+  const [errorChallenge, setErrorChallenge] = useState<GraphQLError | null>(null);
   const [successChallenge, setSuccessChallenge] = useState(false);
   const [teamId, setTeamId] = useState("");
-  const [challengeId, setChallengeId] = useState("");
+  const [challenge, setChallenge] = useState({ id: "", challengeName: "" });
   const [startsAt, setStartsAt] = useState(null);
   const [endAt, setEndAt] = useState(null);
   const onChange = (dates: [any, any]) => {
@@ -39,6 +35,10 @@ const FormLaunchChallenge = () => {
     setStartsAt(start);
     setEndAt(end);
   };
+
+  const [errorInvitation, setErrorInvitation] = useState<GraphQLError | null>(null);
+  const [successInvitation, setSuccessInvitation] = useState(false);
+  const [guestEmail, setGuestEmail] = useState("");
 
   const userEmail = "user4@gmail.com"; //a recup avec le contexte
 
@@ -48,6 +48,7 @@ const FormLaunchChallenge = () => {
     setImg(image);
   };
 
+  console.log('CHALLENGE', challenge)
   const submitNewTeam = async () => {
     setSuccessTeam(false);
     setErrorTeam(null);
@@ -86,7 +87,7 @@ const FormLaunchChallenge = () => {
         mutation: ADD_CHALLENGE_TO_TEAM,
         variables: {
           teamId,
-          challengeId,
+          challengeId : challenge.id,
           startsAt,
           endAt,
         },
@@ -96,6 +97,26 @@ const FormLaunchChallenge = () => {
       setErrorChallenge(error as GraphQLError);
     }
   };
+
+  const submitInvitation = async () => {
+    setSuccessInvitation(false); 
+    setErrorInvitation(null);
+    try {
+      await client.mutate({
+        mutation: CREATE_USER_TO_TEAM,
+        variables: {
+          teamId,
+          userEmail: guestEmail,
+          userRole: UserRole.Player,
+          challengeName: challenge.challengeName
+        },
+      });
+      setSuccessInvitation(true);
+    } catch (error) {
+      setErrorInvitation(error as GraphQLError);
+    }
+
+  }
 
   return (
     <>
@@ -192,7 +213,7 @@ const FormLaunchChallenge = () => {
       >
         <fieldset className="flex flex-col">
           <legend> 2 - Je choisi mon challenge</legend>
-          <SelectChallenge setChallengeId={setChallengeId} />
+          <SelectChallenge setChallenge={setChallenge} />
 
           <label htmlFor="period">Période *</label>
           <DatePicker
@@ -210,8 +231,7 @@ const FormLaunchChallenge = () => {
           {errorChallenge && <div>{errorChallenge.message}</div>}
           {successChallenge && (
             <div>
-              Challenge {`"challengeName"`} ajouté.
-              {/* Team created successfully! */}
+              Challenge ajouté !
             </div>
           )}
         </fieldset>
@@ -225,7 +245,7 @@ const FormLaunchChallenge = () => {
         }}
       >
         <fieldset className="flex flex-col">
-          <legend> 3 - J'invite des participants</legend>
+          <legend> 3 - J&apos;invite des participants</legend>
 
           <label htmlFor="period">Email *</label>
           <input
@@ -233,15 +253,15 @@ const FormLaunchChallenge = () => {
             type="email"
             id="email"
             name="email"
+            value={guestEmail}
             placeholder="invite@exemple.com"
-            onChange={(e) => setIsPublic(e.target.checked)}
+            onChange={(e) => setGuestEmail(e.target.value)}
           />
           <input type="submit" value="valider" />
-          {errorChallenge && <div>{errorChallenge.message}</div>}
-          {successChallenge && (
+          {errorInvitation && <div>{errorInvitation.message}</div>}
+          {successInvitation && (
             <div>
-              Challenge {`"challengeName"`} ajouté.
-              {/* Team created successfully! */}
+              Invitations envoyées
             </div>
           )}
         </fieldset>

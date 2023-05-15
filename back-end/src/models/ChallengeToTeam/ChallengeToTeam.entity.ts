@@ -1,9 +1,10 @@
 import { Field, ObjectType, ID } from "type-graphql";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 import Team from "../Team/Team.entity";
 import Challenge from "../Challenge/Challenge.entity";
 
 @Entity()
+@Unique(["team", "challenge", "startsAt", "endAt"])
 @ObjectType()
 export default class ChallengeToTeam {
   constructor(

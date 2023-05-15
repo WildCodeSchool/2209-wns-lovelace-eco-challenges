@@ -4,14 +4,14 @@ import { client } from "@src/api/apolloClient";
 import { CHALLENGES_LIGHT } from "@src/api/queries";
 import Select from 'react-select';
 
-type Props = { setChallengeId: React.Dispatch<React.SetStateAction<any>> };
+type Props = { setChallenge: React.Dispatch<React.SetStateAction<any>> };
 
 type Option = {
-  value: string;
+  value: string
   label: string
 }
 
-const SelectChallenge = ({ setChallengeId }: Props) => {
+const SelectChallenge = ({ setChallenge }: Props) => {
 
   const { data, error, refetch } = useQuery<
     GetChallengesLightQuery
@@ -23,7 +23,7 @@ const SelectChallenge = ({ setChallengeId }: Props) => {
   const listChallenges = data?.challengesLight.map(el => ({ value: el.id, label: el.challengeName }))
 
   const handleChange = (option: Option | null ) => {
-    setChallengeId(option?.value)
+    setChallenge({ id: option?.value, challengeName: option?.label })
   }
 
   return (

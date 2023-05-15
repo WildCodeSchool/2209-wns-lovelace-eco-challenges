@@ -26,19 +26,26 @@ export const CREATE_USER_TO_TEAM = gql`
     $teamId: ID!
     $userEmail: String!
     $userRole: UserRole!
+    $challengeName: String
   ) {
     createUserToTeam(
       teamId: $teamId
       userEmail: $userEmail
       userRole: $userRole
+      challengeName: $challengeName
     ) {
-      team {
-        teamName
-      }
-      userRole
-      user {
-        email
-      }
+        team {
+          teamName
+          challengeToTeams {
+            challenge {
+              challengeName
+            }
+          }
+        }
+        userRole
+        user {
+          email
+        }
     }
   }
 `;

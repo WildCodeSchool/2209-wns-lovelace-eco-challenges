@@ -4,6 +4,7 @@ import TeamRepository from "../Team/Team.repository";
 import ChallengeToTeamDb from "./ChallengeToTeam.db";
 import ChallengeToTeam from "./ChallengeToTeam.entity";
 import ChallengeRepository from "../Challenge/Challenge.repository";
+import { QueryFailedError } from "typeorm";
 
 export default class ChallengeToTeamRepository extends ChallengeToTeamDb {
 
@@ -39,7 +40,13 @@ export default class ChallengeToTeamRepository extends ChallengeToTeamDb {
       endAt,
     });
 
-    await this.repository.save(newChallengeToTeam);
+    await this.repository.save(newChallengeToTeam).catch((error) => {
+      if (error instanceof QueryFailedError && error.driverError.code === "23505") {
+        throw new Error("Votre équipe joue déjà ce Challenge sur cette période")
+      } else {
+        throw error;
+      }
+    });
     
     return newChallengeToTeam;
   }
