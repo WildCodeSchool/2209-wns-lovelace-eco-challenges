@@ -4,9 +4,11 @@ import {
   Entity,
   Index,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import Team from "../Team/Team.entity";
+import ChallengeToTeam from "../ChallengeToTeam/ChallengeToTeam.entity";
 
 export enum Level {
   EASY = "Facile",
@@ -45,7 +47,7 @@ export default class Challenge {
     startsAt?: Date,
     endAt?: Date, 
     img?: string, 
-    teams?: Team[]
+    challengeToTeams?: ChallengeToTeam[]
   ) {
     this.challengeName = challengeName;
     this.level = level; 
@@ -60,8 +62,8 @@ export default class Challenge {
     if (img) {
       this.img = img; 
     }
-    if (teams) {
-      this.teams = teams;
+    if (challengeToTeams) {
+      this.challengeToTeams = challengeToTeams;
     }
   }
 
@@ -105,8 +107,9 @@ export default class Challenge {
   @Field({ nullable: true })
   img: string; 
 
-  @ManyToMany(() => Team, (team) => team.challenges, {onDelete: "CASCADE", onUpdate: "CASCADE"})
-  @Field(() => [Team], { nullable: true })
-  teams: Team[];
+  @OneToMany(() => ChallengeToTeam, (challengeToTeam) => challengeToTeam.challenge)
+  @Field(() => [ChallengeToTeam], { nullable: true })
+  challengeToTeams: ChallengeToTeam[]; 
+
 }
 

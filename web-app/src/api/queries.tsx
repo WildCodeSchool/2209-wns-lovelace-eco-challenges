@@ -26,17 +26,32 @@ export const CHALLENGE_DETAIL = gql`
       level
       startsAt
       endAt
-      teams {
-        id
-        teamName
-        img
-        userToTeams {
-          userRole
-          user {
-            nickname
+      challengeToTeams {
+        startsAt
+        endAt
+        team {
+          id
+          teamName
+          img
+          userToTeams {
+            userRole
+            user {
+              nickname
+            }
           }
         }
       }
+    }
+  }
+`;
+
+export const CHALLENGES_LIGHT = gql`
+  query GetChallengesLight {
+    challengesLight {
+      challengeName
+      id
+      level
+      category
     }
   }
 `;

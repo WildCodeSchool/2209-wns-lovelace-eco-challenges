@@ -1,7 +1,22 @@
 import { IsEmail } from "class-validator";
-import { Field, ID, ObjectType } from "type-graphql";
+import { Field, ID, ObjectType, registerEnumType } from "type-graphql";
 import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany } from "typeorm";
 import UserToTeam from "../UserToTeam/UserToTeam.entity";
+
+export enum Hobbies {
+  SPORT = "Sport",
+  TRIPS = "Voyages",
+  MUSIC = "Music",
+  ART = "Art",
+  BOOK = "Lecture", 
+  COOK = "Cuisine",
+  GAMES = "Jeux",
+  PETS = "Animaux"
+}
+
+registerEnumType(Hobbies, {
+  name: "Hobbies",
+});
 
 @Entity()
 @ObjectType()
@@ -15,6 +30,8 @@ export default class AppUser {
     city:string,
     country:string,
     hashedPassword: string,
+    img?: string,
+    hobbies?: Hobbies[], 
     isVerified?: boolean, 
     userToTeams?: UserToTeam[]
   ) {
@@ -25,6 +42,12 @@ export default class AppUser {
     this.hashedPassword = hashedPassword;
     this.city = city;
     this.country = country;
+    if (img) {
+      this.img = img;
+    }
+    if (hobbies) {
+      this.hobbies = hobbies;
+    }
     if (isVerified) {
       this.isVerified = isVerified;
     }
@@ -73,6 +96,19 @@ export default class AppUser {
   @Field()
   @Column()
   country:string;
+
+  @Column("varchar", { nullable: true })
+  @Field({ nullable: true })
+  img: string; 
+
+  @Column({
+    type: "enum",
+    enum: Hobbies,
+    array: true,
+    nullable: true
+  })
+  @Field(_type => [Hobbies], { nullable: true })
+  hobbies: Hobbies[];
 
   @Field()
   @Column("boolean", {default:true})

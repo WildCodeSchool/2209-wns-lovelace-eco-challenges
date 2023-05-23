@@ -12,7 +12,8 @@ export default class TeamRepository extends TeamDb {
     return this.repository.find({
       order: {teamName: "ASC"},
       relations: {
-        userToTeams: true
+        userToTeams: true,
+        challengeToTeams: true
       },
       take: itemsByPage,
       skip: (pageNumber -1) * itemsByPage,
@@ -31,6 +32,9 @@ export default class TeamRepository extends TeamDb {
       relations : {
         userToTeams: {
           user: true
+        },
+        challengeToTeams: {
+          challenge: true
         }
       },
       order: {teamName: "ASC"},
@@ -51,6 +55,9 @@ export default class TeamRepository extends TeamDb {
       relations : {
         userToTeams: {
           user: true
+        },
+        challengeToTeams: {
+          challenge: true
         }
       },
       order: {teamName: "ASC"},
@@ -67,6 +74,9 @@ export default class TeamRepository extends TeamDb {
       relations : {
         userToTeams: {
           user: true
+        },
+        challengeToTeams: {
+          challenge: true
         }
       }
     });
@@ -84,6 +94,9 @@ export default class TeamRepository extends TeamDb {
       relations : {
         userToTeams: {
           user: true
+        },
+        challengeToTeams: {
+          challenge: true
         }
       }
     });
@@ -100,6 +113,11 @@ export default class TeamRepository extends TeamDb {
     isPublic: boolean,
     img: string,  
   ): Promise<Team> {
+    const existingTeam = await this.repository.findOne({ where: { teamName } });
+    if (existingTeam) {
+      throw Error('This team Name already exists');
+    }
+
     const newTeam = this.repository.create({ teamName, city, country, img, isPublic });
     await this.repository.save(newTeam);
     return newTeam;
@@ -145,21 +163,5 @@ export default class TeamRepository extends TeamDb {
     // resetting ID because existingTeam loses ID after calling remove
     existingTeam.id = id;
     return existingTeam;
-  }
-
-  static async addChallengeToTeam(
-    teamId: string,
-    challengeId: string
-  ): Promise<Team> {
-    const team = await this.findTeamById(teamId);
-    if (!team) {
-      throw Error("No existing Team matching ID.");
-    }
-    const challenge = await ChallengeRepository.getChallengeById(challengeId);
-    if (!challenge) {
-      throw Error("No existing challenge matching ID.");
-    }
-    team.challenges = [...team.challenges, challenge];
-    return this.repository.save(team);
   }
 }

@@ -1,4 +1,4 @@
-import { IsDate, IsEnum, IsOptional, IsUUID, MaxLength, MinDate, MinLength, MIN_DATE, ValidateIf } from "class-validator";
+import { IsDate, IsEnum, IsOptional, IsUUID, MaxLength, MinDate, MinLength, MIN_DATE, ValidateIf, IsDateString } from "class-validator";
 import { ArgsType, Field, ID } from "type-graphql";
 import { Category, Level } from "../../models/Challenge/Challenge.entity";
 
@@ -27,13 +27,14 @@ class CreateChallengeArgs {
   @Field({ nullable: true })
   @IsOptional()
   @IsDate()
+  // @IsDateString()
   @MinDate(new Date(),{ message: "La date de début ne peut être inférieure à la date du jour"})
   startsAt?: Date;
 
   @Field({ nullable: true })
   @IsOptional()
   @IsDate()
-  
+  // @IsDateString()
   // @MinDate()
   endAt?: Date; 
 

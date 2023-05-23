@@ -4,39 +4,10 @@ _For gql requests_
 
 ## Features
 
-- AddChallengeToteam
 - GetUserToTeams
-- CreateUserToTeam (without invitation -> in progress)
-
----
-
-### Add a challenge to a team
-
-```
-mutation AddChallengeToTeam($challengeId: String!, $teamId: String!) {
-  addChallengeToTeam(challengeId: $challengeId, teamId: $teamId) {
-    teamName
-    id
-    isPublic
-    ...
-    challenges {
-      challengeName
-      id
-      description
-      category
-      level
-      startsAt
-      endAt
-      img
-    }
-  }
-}
-```
-
-| Parameter     | Type     | Description |
-| :------------ | :------- | :---------- |
-| `challengeId` | `string` | uuid        |
-| `teamId`      | `string` | uuid        |
+- CreateUserToTeam
+- GetChallengeToTeams
+- CreateChallengeToTeam
 
 ---
 
@@ -55,9 +26,11 @@ query GetUserToTeams {
     team {
       id
       teamName
-      challenges {
-        challengeName
-        ...
+      challengeToTeams {
+        challenge {
+          challengeName
+          ...
+        }
       }
       ...
     }
@@ -94,10 +67,67 @@ mutation CreateUserToTeam($teamId: ID!, $userId: ID!, $userRole: UserRole!) {
 }
 ```
 
-| Parameter  | Type     | Description   |
-| :--------- | :------- | :------------ |
-| `teamId`   | `string` | uuid          |
-| `userId`   | `string` | uuid          |
-| `userRole` | `enum`   | ADMIN, PLAYER |
+| Parameter  | Type     | Description                |
+| :--------- | :------- | :------------------------- |
+| `teamId`   | `string` | uuid **required**          |
+| `userId`   | `string` | uuid **required**          |
+| `userRole` | `enum`   | ADMIN, PLAYER **required** |
+
+---
+
+### Get Challenge to Team
+
+```
+query GetChallengeToTeams {
+ challengeToTeams {
+    id
+    startsAt
+    endAt
+    team {
+      teamName
+      ...
+      userToTeams {
+        userRole
+        ...
+        user {
+          nickname
+          ...
+        }
+      }
+    }
+    challenge {
+      challengeName
+      ...
+    }
+  }
+}
+```
+
+---
+
+### Create Challenge To Team
+
+```
+mutation CreateChallengeToTeam($teamId: ID!, $challengeId: ID!, $startsAt: DateTime!, $endAt: DateTime!) {
+  createChallengeToTeam(teamId: $teamId, challengeId: $challengeId, startsAt: $startsAt, endAt: $endAt) {
+    id
+    challenge {
+      challengeName
+    }
+    startsAt
+    endAt
+    team {
+      teamName
+    }
+  }
+}
+```
+
+| Parameter     | Type          | Description       |
+| :------------ | :------------ | :---------------- |
+| `teamId`      | `string`      | uuid **required** |
+| `challengeId` | `string`      | uuid **required** |
+| `startsAt`    | `timestamptz` | **required**      |
+| `endAt`       | `timestamptz` | **required**      |
 
 ---

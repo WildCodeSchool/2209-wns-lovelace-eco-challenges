@@ -1,5 +1,5 @@
 import { IsBoolean, IsEmail, IsEnum, IsOptional, IsUUID, MinLength } from "class-validator";
-import { ArgsType, Field, ID, Int } from "type-graphql";
+import { ArgsType, Field, ID } from "type-graphql";
 import { UserRole } from "../../models/UserToTeam/UserToTeam.entity";
 
 @ArgsType()
@@ -16,10 +16,8 @@ class  CreateUserToTeamArgs {
   @IsEnum(UserRole)
   userRole : UserRole;
 
-  @Field()
+  @Field({ nullable: true })
   challengeName?:string;
-
-
 }
 
 export { CreateUserToTeamArgs };

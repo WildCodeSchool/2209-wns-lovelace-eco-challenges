@@ -1,7 +1,7 @@
 import { Arg, Args, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import AppUser from "../../models/AppUser/AppUser.entity";
 import AppUserRepository from "../../models/AppUser/AppUser.repository";
-import { SignInArgs, SignUpArgs } from "./AppUser.input";
+import { SignInArgs, SignUpArgs, UpdateAppUserArgs } from "./AppUser.input";
 import { setSessionIdInCookie } from "../../http-utils";
 import { GlobalContext } from "../..";
 import { Email } from "../InputArgsForAll";
@@ -57,4 +57,20 @@ export default class AppUserResolver {
     return AppUserRepository.getUserByEmailThrow(email); 
   }
 
+  @Mutation(() => AppUser)
+  updateAppUser(
+    @Args() { 
+      id, 
+      firstName,
+      lastName,
+      nickname,
+      email,
+      city,
+      country,
+      img,
+      hobbies
+    }: UpdateAppUserArgs
+  ): Promise<AppUser> {
+    return AppUserRepository.updateAppUser(id, firstName, lastName, nickname, email, city, country, img, hobbies);
+  }
 }

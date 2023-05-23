@@ -8,7 +8,7 @@ const config: CodegenConfig = {
   generates: {
     "src/src-frontend/gql/": {
       preset: "client",
-      plugins: []
+      plugins: [],
     }
   }
 };

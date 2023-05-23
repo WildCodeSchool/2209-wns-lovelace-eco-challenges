@@ -10,7 +10,13 @@ import UserToTeam, { UserRole } from "./UserToTeam.entity";
 export default class UserToTeamRepository extends UserToTeamDb {
 
   static async getUserToTeams(): Promise<UserToTeam[]> {
-    return this.repository.find(); 
+    return this.repository.find({
+      relations: {
+        team : {
+          challengeToTeams : true
+        }
+      }
+    }); 
   }
 
   static async createUserToTeam(
@@ -33,10 +39,6 @@ export default class UserToTeamRepository extends UserToTeamDb {
       user,                                      
       userRole,
     });
-
-
-
-
 
     if(userRole == UserRole.PLAYER) {
       const invitName = `${team.teamName}-${challengeName}-${userEmail}`
