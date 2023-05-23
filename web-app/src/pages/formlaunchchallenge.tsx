@@ -217,6 +217,7 @@ const FormLaunchChallenge = () => {
 
           <label htmlFor="period">Période *</label>
           <DatePicker
+            locale="fr-FR"
             selected={startsAt}
             onChange={onChange}
             startDate={startsAt}
@@ -226,6 +227,7 @@ const FormLaunchChallenge = () => {
             monthsShown={2}
             isClearable={true}
             placeholderText="Click to select a date"
+            className="input-launch-chall"
           />
           <input type="submit" value="valider" />
           {errorChallenge && <div>{errorChallenge.message}</div>}

@@ -33,6 +33,12 @@ const SelectChallenge = ({ setChallenge }: Props) => {
       isSearchable={true}
       isClearable={true}
       onChange={handleChange}
+      styles={{
+        control: (baseStyles, state) => ({
+          ...baseStyles,
+          borderColor: 'black',
+        }),
+      }}
     />
   );
 };
