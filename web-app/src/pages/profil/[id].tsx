@@ -2,7 +2,7 @@ import { client } from "@api/apolloClient";
 import Image from "next/image";
 import { GET_USERSBYID } from "@api/queries";
 import { AppUser } from "@gql/graphql";
-import List from "@shared/List/List";
+// import List from "@shared/List/List";
 import HeaderProfil from "@shared/Profil/HeaderProfil";
 import { SSRConfig } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -37,13 +37,13 @@ const Profil = (props: Props) => {
             <div className="container mx-auto md:p-0">
               <div className="relative bg-white shadow-md rounded-lg w-2/1 mx-auto md:w-1/2 lg:w-1/3 xl:w-1/4 flex justify-center">
                 <div className="relative bg-white shadow-md rounded-lg w-2/1 flex justify-center">
-                  <List
+                  {/* <List
                     description={challenge.challenge.description}
                     title={challenge.challenge.challengeName}
                     source={challenge.challenge.img}
                     endAt={challenge.endAt}
                     level={challenge.challenge.level}
-                  />
+                  /> */}
                 </div>
                 <div className="absolute top-0 right-0 bg-green-500 text-white py-1 px-6 transform -translate-x-1/6 translate-y-1/6 rotate-45 before:absolute before:right-0 before:top-0 before:content: 'Terminé'; before:bg-green-500 before:text-white before:py-1 before:px-6 before:transform: -translate-x-1/6 translate-y-1/6 before:rotate-45 before:shadow-md"></div>
               </div>
