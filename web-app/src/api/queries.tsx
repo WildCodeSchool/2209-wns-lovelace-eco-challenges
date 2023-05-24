@@ -76,15 +76,17 @@ query userById($id: String!) {
         city
         isPublic
         img
-        challenges {
-          id
-          challengeName
-          level
-          description
-          img
-          startsAt
-          endAt
-          category
+        challengeToTeams {
+          challenge {
+            id
+            challengeName
+            level
+            description
+            img
+            startsAt
+            endAt
+            category
+          }
         }
       }
     }

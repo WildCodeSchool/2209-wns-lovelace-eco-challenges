@@ -17,7 +17,7 @@ At the root, create an `.env` file following the `.env.example` model.
 
 Docker and Docker Compose are required on host system.
 
-Build and start in dev mode:ø
+Build and start in dev mode:
 
 ```
 ./build-start.dev.sh
