@@ -1,4 +1,4 @@
-import { IsDate, IsUUID, MinDate } from "class-validator";
+import { IsDate, IsDateString, IsUUID, MinDate } from "class-validator";
 import { ArgsType, Field, ID } from "type-graphql";
 
 @ArgsType()

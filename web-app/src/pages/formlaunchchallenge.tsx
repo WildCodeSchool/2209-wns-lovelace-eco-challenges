@@ -15,6 +15,7 @@ import SelectChallenge from "@shared/SelectChallenge/SelectChallenge";
 import { GraphQLError } from "graphql";
 import { UserRole } from "@gql/graphql";
 
+
 const FormLaunchChallenge = () => {
   const [errorTeam, setErrorTeam] = useState<GraphQLError | null>(null);
   const [successTeam, setSuccessTeam] = useState(false);
@@ -28,9 +29,9 @@ const FormLaunchChallenge = () => {
   const [successChallenge, setSuccessChallenge] = useState(false);
   const [teamId, setTeamId] = useState("");
   const [challenge, setChallenge] = useState({ id: "", challengeName: "" });
-  const [startsAt, setStartsAt] = useState(null);
-  const [endAt, setEndAt] = useState(null);
-  const onChange = (dates: [any, any]) => {
+  const [startsAt, setStartsAt] = useState<Date | null>(null);
+  const [endAt, setEndAt] = useState<Date | null>(null);
+  const onChangeDate = (dates: [any, any]) => {
     const [start, end] = dates;
     setStartsAt(start);
     setEndAt(end);
@@ -88,8 +89,8 @@ const FormLaunchChallenge = () => {
         variables: {
           teamId,
           challengeId : challenge.id,
-          startsAt,
-          endAt,
+          startsAt : startsAt?.toDateString(),
+          endAt: endAt?.toDateString(),
         },
       });
       setSuccessChallenge(true);
@@ -217,9 +218,8 @@ const FormLaunchChallenge = () => {
 
           <label htmlFor="period">Période *</label>
           <DatePicker
-            locale="fr-FR"
             selected={startsAt}
-            onChange={onChange}
+            onChange={onChangeDate}
             startDate={startsAt}
             endDate={endAt}
             minDate={new Date()}
