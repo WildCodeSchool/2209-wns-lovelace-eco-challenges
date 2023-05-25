@@ -18,16 +18,17 @@ const ShowChallenge = (props: Props) => {
           fill={true}
         />
       </div>
-      <div className="w-[400px] h-[250px]">
+      <div className="w-[400px] h-[250px] mt-4">
         <p className="font-bold text-2xl">{src.challengeName}</p>
         <p className="line-clamp-3">{src.description}</p>
         <p>{src.endAt}</p>
         <p className="font-bold">{src.level}</p>
-        <Link href={`/challenge/${src.id}`}>
-          <span className="text-blue-600">Voir plus</span>
-        </Link>
+        {/* <Link href={`/challenge/${src.id}`}>
+      <span className="text-blue-600">Voir plus</span>
+    </Link> */}
       </div>
-    </div>
+    </div >
+
   );
 };
 

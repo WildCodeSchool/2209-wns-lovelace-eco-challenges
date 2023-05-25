@@ -1,12 +1,22 @@
 import { client } from "@api/apolloClient";
 import Image from "next/image";
 import { GET_USERSBYID } from "@api/queries";
-import { AppUser } from "@gql/graphql";
-// import List from "@shared/List/List";
-import HeaderProfil from "@shared/Profil/HeaderProfil";
+import { AppUser, Hobbies } from "@gql/graphql";
 import { SSRConfig } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import ShowChallenge from "@shared/Challenges/ShowChallenge";
+
+import art from '../../src-frontend/assets/images/hobbies/art.png';
+import book from '../../src-frontend/assets/images/hobbies/book.png';
+import cook from '../../src-frontend/assets/images/hobbies/cooking.png';
+import games from '../../src-frontend/assets/images/hobbies/games.png';
+import music from '../../src-frontend/assets/images/hobbies/music.png';
+import pets from '../../src-frontend/assets/images/hobbies/pets.png';
+import sport from '../../src-frontend/assets/images/hobbies/machine-dentrainement.png';
+import trips from '../../src-frontend/assets/images/hobbies/trips.png';
+import HeaderProfil from "@shared/Profil/HeaderProfil";
+// Import other logos for each hobby
 
 type Props = {
   local: string;
@@ -18,87 +28,150 @@ const Profil = (props: Props) => {
   console.log('PROPS', props)
   const { userById } = props;
   const { t } = useTranslation("profil");
-  if (userById) {
-    const userToTeams = userById.userToTeams;
-    if (userToTeams && userToTeams.length > 0) {
-      const team = userToTeams[0].team;
-      if (team && team.challengeToTeams && team.challengeToTeams.length > 0) {
-        const challenge = team.challengeToTeams[0];
 
-        return <div className="container mx-auto p-4 md:p-4">
-          <div className="container mx-auto p-4 md:p-4 flex flex-col space-y-4">
-            <HeaderProfil
-              firstName={userById.firstName}
-              lastName={userById.lastName}
-              city={userById.city}
-              country={userById.country}
-            />
-            <h2 className="text-2xl font-bold mb-8">Challenges</h2>
-            <div className="container mx-auto md:p-0">
-              <div className="relative bg-white shadow-md rounded-lg w-2/1 mx-auto md:w-1/2 lg:w-1/3 xl:w-1/4 flex justify-center">
-                <div className="relative bg-white shadow-md rounded-lg w-2/1 flex justify-center">
-                  {/* <List
-                    description={challenge.challenge.description}
-                    title={challenge.challenge.challengeName}
-                    source={challenge.challenge.img}
-                    endAt={challenge.endAt}
-                    level={challenge.challenge.level}
-                  /> */}
-                </div>
-                <div className="absolute top-0 right-0 bg-green-500 text-white py-1 px-6 transform -translate-x-1/6 translate-y-1/6 rotate-45 before:absolute before:right-0 before:top-0 before:content: 'Terminé'; before:bg-green-500 before:text-white before:py-1 before:px-6 before:transform: -translate-x-1/6 translate-y-1/6 before:rotate-45 before:shadow-md"></div>
+  if (!userById) {
+    return null;
+  }
+
+  const userToTeams = userById.userToTeams;
+
+  if (!userToTeams || userToTeams.length === 0) {
+    return null;
+  }
+
+  const team = userToTeams[0].team;
+
+  if (!team || !team.challengeToTeams || team.challengeToTeams.length === 0) {
+    return null;
+  }
+
+  const challenge = team.challengeToTeams[0];
+
+  return (
+    <div className="container mx-auto p-4">
+      <HeaderProfil
+        firstName={userById.firstName}
+        lastName={userById.lastName}
+        city={userById.city}
+        country={userById.country}
+      />
+      <div className="bg-white shadow-md rounded-lg p-4">
+        <div className="mt-4 flex justify-center">
+          <ShowChallenge src={challenge} />
+        </div>
+        <div className="rounded-lg p-4 mt-4">
+          <div className="flex flex-row justify-around items-center w-full">
+            {userById.hobbies && userById.hobbies.length > 0 ? (
+              <div className="flex flex-row items-center justify-center space-x-4 md:space-x-8">
+                {userById.hobbies.map((hobby, index) => (
+                  <div key={index} className="space-x-2">
+                    {hobby.toString() === Hobbies.Art && (
+                      <Image
+                        src={art}
+                        alt={hobby.toString()}
+                        width={50}
+                        height={50}
+                      />
+                    )}
+                    {hobby.toString() === Hobbies.Book && (
+                      <Image
+                        src={book}
+                        alt={hobby.toString()}
+                        width={50}
+                        height={50}
+                      />
+                    )}
+                    {hobby.toString() === Hobbies.Cook && (
+                      <Image
+                        src={cook}
+                        alt={hobby.toString()}
+                        width={50}
+                        height={50}
+                      />
+                    )}
+                    {hobby.toString() === Hobbies.Games && (
+                      <Image
+                        src={games}
+                        alt={hobby.toString()}
+                        width={50}
+                        height={50}
+                      />
+                    )}
+                    {hobby.toString() === Hobbies.Music && (
+                      <Image
+                        src={music}
+                        alt={hobby.toString()}
+                        width={50}
+                        height={50}
+                      />
+                    )}
+                    {hobby.toString() === Hobbies.Pets && (
+                      <Image
+                        src={pets}
+                        alt={hobby.toString()}
+                        width={50}
+                        height={50}
+                      />
+                    )}
+                    {hobby.toString() === Hobbies.Sport && (
+                      <Image
+                        src={sport}
+                        alt={hobby.toString()}
+                        width={50}
+                        height={50}
+                      />
+                    )}
+                    {hobby.toString() === Hobbies.Trips && (
+                      <Image
+                        src={trips}
+                        alt={hobby.toString()}
+                        width={50}
+                        height={50}
+                      />
+                    )}
+                    {/* Add conditions for other hobbies with corresponding logos */}
+                  </div>
+                ))}
               </div>
+            ) : (
+              <p>Ajoutez vos loisirs !</p>
+            )}
+          </div>
+        </div>
+        <div className="rounded-lg p-4 mt-4">
+          <div className="flex flex-row justify-evenly items-center">
+            <div className="flex flex-col items-center space-y-2">
+              <Image
+                src="https://picsum.photos/200/300"
+                alt="Pierre"
+                width={70}
+                height={150}
+                className="max-w-xs lg:max-w-full lg:rounded-full rounded-full"
+              />
             </div>
-            <div className="rounded-lg p-4">
-              <h2 className="text-2xl font-bold mb-4">Loisirs</h2>
-              <div className="flex flex-row justify-around items-center w-full">
-                <div className="flex flex-col items-center justify-center space-y-2 space-x-2">
-                  <Image src="https://picsum.photos/200/300" alt="" width={70} height={150} className="max-w-xs" />
-                </div>
-                <div className="flex flex-col items-center justify-center space-y-2 space-x-2">
-                  <Image src="https://picsum.photos/200/300" alt="" width={70} height={150} className="max-w-xs" />
-                </div>
-                <div className="flex flex-col items-center justify-center space-y-2 space-x-2">
-                  <Image src="https://picsum.photos/200/300" alt="" width={70} height={150} className="max-w-xs" />
-                </div>
-              </div>
+            <div className="flex flex-col items-center space-y-2">
+              <Image
+                src="https://picsum.photos/200/300"
+                alt="Pierre"
+                width={70}
+                height={150}
+                className="max-w-xs lg:max-w-full lg:rounded-full rounded-full"
+              />
             </div>
-            <div className="rounded-lg p-4">
-              <h2 className="text-2xl font-bold mb-4">Mes amis</h2>
-              <div className="flex flex-row justify-evenly items-center">
-                <div className="flex flex-col items-center space-y-2">
-                  <Image
-                    src="https://picsum.photos/200/300"
-                    alt="Pierre"
-                    width={70}
-                    height={150}
-                    className="max-w-xs lg:max-w-full lg:rounded-full rounded-full"
-                  />
-                </div>
-                <div className="flex flex-col items-center space-y-2">
-                  <Image
-                    src="https://picsum.photos/200/300"
-                    alt="Pierre"
-                    width={70}
-                    height={150}
-                    className="max-w-xs lg:max-w-full lg:rounded-full rounded-full"
-                  />
-                </div>
-                <div className="flex flex-col items-center space-y-2">
-                  <Image
-                    src="https://picsum.photos/200/300"
-                    alt="Pierre"
-                    width={70}
-                    height={150}
-                    className="max-w-xs lg:max-w-full lg:rounded-full rounded-full"
-                  />
-                </div>
-              </div>
+            <div className="flex flex-col items-center space-y-2">
+              <Image
+                src="https://picsum.photos/200/300"
+                alt="Pierre"
+                width={70}
+                height={150}
+                className="max-w-xs lg:max-w-full lg:rounded-full rounded-full"
+              />
             </div>
           </div>
         </div>
-      }
-    }
-  }
+      </div>
+    </div>
+  );
 }
 
 export async function getServerSideProps(context: any) {
@@ -125,4 +198,5 @@ export async function getServerSideProps(context: any) {
     },
   }
 }
-export default Profil
+
+export default Profil;

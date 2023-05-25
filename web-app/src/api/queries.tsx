@@ -66,6 +66,7 @@ query userById($id: String!) {
     city
     nickname
     score
+    hobbies
     userToTeams {
       userRole
       score
