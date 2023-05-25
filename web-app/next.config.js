@@ -8,7 +8,15 @@ const nextConfig = {
     apiUrl: "http://back-end:4000/api"
   },
   publicRuntimeConfig: {
-    apiUrl: "http://localhost:4000"
+    apiUrl: "http://localhost:4000",
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/uploader/image-upload',
+        destination: 'http://localhost:5000/uploader/image-upload',
+      },
+    ]
   },
   images: {
     domains: [

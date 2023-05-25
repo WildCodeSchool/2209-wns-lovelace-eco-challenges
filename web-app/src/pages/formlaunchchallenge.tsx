@@ -23,6 +23,7 @@ const FormLaunchChallenge = () => {
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [isPublic, setIsPublic] = useState(false);
+  const [file, setFiles] = useState({ preview: "", data: "" });
   const [img, setImg] = useState("");
 
   const [errorChallenge, setErrorChallenge] = useState<GraphQLError | null>(null);
@@ -41,18 +42,38 @@ const FormLaunchChallenge = () => {
   const [successInvitation, setSuccessInvitation] = useState(false);
   const [guestEmail, setGuestEmail] = useState("");
 
+  
+
   const userEmail = "user4@gmail.com"; //a recup avec le contexte
 
   const handleImageChange = (e: any) => {
-    const image = URL.createObjectURL(e.target.files[0]);
-    // console.log(image)
-    setImg(image);
+    const image = {
+      preview: URL.createObjectURL(e.target.files[0]),
+      data: e.target.files[0],
+    };
+    setFiles(image);
+    setImg(image.data.name);
   };
 
-  console.log('CHALLENGE', challenge)
+  const postImg = async () => {
+    let formData = new FormData(); 
+    formData.append("file", file.data); 
+
+    try {
+      await fetch("/uploader/image-upload", {
+        method: "POST", 
+        body: formData,
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const submitNewTeam = async () => {
     setSuccessTeam(false);
     setErrorTeam(null);
+    postImg();
+
     try {
       const response = await client.mutate({
         mutation: CREATE_TEAM,
@@ -181,7 +202,7 @@ const FormLaunchChallenge = () => {
             onChange={handleImageChange}
           />
 
-          {img && <Image src={img} width={300} height={300} alt="Mon équipe" />}
+          {file.preview && <Image src={file.preview} width={300} height={300} alt="Mon équipe" />}
 
           <label>
             Groupe ouvert
