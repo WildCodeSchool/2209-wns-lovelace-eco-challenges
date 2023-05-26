@@ -271,7 +271,9 @@ const Index = (props: Props): JSX.Element => {
               bg-primary
               text-center"
           ></div>
-          <List src={challenges} />
+          <div className="flex items-center justify-around flex-wrap">
+            <List src={challenges} />
+          </div>
           <Link href="/challenges">
             <h2
               className="font-bold
