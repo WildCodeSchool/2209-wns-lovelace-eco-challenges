@@ -1,35 +1,35 @@
 import Image from "next/image";
-import Link from "next/link";
-import { type Challenge } from "@gql/graphql";
 
 type Props = {
-  src: Challenge;
+  img: string
+  challengeName: string
+  description: string
+  endAt: string
+  level: string
 };
 
 const ShowChallenge = (props: Props) => {
-  const { src } = props;
+  const { img, challengeName, description, endAt, level } = props;
 
   return (
-    <div className="mx-[10px] w-[100%] flex flex-col items-center justify-center lg:w-[45%] 2xl:w-[30%]">
-      <div className="relative w-[400px] h-[300px]">
-        <Image
-          src={src.img || "https://picsum.photos/400/250"}
-          alt="image"
-          fill={true}
-        />
+    <div className="flex justify-center items-center w-full h-full">
+      <div className="mx-auto w-[400px]">
+        <div className="relative w-full h-[300px]">
+          <Image
+            src={img || "https://picsum.photos/400/250"}
+            alt="image"
+            fill={true}
+          />
+        </div>
+        <div className="w-full mt-4">
+          <p className="font-bold text-2xl text-center">{challengeName}</p>
+          <p className="text-center">{description}</p>
+          <p className="text-center">{endAt}</p>
+          <p className="font-bold text-center">{level}</p>
+        </div>
       </div>
-      <div className="w-[400px] h-[250px] mt-4">
-        <p className="font-bold text-2xl">{src.challengeName}</p>
-        <p className="line-clamp-3">{src.description}</p>
-        <p>{src.endAt}</p>
-        <p className="font-bold">{src.level}</p>
-        {/* <Link href={`/challenge/${src.id}`}>
-      <span className="text-blue-600">Voir plus</span>
-    </Link> */}
-      </div>
-    </div >
+    </div>
 
   );
 };
-
 export default ShowChallenge;
