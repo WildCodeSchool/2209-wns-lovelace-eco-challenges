@@ -14,9 +14,15 @@ import { client } from "@src/api/apolloClient";
 import SelectChallenge from "@shared/SelectChallenge/SelectChallenge";
 import { GraphQLError } from "graphql";
 import { UserRole } from "@gql/graphql";
+import Stepper from "@shared/Stepper/Stepper";
+import FormTeam from "@shared/Stepper/FormTeam";
+import FormChallenge from "@shared/Stepper/FormChallenge";
+import FormInvitation from "@shared/Stepper/FormInvitation";
 
 
 const FormLaunchChallenge = () => {
+  const [currentStep, setCurrentStep] = useState(1);
+
   const [errorTeam, setErrorTeam] = useState<GraphQLError | null>(null);
   const [successTeam, setSuccessTeam] = useState(false);
   const [teamName, setTeamName] = useState("");
@@ -24,8 +30,7 @@ const FormLaunchChallenge = () => {
   const [country, setCountry] = useState("");
   const [isPublic, setIsPublic] = useState(false);
   const [file, setFiles] = useState({ preview: "", data: "" });
-  const [img, setImg] = useState("");
-
+  
   const [errorChallenge, setErrorChallenge] = useState<GraphQLError | null>(null);
   const [successChallenge, setSuccessChallenge] = useState(false);
   const [teamId, setTeamId] = useState("");
@@ -42,39 +47,31 @@ const FormLaunchChallenge = () => {
   const [successInvitation, setSuccessInvitation] = useState(false);
   const [guestEmail, setGuestEmail] = useState("");
 
-  
-
   const userEmail = "user4@gmail.com"; //a recup avec le contexte
 
   const handleImageChange = (e: any) => {
+    // e.preventDefault();
     const image = {
       preview: URL.createObjectURL(e.target.files[0]),
       data: e.target.files[0],
     };
     setFiles(image);
-    setImg(image.data.name);
   };
-
-  const postImg = async () => {
-    let formData = new FormData(); 
-    formData.append("file", file.data); 
-
-    try {
-      await fetch("/uploader/image-upload", {
-        method: "POST", 
-        body: formData,
-      })
-    } catch (err) {
-      console.log(err)
-    }
-  }
 
   const submitNewTeam = async () => {
     setSuccessTeam(false);
     setErrorTeam(null);
-    postImg();
+
+    let formData = new FormData(); 
+    formData.append("file", file.data); 
 
     try {
+        const imageResponse = await fetch("/uploader/image-upload", {
+          method: "POST", 
+          body: formData,
+        });
+        const img = await imageResponse.json();
+
       const response = await client.mutate({
         mutation: CREATE_TEAM,
         variables: {
@@ -82,11 +79,12 @@ const FormLaunchChallenge = () => {
           city,
           country,
           isPublic,
-          img,
+          img: img.filename,
         },
       });
       const team = response.data.createTeam.id;
       setTeamId(team);
+
       await client.mutate({
         mutation: CREATE_USER_TO_TEAM,
         variables: {
@@ -140,12 +138,31 @@ const FormLaunchChallenge = () => {
 
   }
 
+  const renderForm = () => {
+    switch(currentStep) {
+      case 1 : 
+      return (
+        <FormTeam /> 
+      )
+      case 2 : 
+      return (
+        <FormChallenge /> 
+      )
+      case 3 : 
+      return (
+        <FormInvitation /> 
+      )
+      default: return null
+    }
+  }
   return (
     <>
       <h1>Lancer un challenge</h1>
       <TiltedLabel>Règles du jeu</TiltedLabel>
+      <Stepper currentStep={currentStep} setCurrentStep={setCurrentStep}/>
+      {renderForm()}
 
-      <form
+      {/* <form
         className="w-10/12 mx-auto my-8 flex flex-col"
         onSubmit={async (event) => {
           event.preventDefault();
@@ -221,7 +238,7 @@ const FormLaunchChallenge = () => {
             <div>
               Votre Team {`${teamName}`} est créé avec succès.
               {/* Team created successfully! */}
-            </div>
+            {/* </div>
           )}
         </fieldset>
       </form>
@@ -288,7 +305,7 @@ const FormLaunchChallenge = () => {
             </div>
           )}
         </fieldset>
-      </form>
+      </form> */} 
     </>
   );
 };

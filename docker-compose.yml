@@ -38,7 +38,7 @@ services:
     ports:
       - 127.0.0.1:5000:5000
     volumes:
-      - ./uploader:/app
+      - uploader-data:/app/uploads
     depends_on:
       - back-end
 
@@ -66,3 +66,4 @@ services:
 
 volumes:
   database-content:
+  uploader-data:

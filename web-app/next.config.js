@@ -13,8 +13,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/uploader/image-upload',
-        destination: 'http://localhost:5000/uploader/image-upload',
+        source: '/uploader/:path*',
+        destination: 'http://uploader:5000/uploader/:path*',
       },
     ]
   },

@@ -5,7 +5,7 @@
 @import './normalize.css';
 @import './main.css';
 @import './loader.css';
-
+@import './stepper.css';
 
 h1, h2, h3, p, li {
   @apply font-['Lato'];
