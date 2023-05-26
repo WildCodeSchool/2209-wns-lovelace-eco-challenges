@@ -5,6 +5,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
+# RUN mkdir /app/uploads
+
 COPY . ./
 
 FROM base as dev

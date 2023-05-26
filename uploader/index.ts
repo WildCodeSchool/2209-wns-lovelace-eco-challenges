@@ -9,9 +9,20 @@ const port = 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-const storage = multer.diskStorage({
+const MIME_TYPES= {
+  'image/jpg': 'jpg',
+  'image/jpeg': 'jpg',
+  'image/png': 'png',
+  'image/gif': 'gif',
+  'image/bmp': 'bmp', 
+  'image/tiff': 'tiff',
+  'image/tif': 'tif',
+  'image/svg': 'svg'
+};
+
+let storage = multer.diskStorage({
   destination: (
-    request,
+    req,
     file,
     callback
   ) => {
@@ -22,11 +33,13 @@ const storage = multer.diskStorage({
     file,
     callback
   ) => {
-    callback(null, file.originalname);
+    const name = file.originalname.split(' ').join('_');
+    const extension = MIME_TYPES[file.mimetype as keyof typeof MIME_TYPES];
+    callback(null, name + Date.now() + '.' + extension);
   },
 });
 
-const upload = multer({ storage: storage });
+let upload = multer({ storage: storage });
 
 app.post(
   "/uploader/image-upload",
