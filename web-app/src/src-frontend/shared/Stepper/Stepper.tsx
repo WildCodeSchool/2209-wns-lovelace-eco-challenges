@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Check from "@assets/logos/Check";
 import { WHITE } from "@src/src-frontend/constants/color";
-import FormTeam from "./FormTeam";
 
 type Props = { 
   currentStep: number,
@@ -14,8 +13,9 @@ const Stepper = ({ currentStep, setCurrentStep }: Props) => {
   const [complete, setComplete] = useState(false);
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex justify-between item-center max-w-[600px]">
         {steps?.map((step, i) => (
+          <>
           <div
             key={i}
             className={`step-item ${currentStep === i + 1 && "active"} ${
@@ -25,8 +25,9 @@ const Stepper = ({ currentStep, setCurrentStep }: Props) => {
             <div className="step">
               {i + 1 < currentStep || complete ? <Check width="14px" height="14px" fill={WHITE} />: i + 1}
             </div>
-            <p className="text-gray-500">{step}</p>
+            {/* <p className="text-gray-500">{step}</p> */}
           </div>
+          </>
         ))}
       </div>
       {!complete && (
