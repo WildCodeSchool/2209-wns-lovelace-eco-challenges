@@ -1,3 +1,4 @@
+import Button from '@shared/Buttons/Button';
 import SelectChallenge from '@shared/SelectChallenge/SelectChallenge';
 import { client } from '@src/api/apolloClient';
 import { ADD_CHALLENGE_TO_TEAM } from '@src/api/mutations';
@@ -9,7 +10,10 @@ type FormChallengeProps = {
   teamId: string;
   challenge: { id: string, challengeName: string};
   setChallenge: (challenge: { id: string, challengeName: string} ) => void;
-
+  currentStep: number; 
+  setCurrentStep: (step: number) => void; 
+  setComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  steps: number[];
 };
 
 const FormChallenge = (props: FormChallengeProps) => {
@@ -38,6 +42,9 @@ const FormChallenge = (props: FormChallengeProps) => {
         },
       });
       setSuccessChallenge(true);
+      props.currentStep === props.steps.length
+      ? props.setComplete(true)
+      : props.setCurrentStep((prev) => prev + 1);
     } catch (error) {
       setErrorChallenge(error as GraphQLError);
     }
@@ -45,36 +52,34 @@ const FormChallenge = (props: FormChallengeProps) => {
 
   return (
     <form
-        className="w-10/12 mx-auto my-8 flex flex-col"
+        className="mb-5 flex flex-col justify-center"
         onSubmit={async (event) => {
           event.preventDefault();
           await submitChallenge();
         }}
       >
-        <fieldset className="flex flex-col">
-          <legend className="font-medium text-2xl text-primary">Je choisi mon challenge</legend>
+        <fieldset className="flex flex-col justify-center space-y-3">
+          <legend className="font-medium text-2xl text-primary pb-5">Je choisi mon challenge</legend>
           <SelectChallenge setChallenge={props.setChallenge} />
 
-          <label htmlFor="period">Période *</label>
-          <DatePicker
-            selected={startsAt}
-            onChange={onChangeDate}
-            startDate={startsAt}
-            endDate={endAt}
-            minDate={new Date()}
-            selectsRange={true}
-            monthsShown={2}
-            isClearable={true}
-            placeholderText="Click to select a date"
-            className="input-launch-chall"
-          />
-          <input type="submit" value="valider" />
-          {errorChallenge && <div>{errorChallenge.message}</div>}
-          {successChallenge && (
-            <div>
-              Challenge ajouté !
-            </div>
-          )}
+          <label htmlFor="period">Période *
+            <DatePicker
+              selected={startsAt}
+              onChange={onChangeDate}
+              startDate={startsAt}
+              endDate={endAt}
+              minDate={new Date()}
+              selectsRange={true}
+              monthsShown={2}
+              isClearable={true}
+              placeholderText="Click to select a date"
+              className="input-launch-chall"
+            />
+          </label>
+          <div className="py-5 flex justify-end">
+            <Button name="Confirm & Go step 3  >>" size="max-w-fit" type="button-primary" />
+          </div>
+          {errorChallenge && <p className="text-error text-center">{errorChallenge.message}</p>}
         </fieldset>
       </form>
   )

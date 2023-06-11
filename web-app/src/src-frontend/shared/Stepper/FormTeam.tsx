@@ -4,11 +4,16 @@ import { UserRole } from '@gql/graphql';
 import { client } from '@src/api/apolloClient';
 import { CREATE_TEAM, CREATE_USER_TO_TEAM } from '@src/api/mutations';
 import React, { useState } from 'react'
+import Button from "@shared/Buttons/Button";
 
 
 type FormTeamProps = {
   setTeamId: (teamId: string) => void;
   userEmail: string;
+  currentStep: number; 
+  setCurrentStep: (step: number) => void; 
+  setComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  steps: number[];
 };
 
 const FormTeam =  (props: FormTeamProps) => {
@@ -65,6 +70,9 @@ const FormTeam =  (props: FormTeamProps) => {
         },
       });
       setSuccessTeam(true);
+      props.currentStep === props.steps.length
+      ? props.setComplete(true)
+      : props.setCurrentStep((prev) => prev + 1);
     } catch (error) {
       setErrorTeam(error as GraphQLError);
     }
@@ -72,83 +80,83 @@ const FormTeam =  (props: FormTeamProps) => {
   
   return (
     <form
-    className="w-10/12 mx-auto my-8 flex flex-col justify-center"
+    className="mb-5 flex flex-col justify-center"
     onSubmit={async (event) => {
       event.preventDefault();
       await submitNewTeam();
     }}
   >
-    <fieldset className="flex flex-col">
-      <legend className="font-medium text-2xl text-primary"> Je créer ma Team</legend>
-      <label htmlFor="teamName">Nom de ma Team *</label>
-      <input
-        className="input-launch-chall"
-        required
-        type="text"
-        id="teamName"
-        name="teamName"
-        value={teamName}
-        onChange={(event) => {
-          setTeamName(event.target.value);
-        }}
-      />
-      <label htmlFor="city">Ville *</label>
-      <input
-        className="input-launch-chall"
-        required
-        type="text"
-        id="city"
-        name="city"
-        value={city}
-        onChange={(event) => {
-          setCity(event.target.value);
-        }}
-      />
-      <label htmlFor="country">Pays *</label>
-      <input
-        className="input-launch-chall"
-        required
-        type="text"
-        id="country"
-        name="country"
-        value={country}
-        onChange={(event) => {
-          setCountry(event.target.value);
-        }}
-      />
-
-      <label htmlFor="imgTeam">Fanion, photo...</label>
-      <input
-        className="input-launch-chall"
-        type="file"
-        id="imgTeam"
-        name="imgTeam"
-        accept="image/*"
-        capture="environment"
-        onChange={handleImageChange}
-      />
-
-      {file.preview && <Image src={file.preview} width={300} height={300} alt="Mon équipe" />}
-
-      <label>
-        Groupe ouvert
+    <fieldset className="flex flex-col justify-center space-y-3">
+      <legend className="font-medium text-2xl text-primary pb-5"> Je créer ma Team</legend>
+      <label htmlFor="teamName">Nom de ma Team *
         <input
           className="input-launch-chall"
+          required
+          type="text"
+          id="teamName"
+          name="teamName"
+          value={teamName}
+          onChange={(event) => {
+            setTeamName(event.target.value);
+          }}
+        />
+      </label>
+      <label htmlFor="city">Ville *
+        <input
+          className="input-launch-chall"
+          required
+          type="text"
+          id="city"
+          name="city"
+          value={city}
+          onChange={(event) => {
+            setCity(event.target.value);
+          }}
+        />
+      </label>
+      <label htmlFor="country">Pays *
+        <input
+          className="input-launch-chall"
+          required
+          type="text"
+          id="country"
+          name="country"
+          value={country}
+          onChange={(event) => {
+            setCountry(event.target.value);
+          }}
+        />
+      </label>
+
+      <label htmlFor="imgTeam">Fanion, photo...
+        <input
+          className="input-launch-chall"
+          type="file"
+          id="imgTeam"
+          name="imgTeam"
+          accept="image/*"
+          capture="environment"
+          onChange={handleImageChange}
+        />
+      </label>
+
+      {file.preview && <Image src={file.preview} width={300} height={300} alt="Mon équipe" />}
+      
+      <div className="flex items-center space-x-3">
+        <label>Groupe ouvert</label>
+        <input
+          className=""
           type="checkbox"
           id="isPublic"
           name="isPublic"
           checked={isPublic}
           onChange={(e) => setIsPublic(e.target.checked)}
         />
-      </label>
-      <input type="submit" value="valider" />
-      {errorTeam && <div>{errorTeam.message}</div>}
-      {successTeam && (
-        <div>
-          Votre Team {`${teamName}`} est créé avec succès.
-          Team created successfully!
-        </div>
-      )}
+      </div>  
+      <div className="py-5 flex justify-end">
+        <Button name="Confirm & Go step 2  >>" size="max-w-fit" type="button-primary" />
+      </div>
+      {errorTeam && <p className="text-error text-center">{errorTeam.message}</p>}
     </fieldset>
   </form>
   )

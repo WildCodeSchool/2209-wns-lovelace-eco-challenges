@@ -12,7 +12,7 @@ h1, h2, h3, p, li {
 }
 
 .input-launch-chall {
-  @apply border border-black p-2 w-11/12 sm:w-3/4 lg:w-4/6 rounded-md
+  @apply border border-black p-2 sm:max-w-[600px] w-full rounded-md
 }
 
 /* .react-datepicker__input-container {
