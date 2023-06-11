@@ -4,15 +4,13 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { client } from "@api/apolloClient";
 import { useTranslation } from "next-i18next";
 
-import Button from "@shared/Buttons/Button";
 import DownArrow from "@assets/logos/DownArrow";
 import List from "@shared/List/List";
 
 import { PRIMARY } from "@constants/color";
 import { type NextI18NContext } from "@customTypes/types";
 import { type SSRConfig } from "next-i18next";
-import Image from "next/image";
-import Link from "next/link";
+import ButtonExpend from "@shared/Buttons/ButtonExpend";
 
 const pageNumber = 1;
 const itemsByPage = 6;
@@ -53,7 +51,7 @@ const Challenges = (props: Props): JSX.Element => {
           justify-center
           flex-col m-7"
       >
-        <Button
+        <ButtonExpend
           name={t("challenges.morechallenges")}
           type="button-secondary"
           icon={<DownArrow width="20px" height="20px" fill={PRIMARY} />}
