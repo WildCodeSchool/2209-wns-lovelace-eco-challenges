@@ -11,7 +11,7 @@ type FormChallengeProps = {
   challenge: { id: string, challengeName: string};
   setChallenge: (challenge: { id: string, challengeName: string} ) => void;
   currentStep: number; 
-  setCurrentStep: (step: number) => void; 
+  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   setComplete: React.Dispatch<React.SetStateAction<boolean>>;
   steps: number[];
 };
@@ -44,7 +44,7 @@ const FormChallenge = (props: FormChallengeProps) => {
       setSuccessChallenge(true);
       props.currentStep === props.steps.length
       ? props.setComplete(true)
-      : props.setCurrentStep((prev) => prev + 1);
+      : props.setCurrentStep((prev: number) => prev + 1);
     } catch (error) {
       setErrorChallenge(error as GraphQLError);
     }

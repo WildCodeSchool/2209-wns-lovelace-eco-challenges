@@ -11,7 +11,7 @@ type FormTeamProps = {
   setTeamId: (teamId: string) => void;
   userEmail: string;
   currentStep: number; 
-  setCurrentStep: (step: number) => void; 
+  setCurrentStep:React.Dispatch<React.SetStateAction<number>>; 
   setComplete: React.Dispatch<React.SetStateAction<boolean>>;
   steps: number[];
 };
