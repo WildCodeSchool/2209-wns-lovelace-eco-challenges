@@ -42,7 +42,6 @@ const FormStepper = () => {
     <>
       <div className="flex item-center sm:max-w-[600px] w-full pt-10">
         {steps.map((step, i) => (
-          <>
           <div
             key={i}
             className={`step-item ${currentStep === i + 1 && "active"} ${
@@ -53,7 +52,6 @@ const FormStepper = () => {
               {i + 1 < currentStep || complete ? <Check width="14px" height="14px" fill={WHITE} />: i + 1}
             </div>
           </div>
-          </>
         ))}
       </div>
       <div className="sm:max-w-[600px] w-full p-5">{renderForm()}</div>
