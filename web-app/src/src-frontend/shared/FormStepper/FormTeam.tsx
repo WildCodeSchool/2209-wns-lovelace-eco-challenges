@@ -134,7 +134,7 @@ const FormTeam =  (props: FormTeamProps) => {
           type="file"
           id="imgTeam"
           name="imgTeam"
-          accept="image/*"
+          accept=".jpg, .jpeg, .png, .gif, .bmp, .tiff, .tif"
           capture="environment"
           onChange={handleImageChange}
         />

@@ -17,7 +17,6 @@ const MIME_TYPES= {
   'image/bmp': 'bmp', 
   'image/tiff': 'tiff',
   'image/tif': 'tif',
-  'image/svg': 'svg'
 };
 
 let storage = multer.diskStorage({
