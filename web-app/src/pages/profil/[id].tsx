@@ -141,7 +141,6 @@ const Profil = (props: Props) => {
                             height={80}
                           />
                         )}
-                        {/* Add conditions for other hobbies with corresponding logos */}
                       </div>
                     ))}
                   </div>

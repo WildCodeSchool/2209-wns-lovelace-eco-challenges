@@ -1,4 +1,4 @@
-import { type Challenge } from "@gql/graphql";
+import { AppUser, type Challenge } from "@gql/graphql";
 import { CHALLENGES } from "@api/queries";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { client } from "@api/apolloClient";
@@ -19,11 +19,18 @@ type Props = {
   challenges: Challenge[];
   locale: string;
   _nextI18next: SSRConfig;
+  userById: AppUser;
 };
 
 const Challenges = (props: Props): JSX.Element => {
-  const { challenges } = props;
+  const { challenges, userById } = props;
   const { t } = useTranslation("challenges");
+
+  console.log(challenges)
+
+  const challenge = challenges[0]
+
+  console.log(challenge)
 
   return (
     <div>
@@ -54,8 +61,12 @@ const Challenges = (props: Props): JSX.Element => {
         <ButtonExpend
           name={t("challenges.morechallenges")}
           type="button-secondary"
-          icon={<DownArrow width="20px" height="20px" fill={PRIMARY} />}
-        />
+          icon={<DownArrow width="20px" height="20px" fill={PRIMARY}
+          />}
+          img={challenge.img || "https://picsum.photos/400/250"}
+          challengeName={challenge.challengeName}
+          date={challenge.endAt}
+          desc={challenge.description} />
       </div>
     </div>
   );
