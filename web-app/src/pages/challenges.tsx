@@ -19,18 +19,13 @@ type Props = {
   challenges: Challenge[];
   locale: string;
   _nextI18next: SSRConfig;
-  userById: AppUser;
 };
 
 const Challenges = (props: Props): JSX.Element => {
-  const { challenges, userById } = props;
+  const { challenges } = props;
   const { t } = useTranslation("challenges");
 
-  console.log(challenges)
-
   const challenge = challenges[0]
-
-  console.log(challenge)
 
   return (
     <div>

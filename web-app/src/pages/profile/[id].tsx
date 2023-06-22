@@ -199,7 +199,6 @@ export async function getServerSideProps(context: any) {
     query: GET_USERSBYID,
     variables: { id },
   });
-  console.log('SALMJÖEIAUÖDEIMZ', data);
 
   const { userById } = data;
 

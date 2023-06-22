@@ -1,9 +1,6 @@
-import LaunchChallenge from "@assets/logos/LaunchChallenge";
-import { PRIMARY } from "@src/src-frontend/constants/color";
 import clsx from "clsx";
 import { useMemo, useState } from "react";
 import { useTranslation } from "next-i18next";
-import { AppUser, Challenge } from "@gql/graphql";
 import { GET_USERSBYID } from "@src/api/queries";
 import { client } from "@src/api/apolloClient";
 
