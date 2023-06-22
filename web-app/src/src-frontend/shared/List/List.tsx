@@ -7,14 +7,13 @@ type Props = {
 
 const List = (props: Props) => {
   const { src } = props;
-  const { challengeName, description, img, endAt, level, id } = src;
 
   return (
     <>
       {src.map((element, index) => (
         <div key={index}>
           <ShowChallenge
-            img={element.img}
+            img={element.img || "https://picsum.photos/400/250"}
             challengeName={element.challengeName}
             description={element.description}
             endAt={element.endAt}

@@ -22,10 +22,17 @@ const Challenge = (props: Props) => {
   const { challenge } = props;
   const { t } = useTranslation("challenge");
   const router = useRouter();
+  const { img, challengeName, description, endAt, level } = challenge;
 
   return (
     <>
-      <ShowChallenge src={challenge} />
+      <ShowChallenge
+        img={img || "https://picsum.photos/400/250"}
+        challengeName={challengeName}
+        description={description}
+        endAt={endAt}
+        level={level}
+      />
       <Button
         name={t("challenge.gochallenge")}
         type="button-primary"

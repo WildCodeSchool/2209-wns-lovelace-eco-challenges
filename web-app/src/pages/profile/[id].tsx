@@ -19,8 +19,17 @@ type Props = {
 const Profil = (props: Props) => {
   const { userById } = props;
   const { hobbies, userToTeams } = userById;
+
+  if (!userToTeams || userToTeams.length === 0) {
+    return null;
+  };
+
   const { team } = userToTeams[0];
   const { t } = useTranslation("profil");
+
+  if (!team || !team.challengeToTeams || team.challengeToTeams.length === 0) {
+    return null;
+  }
 
   const challenge = team.challengeToTeams[0];
 
@@ -65,19 +74,20 @@ const Profil = (props: Props) => {
           level={challenge.challenge.level}
         />
       </div>
-      {hobbies === null || (hobbies === undefined && <p>Vous n&aposavez pas de hobbies</p>)}
-      <div className="flex items-center justify-around my-5">
-        {hobbies.map((element, index) => (
-          <div key={index}>
-            <Image
-              src={`/images/${element.toLowerCase()}.png`}
-              alt={element}
-              height={80}
-              width={80}
-            />
+      {hobbies && (
+          <div className="flex items-center justify-around my-5">
+            {hobbies.map((element, index) => (
+                <div key={index}>
+                  <Image
+                      src={`/images/${element.toLowerCase()}.png`}
+                      alt={element}
+                      height={80}
+                      width={80}
+                  />
+                </div>
+            ))}
           </div>
-        ))}
-      </div>
+      )}
     </>
   );
 };
