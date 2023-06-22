@@ -7,13 +7,22 @@ type Props = {
 
 const List = (props: Props) => {
   const { src } = props;
+  const { challengeName, description, img, endAt, level, id } = src;
 
   return (
-    <div className="flex flex-wrap justify-center md:justify-center lg:justify-around">
+    <>
       {src.map((element, index) => (
-        <ShowChallenge src={element} key={index} />
+        <div key={index}>
+          <ShowChallenge
+            img={element.img}
+            challengeName={element.challengeName}
+            description={element.description}
+            endAt={element.endAt}
+            level={element.level}
+          />
+        </div>
       ))}
-    </div>
+    </>
   );
 };
 
