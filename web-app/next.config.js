@@ -8,7 +8,10 @@ const nextConfig = {
     apiUrl: "http://back-end:4000/api"
   },
   publicRuntimeConfig: {
-    apiUrl: "http://localhost:4000",
+    apiUrl:
+      process.env.NODE_ENV === "production" 
+        ? "http://localhost:8000/api"
+        : "http://localhost:4000"
   },
   async rewrites() {
     return [

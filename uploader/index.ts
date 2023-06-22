@@ -51,7 +51,7 @@ app.post(
       message: "Image uploaded",
       filename: fileName,
       originalname: originalName,
-      filepath: filePath,
+      filepath: filePath
     });
   }
 );
