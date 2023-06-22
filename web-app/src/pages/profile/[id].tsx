@@ -17,15 +17,15 @@ type Props = {
 };
 
 const Profil = (props: Props) => {
+  const { t } = useTranslation("profil");
   const { userById } = props;
   const { hobbies, userToTeams } = userById;
-
+  
   if (!userToTeams || userToTeams.length === 0) {
     return null;
   };
 
   const { team } = userToTeams[0];
-  const { t } = useTranslation("profil");
 
   if (!team || !team.challengeToTeams || team.challengeToTeams.length === 0) {
     return null;
