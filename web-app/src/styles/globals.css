@@ -12,11 +12,11 @@ h1, h2, h3, p, li {
 }
 
 .input-launch-chall {
-  @apply border border-black p-2 sm:max-w-[600px] w-full rounded-md
+  @apply border border-black p-2 sm:max-w-[600px] w-full rounded-md;
 }
 
 .css-b62m3t-container {
-  @apply sm:max-w-[600px] w-full
+  @apply sm:max-w-[600px] w-full;
 }
 
 .react-datepicker-popper {

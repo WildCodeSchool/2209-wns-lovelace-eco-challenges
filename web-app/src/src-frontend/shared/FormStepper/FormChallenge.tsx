@@ -50,7 +50,6 @@ const FormChallenge = (props: FormChallengeProps) => {
     }
   };
   
-  console.log(setEndAt, endAt)
   return (
     <form
         className="mb-5 flex flex-col justify-center"
@@ -63,20 +62,23 @@ const FormChallenge = (props: FormChallengeProps) => {
           <legend className="font-medium text-2xl text-primary pb-5">Je choisi mon challenge</legend>
           <SelectChallenge setChallenge={props.setChallenge} />
 
-          <label htmlFor="period">Période *
-            <DatePicker
-              selected={startsAt}
-              onChange={onChangeDate}
-              startDate={startsAt}
-              endDate={endAt}
-              minDate={new Date()}
-              selectsRange={true}
-              monthsShown={2}
-              isClearable={true}
-              placeholderText="Click to select a date"
-              className="input-launch-chall"
-            />
-          </label>
+          <div className="flex flex-col">
+            <label htmlFor="period">Période *</label>
+              <DatePicker
+                selected={startsAt}
+                onChange={onChangeDate}
+                startDate={startsAt}
+                endDate={endAt}
+                minDate={new Date()}
+                selectsRange={true}
+                monthsShown={2}
+                isClearable={true}
+                placeholderText="Click to select a date"
+                className="input-launch-chall"
+              />
+          </div>
+
+
           <div className="py-5 flex justify-end">
             <Button name="Confirm & Go step 3  >>" size="max-w-fit" type="button-primary" />
           </div>
