@@ -33,7 +33,6 @@ const SelectChallenge = ({ setChallenge }: Props) => {
       isSearchable={true}
       isClearable={true}
       onChange={handleChange}
-      // className="sm:max-w-[600px] w-full"
       styles={{
         control: (baseStyles, state) => ({
           ...baseStyles,

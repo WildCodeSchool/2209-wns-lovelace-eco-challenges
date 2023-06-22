@@ -1,6 +1,5 @@
 import AppUser from "../AppUser/AppUser.entity";
 import AppUserRepository from "../AppUser/AppUser.repository";
-import Invitation from "../Invitation/Invitation.entity";
 import InvitationRepository from "../Invitation/Invitation.repository";
 import Team from "../Team/Team.entity";
 import TeamRepository from "../Team/Team.repository";

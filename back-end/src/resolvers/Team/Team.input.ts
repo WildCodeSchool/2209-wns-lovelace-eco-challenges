@@ -1,5 +1,4 @@
 import { IsBoolean, IsOptional, IsUUID, MinLength } from "class-validator";
-import { Stream } from "stream";
 import { ArgsType, Field, ID } from "type-graphql";
 
 @ArgsType()

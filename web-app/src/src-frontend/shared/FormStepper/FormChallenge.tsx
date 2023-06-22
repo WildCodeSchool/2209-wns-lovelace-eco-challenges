@@ -49,7 +49,8 @@ const FormChallenge = (props: FormChallengeProps) => {
       setErrorChallenge(error as GraphQLError);
     }
   };
-
+  
+  console.log(setEndAt, endAt)
   return (
     <form
         className="mb-5 flex flex-col justify-center"

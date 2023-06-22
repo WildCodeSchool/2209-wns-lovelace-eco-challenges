@@ -76,7 +76,7 @@ const FormInvitation = (props: FormInvitationProps) => {
 
         {guestEmails.map((input, index) => 
             <div key={index}>
-              <label htmlFor="period">Email invité {index +1}
+              <label htmlFor="email">Email invité {index +1}
                 <input
                   className="input-launch-chall"
                   type="email"

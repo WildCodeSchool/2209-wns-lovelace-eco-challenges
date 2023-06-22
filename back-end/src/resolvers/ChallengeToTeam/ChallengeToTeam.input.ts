@@ -1,5 +1,11 @@
-import { IsDate, IsDateString, IsUUID, MinDate } from "class-validator";
+import { IsDate, IsUUID, MinDate } from "class-validator";
 import { ArgsType, Field, ID } from "type-graphql";
+
+
+const minStartsAt = () => {
+  const date = new Date()
+  return date.toLocaleString()
+}
 
 @ArgsType()
 class CreateChallengeToTeamArgs {
@@ -13,7 +19,6 @@ class CreateChallengeToTeamArgs {
 
   @Field()
   @IsDate()
-  @MinDate(new Date(),{ message: "La date de début ne peut être inférieure à la date du jour"})
   startsAt: Date;
 
   @Field()

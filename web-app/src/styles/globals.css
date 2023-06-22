@@ -16,7 +16,7 @@ h1, h2, h3, p, li {
 }
 
 .css-b62m3t-container {
-  @apply w-11/12 sm:w-3/4 lg:w-4/6
+  @apply sm:max-w-[600px] w-full
 }
 
 .react-datepicker-popper {

@@ -6,7 +6,7 @@ const nextI18NextConfig = {
   fallbacking: {
     default: ['fr']
   },
-  ns: ["page", "home", "challenges", "challenge", "formlaunchchallenge", "signin", "signup"],
+  ns: ["page", "home", "challenges", "challenge", "form", "signin", "signup"],
 }
 
 module.exports = nextI18NextConfig

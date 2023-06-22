@@ -143,15 +143,15 @@ const FormTeam =  (props: FormTeamProps) => {
       {file.preview && <Image src={file.preview} width={300} height={300} alt="Mon équipe" />}
       
       <div className="flex items-center space-x-3">
-        <label>Groupe ouvert</label>
         <input
-          className=""
+          className="w-6 h-6 my-3 accent-primary"
           type="checkbox"
           id="isPublic"
           name="isPublic"
           checked={isPublic}
           onChange={(e) => setIsPublic(e.target.checked)}
         />
+        <label htmlFor="isPublic">Groupe ouvert</label>
       </div>  
       <div className="py-5 flex justify-end">
         <Button name="Confirm & Go step 2  >>" size="max-w-fit" type="button-primary" />

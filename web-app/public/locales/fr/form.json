@@ -1,0 +1,20 @@
+{
+  "form.title": "Lancer un challenge", 
+  "form.rules": "Règles du jeu",
+  "form.team": "Je créer ma Team",
+  "form.teamName" : "Nom de ma Team", 
+  "form.teamCity" : "Ville",
+  "form.teamCountry" : "Pays",
+  "form.teamImg" : "Fanion, photo...",
+  "form.teamStatus" : "Groupe ouvert",
+  "form.teamSubmit" : "Valider & Go step 2 >>",
+  "form.challenge" : "Je choisi mon challenge",
+  "form.period" : "Période",
+  "form.challengeSubmit" : "Valider & Go setp 3 >>",
+  "form.guest" : "Email invité",
+  "form.addGuests" : "Ajouter des invités",
+  "form.invitSubmit" : "Envoyer & Go step 4 >>", 
+  "form.goHome" : "C'est parti !",
+  "form.explain" : "Retrouves ta Team, animes le challenge, suis tes invitations, invites de nouveaux participants et pleins d'autres choses dans dans ton espace dédié", 
+  "form.linkHome" : "Accéder à mon espace"
+}
