@@ -37,6 +37,7 @@ const SelectChallenge = ({ setChallenge }: Props) => {
         control: (baseStyles, state) => ({
           ...baseStyles,
           borderColor: 'black',
+          width: '100%', 
         }),
       }}
     />

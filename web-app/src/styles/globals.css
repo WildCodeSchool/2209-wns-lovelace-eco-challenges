@@ -5,20 +5,20 @@
 @import './normalize.css';
 @import './main.css';
 @import './loader.css';
-
+@import './stepper.css';
 
 h1, h2, h3, p, li {
   @apply font-['Lato'];
 }
 
 .input-launch-chall {
-  @apply border border-black p-2 w-11/12 sm:w-3/4 lg:w-4/6 rounded-md
+  @apply border border-black p-2 sm:max-w-[600px] w-full rounded-md;
 }
 
-/* .react-datepicker__input-container {
-  @apply border
-} */
-
 .css-b62m3t-container {
-  @apply w-11/12 sm:w-3/4 lg:w-4/6
+  @apply sm:max-w-[600px] w-full;
+}
+
+.react-datepicker-popper {
+  z-index: 10 !important;
 }

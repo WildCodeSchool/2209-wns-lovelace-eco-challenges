@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { useTranslation } from "next-i18next";
 import { GET_USERSBYID } from "@src/api/queries";
 import { client } from "@src/api/apolloClient";
+import Image from "next/image";
 
 type Props = {
   img: string
@@ -64,7 +65,7 @@ const Button = (props: Props) => {
               <hr className="border-black border-b my-4" />
               <div className="flex">
                 <div className="w-1/2">
-                  <img src={img} alt="Image du challenge" />
+                  <Image src={img} alt="Image du challenge" />
                 </div>
                 <div className="w-1/2 flex flex-col justify-center pl-4 text-left">
                   <h2 className="text-center">{challengeName}</h2>

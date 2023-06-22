@@ -3,11 +3,9 @@ import {
   Column,
   Entity,
   Index,
-  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import Team from "../Team/Team.entity";
 import ChallengeToTeam from "../ChallengeToTeam/ChallengeToTeam.entity";
 
 export enum Level {

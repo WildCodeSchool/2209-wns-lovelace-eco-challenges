@@ -1,4 +1,4 @@
-import { IsBoolean, IsEmail, IsEnum, IsOptional, IsUUID, MinLength } from "class-validator";
+import { IsEmail, IsEnum, IsUUID } from "class-validator";
 import { ArgsType, Field, ID } from "type-graphql";
 import { UserRole } from "../../models/UserToTeam/UserToTeam.entity";
 

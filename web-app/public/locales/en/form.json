@@ -1,0 +1,21 @@
+{
+  "form.title": "Launch a challenge", 
+  "form.rules": "Playing rules",
+  "form.team": "I create my Team",
+  "form.teamName" : "My team name", 
+  "form.teamCity" : "City",
+  "form.teamCountry" : "Country",
+  "form.teamImg" : "Flag, photo...",
+  "form.teamStatus" : "Open group",
+  "form.teamSubmit" : "Confirm & Go step 2 >>",
+  "form.challenge" : "I choose my challenge",
+  "form.period" : "When",
+  "form.challengeSubmit" : "Confirm & Go setp 3 >>",
+  "form.invit" : "I invite participants", 
+  "form.guest" : "Guest email",
+  "form.addGuests" : "Add guests",
+  "form.invitSubmit" : "Send & Go step 4 >>", 
+  "form.goHome" : "Let's get started!",
+  "form.explain" : "Find your team, animate the challenge, follow your invitations, invite new participants and much more in your dedicated space",
+  "form.linkHome" : "Go to my space"
+}

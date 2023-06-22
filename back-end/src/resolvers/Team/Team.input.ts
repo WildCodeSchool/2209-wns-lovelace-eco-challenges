@@ -37,4 +37,4 @@ class UpdateTeamArgs extends CreateTeamArgs {
   id: string;
 }
 
-export { CreateTeamArgs, UpdateTeamArgs };
+export { CreateTeamArgs, UpdateTeamArgs};

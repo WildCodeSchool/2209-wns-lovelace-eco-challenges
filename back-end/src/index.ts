@@ -20,6 +20,7 @@ import { IS_PRODUCTION } from "./config";
 import InvitationResolver from "./resolvers/Invitation/Invitation.resolver";
 import ChallengeToTeamRepository from "./models/ChallengeToTeam/ChallengeToTeam.repository";
 import ChallengeToTeamResolver from "./resolvers/ChallengeToTeam/ChallengeToTeam.resolver";
+import InvitationRepository from "./models/Invitation/Invitation.repository";
 
 
 export type GlobalContext = ExpressContext & {
@@ -58,13 +59,14 @@ const startServer = async () => {
   const { url } = await server.listen();
   await initializeDatabaseRepositories();
 
-  if (!IS_PRODUCTION) {
+  // if (!IS_PRODUCTION) {
     await AppUserRepository.initializeUsers();
     await ChallengeRepository.initializeChallenges();
     await TeamRepository.initializeTeams();
     await UserToTeamRepository.initializeUserToTeam();
     await ChallengeToTeamRepository.initializeChallengeToTeam();
-  }
+    await InvitationRepository.initializeInvitation();
+  // }
   
   console.log(`🚀  Server ready at ${url}`);
 };

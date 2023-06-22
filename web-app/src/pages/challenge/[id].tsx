@@ -11,6 +11,7 @@ import { useTranslation } from "next-i18next";
 import { type Challenge as ChallengeType } from "@gql/graphql";
 import { type SSRConfig } from "next-i18next";
 import { type ParamsI18NextContext } from "@customTypes/types";
+import { useRouter } from "next/router";
 
 type Props = {
   challenge: ChallengeType;
@@ -20,6 +21,7 @@ type Props = {
 const Challenge = (props: Props) => {
   const { challenge } = props;
   const { t } = useTranslation("challenge");
+  const router = useRouter();
   const { img, challengeName, description, endAt, level } = challenge;
 
   return (
@@ -35,6 +37,7 @@ const Challenge = (props: Props) => {
         name={t("challenge.gochallenge")}
         type="button-primary"
         icon={<LaunchChallenge width="20px" height="20px" fill={WHITE} />}
+        onClickEvent={() => router.push("/formlaunchchallenge")}
       />
       <div className="block w-11/12">
         <h2 className="text-2xl">{t("challenge.teams")}</h2>

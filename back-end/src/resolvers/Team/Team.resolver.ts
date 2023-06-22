@@ -4,6 +4,7 @@ import TeamRepository from "../../models/Team/Team.repository";
 import { Pagination } from "../InputArgsForAll";
 import { CreateTeamArgs, UpdateTeamArgs } from "./Team.input";
 
+
 @Resolver(Team)
 export default class TeamResolver {
   @Query(() => [Team])
@@ -46,16 +47,24 @@ export default class TeamResolver {
       teamName, 
       city, 
       country,
-      isPublic, 
-      img, 
-    }: CreateTeamArgs
+      isPublic,
+      img 
+    }: CreateTeamArgs,
   ): Promise<Team> {
+    // if (img) {
+    //   new Promise(async (resolve, reject) => 
+    //     img.createReadStream()
+    //       .pipe(createWriteStream(__dirname + `/../../../images/${img.filename}`))
+    //       .on("finish", () => resolve(true))
+    //       .on("error", () => reject)
+    //   )
+    // }
     return TeamRepository.createTeam(
       teamName, 
       city, 
       country, 
       isPublic, 
-      img,
+      img
     )
   }
 
