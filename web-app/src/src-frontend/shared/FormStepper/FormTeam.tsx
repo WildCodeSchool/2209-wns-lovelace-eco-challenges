@@ -128,7 +128,8 @@ const FormTeam =  (props: FormTeamProps) => {
         />
       </label>
 
-      <label htmlFor="imgTeam">Fanion, photo...
+      <label htmlFor="imgTeam">Fanion, photo... 
+      <p className="text-sm italic text-gray-700">formats acceptés : jpg, jpeg, png, gif, bmp, tiff, tif</p>
         <input
           className="input-launch-chall"
           type="file"
