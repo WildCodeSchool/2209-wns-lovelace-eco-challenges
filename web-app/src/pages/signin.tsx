@@ -58,21 +58,22 @@ const SignIn = (props: Props) => {
   };
 
   const openSignUp = () => router.push("/signup");
+
   return (
     <>
       {/* <SectionTitle>Connexion</SectionTitle> */}
       <form
+        className="w-10/12 mx-auto my-8 border-2 rounded-xl border-primary"
         onSubmit={async (event) => {
           event.preventDefault();
           await submit();
         }}
-        className="w-10/12 mx-auto my-8 border-2 rounded-xl border-primary"
       >
         <fieldset className="form">
           <legend className="bg-white font-bold -translate-y-1/2 border-2 mx-auto rounded-md border-primary text-primary -rotate-2 px-8">
             <h1 className="rotate-2">{t("signin.signin")}</h1>
           </legend>
-          <label className="block mx-auto w-9/12  font-bold">
+          <label className="block mx-auto w-9/12 font-bold">
             {t("signin.mail")}
             <br />
             <input
@@ -88,11 +89,11 @@ const SignIn = (props: Props) => {
             />
           </label>
           <br />
-          <label className="block mx-auto w-9/12  font-bold">
+          <label className="block mx-auto w-9/12 font-bold">
             {t("signin.password")}
             <br />
             <input
-              className="bg-terciary p-2 w-full  rounded-xl"
+              className="bg-terciary p-2 w-full rounded-xl"
               type="password"
               required
               autoComplete="current-password"
@@ -105,14 +106,13 @@ const SignIn = (props: Props) => {
             />
           </label>
           <br />
-          <div className=" inline-block text-center w-full m-auto">
+          <div className="inline-block text-center w-full m-auto">
             <input
               type="checkbox"
-              className="bg-terciary p-2 w-full  rounded-xl"
+              className="bg-terciary p-2 w-full rounded-xl"
             />
             {t("signin.stay")}
           </div>
-
           <button className="h-0 w-full">
             <ArrowLinkTo
               width="96px"

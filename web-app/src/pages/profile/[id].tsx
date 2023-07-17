@@ -20,10 +20,10 @@ const Profil = (props: Props) => {
   const { t } = useTranslation("profil");
   const { userById } = props;
   const { hobbies, userToTeams } = userById;
-  
+
   if (!userToTeams || userToTeams.length === 0) {
     return null;
-  };
+  }
 
   const { team } = userToTeams[0];
 
@@ -75,18 +75,18 @@ const Profil = (props: Props) => {
         />
       </div>
       {hobbies && (
-          <div className="flex items-center justify-around my-5">
-            {hobbies.map((element, index) => (
-                <div key={index}>
-                  <Image
-                      src={`/images/${element.toLowerCase()}.png`}
-                      alt={element}
-                      height={80}
-                      width={80}
-                  />
-                </div>
-            ))}
-          </div>
+        <div className="flex items-center justify-around my-5">
+          {hobbies.map((element, index) => (
+            <div key={index}>
+              <Image
+                src={`/images/${element.toLowerCase()}.png`}
+                alt={element}
+                height={80}
+                width={80}
+              />
+            </div>
+          ))}
+        </div>
       )}
     </>
   );
