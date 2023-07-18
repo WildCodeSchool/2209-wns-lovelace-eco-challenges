@@ -86,7 +86,7 @@ export default class ChallengeRepository extends ChallengeDb {
       }
     }); 
     if (!existingChallenge) {
-      throw Error("No existing Challenge matching Id")
+      throw Error("No existing challenge matching ID.")
     } 
     return existingChallenge;
   }

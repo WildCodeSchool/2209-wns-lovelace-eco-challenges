@@ -25,13 +25,8 @@ export default class ChallengeToTeamRepository extends ChallengeToTeamDb {
     endAt: Date,
   ): Promise<ChallengeToTeam> {
     const team =(await TeamRepository.getTeamById(teamId)) as Team;
-    if (!team) {
-      throw Error("No existing Team matching ID.");
-    }
+
     const challenge = await ChallengeRepository.getChallengeById(challengeId) as Challenge;
-    if (!challenge) {
-      throw Error("No existing challenge matching ID.");
-    }
 
     const newChallengeToTeam = this.repository.create({ 
       team, 
@@ -42,7 +37,7 @@ export default class ChallengeToTeamRepository extends ChallengeToTeamDb {
 
     await this.repository.save(newChallengeToTeam).catch((error) => {
       if (error instanceof QueryFailedError && error.driverError.code === "23505") {
-        throw new Error("Votre équipe joue déjà ce Challenge sur cette période")
+        throw new Error("Your team is already playing this Challenge over this period")
       } else {
         throw error;
       }
