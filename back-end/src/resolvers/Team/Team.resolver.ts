@@ -51,14 +51,6 @@ export default class TeamResolver {
       img 
     }: CreateTeamArgs,
   ): Promise<Team> {
-    // if (img) {
-    //   new Promise(async (resolve, reject) => 
-    //     img.createReadStream()
-    //       .pipe(createWriteStream(__dirname + `/../../../images/${img.filename}`))
-    //       .on("finish", () => resolve(true))
-    //       .on("error", () => reject)
-    //   )
-    // }
     return TeamRepository.createTeam(
       teamName, 
       city, 
@@ -79,7 +71,7 @@ export default class TeamResolver {
       img, 
     }: UpdateTeamArgs
   ): Promise<Team> {
-    return TeamRepository.updateTeam(id, teamName, city, country, img, isPublic);
+    return TeamRepository.updateTeam(id, { teamName, city, country, img, isPublic});
   }
 
   @Mutation(() => Team)

@@ -17,119 +17,79 @@ describe("TeamRepository integration", () => {
   beforeEach(async () => {
     await TeamRepository.clearRepository();
     await TeamRepository.initializeTeams();
-  })
+  });
 
-  describe("get Team", () => {
-  //   describe("Should return a challenges list with correct category or empty array", () => {
-      
-  //     it("return a list of PROTECTSNATURE challenges", async () => {
-  //       const challenges = await ChallengeRepository.getChallengesByCategory(Category.PROTECTSNATURE, 5, 1);
-  //       challenges.forEach(challenge => {
-  //         expect(challenge.category).toContainEqual(Category.PROTECTSNATURE)  
-  //       });
-  //     });
-  //     it("return a list of CARPOOLING challenges", async () => {
-  //       const challenges = await ChallengeRepository.getChallengesByCategory(Category.CARPOOLING, 5, 1);
-  //       challenges.forEach(challenge => {
-  //         expect(challenge.category).toContainEqual(Category.CARPOOLING)  
-  //       });
-  //     });    
-  //     it("return a list of LESS challenges", async () => {
-  //       const challenges = await ChallengeRepository.getChallengesByCategory(Category.LESS, 5, 1);
-  //       challenges.forEach(challenge => {
-  //         expect(challenge.category).toContainEqual(Category.LESS)  
-  //       });
-  //     });    
-  //   });
-  // });
 
-  // describe("get Challenges by level", () => {
-  //   describe("Should return a challenges list with correct level or empty array", () => {
-      
-  //     it("return a list of EASY challenges", async () => {
-  //       const challenges = await ChallengeRepository.getChallengesByLevel(Level.EASY, 5, 1);
-  //       challenges.forEach(challenge => {
-  //         expect(challenge.level).toBe(Level.EASY)  
-  //       });
-  //     });
-  //     it("return a list of SUPERGREEN challenges", async () => {
-  //       const challenges = await ChallengeRepository.getChallengesByLevel(Level.SUPERGREEN, 5, 1);
-  //       challenges.forEach(challenge => {
-  //         expect(challenge.level).toBe(Level.SUPERGREEN)  
-  //       });
-  //     });     
-  //   });
-  // });
+  describe("Create a new team", () => {
+    describe("when is successfully completed", () => {  
+      it("return the new team", async () => {
+        const newTeam = await TeamRepository.createTeam("New TEAM", "Paris", "France", false)
 
-  // describe("get Challenges by Name", () => {
-  //   describe("Should return the good challenges", () => {
-      
-  //     it("return the challenge", async () => {
-  //       const challenge = await ChallengeRepository.getChallengeByName("Plage");
-  //       expect(challenge.challengeName).toBe("Nettoyons nos plages")  
-  //     });
-      
-  //     it("no challenge found", async () => {
-  //       const challengeName = "Non-existent Challenge";
+        expect(newTeam.teamName).toBe("New TEAM")  
+      });                              
+    });  
 
-  //       await expect(() =>
-  //         ChallengeRepository.getChallengeByName(challengeName)).rejects.toThrowError("No existing Challenge matching Name");
-  //     });
-  //   });     
-  // });
+    describe("when the team name already exists", () => {   
+      it("throw error", async () => {
 
-  // describe("Create a new challenge", () => {
-  //   describe("when is successfully completed", () => {   
-  //     it("return the new challenge", async () => {
-  //       const newChallenge = await ChallengeRepository.createChallenge("New challenge", Level.CHALLENGING, "the new challenge for test", [Category.SELFSUFFICIENCY, Category.LESS])
+        await expect(() => 
+          TeamRepository.createTeam("Team Paris", "PARIS", "France", true)).rejects.toThrowError("This team Name already exists");
+      });
+    });    
+  });
 
-  //       expect(newChallenge.challengeName).toBe("New challenge")  
-  //     });
-  //   });  
-  //   describe("when the challenge name already exists", () => {   
-  //     it("throw error", async () => {
-  //       await expect(() => 
-  //         ChallengeRepository.createChallenge("COVOITURAGE", Level.MODERATE,  "the doublon challenge for test", [Category.CARPOOLING, Category.LESS])).rejects.toBeTruthy();
-  //     });
-  //   });    
-  // });
+  describe("Update a team", () => {
+    describe("when is successfully updated", () => {   
+      it("return updated team", async () => {
+        const team = await TeamRepository.createTeam("Team Test", "Tours", "France", false);
+        const city = "Bordeaux";
+        const isPublic = true;
 
-  // describe("Update a challenge", () => {
-  //   describe("when is successfully updated", () => {   
-  //     it("return updated challenge", async () => {
+        const updatedTeam = await TeamRepository.updateTeam(team.id, { city, isPublic })
 
-  //       const challenge = await ChallengeRepository.createChallenge("Challenge", Level.CHALLENGING, "Challenge for test", [Category.SELFSUFFICIENCY, Category.LESS]);
+        expect(updatedTeam).toHaveProperty('teamName', 'Team Test')
+        expect(updatedTeam).toHaveProperty('city', 'Bordeaux')
+        expect(updatedTeam).toHaveProperty('isPublic', true)
+      });
+    });  
 
-  //       const description = "Challenge updated";
-  //       const level = Level.EASY
+    describe("when update has failed", () => {   
+      it("throw error bad id", async () => {
+        const noId = "e1789ea9-baa8-44e8-b43c-d62746aaf009";
+        const city = "Bordeaux";
 
-  //       const updatedChallenge = await ChallengeRepository.updateChallengePremium(challenge.id, { level, description }
-  //       )
-  //       expect(updatedChallenge).toHaveProperty('challengeName', 'Challenge')
-  //       expect(updatedChallenge).toHaveProperty('level', 'Facile')
-  //       expect(updatedChallenge).toHaveProperty('description', 'Challenge updated')
-  //       expect(updatedChallenge).toHaveProperty('category', ["Autosuffisance", "Réduction"])
-  //     });
-  //   });  
+        await expect(() => TeamRepository.updateTeam(noId, { city })).rejects.toThrowError("No existing Team matching ID.")
+      }); 
 
-  //   describe("when update has failed", () => {   
-  //     it("throw error bad id", async () => {
+      it("throw error doublon teamName", async () => {
+        const team = await TeamRepository.createTeam("New Team", "Lyon", "France", false);
+        const teamName = "Team Paris";
 
-  //       const noId = "e1789ea9-baa8-44e8-b43c-d62746aaf009";
-  //       const description = "Challenge updated";
-  //       const level = Level.EASY;
+        await expect(() => TeamRepository.updateTeam(team.id, { teamName })).rejects.toBeTruthy();
+      });  
+    });
+  });
 
-  //       await expect(() => ChallengeRepository.updateChallengePremium(noId, { level, description })).rejects.toThrowError("No existing Challenge matching ID.")
-  //     }); 
+  describe("Delete a team", () => {
+    describe("when is successfully deleted", () => {   
+      it("returns the deleted team", async () => {
+        const teamToDelete = await TeamRepository.createTeam("Team", "Nantes", "France", false);
 
-  //     it("throw error doublon challengeName", async () => {
+        const deletedTeam = await TeamRepository.deleteTeam(teamToDelete.id); 
 
-  //       const challenge = await ChallengeRepository.createChallenge("Challenge", Level.CHALLENGING, "Challenge for test", [Category.LESS]);
+        expect(deletedTeam).toStrictEqual(teamToDelete);
 
-  //       const challengeName = "COVOITURAGE";
+        await expect(() => TeamRepository.getTeamById(teamToDelete.id)).rejects.toThrowError("No existing Team matching ID.")
+      })
+    });
 
-  //       await expect(() => ChallengeRepository.updateChallengePremium(challenge.id, { challengeName })).rejects.toBeTruthy();
-  //     });  
-  //   });
-  // });
-});
+    describe("when the id doesn't exist", () => {   
+      it("throw error", async () => {
+        const noId = "e1789ea9-baa8-44e8-b43c-d62746aaf009";
+
+        await expect(() => TeamRepository.deleteTeam(noId)).rejects.toThrowError("No existing Team matching ID.")
+      })
+    });
+  });    
+});  
+
