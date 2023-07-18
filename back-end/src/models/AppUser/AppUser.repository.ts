@@ -12,10 +12,12 @@ export default class AppUserRepository extends AppUserDb {
   static createUser(
     firstName: string,
     lastName: string,
-    nickname:string,
+    nickname: string,
     email: string,
-    city:string,
-    country:string,
+    city: string,
+    desc: string,
+    age: number,
+    country: string,
     password: string
   ): Promise<AppUser> {
     const user = new AppUser(
@@ -24,6 +26,8 @@ export default class AppUserRepository extends AppUserDb {
       nickname,
       email,
       city,
+      desc,
+      age,
       country,
       hashSync(password)
     );
@@ -57,59 +61,59 @@ export default class AppUserRepository extends AppUserDb {
   }
 
   static async getUserByNickname(userName: string): Promise<AppUser> {
-    const existingUser = await this.repository.findOne({ 
+    const existingUser = await this.repository.findOne({
       where: {
         nickname: ILike(`%${userName}%`)
       },
       relations: {
-        userToTeams : {
-          team : {
-            challengeToTeams : true
+        userToTeams: {
+          team: {
+            challengeToTeams: true
           }
         }
-      } 
+      }
     });
     if (!existingUser) {
       throw Error("No existing User matching Nickname")
-    } 
+    }
     return existingUser;
   }
 
   static async getUserById(id: string): Promise<AppUser> {
-    const existingUser = await this.repository.findOne({ 
+    const existingUser = await this.repository.findOne({
       where: {
-        id 
-      }, 
+        id
+      },
       relations: {
-        userToTeams : {
-          team : {
-            challengeToTeams : true
+        userToTeams: {
+          team: {
+            challengeToTeams: true
           }
         }
       },
-    }); 
+    });
     if (!existingUser) {
       throw Error("No existing User matching Id")
-    } 
+    }
     return existingUser;
   }
 
   static async getUserByEmailThrow(email: string): Promise<AppUser> {
-    const existingUser = await this.repository.findOne({ 
+    const existingUser = await this.repository.findOne({
       where: {
-        email 
-      }, 
+        email
+      },
       relations: {
-        userToTeams : {
-          team : {
-            challengeToTeams : true
+        userToTeams: {
+          team: {
+            challengeToTeams: true
           }
         }
       },
-    }); 
+    });
     if (!existingUser) {
       throw Error("No existing User matching email")
-    } 
+    }
     return existingUser;
   }
 
@@ -117,12 +121,12 @@ export default class AppUserRepository extends AppUserDb {
     email: string,
   ): Promise<AppUser> {
     const newUser = this.repository.create({
-      firstName : "",
-      lastName : "", 
-      nickname : "", 
-      email : email, 
-      city : "",
-      country: "", 
+      firstName: "",
+      lastName: "",
+      nickname: "",
+      email: email,
+      city: "",
+      country: "",
       hashedPassword: "",
       isVerified: false
     })
@@ -132,39 +136,45 @@ export default class AppUserRepository extends AppUserDb {
   }
 
   static async updateAppUser(
-    id: string, 
+    id: string,
     firstName?: string,
     lastName?: string,
-    nickname?:string,
+    nickname?: string,
     email?: string,
-    city?:string,
-    country?:string,
+    city?: string,
+    desc?: string,
+    age?: number,
+    country?: string,
     img?: string,
     hobbies?: Hobbies[],
   ): Promise<
     {
-    id: string, 
-    firstName?: string,
-    lastName?: string,
-    nickname?:string,
-    email?: string,
-    city?:string,
-    country?:string,
-    img?: string,
-    hobbies?: Hobbies[]
+      id: string,
+      firstName?: string,
+      lastName?: string,
+      nickname?: string,
+      email?: string,
+      city?: string,
+      desc?: string,
+      age?: number,
+      country?: string,
+      img?: string,
+      hobbies?: Hobbies[]
     } & AppUser
   > {
-    const existingAppUser = await this.repository.findOneBy({ id }); 
+    const existingAppUser = await this.repository.findOneBy({ id });
     if (!existingAppUser) {
       throw Error("No existing AppUser matching ID.");
     }
     return this.repository.save({
-      id, 
+      id,
       firstName,
       lastName,
       nickname,
       email,
       city,
+      desc,
+      age,
       country,
       img,
       hobbies
