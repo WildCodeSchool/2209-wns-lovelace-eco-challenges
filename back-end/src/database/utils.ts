@@ -14,7 +14,7 @@ const dataSource = new DataSource({
   synchronize: true,
   entities: [__dirname + "/../models/**/*.entity.{js,ts}"],
   //logging: NODE_ENV === "development" ? ["query", "error"] : ["error"],
-  logging: ["error"],
+  logging: NODE_ENV === "test" ? false : ["error"],
 });
 
 let initialized = false;
