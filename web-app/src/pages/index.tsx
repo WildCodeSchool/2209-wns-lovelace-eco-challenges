@@ -43,61 +43,14 @@ const Index = (props: Props): JSX.Element => {
   const { t } = useTranslation(["home", "page"]);
 
   return (
-    <div className="home-page">
-      <div
-        className="bg-[url('../src-frontend/assets/images/imageHeader.webp')]
-          h-80
-          relative
-          bg-auto
-          bg-no-repeat
-          xl:h-[500px]
-          bg-[#f8f8f8]
-          "
-      >
+    <div className="index">
+      <div className="index-header">
         <div>
-          <div
-            className="text-white
-              absolute
-              left-1/2
-              top-1/2
-              w-11/12
-              bg-transparent
-              rounded-xl
-              -translate-x-2/4
-              -translate-y-2/4"
-          >
-            <h2
-              className="text-2xl
-                text-center
-                font-bold
-                text-primary
-                xl:text-6xl"
-            >
-              {t("app.name")}
-            </h2>
-            <p
-              className="text-center
-                text-primary
-                md:text-xl
-                xl:text-2xl"
-            >
-              {t("home.title")}
-            </p>
-            <p
-              className="text-center
-                text-primary
-                md:text-xl
-                xl:text-2xl
-                mix-blend-difference"
-            >
-              {t("home.subtitle")}
-            </p>
-            <div
-              className="m-3
-                flex
-                justify-around
-                md:hidden"
-            >
+          <div className="header-div">
+            <h2 className="header-title">{t("app.name")}</h2>
+            <p className="header-subtitle">{t("home.title")}</p>
+            <p className="header-subtitle">{t("home.subtitle")}</p>
+            <div className="header-buttons">
               <Button
                 type="button-primary"
                 name="S'inscrire"
@@ -112,123 +65,30 @@ const Index = (props: Props): JSX.Element => {
           </div>
         </div>
       </div>
-      <div
-        className="bg-white flex
-          items-center
-          justify-center
-          flex-col
-          flex-wrap
-          lg:flex-row
-          lg:justify-around
-          xl:justify-center"
-      >
-        <div
-          className="flex
-            items-center
-            justify-center
-            flex-col
-            border-solid
-            border-4
-            border-primary
-            w-3/4
-            p-2
-            rounded-lg
-            my-7
-            shadow-xl
-            sm:w-2/3
-            lg:w-5/12
-            lg:h-[570px]
-            lg:justify-between
-            xl:w-1/3
-            xl:mr-10"
-        >
-          {cardLogo.map((element, index) => {
-            return (
-              <div
-                className="flex
-              items-center
-              justify-center
-              flex-col"
-                key={index}
-              >
-                <div className="w-20">
-                  <Image src={element.source} alt="alt" />
-                </div>
-                <div className="font-bold text-lg">
-                  <p>{t(element.text)}</p>
-                </div>
+      <div className="main-section">
+        <div className="concept-section">
+          {cardLogo.map((element, index) => (
+            <div className="concept-card" key={index}>
+              <div className="w-20">
+                <Image src={element.source} alt="alt" />
               </div>
-            );
-          })}
-          <div
-            className="flex
-              items-center
-              justify-center
-              flex-col text-center"
-          >
+              <div className="font-bold text-lg">
+                <p>{t(element.text)}</p>
+              </div>
+            </div>
+          ))}
+          <div className="concept-card text-center">
             <p className="my-3 xl:text-start">{t("home.whitecard.subtitle")}</p>
             <Button type="button-primary" name={t("home.button.discover")} />
           </div>
         </div>
-        <div
-          className="flex
-            items-center
-            justify-center
-            flex-col
-            bg-primary
-            py-7
-            w-full
-            shadow-xl
-            justify-between
-            lg:w-5/12
-            lg:rounded-lg
-            lg:p-2
-            lg:bg-primary
-            lg:h-[570px]
-            xl:justify-end
-            xl:w-1/3
-            xl:ml-10"
-        >
+        <div className="presentation-section">
           <div className="w-11/12">
-            <h3
-              className="mb-1
-                font-bold
-                text-2xl text-white"
-            >
-              {t("home.come")}
-            </h3>
-            <div
-              className="h-2
-                w-20
-                mb-7"
-            ></div>
-            <p
-              className="text-center
-                text-white
-                xl:text-start"
-            >
-              {t("home.greencard.title")}
-            </p>
-            <div
-              className="flex
-                flex-wrap
-                justify-around"
-            >
+            <h3 className="presentation-come">{t("home.come")}</h3>
+            <p className="presentation-title">{t("home.greencard.title")}</p>
+            <div className="flex flex-wrap justify-around">
               {greenCardLogo.map((element, index) => (
-                <div
-                  key={index}
-                  className="flex
-                    items-center
-                    justify-center
-                    flex-col
-                    bg-white
-                    rounded-lg
-                    p-5
-                    m-5
-                    shadow-xl
-                    flex-[33%]
-                    lg:flex-[34%]"
-                >
+                <div className="presentation-card" key={index}>
                   <div className="w-20 relative">
                     <Image src={element.source} alt="alt" />
                   </div>
@@ -236,12 +96,7 @@ const Index = (props: Props): JSX.Element => {
                 </div>
               ))}
             </div>
-            <div
-              className="flex
-                items-center
-                justify-center
-                flex-col"
-            >
+            <div className="flex items-center justify-center flex-col">
               <Button
                 icon={
                   <LaunchChallenge width="20px" height="20px" fill={PRIMARY} />
@@ -253,38 +108,16 @@ const Index = (props: Props): JSX.Element => {
             </div>
           </div>
         </div>
-        <div
-          className="my-7
-            w-11/12"
-        >
-          <h3
-            className="mb-1
-              font-bold
-              text-2xl"
-          >
+        <div className="challenges-section">
+          <h3 className="mb-1 font-bold text-2xl">
             {t("home.actualchallenge")}
           </h3>
-          <div
-            className="h-2
-              w-20
-              mb-7
-              bg-primary
-              text-center"
-          ></div>
+          <div className="h-2 w-20 mb-7 bg-primary text-center"></div>
           <div className="flex items-center justify-around flex-wrap">
             <List src={challenges} />
           </div>
           <Link href="/challenges">
-            <h2
-              className="font-bold
-                text-center
-                text-xl
-                flex
-                justify-center
-                items-center
-                pt-2
-                xl:justify-start"
-            >
+            <h2 className="challenges-seemore">
               {t("home.seemore")}
               <i>
                 <ArrowLinkTo width="50px" height="50px" fill={PRIMARY} />
@@ -292,41 +125,14 @@ const Index = (props: Props): JSX.Element => {
             </h2>
           </Link>
         </div>
-        <div
-          className="bg-gray-100
-            rounded-lg
-            w-11/12
-            px-7
-            pt-7
-            shadow-xl"
-        >
-          <h3
-            className="mb-1
-              font-bold
-              text-2xl"
-          >
-            {t("home.partners")}
-          </h3>
-          <div
-            className="h-2
-              w-20
-              mb-7
-              bg-primary"
-          ></div>
-          <div
-            className="flex
-              flex-wrap
-              items-center
-              justify-around"
-          >
+        <div className="partners-section">
+          <h3 className="mb-1 font-bold text-2xl">{t("home.partners")}</h3>
+          <div className="h-2 w-20 mb-7 bg-primary"></div>
+          <div className="flex flex-wrap items-center justify-around">
             {partnersLogo.map((element, index) => (
               <div
+                className="w-1/4 m-4 md:w-1/6 lg:w-1/12 xl:w-[5%]"
                 key={index}
-                className="w-1/4
-                  m-4
-                  md:w-1/6
-                  lg:w-1/12
-                  xl:w-[5%]"
               >
                 <Image src={element.source} alt="alt" />
               </div>
@@ -336,41 +142,16 @@ const Index = (props: Props): JSX.Element => {
             <Partners width="100px" height="100px" fill={PRIMARY} />
           </i>
         </div>
-        <div
-          className="flex
-            items-center
-            justify-center
-            flex-col
-            my-7
-            lg:flex-row
-            lg:justify-around
-            lg:w-full
-            xl:items-start"
-        >
-          <div
-            className="mb-4 flex
-              items-center
-              justify-center
-              flex-col"
-          >
+        <div className="versions-section">
+          <div className="mb-4 flex items-center justify-center flex-col">
             <TiltedLabel>{t("home.free")}</TiltedLabel>
             {versionFreeText.map((element, index) => (
               <VersionsLine key={index} text={element} />
             ))}
           </div>
-          <div
-            className="flex
-              items-center
-              justify-center
-              flex-col"
-          >
+          <div className="flex items-center justify-center flex-col">
             <TiltedLabel>{t("home.premium")}</TiltedLabel>
-            <p
-              className="text-center
-                mb-5"
-            >
-              {t("home.versionsubtitle")}
-            </p>
+            <p className="text-center mb-5">{t("home.versionsubtitle")}</p>
             {versionPremiumText.map((element, index) => (
               <VersionsLine key={index} text={element} />
             ))}

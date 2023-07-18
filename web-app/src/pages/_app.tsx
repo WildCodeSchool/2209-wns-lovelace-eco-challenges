@@ -1,13 +1,8 @@
-import "@styles/globals.css";
+import "@styles/main.css";
 
 import type { AppProps } from "next/app";
 import { appWithTranslation } from "next-i18next";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
 import { client } from "@api/apolloClient";
 
 import Header from "@shared/Header/Header";

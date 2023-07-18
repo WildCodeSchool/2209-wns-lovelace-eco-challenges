@@ -25,55 +25,30 @@ const Header = () => {
   }, [open]);
 
   return (
-    <header
-      className="bg-primary
-    flex
-    justify-between
-    p-5
-    h-20"
-    >
+    <header className="header">
       <Link href="/">
         <div className="flex" onClick={isClicked}>
-          <div
-            className="w-10
-            mr-4"
-          >
-            <Image src={Ecology} alt="logo eco playground" />
+          <div className="w-10 mr-4">
+            <Image 
+              src={Ecology}
+              alt="logo eco playground"
+            />
           </div>
-          <h1
-            className="text-white
-            relative
-            w-fit
-            text-3xl
-            m-0
-            after"
-          >
-            {t('app.name')}
-          </h1>
+          <h1 className="text-white relative w-fit text-3xl m-0 after">{t('app.name')}</h1>
         </div>
       </Link>
       <div
+        className="w-10 flex flex-col justify-around md:hidden"
         onClick={() => setOpen(!open)}
-        className="w-10
-            flex
-            flex-col
-            justify-around
-            md:hidden"
       >
-        <div
-          className=" border-2
-                border-white"
-        ></div>
-        <div
-          className=" border-2
-                border-white"
-        ></div>
-        <div
-          className=" border-2
-                border-white"
-        ></div>
+        <div className=" border-2 border-white"></div>
+        <div className=" border-2 border-white"></div>
+        <div className=" border-2 border-white"></div>
       </div>
-      <ResponsiveNav open={open} isClicked={isClicked} />
+      <ResponsiveNav
+        open={open}
+        isClicked={isClicked}
+        />
       <Nav />
     </header>
   );

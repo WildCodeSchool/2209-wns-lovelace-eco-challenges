@@ -1,0 +1,3 @@
+.footer {
+    @apply bg-primary text-white flex items-center justify-center flex-col text-center lg:p-7 lg:flex-row lg:justify-around lg:text-start;
+}
