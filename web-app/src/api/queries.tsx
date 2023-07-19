@@ -63,6 +63,8 @@ query userById($id: String!) {
     firstName
     email
     country
+    desc
+    age
     city
     nickname
     score
