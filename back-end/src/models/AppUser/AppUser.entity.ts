@@ -49,9 +49,6 @@ export default class AppUser {
     if (img) {
       this.img = img;
     }
-    if (desc) {
-      this.desc = desc
-    }
     if (hobbies) {
       this.hobbies = hobbies;
     }
@@ -105,7 +102,7 @@ export default class AppUser {
   desc: string;
 
   @Field()
-  @Column()
+  @Column("int")
   age: number;
 
   @Field()

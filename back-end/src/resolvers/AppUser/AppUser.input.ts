@@ -31,8 +31,15 @@ export class SignUpArgs {
   city: string;
 
   @Field()
+  @MinLength(1, { message: "La description doit faire au moins un caractère de long." })
+  desc: string;
+
+  @Field()
+  age: number;
+
+  @Field()
   @MinLength(1, { message: "le pays doit faire au moins un caractère de long." })
-  country:string;
+  country: string;
 
   @Field()
   @Matches(passwordRegExp, {
@@ -52,12 +59,12 @@ export class SignInArgs {
   password: string;
 }
 
-@ArgsType() 
+@ArgsType()
 export class UpdateAppUserArgs {
 
   @Field(() => ID)
   @IsUUID()
-  id: string; 
+  id: string;
 
   @Field({ nullable: true })
   @MinLength(1, {
@@ -78,12 +85,19 @@ export class UpdateAppUserArgs {
   email?: string;
 
   @Field({ nullable: true })
+  @MinLength(1, { message: "La description doit faire au moins un caractère de long." })
+  desc?: string;
+
+  @Field({ nullable: true })
+  age?: number;
+
+  @Field({ nullable: true })
   @MinLength(1, { message: "La ville doit faire au moins un caractère de long." })
   city?: string;
 
   @Field({ nullable: true })
   @MinLength(1, { message: "le pays doit faire au moins un caractère de long." })
-  country?:string;
+  country?: string;
 
   // @Field({ nullable: true })
   // @Matches(passwordRegExp, {
@@ -93,8 +107,8 @@ export class UpdateAppUserArgs {
   // password?: string;
 
   @Field({ nullable: true })
-  img?: string; 
-  
+  img?: string;
+
   @Field(_type => [Hobbies], { nullable: true })
   @IsEnum(Hobbies, { each: true })
   hobbies?: Hobbies[]

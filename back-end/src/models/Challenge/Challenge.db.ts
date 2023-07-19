@@ -43,7 +43,7 @@ export default class ChallengeDb {
       category: [Category.CARPOOLING],
       startsAt: "2023-02-17T08:00:00+0000",
       endAt: "2023-02-17T20:00:00+0000",
-      img: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.futura-sciences.com%2Fsources%2Fimages%2Fglossaire%2Fpolyethylene-sac-plastique.jpg&tbnid=28fZ6FlTzZ2X4M&vet=12ahUKEwi2zvq35pWAAxWSnCcCHQHVA-MQMygFegUIARDvAQ..i&imgrefurl=https%3A%2F%2Fwww.futura-sciences.com%2Fsciences%2Fdefinitions%2Fchimie-plastique-13438%2F&docid=vtxLVb6SLpVkjM&w=1820&h=948&q=plastique&ved=2ahUKEwi2zvq35pWAAxWSnCcCHQHVA-MQMygFegUIARDvAQ",
+      img: "https://www.wedemain.fr/wp-content/uploads/2023/03/Shutterstock_1074166649-1-409x320.jpg",
     });
     await this.repository.save({
       challengeName: "Défi du tri séléctif",
@@ -52,7 +52,7 @@ export default class ChallengeDb {
       category: [Category.CARPOOLING],
       startsAt: "2023-02-17T08:00:00+0000",
       endAt: "2023-02-17T20:00:00+0000",
-      img: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.futura-sciences.com%2Fsources%2Fimages%2Ftri-selectif.jpeg&tbnid=QV9j-C_m0S_dbM&vet=12ahUKEwiZrr-f5pWAAxXrpycCHRmGASMQMygregUIARDNAg..i&imgrefurl=https%3A%2F%2Fwww.futura-sciences.com%2Fplanete%2Fquestions-reponses%2Fenvironnement-poubelle-tri-selectif-introduire-entreprise-17952%2F&docid=yTDeGT0lPdwW0M&w=5043&h=3362&q=tri%20selectif&ved=2ahUKEwiZrr-f5pWAAxXrpycCHRmGASMQMygregUIARDNAg",
+      img: "https://www.wedemain.fr/wp-content/uploads/2023/07/shutterstock_523272235-870x566.jpg",
     });
     await this.repository.save({
       challengeName: "Je réduis ma consommation de viande 🍖",
@@ -95,11 +95,11 @@ export default class ChallengeDb {
     await this.repository.save({
       challengeName: "Réduire la consommation d'eau",
       level: Level.SUPERGREEN,
-      description: " Réduisez votre consommation d'eau pendant une semaine en limitant les douches à 5 minutes, en fermant le robinet pendant que vous vous brossez les dents, et en utilisant un arrosoir pour arroser vos plantes.",
+      description: "Réduisez votre consommation d'eau pendant une semaine en limitant les douches à 5 minutes, en fermant le robinet pendant que vous vous brossez les dents, et en utilisant un arrosoir pour arroser vos plantes.",
       category: [Category.PROTECTSNATURE, Category.SELFSUFFICIENCY],
       startsAt: "2023-03-11T09:00:00+0000",
       endAt: undefined,
-      img: "https://fr.jardins-animes.com/images/media/mini-ruche-abeille-sauvage.jpg",
+      img: "https://www.wedemain.fr/wp-content/uploads/2022/09/shutterstock_1665205663-409x320.jpg",
     });
   }
 }
