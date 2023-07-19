@@ -23,6 +23,8 @@ const SIGN_UP = gql`
     $nickname: String!
     $email: String!
     $city: String!
+    $desc: String!
+    $age: Float!
     $country: String!
     $password: String!
   ) {
@@ -32,6 +34,8 @@ const SIGN_UP = gql`
       nickname: $nickname
       email: $email
       city: $city
+      desc: $desc
+      age: $age
       country: $country
       password: $password
     ) {
@@ -43,6 +47,8 @@ const SIGN_UP = gql`
       score
       disabled
       city
+      desc
+      age
       country
     }
   }
@@ -59,6 +65,8 @@ const SignUp = (props: Props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [city, setCity] = useState("");
+  const [desc, setDesc] = useState("");
+  const [age, setAge] = useState(0);
   const [country, setCountry] = useState("");
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
@@ -83,6 +91,8 @@ const SignUp = (props: Props) => {
           nickname,
           email,
           city,
+          desc,
+          age,
           country,
           password,
         },
