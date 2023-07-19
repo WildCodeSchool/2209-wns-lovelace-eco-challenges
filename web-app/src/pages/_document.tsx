@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from 'next/document'
 
 const Document = (): JSX.Element => {
   return (
-    <Html lang="en">
+    <Html lang="fr">
       <Head />
       <body>
         <Main />

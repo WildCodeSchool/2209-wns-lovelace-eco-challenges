@@ -25,12 +25,12 @@ const Challenges = (props: Props): JSX.Element => {
   const { challenges } = props;
   const { t } = useTranslation("challenges");
 
-  const challenge = challenges[0]
+  const challenge = challenges[0];
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
       <div className="w-11/12">
-        <h2 className="subtitle">{t("challenges.title")}</h2>
+        <h2>{t("challenges.title")}</h2>
         <div className="custom-underline bg-primary"></div>
         <p className="text-center xl:text-start">{t("challenges.subtitle")}</p>
         <p className="text-center xl:text-start">
@@ -38,30 +38,20 @@ const Challenges = (props: Props): JSX.Element => {
           <span className="text-blue-600">{t("challenges.seemore")}</span>
         </p>
       </div>
-      <div
-        className="w-11/12
-          m-7
-          text-center
-          xl:text-start"
-      >
+      <div className="default-width m-7 text-center xl:text-start">
         <input className="search" type="text" placeholder="TODO..." />
       </div>
       <List src={challenges} />
-      <div
-        className="flex
-          items-center
-          justify-center
-          flex-col m-7"
-      >
+      <div className="flex-center-center flex-col m-7">
         <ButtonExpend
           name={t("challenges.morechallenges")}
           type="button-secondary"
-          icon={<DownArrow width="20px" height="20px" fill={PRIMARY}
-          />}
+          icon={<DownArrow width="20px" height="20px" fill={PRIMARY} />}
           img={challenge.img || "https://picsum.photos/400/250"}
           challengeName={challenge.challengeName}
           date={challenge.endAt}
-          desc={challenge.description} />
+          desc={challenge.description}
+        />
       </div>
     </div>
   );

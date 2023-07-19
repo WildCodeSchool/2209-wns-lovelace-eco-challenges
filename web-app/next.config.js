@@ -9,7 +9,7 @@ const nextConfig = {
   },
   publicRuntimeConfig: {
     apiUrl:
-      process.env.NODE_ENV === "production" 
+      process.env.NODE_ENV === "production"
         ? "http://localhost:8000/api"
         : "http://localhost:4000"
   },

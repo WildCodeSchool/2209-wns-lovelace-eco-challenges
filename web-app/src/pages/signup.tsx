@@ -23,6 +23,8 @@ const SIGN_UP = gql`
     $nickname: String!
     $email: String!
     $city: String!
+    $desc: String!
+    $age: Float!
     $country: String!
     $password: String!
   ) {
@@ -32,6 +34,8 @@ const SIGN_UP = gql`
       nickname: $nickname
       email: $email
       city: $city
+      desc: $desc
+      age: $age
       country: $country
       password: $password
     ) {
@@ -43,6 +47,8 @@ const SIGN_UP = gql`
       score
       disabled
       city
+      desc
+      age
       country
     }
   }
@@ -59,6 +65,8 @@ const SignUp = (props: Props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [city, setCity] = useState("");
+  const [desc, setDesc] = useState("");
+  const [age, setAge] = useState(0);
   const [country, setCountry] = useState("");
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
@@ -83,6 +91,8 @@ const SignUp = (props: Props) => {
           nickname,
           email,
           city,
+          desc,
+          age,
           country,
           password,
         },
@@ -103,24 +113,25 @@ const SignUp = (props: Props) => {
   };
 
   const openSignIn = () => router.push("/signin");
+
   return (
     <>
       <form
+        className="w-10/12 mx-auto my-8 border-2 rounded-xl border-primary"
         onSubmit={async (event) => {
           event.preventDefault();
           await submit();
         }}
-        className="w-10/12 mx-auto my-8 border-2 rounded-xl border-primary"
       >
         <fieldset className="form">
           <legend className="bg-white font-bold -translate-y-1/2 border-2 mx-auto rounded-md border-primary text-primary -rotate-2 px-8">
             <h1 className="rotate-2">{t("signup.signup")}</h1>{" "}
           </legend>
-          <label className="block mx-auto w-9/12  font-bold">
+          <label className="block mx-auto w-9/12 font-bold">
             {t("signup.firstname")}
             <br />
             <input
-              className="bg-terciary p-2 w-full  rounded-xl"
+              className="bg-terciary p-2 w-full rounded-xl"
               type="text"
               required
               id="firstName"
@@ -133,11 +144,11 @@ const SignUp = (props: Props) => {
             />
           </label>
           <br />
-          <label className="block mx-auto w-9/12  font-bold">
+          <label className="block mx-auto w-9/12 font-bold">
             {t("signup.lastname")}
             <br />
             <input
-              className="bg-terciary p-2 w-full  rounded-xl"
+              className="bg-terciary p-2 w-full rounded-xl"
               type="text"
               required
               id="lastName"
@@ -150,11 +161,11 @@ const SignUp = (props: Props) => {
             />
           </label>
           <br />
-          <label className="block mx-auto w-9/12  font-bold">
+          <label className="block mx-auto w-9/12 font-bold">
             {t("signup.nickname")}
             <br />
             <input
-              className="bg-terciary p-2 w-full  rounded-xl"
+              className="bg-terciary p-2 w-full rounded-xl"
               type="text"
               required
               id="Nickname"
@@ -167,11 +178,11 @@ const SignUp = (props: Props) => {
             />
           </label>
           <br />
-          <label className="block mx-auto w-9/12  font-bold">
+          <label className="block mx-auto w-9/12 font-bold">
             {t("signup.email")}
             <br />
             <input
-              className="bg-terciary p-2 w-full  rounded-xl"
+              className="bg-terciary p-2 w-full rounded-xl"
               type="email"
               required
               autoComplete="email"
@@ -185,11 +196,11 @@ const SignUp = (props: Props) => {
             />
           </label>
           <br />
-          <label className="block mx-auto w-9/12  font-bold">
+          <label className="block mx-auto w-9/12 font-bold">
             {t("signup.city")}
             <br />
             <input
-              className="bg-terciary p-2 w-full  rounded-xl"
+              className="bg-terciary p-2 w-full rounded-xl"
               type="text"
               required
               id="city"
@@ -202,11 +213,11 @@ const SignUp = (props: Props) => {
             />
           </label>
           <br />
-          <label className="block mx-auto w-9/12  font-bold">
+          <label className="block mx-auto w-9/12 font-bold">
             {t("signup.country")}
             <br />
             <input
-              className="bg-terciary p-2 w-full  rounded-xl"
+              className="bg-terciary p-2 w-full rounded-xl"
               type="text"
               required
               id="country"
@@ -219,11 +230,11 @@ const SignUp = (props: Props) => {
             />
           </label>
           <br />
-          <label className="block mx-auto w-9/12  font-bold">
+          <label className="block mx-auto w-9/12 font-bold">
             {t("signup.password")}
             <br />
             <input
-              className="bg-terciary p-2 w-full  rounded-xl"
+              className="bg-terciary p-2 w-full rounded-xl"
               type="password"
               required
               autoComplete="new-password"
@@ -238,11 +249,11 @@ const SignUp = (props: Props) => {
           </label>
           <br />
 
-          <label className="block mx-auto w-9/12  font-bold">
+          <label className="block mx-auto w-9/12 font-bold">
             {t("signup.confirm")}
             <br />
             <input
-              className="bg-terciary p-2 w-full  rounded-xl"
+              className="bg-terciary p-2 w-full rounded-xl"
               type="password"
               required
               autoComplete="new-password"

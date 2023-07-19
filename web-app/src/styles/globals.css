@@ -1,24 +1,27 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import './normalize.css';
-@import './main.css';
-@import './loader.css';
-@import './stepper.css';
-
 h1, h2, h3, p, li {
-  @apply font-['Lato'];
-}
-
+    @apply font-['Lato'];
+  }
+  
 .input-launch-chall {
-  @apply border border-black p-2 sm:max-w-[600px] w-full rounded-md;
-}
-
-.css-b62m3t-container {
-  @apply sm:max-w-[600px] w-full;
+    @apply border border-black p-2 sm:max-w-[600px] w-full rounded-md;
 }
 
 .react-datepicker-popper {
-  z-index: 10 !important;
+    z-index: 10 !important;
+}
+
+.css-b62m3t-container {
+    @apply sm:max-w-[600px] w-full;
+}
+
+.flex-center-center {
+    @apply flex items-center justify-center;
+}
+
+.after::after {
+    content: 'Make a better World';
+    top: 1.5rem;
+    right: 0;
+    position: absolute;
+    font-size: 0.75rem;
 }
