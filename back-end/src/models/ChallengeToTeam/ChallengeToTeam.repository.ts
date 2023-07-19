@@ -14,7 +14,8 @@ export default class ChallengeToTeamRepository extends ChallengeToTeamDb {
         team : {
           userToTeams : true
         }
-      }
+      },
+      order: {startsAt: "DESC"}
     }) 
   }
 

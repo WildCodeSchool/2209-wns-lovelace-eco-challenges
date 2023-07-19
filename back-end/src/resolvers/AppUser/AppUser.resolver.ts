@@ -71,6 +71,6 @@ export default class AppUserResolver {
       hobbies
     }: UpdateAppUserArgs
   ): Promise<AppUser> {
-    return AppUserRepository.updateAppUser(id, firstName, lastName, nickname, email, city, country, img, hobbies);
+    return AppUserRepository.updateAppUser(id, {firstName, lastName, nickname, email, city, country, img, hobbies});
   }
 }

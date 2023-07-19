@@ -16,7 +16,7 @@ export default class ChallengeRepository extends ChallengeDb {
           }
         }
       },
-      order: {startsAt: "DESC"},
+      order: {challengeName: "ASC"},
       take: itemsByPage,
       skip: (pageNumber -1) * itemsByPage,
     }); 
@@ -24,7 +24,7 @@ export default class ChallengeRepository extends ChallengeDb {
 
   static async getChallengesLight(): Promise<Challenge[]> {
     return this.repository.find({
-      order: {startsAt: "DESC"},
+      order: {challengeName: "ASC"},
     }); 
   }
 
@@ -44,7 +44,7 @@ export default class ChallengeRepository extends ChallengeDb {
           }
         }
       },
-      order: {startsAt: "DESC"},
+      order: {category: "ASC"},
       take: itemsByPage,
       skip: (pageNumber -1) * itemsByPage,
       });
@@ -66,7 +66,7 @@ export default class ChallengeRepository extends ChallengeDb {
           }
         }
       },
-      order: {startsAt: "DESC"},
+      order: {level: "ASC"},
       take: itemsByPage,
       skip: (pageNumber -1) * itemsByPage,
     });

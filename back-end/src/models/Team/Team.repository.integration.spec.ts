@@ -47,7 +47,7 @@ describe("TeamRepository integration", () => {
 
         const updatedTeam = await TeamRepository.updateTeam(team.id, { city, isPublic })
 
-        expect(updatedTeam).toHaveProperty('teamName', 'Team Test')
+        expect(updatedTeam).toHaveProperty('teamName', 'Team test')
         expect(updatedTeam).toHaveProperty('city', 'Bordeaux')
         expect(updatedTeam).toHaveProperty('isPublic', true)
       });

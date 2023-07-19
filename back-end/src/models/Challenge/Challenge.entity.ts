@@ -1,7 +1,5 @@
 import { Field, ID, ObjectType, registerEnumType } from "type-graphql";
 import {
-  BeforeInsert,
-  BeforeUpdate,
   Column,
   Entity,
   Index,

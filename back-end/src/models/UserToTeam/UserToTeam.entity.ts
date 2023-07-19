@@ -20,7 +20,7 @@ registerEnumType(UserRole, {
 });
 
 @Entity()
-@Unique(["team", "user", "userRole"])
+@Unique(["team", "user"])
 @ObjectType()
 export default class UserToTeam {
   constructor(

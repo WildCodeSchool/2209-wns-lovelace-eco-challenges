@@ -130,8 +130,8 @@ describe("ChallengeRepository integration", () => {
         )
 
         expect(updatedChallenge).toHaveProperty('challengeName', 'Challenge')
-        expect(updatedChallenge).toHaveProperty('level', 'Facile')
-        expect(updatedChallenge).toHaveProperty('description', 'Challenge updated')
+        expect(updatedChallenge).toHaveProperty('level', level)
+        expect(updatedChallenge).toHaveProperty('description', description)
         expect(updatedChallenge).toHaveProperty('category', ["Autosuffisance", "Réduction"])
       });
     });  

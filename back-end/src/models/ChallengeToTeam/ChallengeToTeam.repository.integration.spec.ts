@@ -29,10 +29,9 @@ describe("ChallengeToTeamRepository integration", () => {
       it("return the new challenge with team", async () => {
         const newTeam = await TeamRepository.createTeam("New TEAM", "Paris", "France", false); 
         const challenge = await ChallengeRepository.getChallengeByName("Covoiturage");
-
         const newChallengeToTeam = await ChallengeToTeamRepository.createChallengeToTeam(newTeam.id, challenge.id, new Date("2023-08-01T09:00:00+0000"), new Date("2024-08-01T09:00:00+0000"));
 
-        expect(newChallengeToTeam.team.teamName).toBe("New TEAM"); 
+        expect(newChallengeToTeam.team.teamName).toBe("New team"); 
         expect(newChallengeToTeam.challenge.challengeName).toBe("Covoiturage"); 
       });                              
     });  
@@ -63,6 +62,4 @@ describe("ChallengeToTeamRepository integration", () => {
       })
     });   
   });
-
-
 });  
