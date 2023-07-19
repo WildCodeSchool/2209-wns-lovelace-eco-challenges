@@ -83,7 +83,7 @@ const Index = (props: Props): JSX.Element => {
           </div>
         </div>
         <div className="presentation-section">
-          <div className="w-11/12">
+          <div className="presentation-section-card">
             <h3 className="presentation-come">{t("home.come")}</h3>
             <p className="presentation-title">{t("home.greencard.title")}</p>
             <div className="flex flex-wrap justify-around">
