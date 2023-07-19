@@ -10,7 +10,7 @@ import { Email } from "../InputArgsForAll";
 export default class AppUserResolver {
   @Mutation(() => AppUser)
   signUp(
-    @Args() { firstName, lastName, nickname, email, city, country, password }: SignUpArgs
+    @Args() { firstName, lastName, nickname, email, city, desc, age, country, password }: SignUpArgs
   ): Promise<AppUser> {
     return AppUserRepository.createUser(
       firstName,
@@ -18,6 +18,8 @@ export default class AppUserResolver {
       nickname,
       email,
       city,
+      desc,
+      age,
       country,
       password
     );
@@ -43,34 +45,36 @@ export default class AppUserResolver {
   }
 
   @Query(() => AppUser)
-  userByNickname(@Arg("nickname") nickname : string): Promise<AppUser> {
-    return AppUserRepository.getUserByNickname(nickname); 
+  userByNickname(@Arg("nickname") nickname: string): Promise<AppUser> {
+    return AppUserRepository.getUserByNickname(nickname);
   }
 
   @Query(() => AppUser)
-  userById(@Arg("id") id : string): Promise<AppUser> {
-    return AppUserRepository.getUserById(id); 
+  userById(@Arg("id") id: string): Promise<AppUser> {
+    return AppUserRepository.getUserById(id);
   }
 
   @Query(() => AppUser)
   userByEmail(@Args() { email }: Email): Promise<AppUser> {
-    return AppUserRepository.getUserByEmailThrow(email); 
+    return AppUserRepository.getUserByEmailThrow(email);
   }
 
   @Mutation(() => AppUser)
   updateAppUser(
-    @Args() { 
-      id, 
+    @Args() {
+      id,
       firstName,
       lastName,
       nickname,
       email,
       city,
+      desc,
+      age,
       country,
       img,
       hobbies
     }: UpdateAppUserArgs
   ): Promise<AppUser> {
-    return AppUserRepository.updateAppUser(id, firstName, lastName, nickname, email, city, country, img, hobbies);
+    return AppUserRepository.updateAppUser(id, firstName, lastName, nickname, email, desc, city, age, country, img, hobbies);
   }
 }

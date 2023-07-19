@@ -8,7 +8,7 @@ export enum Hobbies {
   TRIPS = "Voyages",
   MUSIC = "Music",
   ART = "Art",
-  BOOK = "Lecture", 
+  BOOK = "Lecture",
   COOK = "Cuisine",
   GAMES = "Jeux",
   PETS = "Animaux"
@@ -20,19 +20,21 @@ registerEnumType(Hobbies, {
 
 @Entity()
 @ObjectType()
-@Index(['nickname'], { unique: true,  where: `"isVerified"=true` })
+@Index(['nickname'], { unique: true, where: `"isVerified"=true` })
 export default class AppUser {
   constructor(
     firstName: string,
     lastName: string,
     nickname: string,
     email: string,
-    city:string,
-    country:string,
+    city: string,
+    desc: string,
+    age: number,
+    country: string,
     hashedPassword: string,
     img?: string,
-    hobbies?: Hobbies[], 
-    isVerified?: boolean, 
+    hobbies?: Hobbies[],
+    isVerified?: boolean,
     userToTeams?: UserToTeam[]
   ) {
     this.firstName = firstName;
@@ -41,6 +43,8 @@ export default class AppUser {
     this.email = email;
     this.hashedPassword = hashedPassword;
     this.city = city;
+    this.desc = desc;
+    this.age = age
     this.country = country;
     if (img) {
       this.img = img;
@@ -79,27 +83,35 @@ export default class AppUser {
 
   @Field()
   @Column()
-  nickname:string;
+  nickname: string;
 
   @Field()
-  @Column("int", {default:0})
-  score:number;
+  @Column("int", { default: 0 })
+  score: number;
 
   @Field()
-  @Column("boolean", {default:false})
-  disabled:boolean;
-
-  @Field()
-  @Column()
-  city:string;
+  @Column("boolean", { default: false })
+  disabled: boolean;
 
   @Field()
   @Column()
-  country:string;
+  city: string;
+
+  @Column("text")
+  @Field()
+  desc: string;
+
+  @Field()
+  @Column("int")
+  age: number;
+
+  @Field()
+  @Column()
+  country: string;
 
   @Column("varchar", { nullable: true })
   @Field({ nullable: true })
-  img: string; 
+  img: string;
 
   @Column({
     type: "enum",
@@ -111,10 +123,10 @@ export default class AppUser {
   hobbies: Hobbies[];
 
   @Field()
-  @Column("boolean", {default:true})
+  @Column("boolean", { default: true })
   isVerified: boolean;
 
   @OneToMany(() => UserToTeam, (userToTeam) => userToTeam.user)
   @Field(() => [UserToTeam], { nullable: true })
-  userToTeams: UserToTeam[]; 
+  userToTeams: UserToTeam[];
 }

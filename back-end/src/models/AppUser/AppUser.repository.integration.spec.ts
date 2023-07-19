@@ -13,7 +13,7 @@ describe("AppUserRepository integration", () => {
   beforeAll(async () => {
     await initializeDatabaseRepositories();
   });
- 
+
   afterAll(async () => {
     await closeConnection();
   });
@@ -31,14 +31,14 @@ describe("AppUserRepository integration", () => {
 
   describe("signIn", () => {
     describe("when email address does not belong to existing user", () => {
-      
+
       it("throws invalid credentials error", async () => {
         const email = "unknown@user.com";
         expect(() =>
           AppUserRepository.signIn(email, "whatever")
         ).rejects.toThrowError(INVALID_CREDENTIALS_ERROR_MESSAGE);
       });
-      
+
       describe("when email address belongs to existing user", () => {
         const email = "jean@user.com";
 
@@ -50,6 +50,8 @@ describe("AppUserRepository integration", () => {
               "JohnD",
               email,
               "France",
+              "description",
+              23,
               "paris",
               "password"
             );
@@ -68,6 +70,8 @@ describe("AppUserRepository integration", () => {
               "JohnD",
               email,
               "Paris",
+              "description",
+              23,
               "france",
               "password32*"
             );
@@ -89,6 +93,8 @@ describe("AppUserRepository integration", () => {
               "JohnD",
               email,
               "Paris",
+              "description",
+              23,
               "france",
               "password32*"
             );
@@ -107,8 +113,8 @@ describe("AppUserRepository integration", () => {
   });
   describe("signOut", () => {
     describe("when passed existing user", () => {
-      it("deletes session in database", () => {});
-      it("returns user", () => {});
+      it("deletes session in database", () => { });
+      it("returns user", () => { });
     });
   });
 });
