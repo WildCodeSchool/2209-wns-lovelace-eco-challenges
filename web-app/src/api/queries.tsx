@@ -96,3 +96,39 @@ query userById($id: String!) {
   }
 }
 `;
+
+
+export const GET_PROFILE = gql`
+  query MyProfile {
+    myProfile {
+      nickname
+      city
+      country
+      email
+      firstName
+      hobbies
+      id
+      img
+      isVerified
+      lastName
+      score
+      userToTeams {
+        team {
+          city
+          country
+          id
+          teamName
+          challengeToTeams {
+            challenge {
+              challengeName
+              category
+              img
+            }
+            startsAt
+            endAt
+          }
+        }
+      }
+    }
+  }
+`
