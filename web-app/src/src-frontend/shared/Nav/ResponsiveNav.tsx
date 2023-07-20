@@ -49,16 +49,6 @@ const ResponsiveNav = (props: Props) => {
         </Link>
         <Link
           className="py-5 w-full flex items-baseline"
-          href="/teams"
-          onClick={() => isClicked()}
-        >
-          <i className="mr-3">
-            <Groups width="30px" height="30px" fill="white" />
-          </i>
-          {t("menu.teams")}
-        </Link>
-        <Link
-          className="py-5 w-full flex items-baseline"
           href="/signin"
           onClick={() => isClicked()}
         >

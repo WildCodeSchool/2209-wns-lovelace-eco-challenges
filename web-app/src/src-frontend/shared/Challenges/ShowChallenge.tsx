@@ -19,6 +19,7 @@ const ShowChallenge = (props: Props) => {
             src={img || "https://picsum.photos/400/250"}
             alt="image"
             fill={true}
+            className="rounded-lg"
           />
         </div>
         <div className="w-full mt-4">
