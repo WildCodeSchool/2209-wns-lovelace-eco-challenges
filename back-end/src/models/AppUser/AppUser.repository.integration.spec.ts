@@ -2,6 +2,7 @@ import {
   closeConnection,
   getDatabase,
   initializeDatabaseRepositories,
+  truncateAllTables,
 } from "../../database/utils";
 import AppUserRepository, {
   INVALID_CREDENTIALS_ERROR_MESSAGE,
@@ -15,18 +16,12 @@ describe("AppUserRepository integration", () => {
   });
 
   afterAll(async () => {
-    await closeConnection();
+    await truncateAllTables();
   });
 
   beforeEach(async () => {
-    // eslint-disable-next-line no-restricted-syntax
-    const database = await getDatabase();
-    for (const entity of database.entityMetadatas) {
-      const repository = database.getRepository(entity.name);
-      await repository.query(
-        `TRUNCATE ${entity.tableName} RESTART IDENTITY CASCADE;`
-      );
-    }
+    await truncateAllTables();
+    await AppUserRepository.initializeUsers();
   });
 
   describe("signIn", () => {

@@ -51,7 +51,6 @@ export default class UserToTeamRepository extends UserToTeamDb {
     
     return newUserToTeam;
   }
-
 }
 
 

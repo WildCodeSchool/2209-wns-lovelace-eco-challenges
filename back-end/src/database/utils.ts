@@ -14,7 +14,7 @@ const dataSource = new DataSource({
   synchronize: true,
   entities: [__dirname + "/../models/**/*.entity.{js,ts}"],
   //logging: NODE_ENV === "development" ? ["query", "error"] : ["error"],
-  logging: ["error"],
+  logging: NODE_ENV === "test" ? false : ["error"],
 });
 
 let initialized = false;
@@ -45,9 +45,20 @@ async function closeConnection() {
   await dataSource.destroy();
 }
 
+async function truncateAllTables() {
+  const database = await getDatabase();
+  for (const entity of database.entityMetadatas) {
+    const repository = database.getRepository(entity.name);
+    await repository.query(
+      `TRUNCATE ${entity.tableName} RESTART IDENTITY CASCADE;`
+    );
+  }
+};
+
 export {
   getDatabase,
   getRepository,
   initializeDatabaseRepositories,
   closeConnection,
+  truncateAllTables
 };

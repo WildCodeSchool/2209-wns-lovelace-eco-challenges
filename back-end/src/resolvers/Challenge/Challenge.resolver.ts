@@ -96,7 +96,7 @@ export default class ChallengeResolver {
       img
     }: UpdateChallengePremiumArgs
   ): Promise<Challenge> {
-    return ChallengeRepository.updateChallengePremium(id, challengeName, level, description, category, startsAt, endAt, img);
+    return ChallengeRepository.updateChallengePremium(id, { challengeName, level, description, category, startsAt, endAt, img});
   }
 
   @Mutation(() => Challenge)

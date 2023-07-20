@@ -1,5 +1,5 @@
 import AppUserDb from "./AppUser.db";
-import AppUser, { Hobbies } from "./AppUser.entity";
+import AppUser from "./AppUser.entity";
 
 import { hashSync, compareSync } from "bcryptjs";
 import SessionRepository from "./Session.repository";
@@ -127,7 +127,7 @@ export default class AppUserRepository extends AppUserDb {
       email: email,
       city: "",
       desc: "",
-      age: undefined,
+      age: 0,
       country: "",
       hashedPassword: "",
       isVerified: false
@@ -138,48 +138,17 @@ export default class AppUserRepository extends AppUserDb {
   }
 
   static async updateAppUser(
-    id: string,
-    firstName?: string,
-    lastName?: string,
-    nickname?: string,
-    email?: string,
-    city?: string,
-    desc?: string,
-    age?: number,
-    country?: string,
-    img?: string,
-    hobbies?: Hobbies[],
-  ): Promise<
-    {
-      id: string,
-      firstName?: string,
-      lastName?: string,
-      nickname?: string,
-      email?: string,
-      city?: string,
-      desc?: string,
-      age?: number,
-      country?: string,
-      img?: string,
-      hobbies?: Hobbies[]
-    } & AppUser
+    id: string, 
+    updateAppUser: Partial<AppUser>  ): Promise<
+    AppUser
   > {
     const existingAppUser = await this.repository.findOneBy({ id });
     if (!existingAppUser) {
       throw Error("No existing AppUser matching ID.");
     }
     return this.repository.save({
-      id,
-      firstName,
-      lastName,
-      nickname,
-      email,
-      city,
-      desc,
-      age,
-      country,
-      img,
-      hobbies
+      ... existingAppUser, 
+      ... updateAppUser
     });
   }
 }

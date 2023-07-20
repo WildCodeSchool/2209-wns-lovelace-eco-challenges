@@ -16,7 +16,7 @@ export default class ChallengeRepository extends ChallengeDb {
           }
         }
       },
-      order: {startsAt: "ASC"},
+      order: {challengeName: "ASC"},
       take: itemsByPage,
       skip: (pageNumber -1) * itemsByPage,
     }); 
@@ -24,7 +24,7 @@ export default class ChallengeRepository extends ChallengeDb {
 
   static async getChallengesLight(): Promise<Challenge[]> {
     return this.repository.find({
-      order: {startsAt: "ASC"},
+      order: {challengeName: "ASC"},
     }); 
   }
 
@@ -44,7 +44,7 @@ export default class ChallengeRepository extends ChallengeDb {
           }
         }
       },
-      order: {startsAt: "ASC"},
+      order: {category: "ASC"},
       take: itemsByPage,
       skip: (pageNumber -1) * itemsByPage,
       });
@@ -66,7 +66,7 @@ export default class ChallengeRepository extends ChallengeDb {
           }
         }
       },
-      order: {startsAt: "ASC"},
+      order: {level: "ASC"},
       take: itemsByPage,
       skip: (pageNumber -1) * itemsByPage,
     });
@@ -86,7 +86,7 @@ export default class ChallengeRepository extends ChallengeDb {
       }
     }); 
     if (!existingChallenge) {
-      throw Error("No existing Challenge matching Id")
+      throw Error("No existing challenge matching ID.")
     } 
     return existingChallenge;
   }
@@ -119,7 +119,9 @@ export default class ChallengeRepository extends ChallengeDb {
     endAt?: Date, 
     img?: string, 
   ): Promise<Challenge> { 
+
     const newChallenge = this.repository.create({ challengeName, level, description, category, startsAt, endAt, img });
+
     await this.repository.save(newChallenge);
     return newChallenge;
   }
@@ -148,43 +150,21 @@ export default class ChallengeRepository extends ChallengeDb {
 
   static async updateChallengePremium(
     id: string, 
-    challengeName: string,
-    level: Level, 
-    description: string, 
-    category: Category[],
-    startsAt?: Date,
-    endAt?: Date, 
-    img?: string, 
-  ): Promise<
-    {
-    id: string, 
-    challengeName: string,
-    level: Level, 
-    description: string, 
-    category: Category[],
-    startsAt?: Date,
-    endAt?: Date, 
-    img?: string, 
-    } & Challenge
+    updatedChallenge: Partial<Challenge>
+  ): Promise< Challenge
   > {
     const existingChallenge = await this.repository.findOneBy({ id }); 
     if (!existingChallenge) {
       throw Error("No existing Challenge matching ID.");
     }
-    return this.repository.save({
-      id, 
-      challengeName,
-      level,
-      description,
-      category,
-      startsAt,
-      endAt,
-      img
+
+    return this.repository.save({ ...existingChallenge, 
+      ...updatedChallenge
     });
   }
 
   static async deleteChallenge(id: string): Promise<Challenge> {
-    const existingChallenge = await this.findChallengeById(id);
+    const existingChallenge = await this.repository.findOneBy({ id }); 
     if (!existingChallenge) {
       throw Error("No existing Challenge matching ID.");
     }

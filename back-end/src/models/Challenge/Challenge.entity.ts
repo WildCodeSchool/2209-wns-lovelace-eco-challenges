@@ -41,7 +41,7 @@ export default class Challenge {
     challengeName: string,
     level : Level,
     description: string,
-    category: [Category],
+    category: Category[],
     startsAt?: Date,
     endAt?: Date, 
     img?: string, 
@@ -69,7 +69,18 @@ export default class Challenge {
   @Field(() => ID)
   id: string;
 
-  @Column("varchar", { length: 100 })
+  @Column({ 
+    type: "varchar",
+    length: 100, 
+    transformer: {
+      to(value : string){
+        return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
+      }, 
+      from(value: string) {
+        return value;
+      }
+    } 
+  })
   @Index({ unique: true })
   @Field()
   challengeName: string;
@@ -86,6 +97,7 @@ export default class Challenge {
     type: 'enum',
     enum: Level,
   })
+  @Index()
   @Field(_type => Level)
   level:Level;  
 
@@ -98,6 +110,7 @@ export default class Challenge {
     enum: Category,
     array: true,
   })
+  @Index()
   @Field(_type => [Category])
   category: Category[];
 
@@ -108,6 +121,6 @@ export default class Challenge {
   @OneToMany(() => ChallengeToTeam, (challengeToTeam) => challengeToTeam.challenge)
   @Field(() => [ChallengeToTeam], { nullable: true })
   challengeToTeams: ChallengeToTeam[]; 
-
+  
 }
 

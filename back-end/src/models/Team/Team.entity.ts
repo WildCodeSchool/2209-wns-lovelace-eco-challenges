@@ -41,16 +41,29 @@ export default class Team {
   @Field(() => ID)
   id: string;
 
-  @Column("varchar", { length: 45 })
+  @Column({ 
+    type: "varchar", 
+    length: 45,
+    transformer: {
+      to(value : string){
+        return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
+      }, 
+      from(value: string) {
+        return value;
+      }
+    } 
+  })
   @Index({ unique: true })
   @Field()
   teamName: string;
 
   @Column("varchar", { length: 100 })
+  @Index()
   @Field()
   city: string; 
 
   @Column("varchar", { length: 100 })
+  @Index()
   @Field()
   country: string; 
 

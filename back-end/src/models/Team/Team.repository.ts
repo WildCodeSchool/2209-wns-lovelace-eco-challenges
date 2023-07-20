@@ -100,7 +100,7 @@ export default class TeamRepository extends TeamDb {
       }
     });
     if (!existingTeam) {
-      throw Error("No existing Team matching Id")
+      throw Error("No existing Team matching ID.")
     } 
     return existingTeam;
   }
@@ -110,7 +110,7 @@ export default class TeamRepository extends TeamDb {
     city: string, 
     country: string, 
     isPublic: boolean,
-    img: string,  
+    img?: string,  
   ): Promise<Team> {
     const existingTeam = await this.repository.findOne({ where: { teamName } });
     if (existingTeam) {
@@ -124,37 +124,20 @@ export default class TeamRepository extends TeamDb {
 
   static async updateTeam(
     id: string, 
-    teamName: string, 
-    city: string, 
-    country: string, 
-    img: string,
-    isPublic: boolean 
-  ): Promise<
-    {
-      id: string; 
-      teamName: string;
-      city: string; 
-      country: string;
-      img: string;
-      isPublic: boolean;
-    } & Team
-  > {
+    updatedTeam: Partial<Team>
+  ): Promise<Team> {
     const existingTeam = await this.repository.findOneBy({ id }); 
     if (!existingTeam) {
       throw Error("No existing Team matching ID.");
     }
     return this.repository.save({
-      id, 
-      teamName,
-      city,
-      country,
-      img,
-      isPublic,
+      ...existingTeam,
+      ...updatedTeam
     });
   }
 
   static async deleteTeam(id: string): Promise<Team> {
-    const existingTeam = await this.findTeamById(id);
+    const existingTeam = await this.repository.findOneBy({ id });
     if (!existingTeam) {
       throw Error("No existing Team matching ID.");
     }
