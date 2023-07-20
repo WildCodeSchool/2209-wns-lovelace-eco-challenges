@@ -113,22 +113,3 @@ export class UpdateAppUserArgs {
   @IsEnum(Hobbies, { each: true })
   hobbies?: Hobbies[]
 } 
-@ArgsType()
-export class ChangePasswordArgs {
-  @Field()
-  userId:string;
-
-  @Field()
-  @Matches(passwordRegExp, {
-    message:
-      "Le mot de passe doit comporter au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.",
-  })
-  newPassword: string;
-}
-
-@ArgsType()
-export class askChangePasswordArgs {
-  @Field()
-  @IsEmail()
-  email:string
-}

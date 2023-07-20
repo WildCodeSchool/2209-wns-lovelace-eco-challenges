@@ -128,15 +128,5 @@ export default class AppUser {
 
   @OneToMany(() => UserToTeam, (userToTeam) => userToTeam.user)
   @Field(() => [UserToTeam], { nullable: true })
-  userToTeams: UserToTeam[]; 
-
-  @Column({
-    nullable:true
-  })
-  resetPasswordToken?: string
-
-  @Column({
-    nullable:true
-  })
-  resetTokenCreationDate?: Date
+  userToTeams: UserToTeam[];
 }

@@ -15,8 +15,44 @@ import { SIGN_IN_PATH } from "@constants/paths";
 
 import { type NextI18NContext } from "@customTypes/types";
 import { type SSRConfig } from "next-i18next";
-import { SIGN_UP } from "@src/api/mutation";
 
+const SIGN_UP = gql`
+  mutation SignUp(
+    $firstName: String!
+    $lastName: String!
+    $nickname: String!
+    $email: String!
+    $city: String!
+    $desc: String!
+    $age: Float!
+    $country: String!
+    $password: String!
+  ) {
+    signUp(
+      firstName: $firstName
+      lastName: $lastName
+      nickname: $nickname
+      email: $email
+      city: $city
+      desc: $desc
+      age: $age
+      country: $country
+      password: $password
+    ) {
+      id
+      email
+      firstName
+      lastName
+      nickname
+      score
+      disabled
+      city
+      desc
+      age
+      country
+    }
+  }
+`;
 
 type Props = {
   locale: string;
@@ -35,10 +71,10 @@ const SignUp = (props: Props) => {
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const { t } = useTranslation("signup");
 
+  const [confirmedPassword, setConfirmedPassword] = useState(false);
 
   const [signUp, { loading }] = useMutation<
     SignUpMutation,
@@ -69,28 +105,23 @@ const SignUp = (props: Props) => {
         toast.success(
           "Your account has been successfully created. You can now connect."
         );
-        alert("Création du compte réussie")
       }
       router.push(SIGN_IN_PATH);
     } catch (error) {
       // toast.error(getErrorMessage(error));
-      alert("Une erreur est survenue")
     }
   };
+
+  const openSignIn = () => router.push("/signin");
 
   return (
     <>
       <form
+        className="w-10/12 mx-auto my-8 border-2 rounded-xl border-primary"
         onSubmit={async (event) => {
           event.preventDefault();
-          
-          if (passwordConfirmation !== password) {
-            alert(t("signup.donotwork"))
-          } else {
-            await submit();
-          }
+          await submit();
         }}
-        className="w-10/12 mx-auto my-8 border-2 rounded-xl border-primary md:w-2/3 lg:w-1/4"
       >
         <fieldset className="form">
           <legend className="bg-white font-bold -translate-y-1/2 border-2 mx-auto rounded-md border-primary text-primary -rotate-2 px-8">
@@ -198,20 +229,6 @@ const SignUp = (props: Props) => {
               }}
             />
           </label>
-          <label className="block mx-auto w-9/12 font-bold">
-            {t("signup.bio")}
-
-            <textarea
-              className="bg-terciary p-2 w-full rounded-xl resize-none"
-              required
-              id="description"
-              name="description"
-              placeholder="France"
-              onChange={(event) => {
-                setDesc(event.target.value);
-              }}
-            />
-          </label>
           <br />
           <label className="block mx-auto w-9/12 font-bold">
             {t("signup.password")}
@@ -240,26 +257,22 @@ const SignUp = (props: Props) => {
               type="password"
               required
               autoComplete="new-password"
-              id="confirm-password"
-              name="confirm-password"
+              id="password"
+              name="password"
               placeholder="*********************"
-              onChange={(e) => {
-                setPasswordConfirmation(e.target.value)
+              onChange={(event) => {
+                if (event.target.value !== password) {
+                  setConfirmedPassword(false);
+                } else {
+                  setConfirmedPassword(true);
+                }
               }}
             />
-
-            {/* {confirmedPassword ? (
+            {confirmedPassword ? (
               <></>
             ) : (
               <p className="error">{t("signup.donotwork")}</p>
-            )} */}
-            {/* 
-              {confirmedPassword ? (
-                <></>
-              ) : (
-                <p className="error">{t('signup.donotwork')}</p>
-              )}
-             */}
+            )}
           </label>
 
           <div className="text-center font-semibold text-primary pt-4 pb-2">
@@ -296,6 +309,7 @@ const SignUp = (props: Props) => {
       <div className="flex items-center justify-center flex-col m-4">
         <h2>{t("signup.account")}</h2>
         <Button
+          onClickEvent={openSignIn}
           type="button-primary"
           name="Se Connecter"
         />

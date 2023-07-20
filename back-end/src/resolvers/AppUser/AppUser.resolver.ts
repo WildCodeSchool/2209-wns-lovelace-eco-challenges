@@ -1,7 +1,7 @@
 import { Arg, Args, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import AppUser from "../../models/AppUser/AppUser.entity";
 import AppUserRepository from "../../models/AppUser/AppUser.repository";
-import { ChangePasswordArgs, SignInArgs, SignUpArgs, askChangePasswordArgs, UpdateAppUserArgs } from "./AppUser.input";
+import { SignInArgs, SignUpArgs, UpdateAppUserArgs } from "./AppUser.input";
 import { setSessionIdInCookie } from "../../http-utils";
 import { GlobalContext } from "../..";
 import { Email } from "../InputArgsForAll";
@@ -38,17 +38,6 @@ export default class AppUserResolver {
     return user;
   }
 
-  @Mutation(() => AppUser)
-  async changePassword(@Args() { userId, newPassword }: ChangePasswordArgs) {
-    return AppUserRepository.changePassword(userId, newPassword)
-  }
-
-  @Mutation(() => String)
-  async askChangePassword(@Args() { email }: askChangePasswordArgs):Promise<string>{
-    await AppUserRepository.askResetPassword(email)
-    return  `Un email de récupération a bien été envoyé à l'adresse : ${email}`
-  }
-  
   @Authorized()
   @Query(() => AppUser)
   async myProfile(@Ctx() context: GlobalContext): Promise<AppUser> {
