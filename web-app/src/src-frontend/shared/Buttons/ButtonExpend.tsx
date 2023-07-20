@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useTranslation } from "next-i18next";
 import { PRIMARY } from "@constants/color";
 import LaunchChallenge from "@assets/logos/LaunchChallenge";
 import Button from "./Button";
@@ -19,14 +18,9 @@ const ButtonExpend = (props: Props) => {
 
   const [expanded, setExpanded] = useState(false);
 
-  useEffect(() => {
-    console.log("Expanded state:", expanded);
-  }, [expanded]);
-
   const handleExpandClick = () => {
     setExpanded((prevExpanded) => !prevExpanded);
   };
-  const { t } = useTranslation(["challenge", "page"]);
 
   return (
     <div className="button-expend flex flex-col items-center">
