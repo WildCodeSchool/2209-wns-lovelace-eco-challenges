@@ -25,15 +25,6 @@ const Nav = () => {
             {t("menu.challenges")}
           </span>
         </Link>
-        <Link href="/teams">
-          <span
-            className="px-2
-                text-base
-                lg:text-2xl"
-          >
-            {t("menu.teams")}
-          </span>
-        </Link>
         <Link href="/signin">
           <span
             className="px-2

@@ -3,14 +3,15 @@ import { type Challenge } from "@gql/graphql";
 
 type Props = {
   src: Challenge[];
+  itemsPerPage?: number;
 };
 
 const List = (props: Props) => {
-  const { src } = props;
+  const { src, itemsPerPage } = props;
 
   return (
     <>
-      {src.map((element, index) => (
+      {src.slice(0, itemsPerPage || 6).map((element, index) => (
         <div className="m-5" key={index}>
           <ShowChallenge
             img={element.img || "https://picsum.photos/400/250"}
