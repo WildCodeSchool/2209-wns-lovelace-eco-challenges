@@ -3,9 +3,10 @@ import { type Challenge } from "@gql/graphql";
 import { CHALLENGES } from "@api/queries";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { client } from "@api/apolloClient";
-import { useTranslation } from "next-i18next";
+import { SSRConfig, useTranslation } from "next-i18next";
 import List from "@shared/List/List";
 import ButtonExpend from "@shared/Buttons/ButtonExpend";
+import { NextI18NContext } from "@src/src-frontend/customTypes/types";
 
 const pageNumber = 1;
 const itemsByPage = 6;
@@ -13,7 +14,7 @@ const itemsByPage = 6;
 type Props = {
   challenges: Challenge[];
   locale: string;
-  _nextI18next: any;
+  _nextI18next: SSRConfig;
 };
 
 const Challenges = (props: Props): JSX.Element => {
@@ -51,7 +52,7 @@ const Challenges = (props: Props): JSX.Element => {
   );
 };
 
-export async function getServerSideProps(context: any) {
+export async function getServerSideProps(context: NextI18NContext) {
   const { locale } = context;
   if (!["en", "fr"].includes(locale)) {
     return { notFound: true };
