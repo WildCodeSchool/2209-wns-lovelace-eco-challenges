@@ -1,106 +1,60 @@
-import clsx from "clsx";
-import { useMemo, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "next-i18next";
-import { GET_USERSBYID } from "@src/api/queries";
-import { client } from "@src/api/apolloClient";
-import Image from "next/image";
+import { PRIMARY } from "@constants/color";
+import LaunchChallenge from "@assets/logos/LaunchChallenge";
+import Button from "./Button";
 
 type Props = {
-  img: string
-  challengeName: string
-  date: string
-  desc: string
   name: string;
   type: string;
-  icon?: any;
-  size?: string;
-  onClickEvent?: () => void;
+  icon?: React.ReactNode;
+  img: string;
+  challengeName: string;
+  desc: string;
+  level: string;
 };
 
-const Button = (props: Props) => {
-  const { name, type, icon = null, size, img, challengeName, date, desc } = props;
+const ButtonExpend = (props: Props) => {
+  const { img, challengeName, desc, level } = props;
 
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
+  useEffect(() => {
+    console.log("Expanded state:", expanded);
+  }, [expanded]);
+
+  const handleExpandClick = () => {
+    setExpanded((prevExpanded) => !prevExpanded);
   };
-  const { t } = useTranslation(["home", "page"]);
-
-  const buttonClassName = useMemo(
-    (): string =>
-      clsx({
-        "rounded-lg p-2 min-h-[42px] flex items-center justify-center shadow-xl": true,
-        "text-white bg-primary": type === "button-primary" ?? true,
-        "text-primary bg-white": type === "button-secondary" ?? true,
-        "flex items-center justify-between": !!icon,
-        [String(size)]: true,
-      }),
-    [type, icon, size]
-  );
+  const { t } = useTranslation(["challenge", "page"]);
 
   return (
-    <div>
-      <div className="flex flex-col items-center">
-        <button onClick={toggleExpand} className={buttonClassName}>
-          {name}
-          {icon ?? <i>{icon}</i>}
-        </button>
-        {isExpanded && (
-          <div className="flex flex-row justify-center mt-4">
-            <h2 className="text-xl font-bold mb-4 p-8">Les challenges et événements en cours</h2>
-            <div className="my-4 bg-white p-4">
-              <div className="flex space-x-4 mb-4">
-                <input
-                  type="text"
-                  placeholder="search your challenge"
-                  className="border rounded px-3 py-2 w-1/2"
-                />
-                <input
-                  type="text"
-                  placeholder="search by country"
-                  className="border rounded px-3 py-2 w-1/2"
-                />
-              </div>
-              <hr className="border-black border-b my-4" />
-              <div className="flex">
-                <div className="w-1/2">
-                  <Image src={img} alt="Image du challenge" />
-                </div>
-                <div className="w-1/2 flex flex-col justify-center pl-4 text-left">
-                  <h2 className="text-center">{challengeName}</h2>
-                  <p className="text-center">{date}</p>
-                  <p className="text-center">{desc}</p>
-                </div>
-              </div>
+    <div className="button-expend flex flex-col items-center">
+      <div className="button w-2/2  content-center">
+        <Button onClickEvent={handleExpandClick}
+          icon={
+            <LaunchChallenge width="20px" height="20px" fill={PRIMARY} />
+          }
+          type="button-secondary"
+          name={"Plus de challenge"}
+        />
+      </div>
+      {expanded && (
+        <div className="flex justify-center items-center w-full h-full mt-8">
+          <div className="mx-auto w-[400px]">
+            <div className="relative w-full h-[300px]">
+              <img src={img} alt={challengeName} className="img-left" />
+            </div>
+            <div className="w-full mt-8">
+              <p className="font-bold text-2xl text-center">{challengeName}</p>
+              <p className="text-center">{desc}</p>
+              <p className="text-center">{level}</p>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export async function getServerSideProps(context: any) {
-  const { locale } = context;
-  if (!["en", "fr"].includes(locale)) {
-    return { notFound: true };
-  }
-  const path = context.params;
-  const { id } = path;
-
-  const { data } = await client.query({
-    query: GET_USERSBYID,
-    variables: { id },
-  });
-
-  const { userById } = data;
-  return {
-    props: {
-      userById: userById,
-      locale,
-    },
-  }
-}
-
-export default Button;
+export default ButtonExpend;

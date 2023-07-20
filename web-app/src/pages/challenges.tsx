@@ -1,15 +1,10 @@
+import React from "react";
 import { type Challenge } from "@gql/graphql";
 import { CHALLENGES } from "@api/queries";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { client } from "@api/apolloClient";
 import { useTranslation } from "next-i18next";
-
-import DownArrow from "@assets/logos/DownArrow";
 import List from "@shared/List/List";
-
-import { PRIMARY } from "@constants/color";
-import { type NextI18NContext } from "@customTypes/types";
-import { type SSRConfig } from "next-i18next";
 import ButtonExpend from "@shared/Buttons/ButtonExpend";
 
 const pageNumber = 1;
@@ -18,7 +13,7 @@ const itemsByPage = 6;
 type Props = {
   challenges: Challenge[];
   locale: string;
-  _nextI18next: SSRConfig;
+  _nextI18next: any;
 };
 
 const Challenges = (props: Props): JSX.Element => {
@@ -46,18 +41,17 @@ const Challenges = (props: Props): JSX.Element => {
         <ButtonExpend
           name={t("challenges.morechallenges")}
           type="button-secondary"
-          icon={<DownArrow width="20px" height="20px" fill={PRIMARY} />}
           img={challenge.img || "https://picsum.photos/400/250"}
           challengeName={challenge.challengeName}
-          date={challenge.endAt}
           desc={challenge.description}
+          level={challenge.level}
         />
       </div>
     </div>
   );
 };
 
-export async function getServerSideProps(context: NextI18NContext) {
+export async function getServerSideProps(context: any) {
   const { locale } = context;
   if (!["en", "fr"].includes(locale)) {
     return { notFound: true };
