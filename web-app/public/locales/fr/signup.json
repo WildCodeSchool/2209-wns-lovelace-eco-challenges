@@ -6,6 +6,7 @@
     "signup.email": "Email",
     "signup.city": "Ville",
     "signup.country": "Pays",
+    "signup.bio": "biographie",
     "signup.password": "Mot de passe",
     "signup.confirm": "Confirmer mot de passe",
     "signup.donotwork": "Le mot de passe ne correspond pas",

@@ -13,6 +13,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\n    mutation SignUp($firstName: String!, $lastName: String!, $nickname: String!, $email: String!, $city: String!, $country: String!, $password: String!, $age: Float!, $desc: String!) {\n        signUp(firstName: $firstName, lastName: $lastName, nickname: $nickname, email: $email, city: $city, country: $country, password: $password, age: $age, desc: $desc) {\n            id\n            email\n            firstName\n            lastName\n            nickname\n            score\n            disabled\n            city\n            country\n            img\n            hobbies\n            isVerified\n            desc\n            age\n        }\n    }\n": types.SignUpDocument,
+    "\n    mutation ChangePassword($userId: String!, $newPassword: String!) {\n    changePassword(userId: $userId, newPassword: $newPassword) {\n        id\n        email\n        firstName\n        lastName\n        nickname\n        score\n        disabled\n        city\n        country\n        isVerified\n    }\n    }\n": types.ChangePasswordDocument,
+    "\n    mutation AskChangePassword($email: String!) {\n        askChangePassword(email: $email)\n    }\n": types.AskChangePasswordDocument,
     "\n  mutation CreateTeam(\n    $teamName: String!\n    $city: String!\n    $country: String!\n    $isPublic: Boolean!\n    $img: String\n  ) {\n    createTeam(\n      teamName: $teamName\n      city: $city\n      country: $country\n      isPublic: $isPublic\n      img: $img\n    ) {\n      id\n      teamName\n    }\n  }\n": types.CreateTeamDocument,
     "\n  mutation CreateUserToTeam(\n    $teamId: ID!\n    $userEmail: String!\n    $userRole: UserRole!\n    $challengeName: String\n  ) {\n    createUserToTeam(\n      teamId: $teamId\n      userEmail: $userEmail\n      userRole: $userRole\n      challengeName: $challengeName\n    ) {\n        team {\n          teamName\n          challengeToTeams {\n            challenge {\n              challengeName\n            }\n          }\n        }\n        userRole\n        user {\n          email\n        }\n    }\n  }\n": types.CreateUserToTeamDocument,
     "\n  mutation CreateChallengeToTeam(\n    $teamId: ID!\n    $challengeId: ID!\n    $startsAt: DateTime!\n    $endAt: DateTime!\n  ) {\n    createChallengeToTeam(\n      teamId: $teamId\n      challengeId: $challengeId\n      startsAt: $startsAt\n      endAt: $endAt\n    ) {\n      id\n      challenge {\n        challengeName\n      }\n      startsAt\n      endAt\n      team {\n        teamName\n      }\n    }\n  }\n": types.CreateChallengeToTeamDocument,
@@ -21,7 +24,6 @@ const documents = {
     "\n  query GetChallengesLight {\n    challengesLight {\n      challengeName\n      id\n      level\n      category\n    }\n  }\n": types.GetChallengesLightDocument,
     "\nquery userById($id: String!) {\n  userById(id: $id) {\n    id\n    lastName\n    firstName\n    email\n    country\n    desc\n    age\n    city\n    nickname\n    score\n    hobbies\n    userToTeams {\n      userRole\n      score\n      team {\n        id\n        teamName\n        country\n        city\n        isPublic\n        img\n        challengeToTeams {\n          challenge {\n            id\n            challengeName\n            level\n            description\n            img\n            startsAt\n            endAt\n            category\n          }\n        }\n      }\n    }\n  }\n}\n": types.UserByIdDocument,
     "\n  mutation SignIn($email: String!, $password: String!) {\n    signIn(email: $email, password: $password) {\n      id\n      email\n      firstName\n      lastName\n    }\n  }\n": types.SignInDocument,
-    "\n  mutation SignUp(\n    $firstName: String!\n    $lastName: String!\n    $nickname: String!\n    $email: String!\n    $city: String!\n    $desc: String!\n    $age: Float!\n    $country: String!\n    $password: String!\n  ) {\n    signUp(\n      firstName: $firstName\n      lastName: $lastName\n      nickname: $nickname\n      email: $email\n      city: $city\n      desc: $desc\n      age: $age\n      country: $country\n      password: $password\n    ) {\n      id\n      email\n      firstName\n      lastName\n      nickname\n      score\n      disabled\n      city\n      desc\n      age\n      country\n    }\n  }\n": types.SignUpDocument,
 };
 
 /**
@@ -38,6 +40,18 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    mutation SignUp($firstName: String!, $lastName: String!, $nickname: String!, $email: String!, $city: String!, $country: String!, $password: String!, $age: Float!, $desc: String!) {\n        signUp(firstName: $firstName, lastName: $lastName, nickname: $nickname, email: $email, city: $city, country: $country, password: $password, age: $age, desc: $desc) {\n            id\n            email\n            firstName\n            lastName\n            nickname\n            score\n            disabled\n            city\n            country\n            img\n            hobbies\n            isVerified\n            desc\n            age\n        }\n    }\n"): (typeof documents)["\n    mutation SignUp($firstName: String!, $lastName: String!, $nickname: String!, $email: String!, $city: String!, $country: String!, $password: String!, $age: Float!, $desc: String!) {\n        signUp(firstName: $firstName, lastName: $lastName, nickname: $nickname, email: $email, city: $city, country: $country, password: $password, age: $age, desc: $desc) {\n            id\n            email\n            firstName\n            lastName\n            nickname\n            score\n            disabled\n            city\n            country\n            img\n            hobbies\n            isVerified\n            desc\n            age\n        }\n    }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    mutation ChangePassword($userId: String!, $newPassword: String!) {\n    changePassword(userId: $userId, newPassword: $newPassword) {\n        id\n        email\n        firstName\n        lastName\n        nickname\n        score\n        disabled\n        city\n        country\n        isVerified\n    }\n    }\n"): (typeof documents)["\n    mutation ChangePassword($userId: String!, $newPassword: String!) {\n    changePassword(userId: $userId, newPassword: $newPassword) {\n        id\n        email\n        firstName\n        lastName\n        nickname\n        score\n        disabled\n        city\n        country\n        isVerified\n    }\n    }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    mutation AskChangePassword($email: String!) {\n        askChangePassword(email: $email)\n    }\n"): (typeof documents)["\n    mutation AskChangePassword($email: String!) {\n        askChangePassword(email: $email)\n    }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -70,10 +84,6 @@ export function graphql(source: "\nquery userById($id: String!) {\n  userById(id
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation SignIn($email: String!, $password: String!) {\n    signIn(email: $email, password: $password) {\n      id\n      email\n      firstName\n      lastName\n    }\n  }\n"): (typeof documents)["\n  mutation SignIn($email: String!, $password: String!) {\n    signIn(email: $email, password: $password) {\n      id\n      email\n      firstName\n      lastName\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  mutation SignUp(\n    $firstName: String!\n    $lastName: String!\n    $nickname: String!\n    $email: String!\n    $city: String!\n    $desc: String!\n    $age: Float!\n    $country: String!\n    $password: String!\n  ) {\n    signUp(\n      firstName: $firstName\n      lastName: $lastName\n      nickname: $nickname\n      email: $email\n      city: $city\n      desc: $desc\n      age: $age\n      country: $country\n      password: $password\n    ) {\n      id\n      email\n      firstName\n      lastName\n      nickname\n      score\n      disabled\n      city\n      desc\n      age\n      country\n    }\n  }\n"): (typeof documents)["\n  mutation SignUp(\n    $firstName: String!\n    $lastName: String!\n    $nickname: String!\n    $email: String!\n    $city: String!\n    $desc: String!\n    $age: Float!\n    $country: String!\n    $password: String!\n  ) {\n    signUp(\n      firstName: $firstName\n      lastName: $lastName\n      nickname: $nickname\n      email: $email\n      city: $city\n      desc: $desc\n      age: $age\n      country: $country\n      password: $password\n    ) {\n      id\n      email\n      firstName\n      lastName\n      nickname\n      score\n      disabled\n      city\n      desc\n      age\n      country\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
