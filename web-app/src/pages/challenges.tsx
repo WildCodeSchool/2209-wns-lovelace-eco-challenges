@@ -24,20 +24,19 @@ const Challenges = (props: Props): JSX.Element => {
   const challenge = challenges[0];
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex items-center flex-col">
       <div className="w-11/12">
-        <h2>{t("challenges.title")}</h2>
+        <h2 className="challenges-title">{t("challenges.title")}</h2>
         <div className="custom-underline bg-primary"></div>
-        <p className="text-center xl:text-start">{t("challenges.subtitle")}</p>
-        <p className="text-center xl:text-start">
+        <p className="py-5 text-center xl:text-start">{t("challenges.subtitle")}</p>
+        <p className="py-5 text-center xl:text-start">
           {t("challenges.proposal")}
           <span className="text-blue-600">{t("challenges.seemore")}</span>
         </p>
       </div>
-      <div className="default-width m-7 text-center xl:text-start">
-        <input className="search" type="text" placeholder="TODO..." />
+      <div className="challenges-list">
+        <List src={challenges} />
       </div>
-      <List src={challenges} />
       <div className="flex-center-center flex-col m-7">
         <ButtonExpend
           name={t("challenges.morechallenges")}

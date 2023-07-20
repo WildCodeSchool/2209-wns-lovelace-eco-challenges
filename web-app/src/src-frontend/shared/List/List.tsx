@@ -11,7 +11,7 @@ const List = (props: Props) => {
   return (
     <>
       {src.map((element, index) => (
-        <div key={index}>
+        <div className="m-5" key={index}>
           <ShowChallenge
             img={element.img || "https://picsum.photos/400/250"}
             challengeName={element.challengeName}
