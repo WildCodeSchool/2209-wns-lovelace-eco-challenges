@@ -97,6 +97,7 @@ export default class Challenge {
     type: 'enum',
     enum: Level,
   })
+  @Index()
   @Field(_type => Level)
   level:Level;  
 
@@ -109,6 +110,7 @@ export default class Challenge {
     enum: Category,
     array: true,
   })
+  @Index()
   @Field(_type => [Category])
   category: Category[];
 

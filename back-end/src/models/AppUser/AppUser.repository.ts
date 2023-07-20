@@ -127,7 +127,7 @@ export default class AppUserRepository extends AppUserDb {
       email: email,
       city: "",
       desc: "",
-      age: undefined,
+      age: 0,
       country: "",
       hashedPassword: "",
       isVerified: false

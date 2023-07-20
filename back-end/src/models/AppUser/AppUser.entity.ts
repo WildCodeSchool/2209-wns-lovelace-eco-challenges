@@ -97,7 +97,7 @@ export default class AppUser {
   @Column()
   city: string;
 
-  @Column("text")
+  @Column("varchar")
   @Field()
   desc: string;
 

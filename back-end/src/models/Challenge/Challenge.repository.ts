@@ -164,7 +164,7 @@ export default class ChallengeRepository extends ChallengeDb {
   }
 
   static async deleteChallenge(id: string): Promise<Challenge> {
-    const existingChallenge = await this.findChallengeById(id);
+    const existingChallenge = await this.repository.findOneBy({ id }); 
     if (!existingChallenge) {
       throw Error("No existing Challenge matching ID.");
     }

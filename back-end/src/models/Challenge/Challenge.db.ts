@@ -9,10 +9,6 @@ export default class ChallengeDb {
     this.repository = await getRepository(Challenge);
   }
 
-  protected static findChallengeById(challengeId: string) {
-    return this.repository.findOneBy({ id: challengeId });
-  }
-
   static async clearRepository(): Promise<void> {
     await this.repository.delete({});
   }

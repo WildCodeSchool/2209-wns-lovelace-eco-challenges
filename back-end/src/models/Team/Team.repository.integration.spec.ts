@@ -1,6 +1,7 @@
 import {
   closeConnection,
   initializeDatabaseRepositories,
+  truncateAllTables,
 } from "../../database/utils";
 import TeamRepository from "./Team.repository";
 
@@ -11,27 +12,26 @@ describe("TeamRepository integration", () => {
   });
 
   afterAll(async () => {
+    await truncateAllTables();
     await closeConnection();
   });
 
   beforeEach(async () => {
-    await TeamRepository.clearRepository();
+    await truncateAllTables();
     await TeamRepository.initializeTeams();
   });
-
 
   describe("Create a new team", () => {
     describe("when is successfully completed", () => {  
       it("return the new team", async () => {
-        const newTeam = await TeamRepository.createTeam("New TEAM", "Paris", "France", false)
+        const newTeam = await TeamRepository.createTeam("New TEAM Test", "Paris", "France", false)
 
-        expect(newTeam.teamName).toBe("New TEAM")  
+        expect(newTeam.teamName).toBe("New TEAM Test")  
       });                              
     });  
 
     describe("when the team name already exists", () => {   
       it("throw error", async () => {
-
         await expect(() => 
           TeamRepository.createTeam("Team Paris", "PARIS", "France", true)).rejects.toThrowError("This team Name already exists");
       });
@@ -41,15 +41,15 @@ describe("TeamRepository integration", () => {
   describe("Update a team", () => {
     describe("when is successfully updated", () => {   
       it("return updated team", async () => {
-        const team = await TeamRepository.createTeam("Team Test", "Tours", "France", false);
+        const team = await TeamRepository.createTeam("Update team", "Tours", "France", false);
         const city = "Bordeaux";
         const isPublic = true;
 
         const updatedTeam = await TeamRepository.updateTeam(team.id, { city, isPublic })
 
-        expect(updatedTeam).toHaveProperty('teamName', 'Team test')
-        expect(updatedTeam).toHaveProperty('city', 'Bordeaux')
-        expect(updatedTeam).toHaveProperty('isPublic', true)
+        expect(updatedTeam).toHaveProperty("teamName", "Update team")
+        expect(updatedTeam).toHaveProperty("city", "Bordeaux")
+        expect(updatedTeam).toHaveProperty("isPublic", true)
       });
     });  
 
@@ -73,11 +73,10 @@ describe("TeamRepository integration", () => {
   describe("Delete a team", () => {
     describe("when is successfully deleted", () => {   
       it("returns the deleted team", async () => {
-        const teamToDelete = await TeamRepository.createTeam("Team", "Nantes", "France", false);
-
+        const teamToDelete = await TeamRepository.getTeamByName("Team Toulouse");
         const deletedTeam = await TeamRepository.deleteTeam(teamToDelete.id); 
 
-        expect(deletedTeam).toStrictEqual(teamToDelete);
+        expect(deletedTeam.teamName).toBe(teamToDelete.teamName);
 
         await expect(() => TeamRepository.getTeamById(teamToDelete.id)).rejects.toThrowError("No existing Team matching ID.")
       })

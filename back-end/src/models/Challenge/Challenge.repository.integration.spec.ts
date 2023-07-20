@@ -1,6 +1,7 @@
 import {
   closeConnection,
   initializeDatabaseRepositories,
+  truncateAllTables,
 } from "../../database/utils";
 import { Category, Level } from "./Challenge.entity";
 import ChallengeRepository from "./Challenge.repository";
@@ -12,11 +13,12 @@ describe("ChallengeRepository integration", () => {
   });
 
   afterAll(async () => {
+    await truncateAllTables();
     await closeConnection();
   });
 
   beforeEach(async () => {
-    await ChallengeRepository.clearRepository();
+    await truncateAllTables();
     await ChallengeRepository.initializeChallenges();
   })
 
@@ -112,7 +114,6 @@ describe("ChallengeRepository integration", () => {
 
     describe("when the challenge name already exists", () => {   
       it("throw error", async () => {
-
         await expect(() => 
           ChallengeRepository.createChallenge("COVOITURAGE", Level.MODERATE,  "the doublon challenge for test", [Category.CARPOOLING, Category.LESS])).rejects.toBeTruthy();
       });
@@ -146,7 +147,7 @@ describe("ChallengeRepository integration", () => {
       }); 
 
       it("throw error doublon challengeName", async () => {
-        const challenge = await ChallengeRepository.createChallenge("Challenge", Level.CHALLENGING, "Challenge for test", [Category.LESS]);
+        const challenge = await ChallengeRepository.getChallengeByName("Nettoyons nos plages");
         const challengeName = "COVOITURAGE";
 
         await expect(() => ChallengeRepository.updateChallengePremium(challenge.id, { challengeName })).rejects.toBeTruthy();

@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType, registerEnumType } from "type-graphql";
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import UserToTeam from "../UserToTeam/UserToTeam.entity";
 
 
@@ -45,7 +45,8 @@ export default class Invitation {
   @Field()
   createdAt: Date; 
 
-  @OneToMany(() => UserToTeam, (userToTeam) => userToTeam.invitation)
+  @OneToOne(() => UserToTeam, (userToTeam) => userToTeam.invitation, {  
+    onDelete: "CASCADE", onUpdate: "CASCADE" })
   @Field(() => [UserToTeam])
   userToTeams: UserToTeam[]; 
 }

@@ -137,7 +137,7 @@ export default class TeamRepository extends TeamDb {
   }
 
   static async deleteTeam(id: string): Promise<Team> {
-    const existingTeam = await this.findTeamById(id);
+    const existingTeam = await this.repository.findOneBy({ id });
     if (!existingTeam) {
       throw Error("No existing Team matching ID.");
     }

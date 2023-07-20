@@ -10,10 +10,6 @@ export default class TeamDb {
     this.repository = await getRepository(Team);
   }
 
-  protected static findTeamById(teamId: string) {
-    return this.repository.findOneBy({ id: teamId });
-  }
-
   static async clearRepository(): Promise<void> {
     await this.repository.delete({});
   }

@@ -58,10 +58,12 @@ export default class Team {
   teamName: string;
 
   @Column("varchar", { length: 100 })
+  @Index()
   @Field()
   city: string; 
 
   @Column("varchar", { length: 100 })
+  @Index()
   @Field()
   country: string; 
 

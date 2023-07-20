@@ -53,7 +53,7 @@ export const teamBarcelone = new Team("Team Barcelone","Barcelone","Espagne",tru
 export const userTeamOne = new UserToTeam(teamParis, userOne, UserRole.ADMIN, undefined)
 export const userTeamTwo = new UserToTeam(teamParis, userTwo, UserRole.PLAYER, undefined)
 export const userTeamThree = new UserToTeam(teamBarcelone, userThree, UserRole.ADMIN, undefined)
-export const userTeamFour = new UserToTeam(teamTours, userOne, UserRole.PLAYER, undefined)
+export const userTeamFour = new UserToTeam(teamTours, userFour, UserRole.PLAYER, undefined)
 
 //CHALLENGE_TO_TEAM
 export const challengeTeamOne = new ChallengeToTeam(teamParis, challengeTwo, new Date("2023-03-11T09:00:00+0000"), new Date("2024-03-11T09:00:00+0000"));

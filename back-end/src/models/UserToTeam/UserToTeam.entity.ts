@@ -3,7 +3,9 @@ import {
   Column,
   Entity,
   Index,
+  JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   Unique,
 } from "typeorm";
@@ -64,7 +66,13 @@ export default class UserToTeam {
   @Field()
   disabled: boolean; 
 
-  @ManyToOne(() => Invitation, (invitation) => invitation.userToTeams, { eager: true, onDelete: "CASCADE", onUpdate: "CASCADE" })
+  // @ManyToOne(() => Invitation, (invitation) => invitation.userToTeams, { eager: true, onDelete: "CASCADE", onUpdate: "CASCADE" })
+  // @Field(() => Invitation, { nullable: true })
+  // invitation: Invitation;
+
+  @OneToOne(() => Invitation, (invitation) => invitation.userToTeams, { eager: true,  
+    onDelete: "CASCADE", onUpdate: "CASCADE" })
   @Field(() => Invitation, { nullable: true })
+  @JoinColumn()
   invitation: Invitation;
 }
