@@ -5,7 +5,7 @@ import { type SSRConfig } from "next-i18next";
 import React, { useState } from 'react'
 import Button from '@shared/Buttons/Button';
 import { useMutation } from '@apollo/client';
-import { ASK_CHANGE_PASSWORD } from '@src/api/mutation';
+import { ASK_CHANGE_PASSWORD } from '@src/api/mutations';
 import { toast } from 'react-toastify';
 
 type Props = {

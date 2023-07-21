@@ -6,7 +6,7 @@ import { type SSRConfig } from "next-i18next";
 import React, { useState } from 'react'
 import ArrowLinkTo from '@assets/logos/ArrowLinkTo';
 import { useMutation } from '@apollo/client';
-import { CHANGE_PASSWORD } from '@src/api/mutation';
+import { CHANGE_PASSWORD } from '@src/api/mutations';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 

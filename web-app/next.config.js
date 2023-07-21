@@ -5,19 +5,20 @@ const nextConfig = {
   i18n,
   reactStrictMode: true,
   serverRuntimeConfig: {
-    apiUrl: "http://back-end:4000/api"
+    apiUrl: "http://back-end:4000/graphql"
   },
   publicRuntimeConfig: {
-    apiUrl:
-      process.env.NODE_ENV === "production"
-        ? "http://localhost:8000/api"
-        : "http://localhost:4000"
+    apiUrl:"/graphql"
   },
   async rewrites() {
     return [
       {
         source: '/uploader/:path*',
         destination: 'http://uploader:5000/uploader/:path*',
+      },
+      {
+        source: "/graphql/:path*",
+        destination: "http://back-end:4000/graphql/:path*",
       },
     ]
   },

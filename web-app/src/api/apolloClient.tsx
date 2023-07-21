@@ -8,7 +8,13 @@ const isServerSide = typeof window === "undefined";
 export const client = new ApolloClient({
   ssrMode: isServerSide,
   link: createHttpLink({
-    uri: isServerSide ? serverRuntimeConfig.apiUrl : publicRuntimeConfig.apiUrl
+    uri: isServerSide ? serverRuntimeConfig.apiUrl : publicRuntimeConfig.apiUrl,
   }),
+  /* ...(isServerSide && {
+    headers: {
+      cookie: new URLSearchParams(cookies).toString(),
+      "User-Agent": `Next.js for ${userAgent}`,
+    },
+  }), */  
   cache: new InMemoryCache(),
 });
