@@ -5,6 +5,11 @@ import Login from "@assets/logos/Login";
 import Groups from "@assets/logos/Groups";
 import Profile from "@assets/logos/Profile";
 import Hands from "@assets/logos/Hands";
+import { useQuery } from "@apollo/client";
+import { MyProfileQuery } from "@gql/graphql";
+import { GET_PROFILE } from "@src/api/queries";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 type Props = {
   open: boolean;
@@ -16,6 +21,15 @@ const ResponsiveNav = (props: Props) => {
 
   const { t } = useTranslation("page");
 
+  const { data, refetch } = useQuery<MyProfileQuery>(GET_PROFILE)
+
+  const router = useRouter()
+
+  
+  useEffect(() => {
+    refetch()
+  }, [refetch, router])
+  
   if (!open) {
     return null;
   }
@@ -47,36 +61,44 @@ const ResponsiveNav = (props: Props) => {
           </i>
           {t("menu.challenges")}
         </Link>
-        <Link
-          className="py-5 w-full flex items-baseline"
-          href="/signin"
-          onClick={() => isClicked()}
-        >
-          <i className="mr-3">
-            <Login width="30px" height="30px" fill="white" />
-          </i>
-          {t("menu.login")}
-        </Link>
-        <Link
-          className="py-5 w-full flex items-baseline"
-          href="/signup"
-          onClick={() => isClicked()}
-        >
-          <i className="mr-3">
-            <Hands width="30px" height="30px" fill="white" />
-          </i>
-          {t("menu.signin")}
-        </Link>
-        <Link
+        
+        {
+          data?.myProfile ? <>
+          <Link
           className="py-5 w-full flex items-baseline"
           href="/profile"
           onClick={() => isClicked()}
         >
-          <i className="mr-3">
-            <Profile width="30px" height="30px" fill="white" />
-          </i>
-          {t("menu.profile")}
-        </Link>
+            <i className="mr-3">
+              <Profile width="30px" height="30px" fill="white" />
+            </i>
+            {data.myProfile.nickname}
+          </Link>
+        </> : 
+        <> 
+          <Link
+            className="py-5 w-full flex items-baseline"
+            href="/signin"
+            onClick={() => isClicked()}
+          >
+            <i className="mr-3">
+              <Login width="30px" height="30px" fill="white" />
+            </i>
+            {t("menu.login")}
+          </Link>
+          <Link
+            className="py-5 w-full flex items-baseline"
+            href="/signup"
+            onClick={() => isClicked()}
+          >
+            <i className="mr-3">
+              <Hands width="30px" height="30px" fill="white" />
+            </i>
+            {t("menu.signin")}
+          </Link>
+        </>
+        }
+        
       </ul>
     </nav>
   );

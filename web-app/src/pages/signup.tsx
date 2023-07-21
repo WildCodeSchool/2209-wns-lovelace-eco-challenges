@@ -15,7 +15,7 @@ import { SIGN_IN_PATH } from "@constants/paths";
 
 import { type NextI18NContext } from "@customTypes/types";
 import { type SSRConfig } from "next-i18next";
-import { SIGN_UP } from "@src/api/mutation";
+import { SIGN_UP } from "@src/api/mutations";
 
 
 type Props = {
