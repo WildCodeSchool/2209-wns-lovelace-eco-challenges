@@ -18,7 +18,6 @@ type FormTeamProps = {
 
 const FormTeam =  (props: FormTeamProps) => {
   const [errorTeam, setErrorTeam] = useState<GraphQLError | null>(null);
-  const [successTeam, setSuccessTeam] = useState(false);
   const [teamName, setTeamName] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
@@ -35,7 +34,6 @@ const FormTeam =  (props: FormTeamProps) => {
   };
 
   const submitNewTeam = async () => {
-    setSuccessTeam(false);
     setErrorTeam(null);
 
     let formData = new FormData(); 
@@ -69,7 +67,6 @@ const FormTeam =  (props: FormTeamProps) => {
           userRole: UserRole.Admin,
         },
       });
-      setSuccessTeam(true);
       props.currentStep === props.steps.length
       ? props.setComplete(true)
       : props.setCurrentStep((prev) => prev + 1);

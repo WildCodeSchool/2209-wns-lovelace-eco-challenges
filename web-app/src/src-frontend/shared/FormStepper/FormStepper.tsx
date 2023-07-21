@@ -38,6 +38,7 @@ const FormStepper = () => {
       default: return null
     }
   }
+
   return (
     <>
       <div className="flex item-center sm:max-w-[600px] w-full pt-10">
@@ -48,7 +49,7 @@ const FormStepper = () => {
               (i + 1 < currentStep || complete) && "complete"
             } `}
           >
-            <div className="step">
+            <div className="step" data-testid="stepper">
               {i + 1 < currentStep || complete ? <Check width="14px" height="14px" fill={WHITE} />: i + 1}
             </div>
           </div>
