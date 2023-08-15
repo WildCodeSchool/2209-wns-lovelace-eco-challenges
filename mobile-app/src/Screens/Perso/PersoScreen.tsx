@@ -1,50 +1,62 @@
-import React from 'react';
+import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { gql, useQuery } from "@apollo/client";
-import { UserByIdQuery, UserByIdQueryVariables } from "../../gql/graphql";
+import { UserByIdQuery, UserByIdQueryVariables } from '../../../gql/graphql';
+
 
 export const GET_USERSBYID = gql`
-query userById($Id: String!) {
-  userById(id: $Id) {
+query UserById($id: String!) {
+  userById(id: $id) {
     id
-    lastName
-    firstName
     email
-    country
-    city
+    firstName
+    lastName
     nickname
     score
+    disabled
+    city
+    desc
+    age
+    country
+    img
+    hobbies
+    isVerified
     userToTeams {
-      userRole
-      score
+      id
       team {
         id
         teamName
-        country
         city
-        isPublic
+        country
         img
-        challenges {
+        isPublic
+        challengeToTeams {
           id
-          challengeName
-          level
-          description
-          img
+          challenge {
+            challengeName
+            level
+            description
+            category
+            img
+            id
+          }
           startsAt
           endAt
-          category
         }
       }
+      userRole
+      score
+      disabled
     }
   }
 }
 `
 
 const PersoScreen = () => {
-  const Id = "c28f0b3d-8d4e-4116-b881-d17d4e472a82"
+  const id = "4f76b71f-ae2b-4888-956b-d479069de7c1"
   const { data } = useQuery<UserByIdQuery, UserByIdQueryVariables
   >(GET_USERSBYID, {
-    variables: { Id },
+    variables: { id },
     fetchPolicy: "cache-and-network",
   });
   const users = data?.userById;
@@ -57,7 +69,7 @@ const PersoScreen = () => {
             source={require('../../../assets/icons/visagehomme.png')}
           />
         </View>
-        <Text style={styles.name}>{users?.firstName} {users?.lastName}</Text>
+        <Text style={styles.name}>{users?.firstName} {users?.lastName} </Text>
         <TouchableOpacity style={styles.editProfileButton}>
           <Text style={styles.editProfileButtonText}>Modifier le profil</Text>
         </TouchableOpacity>
