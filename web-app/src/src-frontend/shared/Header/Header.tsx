@@ -22,6 +22,7 @@ const Header = () => {
 
   useEffect(() => {
     disableScroll(open);
+
   }, [open]);
 
   return (

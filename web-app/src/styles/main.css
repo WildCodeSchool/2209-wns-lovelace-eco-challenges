@@ -3,10 +3,22 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Kanit:wght@500&family=Lato:wght@300&display=swap");
-@import './globals.css';
-@import './normalize.css';
-@import './loader.css';
-@import './stepper.css';
-@import './index.css';
-@import './header.css';
-@import './footer.css';
+@import "./globals.css";
+@import "./normalize.css";
+@import "./loader.css";
+@import "./stepper.css";
+@import "./index.css";
+@import "./header.css";
+@import "./footer.css";
+@import "./challenges.css";
+
+@font-face {
+  font-family: Lato;
+  src: url("/fonts/Lato-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1, h2, h3, p, li {
+  font-family: Lato;
+}

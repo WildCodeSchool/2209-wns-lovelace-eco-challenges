@@ -48,16 +48,13 @@ const Profil = (props: Props) => {
           </div>
           <div className="text-center">
             <h1 className="text-4xl text-primary">
-              {userById.firstName} {userById.lastName}
+              {userById.firstName} {userById.lastName}, {userById.age}
             </h1>
             <p className="text-2xl text-primary">
               {userById.city}, {userById.country}
             </p>
             <p className="w-1/2 m-auto">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry&aposs standard dummy
-              text ever since the 1500s, when an unknown printer took a galley
-              of type and scrambled it to make a type specimen book.{" "}
+              {userById.desc}
             </p>
             <div className="flex items-center justify-center my-5">
               <Button name="Modifier le profil" type="button-primary" />

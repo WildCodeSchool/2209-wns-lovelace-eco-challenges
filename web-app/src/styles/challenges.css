@@ -1,0 +1,7 @@
+.challenges-title {
+    @apply font-bold text-center text-2xl flex justify-center items-center py-5 xl:justify-start;
+}
+
+.challenges-list {
+    @apply w-11/12 flex flex-wrap justify-center items-center md:justify-around md:items-baseline;
+}

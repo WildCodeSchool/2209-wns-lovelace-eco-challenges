@@ -11,5 +11,11 @@ export const client = new ApolloClient({
   link: createHttpLink({
     uri: isServerSide ? serverRuntimeConfig.apiUrl : publicRuntimeConfig.apiUrl, fetch
   }),
+  /* ...(isServerSide && {
+    headers: {
+      cookie: new URLSearchParams(cookies).toString(),
+      "User-Agent": `Next.js for ${userAgent}`,
+    },
+  }), */  
   cache: new InMemoryCache(),
 });
