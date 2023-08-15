@@ -1,3 +1,4 @@
+import React from "react";
 import PersoScreen from './src/Screens/Perso/PersoScreen'
 import Header from './src/Shared/components/header/Header';
 import MyChallengeScreen from './src/Screens/MyChallenge/MyChallengeScreen';
@@ -6,11 +7,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import React from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import Constants from "expo-constants";
 
 
-const GRAPHQL_API_URL = 'http://localhost:4000';
+const GRAPHQL_API_URL = Constants?.expoConfig?.extra?.GRAPHQL_API_URL;
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();

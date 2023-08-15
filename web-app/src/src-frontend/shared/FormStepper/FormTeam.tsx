@@ -18,12 +18,11 @@ type FormTeamProps = {
 
 const FormTeam =  (props: FormTeamProps) => {
   const [errorTeam, setErrorTeam] = useState<GraphQLError | null>(null);
-  const [successTeam, setSuccessTeam] = useState(false);
   const [teamName, setTeamName] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [isPublic, setIsPublic] = useState(false);
-  const [file, setFiles] = useState({ preview: "", data: "" });
+  const [file, setFile] = useState({ preview: "", data: "" });
   
   const handleImageChange = (e: any) => {
     // e.preventDefault();
@@ -31,11 +30,10 @@ const FormTeam =  (props: FormTeamProps) => {
       preview: URL.createObjectURL(e.target.files[0]),
       data: e.target.files[0],
     };
-    setFiles(image);
+    setFile(image);
   };
 
   const submitNewTeam = async () => {
-    setSuccessTeam(false);
     setErrorTeam(null);
 
     let formData = new FormData(); 
@@ -69,7 +67,6 @@ const FormTeam =  (props: FormTeamProps) => {
           userRole: UserRole.Admin,
         },
       });
-      setSuccessTeam(true);
       props.currentStep === props.steps.length
       ? props.setComplete(true)
       : props.setCurrentStep((prev) => prev + 1);
@@ -141,7 +138,7 @@ const FormTeam =  (props: FormTeamProps) => {
         />
       </label>
 
-      {file.preview && <Image src={file.preview} width={300} height={300} alt="Mon équipe" />}
+      {file.preview && <Image src={file.preview} width={300} height={300} alt="Mon équipe" data-testid="img-team"/>}
       
       <div className="flex items-center space-x-3">
         <input
