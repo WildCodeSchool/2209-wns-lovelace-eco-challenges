@@ -84,7 +84,7 @@ const FormTeam =  (props: FormTeamProps) => {
     }}
   >
     <fieldset className="flex flex-col justify-center space-y-3">
-      <legend className="font-medium text-2xl text-primary pb-5"> Je créer ma Team</legend>
+      <legend className="font-medium text-2xl text-primary pb-5"> Je crée ma Team</legend>
       <label htmlFor="teamName">Nom de ma Team *
         <input
           className="input-launch-chall"
@@ -143,6 +143,7 @@ const FormTeam =  (props: FormTeamProps) => {
       <div className="flex items-center space-x-3">
         <input
           className="w-6 h-6 my-3 accent-primary"
+          required
           type="checkbox"
           id="isPublic"
           name="isPublic"

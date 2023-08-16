@@ -48,7 +48,7 @@ const Nav = () => {
           </span>
         </Link>
         {
-          data?.myProfile ? <Link href="/profile">
+          data?.myProfile ? <Link href={`/profile/${data.myProfile.id}`}>
           <span
             className="px-2
                 text-base

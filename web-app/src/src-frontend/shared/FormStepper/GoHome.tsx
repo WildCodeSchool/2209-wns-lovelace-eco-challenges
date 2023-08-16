@@ -17,7 +17,7 @@ const GoHome = (props: GoHomeProps) => {
         <Button
           type="button-primary"
           name="Accéder à mon espace"
-          // onClickEvent={() => router.push("/profil")}
+          onClickEvent={() => router.push(`/profile/data.myProfile.id`)}
         />
       </div>
     </>

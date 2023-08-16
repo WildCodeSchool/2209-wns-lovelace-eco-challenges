@@ -18,8 +18,8 @@ const FormLaunchChallenge = (props: Props) => {
   return (
     <div className="flex flex-col items-center my-10 space-y-3 w-full">
       <LaunchChallenge width="3em" height="3em" />
-      <h1 className="font-bold text-2xl">{t("form.title")}</h1>
-      <TiltedLabel>{t("form.rules")}</TiltedLabel>
+      <h1 className="font-bold text-2xl">Lancer un challenge</h1>
+      <TiltedLabel>Règles du jeu</TiltedLabel>
       <FormStepper />
     </div>
   );

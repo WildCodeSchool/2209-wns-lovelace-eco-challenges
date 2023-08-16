@@ -66,7 +66,7 @@ const ResponsiveNav = (props: Props) => {
           data?.myProfile ? <>
           <Link
           className="py-5 w-full flex items-baseline"
-          href="/profile"
+          href={`/profile/${data.myProfile.id}`}
           onClick={() => isClicked()}
         >
             <i className="mr-3">

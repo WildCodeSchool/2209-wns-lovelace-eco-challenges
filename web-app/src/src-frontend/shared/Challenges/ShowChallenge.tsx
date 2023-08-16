@@ -12,9 +12,9 @@ const ShowChallenge = (props: Props) => {
   const { img, challengeName, description, endAt, level } = props;
 
   return (
-    <div className="flex justify-center items-center w-full h-full">
-      <div className="mx-auto w-[400px]">
-        <div className="relative w-full h-[300px]">
+    <div className="flex justify-center p-5">
+      <div className="mx-auto w-[300px]">
+        <div className="relative w-full h-[250px]">
           <Image
             src={img || "https://picsum.photos/400/250"}
             alt="image"

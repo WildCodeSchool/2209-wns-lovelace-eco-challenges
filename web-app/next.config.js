@@ -31,6 +31,8 @@ const nextConfig = {
       'www.wedemain.fr',
       'picsum.photos',
       'assets.letemps.ch',
+      'img.freepik.com',
+      'cdn.pixabay.com'
     ],
   },
 }
