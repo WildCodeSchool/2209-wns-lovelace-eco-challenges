@@ -70,6 +70,7 @@ export default class AppUserResolver {
     return AppUserRepository.getUserByEmailThrow(email);
   }
 
+  @Authorized()
   @Mutation(() => AppUser)
   updateAppUser(
     @Args() {

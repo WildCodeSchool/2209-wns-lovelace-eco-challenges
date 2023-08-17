@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from "type-graphql";
+import { Args, Authorized, Mutation, Query, Resolver } from "type-graphql";
 import ChallengeToTeam from "../../models/ChallengeToTeam/ChallengeToTeam.entity";
 import ChallengeToTeamRepository from "../../models/ChallengeToTeam/ChallengeToTeam.repository";
 import { CreateChallengeToTeamArgs } from "./ChallengeToTeam.input";
@@ -10,6 +10,7 @@ export default class ChallengeToTeamResolver {
     return ChallengeToTeamRepository.getChallengeToTeams();
   }
 
+  @Authorized()
   @Mutation(() => ChallengeToTeam)
   createChallengeToTeam(
     @Args() { 

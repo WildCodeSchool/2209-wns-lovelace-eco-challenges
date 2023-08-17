@@ -143,7 +143,6 @@ const FormTeam =  (props: FormTeamProps) => {
       <div className="flex items-center space-x-3">
         <input
           className="w-6 h-6 my-3 accent-primary"
-          required
           type="checkbox"
           id="isPublic"
           name="isPublic"
