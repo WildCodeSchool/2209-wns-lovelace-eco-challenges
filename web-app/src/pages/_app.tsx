@@ -7,12 +7,17 @@ import { client } from "@api/apolloClient";
 
 import Header from "@shared/Header/Header";
 import Footer from "@shared/Footer/Footer";
+import Head from "next/head";
 
 const App = (props: AppProps): JSX.Element => {
   const { Component, pageProps } = props;
 
   return (
     <ApolloProvider client={client}>
+      <Head>
+        <meta name="description" content="Bienvenue sur Eco Playground. Relevez le challenge !" />
+        <title>Eco Playground</title>
+      </Head>
       <Header />
       <Component {...pageProps} />
       <Footer />
