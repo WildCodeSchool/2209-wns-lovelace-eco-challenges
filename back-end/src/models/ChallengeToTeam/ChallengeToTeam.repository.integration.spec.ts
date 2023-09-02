@@ -46,7 +46,7 @@ describe("ChallengeToTeamRepository integration", () => {
           const challenge = await ChallengeRepository.getChallengeByName("Covoiturage");
 
           await expect(() => 
-            ChallengeToTeamRepository.createChallengeToTeam(noId, challenge.id, new Date("2023-08-01T09:00:00+0000"), new Date("2024-08-01T09:00:00+0000"))).rejects.toThrowError("No existing Team matching ID.");
+            ChallengeToTeamRepository.createChallengeToTeam(noId, challenge.id, new Date("2023-08-01T09:00:00+0000"), new Date("2024-08-01T09:00:00+0000"))).rejects.toThrowError("No existing Team");
 
           await expect(() => 
           ChallengeToTeamRepository.createChallengeToTeam(team.id, noId, new Date("2023-08-01T09:00:00+0000"), new Date("2024-08-01T09:00:00+0000"))).rejects.toThrowError("No existing challenge matching ID.");

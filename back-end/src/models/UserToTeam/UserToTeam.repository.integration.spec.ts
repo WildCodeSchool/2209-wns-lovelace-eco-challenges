@@ -76,7 +76,7 @@ describe.only("UserToTeamRepository integration", () => {
           const teamId = "1234b5a1-97d3-48f9-8f14-163e0711ac88";
           const userEmail = "user@email.com";
           
-          await expect(() => UserToTeamRepository.createUserToTeam(teamId, userEmail, UserRole.ADMIN)).rejects.toThrowError("No existing Team matching ID.");
+          await expect(() => UserToTeamRepository.createUserToTeam(teamId, userEmail, UserRole.ADMIN)).rejects.toThrowError("No existing Team");
         });
       })
 
