@@ -9,19 +9,14 @@ import { MyProfileQuery } from "@gql/graphql";
 import { useQuery } from "@apollo/client";
 import { GET_PROFILE } from "@src/api/queries";
 
-
 const FormStepper = () => {
-
   const steps=[1, 2, 3, 4]
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
 
   const [teamId, setTeamId] = useState("");
   const [challenge, setChallenge] = useState({ id: "", challengeName: "" });
-  const userEmail = "user4@gmail.com"; //a recup avec le contexte
   const { data } = useQuery<MyProfileQuery>(GET_PROFILE)
-
-  console.log('DATA', data)
   
   const renderForm = () => {
     if (data) {
@@ -50,7 +45,6 @@ const FormStepper = () => {
   }
 
   return (
-    
     <>
     {data ? 
       <>

@@ -59,14 +59,12 @@ const startServer = async () => {
   const { url } = await server.listen();
   await initializeDatabaseRepositories();
 
-  // if (!IS_PRODUCTION) {
-    await AppUserRepository.initializeUsers();
-    await ChallengeRepository.initializeChallenges();
-    await TeamRepository.initializeTeams();
-    await UserToTeamRepository.initializeUserToTeam();
-    await ChallengeToTeamRepository.initializeChallengeToTeam();
-    await InvitationRepository.initializeInvitation();
-  // }
+  await AppUserRepository.initializeUsers();
+  await ChallengeRepository.initializeChallenges();
+  await TeamRepository.initializeTeams();
+  await UserToTeamRepository.initializeUserToTeam();
+  await ChallengeToTeamRepository.initializeChallengeToTeam();
+  await InvitationRepository.initializeInvitation();
   
   console.log(`🚀  Server ready at ${url}`);
 };

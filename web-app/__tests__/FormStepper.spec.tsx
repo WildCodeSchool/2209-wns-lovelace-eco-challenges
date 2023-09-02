@@ -1,18 +1,45 @@
 
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MockedProvider, MockedResponse } from '@apollo/client/testing';
-import { CreateTeamMutation, CreateUserToTeamMutation, Mutation, UserRole } from '@gql/graphql';
-import { CREATE_TEAM, CREATE_USER_TO_TEAM } from '@src/api/mutations';
+import { AppUser, MyProfileQuery } from '@gql/graphql';
 import FormStepper from '@shared/FormStepper/FormStepper';
-import userEvent from '@testing-library/user-event';
+import { GET_PROFILE } from '@src/api/queries';
 
 URL.createObjectURL = jest.fn(() => 
 "https://mocked-image-url");
 
-const renderFormStepper = ( mocks: MockedResponse<Mutation>[] = []) => {
+const mockedUser : AppUser = {
+  email: "user@gmail.com",
+  age: 0,
+  city: '',
+  country: '',
+  desc: '',
+  disabled: false,
+  firstName: '',
+  id: '',
+  isVerified: false,
+  lastName: '',
+  nickname: '',
+  score: 0,
+}
+
+const userContext: MockedResponse<MyProfileQuery>[] = [
+  {
+    request: {
+      query: GET_PROFILE, 
+    },
+    result: {
+      data : {
+        myProfile : mockedUser
+      }
+    },
+  },
+];
+
+const renderFormStepper = () => {
   return render (
-    <MockedProvider mocks={mocks}>
-      <FormStepper />
+    <MockedProvider mocks={userContext}>
+      <FormStepper  />
     </MockedProvider>
   )
 }

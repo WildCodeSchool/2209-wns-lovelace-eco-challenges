@@ -2,7 +2,6 @@ import { Field, ID, ObjectType, registerEnumType } from "type-graphql";
 import {
   Column,
   Entity,
-  Index,
   JoinColumn,
   ManyToOne,
   OneToOne,
@@ -65,10 +64,6 @@ export default class UserToTeam {
   @Column("boolean", {default: false})
   @Field()
   disabled: boolean; 
-
-  // @ManyToOne(() => Invitation, (invitation) => invitation.userToTeams, { eager: true, onDelete: "CASCADE", onUpdate: "CASCADE" })
-  // @Field(() => Invitation, { nullable: true })
-  // invitation: Invitation;
 
   @OneToOne(() => Invitation, (invitation) => invitation.userToTeams, { eager: true,  
     onDelete: "CASCADE", onUpdate: "CASCADE" })

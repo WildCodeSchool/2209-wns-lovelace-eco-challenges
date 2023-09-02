@@ -13,7 +13,6 @@ type Props = {
 
 const FormLaunchChallenge = (props: Props) => {
   const { t } = useTranslation("form");
-  // const userEmail = "user4@gmail.com"; //a recup avec le contexte
 
   return (
     <div className="flex flex-col items-center my-10 space-y-3 w-full">
