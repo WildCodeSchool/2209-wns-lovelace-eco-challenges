@@ -1,7 +1,7 @@
 import { client } from "@api/apolloClient";
 import Image from "next/image";
 import { GET_USERSBYID } from "@api/queries";
-import { AppUser, Challenge } from "@gql/graphql";
+import { AppUser, Challenge, SignOutMutation } from "@gql/graphql";
 import { SSRConfig } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
