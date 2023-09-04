@@ -25,3 +25,7 @@ export const getSessionIdInCookie = (
   const parsedCookies = parse(rawCookies);
   return parsedCookies.sessionId;
 };
+
+export const deleteSessionIdInCookie = (ctx: ExpressContext) => {
+  ctx.res.clearCookie("sessionId");
+};

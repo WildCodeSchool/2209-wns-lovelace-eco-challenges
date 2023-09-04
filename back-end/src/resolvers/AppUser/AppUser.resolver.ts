@@ -2,7 +2,7 @@ import { Arg, Args, Authorized, Ctx, Mutation, Query, Resolver } from "type-grap
 import AppUser from "../../models/AppUser/AppUser.entity";
 import AppUserRepository from "../../models/AppUser/AppUser.repository";
 import { ChangePasswordArgs, SignInArgs, SignUpArgs, askChangePasswordArgs, UpdateAppUserArgs } from "./AppUser.input";
-import { setSessionIdInCookie } from "../../http-utils";
+import { deleteSessionIdInCookie, setSessionIdInCookie } from "../../http-utils";
 import { GlobalContext } from "../..";
 import { Email } from "../InputArgsForAll";
 
@@ -36,6 +36,14 @@ export default class AppUserResolver {
     );
     setSessionIdInCookie(context, session.id);
     return user;
+  }
+
+  @Authorized()
+  @Mutation(() => String)
+  async signOut(@Ctx() context:GlobalContext): Promise<string> {
+    await AppUserRepository.logout(context);
+    deleteSessionIdInCookie(context);
+    return "You've been signed out securely";
   }
 
   @Mutation(() => AppUser)

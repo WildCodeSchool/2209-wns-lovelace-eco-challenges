@@ -25,7 +25,9 @@ import InvitationRepository from "./models/Invitation/Invitation.repository";
 
 export type GlobalContext = ExpressContext & {
   user: AppUser | null;
+  sessionId: string | undefined;
 };
+
 
 const startServer = async () => {
   const server = new ApolloServer({
@@ -41,7 +43,7 @@ const startServer = async () => {
         ? null
         : await AppUserRepository.findBySessionId(sessionId);
 
-      return { res: context.res, req: context.req, user };
+      return { res: context.res, req: context.req, user, sessionId };
     },
     csrfPrevention: true,
     cache: "bounded",

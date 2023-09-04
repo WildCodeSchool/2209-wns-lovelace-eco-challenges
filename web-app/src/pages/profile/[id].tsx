@@ -11,6 +11,9 @@ import Button from "@shared/Buttons/Button";
 import LaunchChallenge from "@assets/logos/LaunchChallenge";
 import router from "next/router";
 import { WHITE } from "@src/src-frontend/constants/color";
+import { HOME_PATH } from "@src/src-frontend/constants/paths";
+import { useMutation } from "@apollo/client";
+import { SIGN_OUT } from "@src/api/mutations";
 
 type Props = {
   local: string;
@@ -30,6 +33,12 @@ const Profil = (props: Props) => {
       ...challenge
     }))
   );
+
+  const [signOut] = useMutation<SignOutMutation>(SIGN_OUT, {
+    onCompleted: async () => {
+      router.push(HOME_PATH);
+    },
+  });
 
   return (
     <div className="px-3  py-6 flex flex-col items-center space-y-6">
@@ -56,6 +65,7 @@ const Profil = (props: Props) => {
               {userById.desc}
             </p>
             <button className="text-sm">Modifier mon profil 🖊️</button>
+            <button onClick={async () => {await signOut();}}>Log out</button>
             <div className="flex flex-col items-center justify-center py-5">
               <Button
                 icon={

@@ -121,3 +121,9 @@ export const ASK_CHANGE_PASSWORD = gql`
         askChangePassword(email: $email)
     }
 `
+
+export const SIGN_OUT = gql`
+  mutation SignOut {
+    signOut
+  }
+`;

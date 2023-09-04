@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 import { gql, useQuery } from "@apollo/client";
 import { UserByIdQuery, UserByIdQueryVariables } from '../../../gql/graphql';
 
@@ -53,7 +53,7 @@ query UserById($id: String!) {
 `
 
 const PersoScreen = () => {
-  const id = "4f76b71f-ae2b-4888-956b-d479069de7c1"
+  const id = "33109060-f65d-4c83-aa43-53ca5d5d60b2"
   const { data } = useQuery<UserByIdQuery, UserByIdQueryVariables
   >(GET_USERSBYID, {
     variables: { id },
@@ -61,30 +61,29 @@ const PersoScreen = () => {
   });
   const users = data?.userById;
   return (
-    <View style={styles.container}>
-      <View style={styles.profileCard}>
-        <View style={styles.profileImageContainer}>
-          <Image
-            style={styles.img}
-            source={require('../../../assets/icons/visagehomme.png')}
-          />
+    <SafeAreaView style={styles.pageCtn}>
+      <ScrollView style={styles.container}>
+        <View style={styles.profileCard}>
+          <View style={styles.profileImageContainer}>
+            <Image
+              style={styles.img}
+              source={require('../../../assets/icons/visagehomme.png')}
+            />
+          </View>
+          <Text style={styles.name}>{users?.firstName} {users?.lastName} </Text>
+          <Text style={styles.nickname}>{users?.nickname}</Text>
+          <TouchableOpacity style={styles.editProfileButton}>
+            <Text style={styles.editProfileButtonText}>Modifier le profil</Text>
+          </TouchableOpacity>
         </View>
-        <Text style={styles.name}>{users?.firstName} {users?.lastName} </Text>
-        <TouchableOpacity style={styles.editProfileButton}>
-          <Text style={styles.editProfileButtonText}>Modifier le profil</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.infoCard}>
-        {/* Carte d'information */}
-        <View style={styles.locationContainer}>
-          <Text style={styles.info}>{users?.city}, {users?.country}</Text>
+        <View style={styles.infoCard}>
+          {/* Carte d'information */}
+          <View style={styles.locationContainer}>
+            <Text style={styles.info}>{users?.city}, {users?.country}</Text>
+          </View>
+          <Text style={styles.description}>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</Text>
         </View>
-        <Text style={styles.description}>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</Text>
-      </View>
-      <View style={styles.scoreCard}>
-        {/* Carte du score */}
-        <Text style={styles.nickname}>{users?.nickname}</Text>
-        <View style={styles.profileInfo}>
+        <View style={styles.profileCard}>
           <Text style={styles.profileInfoLabel}>Amis</Text>
           <View style={styles.friendContainer}>
             <View style={styles.friendItem}>
@@ -105,14 +104,16 @@ const PersoScreen = () => {
           <Text style={styles.scoreInfoLabel}>Score Total</Text>
           <Text style={styles.score}>{users?.score}</Text>
         </View>
-      </View>
-    </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  pageCtn: {
     flex: 1,
+  },
+  container: {
     padding: 16,
   },
   profileCard: {
@@ -181,19 +182,6 @@ const styles = StyleSheet.create({
     color: '#666666',
     marginBottom: 16,
   },
-  scoreCard: {
-    backgroundColor: '#ffffff',
-    borderRadius: 10,
-    padding: 16,
-    shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
   nickname: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -215,6 +203,15 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   scoreInfo: {
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    padding: 16,
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+    flex: 1,
     alignItems: 'center',
     marginBottom: 16,
   },
@@ -228,7 +225,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    marginLeft: 35
   },
   friendItem: {
     alignItems: 'center',
@@ -240,7 +236,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
   },
   friendName: {
-    fontSize: 14,
+    fontSize: 12,
     textAlign: 'center',
   },
 

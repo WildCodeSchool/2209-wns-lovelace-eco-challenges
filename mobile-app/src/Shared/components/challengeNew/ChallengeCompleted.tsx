@@ -10,7 +10,7 @@ const ChallengeCompleted = ({ challenge }: PropType) => {
     <View style={styles.container}>
       <View style={styles.cardContainer}>
         <View style={styles.headerContainer}>
-          <Text style={styles.challengeName}>{challenge.challengeName}</Text>
+          <Text style={styles.challengeName}>{challenge.challenge.challengeName}</Text>
           <View style={styles.badgeContainer}>
             <Text style={styles.badgeText}>Terminé</Text>
           </View>
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#888',
     marginBottom: 8,
+    marginTop: 16,
   },
   infoContainer: {
     flexDirection: 'row',

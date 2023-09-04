@@ -17,7 +17,7 @@ class  CreateTeamArgs {
 
   @Field()
   @MinLength(2, {
-    message: "Le pays doit faire au moins deux caractère de long.",
+    message: "Le pays doit faire au moins deux caractères de long.",
   })
   country: string;
 

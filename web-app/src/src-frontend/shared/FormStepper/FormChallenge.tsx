@@ -18,7 +18,6 @@ type FormChallengeProps = {
 
 const FormChallenge = (props: FormChallengeProps) => {
   const [errorChallenge, setErrorChallenge] = useState<GraphQLError | null>(null);
-  const [successChallenge, setSuccessChallenge] = useState(false);
 
   const [startsAt, setStartsAt] = useState<Date | null>(null);
   const [endAt, setEndAt] = useState<Date | null>(null);
@@ -29,7 +28,6 @@ const FormChallenge = (props: FormChallengeProps) => {
   };
 
   const submitChallenge = async () => {
-    setSuccessChallenge(false);
     setErrorChallenge(null);
     try {
       await client.mutate({
@@ -41,7 +39,6 @@ const FormChallenge = (props: FormChallengeProps) => {
           endAt: endAt?.toDateString(),
         },
       });
-      setSuccessChallenge(true);
       props.currentStep === props.steps.length
       ? props.setComplete(true)
       : props.setCurrentStep((prev: number) => prev + 1);

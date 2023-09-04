@@ -11,4 +11,8 @@ export default class SessionRepository extends SessionDb {
   static findById(id: string): Promise<Session | null> {
     return this.repository.findOneBy({ id });
   }
+
+  static async deleteSession(id: string): Promise<void> {
+    await this.repository.delete({ id });
+  }
 }

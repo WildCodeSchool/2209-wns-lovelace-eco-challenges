@@ -17,7 +17,7 @@ const Nav = () => {
     refetch()
   }, [refetch, router])
   
-  return (
+    return (
     <nav
       className="text-white
     hidden
