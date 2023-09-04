@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from "type-graphql";
+import { Args, Authorized, Mutation, Query, Resolver } from "type-graphql";
 import UserToTeam from "../../models/UserToTeam/UserToTeam.entity";
 import UserToTeamRepository from "../../models/UserToTeam/UserToTeam.repository";
 import { CreateUserToTeamArgs } from "./UserToTeam.input";
@@ -10,6 +10,7 @@ export default class UserToTeamResolver {
     return UserToTeamRepository.getUserToTeams();
   }
 
+  @Authorized()
   @Mutation(() => UserToTeam)
   createUserToTeam(
     @Args() { 

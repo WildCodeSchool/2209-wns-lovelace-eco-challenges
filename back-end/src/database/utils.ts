@@ -22,7 +22,7 @@ async function getDatabase() {
   if (!initialized) {
     await dataSource.initialize();
     initialized = true;
-    console.log("Successfully connected to database.");
+    //console.log("Successfully connected to database.");
   }
   return dataSource;
 }

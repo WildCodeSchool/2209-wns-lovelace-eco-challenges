@@ -53,7 +53,7 @@ query UserById($id: String!) {
 `
 
 const MyTeamScreen = () => {
-  const id = "4f76b71f-ae2b-4888-956b-d479069de7c1"
+  const id = "33109060-f65d-4c83-aa43-53ca5d5d60b2"
   const { data } = useQuery<UserByIdQuery, UserByIdQueryVariables
   >(GET_USERSBYID, {
     variables: { id },

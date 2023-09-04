@@ -10,7 +10,7 @@ const ChallengeCard = ({ challenge, userToTeams }: PropType) => {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>{challenge.challengeName}</Text>
+        <Text style={styles.title}>{challenge.challenge.challengeName}</Text>
         <View style={styles.teamContainer}>
           <Image style={styles.teamIcon} />
           <Text style={styles.teamName}>Paris</Text>
@@ -22,13 +22,13 @@ const ChallengeCard = ({ challenge, userToTeams }: PropType) => {
           <Text style={styles.value}>18 octobre 2023</Text>
         </View>
         <View style={styles.scoreContainer}>
-          <Text style={styles.label}>Ton score est: {userToTeams.score}</Text>
-          <Text style={styles.value}>{challenge.score}</Text>
+          <Text style={styles.label}>Ton score est: {userToTeams[0].score}</Text>
+          <Text style={styles.value}>{challenge.challenge.score}</Text>
         </View>
       </View>
       <View style={styles.themeContainer}>
         <Text style={styles.label}>Thème du challenge:</Text>
-        <Text style={styles.theme}>{challenge?.description}</Text>
+        <Text style={styles.theme}>{challenge.challenge.description}</Text>
       </View>
     </View>
   );
@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
   theme: {
     fontSize: 16,
     color: '#444',
+    marginTop: 8,
   },
 });
 

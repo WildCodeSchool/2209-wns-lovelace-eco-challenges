@@ -104,6 +104,8 @@ export enum Level {
 export type Mutation = {
   __typename?: 'Mutation';
   acceptInvitation: Invitation;
+  askChangePassword: Scalars['String'];
+  changePassword: AppUser;
   createChallenge: Challenge;
   createChallengeToTeam: ChallengeToTeam;
   createTeam: Team;
@@ -122,6 +124,17 @@ export type Mutation = {
 
 export type MutationAcceptInvitationArgs = {
   id: Scalars['String'];
+};
+
+
+export type MutationAskChangePasswordArgs = {
+  email: Scalars['String'];
+};
+
+
+export type MutationChangePasswordArgs = {
+  newPassword: Scalars['String'];
+  userId: Scalars['String'];
 };
 
 

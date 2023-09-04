@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import Ecology from "@assets/logos/ecology.png";
+import Earth from "@assets/logos/earth.png";
 
 import Nav from "@shared/Nav/Nav";
 import ResponsiveNav from "@shared/Nav/ResponsiveNav";
@@ -31,7 +31,7 @@ const Header = () => {
         <div className="flex" onClick={isClicked}>
           <div className="w-10 mr-4">
             <Image 
-              src={Ecology}
+              src={Earth}
               alt="logo eco playground"
             />
           </div>
@@ -39,7 +39,7 @@ const Header = () => {
         </div>
       </Link>
       <div
-        className="w-10 flex flex-col justify-around md:hidden"
+        className="w-8 h-8 flex flex-col justify-around md:hidden"
         onClick={() => setOpen(!open)}
       >
         <div className=" border-2 border-white"></div>

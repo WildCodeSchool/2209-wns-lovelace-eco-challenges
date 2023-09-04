@@ -17,7 +17,7 @@ const Nav = () => {
     refetch()
   }, [refetch, router])
   
-  return (
+    return (
     <nav
       className="text-white
     hidden
@@ -48,7 +48,7 @@ const Nav = () => {
           </span>
         </Link>
         {
-          data?.myProfile ? <Link href="/profile">
+          data?.myProfile ? <Link href={`/profile/${data.myProfile.id}`}>
           <span
             className="px-2
                 text-base

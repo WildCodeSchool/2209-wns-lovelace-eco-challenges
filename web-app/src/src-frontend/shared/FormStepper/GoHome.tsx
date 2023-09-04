@@ -5,6 +5,7 @@ import React from 'react'
 type GoHomeProps = {
   teamName?: string; 
   challengeName?: string; 
+  userId: string; 
 };
 
 const GoHome = (props: GoHomeProps) => {
@@ -17,7 +18,7 @@ const GoHome = (props: GoHomeProps) => {
         <Button
           type="button-primary"
           name="Accéder à mon espace"
-          // onClickEvent={() => router.push("/profil")}
+          onClickEvent={() => router.push(`/profile/${props.userId}`)}
         />
       </div>
     </>

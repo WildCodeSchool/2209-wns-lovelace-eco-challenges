@@ -56,7 +56,7 @@ query UserById($id: String!) {
 `
 
 export default function MyChallenge() {
-  const id = "4f76b71f-ae2b-4888-956b-d479069de7c1"
+  const id = "33109060-f65d-4c83-aa43-53ca5d5d60b2"
   const { data } = useQuery<UserByIdQuery, UserByIdQueryVariables
   >(GET_USERSBYID, {
     variables: { id },
@@ -80,12 +80,12 @@ export default function MyChallenge() {
         </View>
         <View style={styles.challengeCard}>
           {challenges && challenges.length > 0 && challenges.map((challenge) => (
-            <>
+            <View key={challenge?.id} >
               <ChallengeCard
                 userToTeams={userToTeams}
                 challenge={challenge}
                 key={challenge?.id} />
-            </>
+            </View>
           ))}
         </View>
         <View style={styles.titleContainer}>
@@ -94,10 +94,12 @@ export default function MyChallenge() {
         </View>
         <View>
           {challenges?.map((challenge) => (
-            <ChallengeCompleted
-              key={challenge?.id}
-              challenge={challenge}
-            />
+            <View key={challenge?.id} >
+              <ChallengeCompleted
+                key={challenge?.id}
+                challenge={challenge}
+              />
+            </View>
           ))}
         </View>
       </ScrollView>

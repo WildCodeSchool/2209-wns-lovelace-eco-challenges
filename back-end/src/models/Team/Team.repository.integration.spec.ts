@@ -78,7 +78,7 @@ describe("TeamRepository integration", () => {
 
         expect(deletedTeam.teamName).toBe(teamToDelete.teamName);
 
-        await expect(() => TeamRepository.getTeamById(teamToDelete.id)).rejects.toThrowError("No existing Team matching ID.")
+        await expect(() => TeamRepository.getTeamById(teamToDelete.id)).rejects.toThrowError("No existing Team")
       })
     });
 

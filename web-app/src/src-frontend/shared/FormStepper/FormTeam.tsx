@@ -84,7 +84,7 @@ const FormTeam =  (props: FormTeamProps) => {
     }}
   >
     <fieldset className="flex flex-col justify-center space-y-3">
-      <legend className="font-medium text-2xl text-primary pb-5"> Je créer ma Team</legend>
+      <legend className="font-medium text-2xl text-primary pb-5"> Je crée ma Team</legend>
       <label htmlFor="teamName">Nom de ma Team *
         <input
           className="input-launch-chall"

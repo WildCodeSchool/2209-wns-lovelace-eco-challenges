@@ -6,6 +6,7 @@ import SessionRepository from "./Session.repository";
 import Session from "./Session.entity";
 import { ILike } from "typeorm";
 import { createTransport } from "nodemailer"
+import { GlobalContext } from "../..";
 
 export const INVALID_CREDENTIALS_ERROR_MESSAGE = "Identifiants incorrects.";
 
@@ -47,6 +48,12 @@ export default class AppUserRepository extends AppUserDb {
     const session = await SessionRepository.createSession(user);
     return { user, session };
   }
+
+  static logout = async (context: GlobalContext) => {
+    const sessionId = context.sessionId;
+    if (!sessionId) throw new Error("Unauthorized");
+    await SessionRepository.deleteSession(sessionId);
+  };
 
   // static async signOut(user: AppUser): Promise<AppUser> {
   // delete session linked to user

@@ -1,5 +1,5 @@
 
-import { Arg, Args, ID, Int, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Args, Authorized, ID, Int, Mutation, Query, Resolver } from "type-graphql";
 import Challenge, { Category, Level } from "../../models/Challenge/Challenge.entity";
 import ChallengeRepository from "../../models/Challenge/Challenge.repository";
 import { Pagination } from "../InputArgsForAll";
@@ -49,6 +49,7 @@ export default class ChallengeResolver {
     return ChallengeRepository.getChallengeByName(challengeName); 
   }
 
+  @Authorized()
   @Mutation(() => Challenge)
   createChallenge(
     @Args() { 
@@ -72,6 +73,7 @@ export default class ChallengeResolver {
     )
   }
 
+  @Authorized()
   @Mutation(() => Challenge)
   updateDatesChallenge(
     @Args() { 
@@ -83,6 +85,7 @@ export default class ChallengeResolver {
     return ChallengeRepository.updateDatesChallenge(id, startsAt, endAt);
   }
 
+  @Authorized()
   @Mutation(() => Challenge)
   updateChallengePremium(
     @Args() { 
@@ -99,6 +102,7 @@ export default class ChallengeResolver {
     return ChallengeRepository.updateChallengePremium(id, { challengeName, level, description, category, startsAt, endAt, img});
   }
 
+  @Authorized()
   @Mutation(() => Challenge)
   deleteChallenge(@Arg("id") id: string): Promise<Challenge> {
     return ChallengeRepository.deleteChallenge(id);

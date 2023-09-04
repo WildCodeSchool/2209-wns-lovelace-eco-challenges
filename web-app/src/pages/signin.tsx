@@ -34,6 +34,7 @@ const SignIn = (props: Props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { t } = useTranslation("signin");
+  const [userId, setUserID] = useState<undefined | string>("");
 
   const { locale } = props;
 
@@ -45,19 +46,20 @@ const SignIn = (props: Props) => {
 
   const submit = async () => {
     try {
-      await signIn({
+      const response = await signIn({
         variables: { email, password },
       });
+      const userID = response.data?.signIn.id
       if (locale === "fr") {
         toast.success("Vous vous êtes connecté avec succès.");
       } else {
         toast.success("You have successfully logged in.");
       }
-      router.push(HOME_PATH)
-      alert("Connexion réussie")
+      router.push(`/profile/${userID}`)
+      // alert("Connexion réussie")
     } catch (error) {
       // toast.error(getErrorMessage(error));
-      alert("Error")
+      // alert("Error")
     }
   };
 

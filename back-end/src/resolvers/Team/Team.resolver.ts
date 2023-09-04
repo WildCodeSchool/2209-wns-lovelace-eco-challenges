@@ -1,4 +1,4 @@
-import { Arg, Args, ID, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Args, Authorized, ID, Mutation, Query, Resolver } from "type-graphql";
 import Team from "../../models/Team/Team.entity";
 import TeamRepository from "../../models/Team/Team.repository";
 import { Pagination } from "../InputArgsForAll";
@@ -41,6 +41,7 @@ export default class TeamResolver {
     return TeamRepository.getTeamById(id); 
   }
 
+  @Authorized()
   @Mutation(() => Team)
   createTeam(
     @Args() { 
@@ -60,6 +61,7 @@ export default class TeamResolver {
     )
   }
 
+  @Authorized()
   @Mutation(() => Team)
   updateTeam(
     @Args() { 
@@ -74,6 +76,7 @@ export default class TeamResolver {
     return TeamRepository.updateTeam(id, { teamName, city, country, img, isPublic});
   }
 
+  @Authorized()
   @Mutation(() => Team)
   deleteTeam(@Arg("id") id: string): Promise<Team> {
     return TeamRepository.deleteTeam(id);

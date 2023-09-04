@@ -17,7 +17,6 @@ type FormInvitationProps = {
 
 const FormInvitation = (props: FormInvitationProps) => {
   const [errorInvitation, setErrorInvitation] = useState<GraphQLError | null>(null);
-  const [successInvitation, setSuccessInvitation] = useState(false);
   const [guestEmails, setGuestEmails] = useState([{ email: ""},{ email: ""},{ email: ""} ])
 
   const handleEmailChange = (index: number, event: ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +31,6 @@ const FormInvitation = (props: FormInvitationProps) => {
   };
 
   const submitInvitation = async () => {
-    setSuccessInvitation(false); 
     setErrorInvitation(null);
     const cleanGuestEmails = guestEmails.filter((value, index, self) => {
       if (value.email.length === 0) {
@@ -54,7 +52,6 @@ const FormInvitation = (props: FormInvitationProps) => {
           },
         })
       )
-      setSuccessInvitation(true);
       props.currentStep === props.steps.length
       ? props.setComplete(true)
       : props.setCurrentStep((prev) => prev + 1);

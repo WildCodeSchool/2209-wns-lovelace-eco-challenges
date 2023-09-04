@@ -100,7 +100,7 @@ export default class TeamRepository extends TeamDb {
       }
     });
     if (!existingTeam) {
-      throw Error("No existing Team matching ID.")
+      throw Error("No existing Team")
     } 
     return existingTeam;
   }
